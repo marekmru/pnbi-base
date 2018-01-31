@@ -1,5 +1,4 @@
-@import url(//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800,700italic,400italic);
-@import url(//fonts.googleapis.com/icon?family=Material+Icons);
+@import url(//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800,700italic,400italic|Material+Icons);
 html {
   box-sizing: border-box;
 }
@@ -37,3 +36,18 @@ button.md-button {
 @import "~vue-material/dist/theme/engine"; // Import the theme engine
 @include md-register-theme("default", ( primary: #d70f14, accent: #0a7db4));
 @import "~vue-material/dist/theme/all"; // Apply the theme
+// view transtions
+.fade-enter-active,
+.fade-leave-active {
+  transition-property: opacity;
+  transition-duration: .25s;
+}
+
+.fade-enter-active {
+  transition-delay: .25s;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0
+}

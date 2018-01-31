@@ -1,7 +1,12 @@
 <script>
-import Auth from '@/services/Auth'
+import Auth from './Auth'
 import router from '@/router'
+import BI_BASE_CONFIG from '@/pnbi.base.config.js'
+
 export default {
+  mounted () {
+
+  },
   props: {
     login: Function
   },
@@ -18,12 +23,27 @@ export default {
       })
     }
   },
-  created () {},
-  computed: {}
+  created () {
+    const title = BI_BASE_CONFIG.TITLE
+    if (typeof title === 'undefined') {
+      alert('NO BI_BASE_CONFIG.TITLE')
+    }
+    this.title = title || 'CORE'
+    // document.querySelector('.bi-navbar-title').textContent = title || 'CORE'
+  },
+  computed: {
+    isNavVisible () {
+      const isVis =
+        ['login', 'reset'].indexOf(
+          this.$route.name
+        ) === -1
+      return isVis
+    }
+  }
 }
 </script>
 <template>
-    <div class="navbar">
+    <div class="navbar" v-if="isNavVisible">
         <md-toolbar class="md-dense">
             <div class="md-toolbar-row">
                 <div class="md-toolbar-section-start">
