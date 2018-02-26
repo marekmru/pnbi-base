@@ -33,7 +33,6 @@ export default {
     <div class="page" id="login">
         <login-form v-if="state === 'login'" :setState="setState"></login-form>
          <forgot-form v-if="state === 'forgot'" :setState="setState"></forgot-form>
-         <span @click="dosom">asdf</span>
     </div>
 </template>
 

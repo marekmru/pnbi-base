@@ -10,6 +10,7 @@ export default {
     return {
       dummy: null,
       strength: 0,
+      oldStrength: 0,
       user: {
         password: "",
         password2: ""
@@ -57,7 +58,7 @@ export default {
           password: this.user.password
         })
           .then(response => {
-            this.strength = Math.round(response.strength * 100) / 100;
+            this.strength = Math.round(response.strength * 100);
           })
           .catch(err => {
             console.log(err);
@@ -69,20 +70,44 @@ export default {
     isValid: {
       get: function() {
         const valid = this.user.password === this.user.password2;
-        return valid;
+        if (this.user.password.length !=0){
+          return valid;
+        }else {
+          this.strength = 0
+          return !valid
+        }
+
       }
     },
     progress() {
-      return Math.min(100, this.user.password.length * 10);
+      if (this.strength > this.oldStrength){
+        this.oldStrength = this.strength;        
+        if (this.strength < 20){ 
+                    this.strength = 0;
+          return this.strength;
+        }else{
+          return this.strength;
+        }
+      } else if(this.strength == 0) {
+        return this.strength;
+      }else {
+        return this.oldStrength
+      }  
     },
     color() {
-      const prog = Math.floor(this.progress / 28)
-      if (prog<3){
-        return ["error", "warning", "success"][Math.floor(this.progress / 28)];
+      if (this.strength < 33){
+        return ["error", "warning", "success"][0];
+      }else if(this.strength >33 && this.strength < 66){
+        return ["error", "warning", "success"][1];
+      }else if(this.strength > 66){
+        return ["error", "warning", "success"][2];
+      }
+
+      /*if (true){  
+        return ["error", "warning", "success"][Math.floor(this.progress / 40)];
       }else {       
         return ["error", "warning", "success"][2]
-      }
-      ;
+      };*/
     },
   },
   created() {}
@@ -97,10 +122,10 @@ export default {
           <h1 class="bi-powered">POWERED BY CORE</h1>
           <v-form ref="form"> 
           <v-card >
-            <v-card-title class="pb-0 title">
-              <h2 class="mb-3">Neues Passwort</h2>
+            <v-card-title class="pb-0">
+              <h2 >Neues Passwort</h2>
             </v-card-title>
-            <v-card-text class="pb-0" v-model="rules.valid">              
+            <v-card-text class="py-0" v-model="rules.valid">              
               <v-text-field type="password" @focus="focus" label="Neues Passwort" v-model="user.password" :rules="rules.passwordRules" @input="onChange" required></v-text-field>
               <v-card-text class="pt-0 pb-0 progress-bar">
                 <span>Passwortstärke:</span>
@@ -120,7 +145,7 @@ export default {
 
 <style lang="scss">
 .input-group__details{
-  // proides to see the bottom border of input field inside Cards even if padding is changed
+  // provides to see the bottom border of input field inside Cards even if padding is changed
   margin-top: 3px;
 }
 .progress-bar{

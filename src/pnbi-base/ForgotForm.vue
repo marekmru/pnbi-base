@@ -78,7 +78,7 @@ export default {
         <v-card v-if="!message">
           <v-card-title>
             <v-layout  column>
-              <h2 class="mb-3" >Passwort zurücksetzen</h2>
+              <h2>Passwort zurücksetzen</h2>
               <v-form  @submit="onSubmit" v-model="rules.valid" ref="form" lazy-validation>
                 <v-text-field @focus="focus" label="Ihre E-Mail Adresse" v-model="user.email" :rules="rules.emailRules" required></v-text-field>
               <v-btn class="mt-4" :disabled="!rules.valid" block color="primary" type="submit">Anfordern</v-btn>
