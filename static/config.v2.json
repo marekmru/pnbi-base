@@ -1,0 +1,2035 @@
+{
+  "title": "Brandinvestor",
+  "images": [
+  ],
+  "client": [
+    "BMW"
+  ],
+  "i18n": {
+  },
+  
+  "campaignType": [
+    "Launch-Kampagne",
+    "Image-Kampagne",
+    "Abverkaufs-Kampagne"
+  ],
+  "kpis": [
+    {
+      "Value_Code": "adAwareness",
+      "Values": "KAMPAGNENERINNERUNG",
+      "Values_2": "KAMPAGNENERINNERUNG",
+      "type": "percent"
+    },
+    {
+      "Value_Code": "brandAwareness",
+      "Values": "BEKANNTHEIT",
+      "Values_2": "BEKANNTHEIT",
+      "type": "percent"
+    },
+    {
+      "Value_Code": "buyerReadiness",
+      "Values": "KAUFBEREITSCHAFT",
+      "Values_2": "KAUFBEREITSCHAFT",
+      "type": "percent"
+    },
+    {
+      "Value_Code": "leads",
+      "Values": "LEADS PRO WOCHE",
+      "Values_2": "LEADS",
+      "type": "abs"
+    }
+  ],
+  "kpisTargetGroupValues": [
+    {
+      "Value_Code": "adAwareness",
+      "expressions": [
+        {
+          "Values": "GERING",
+          "Value": 3
+        },
+        {
+          "Values": "MITTEL",
+          "Value": 15
+        },
+        {
+          "Values": "HOCH",
+          "Value": 40
+        }
+      ],
+      "type": "percent",
+      "exts": [
+        "%",
+        120
+      ]
+    },
+    {
+      "Value_Code": "brandAwareness",
+      "expressions": [
+        {
+          "Values": "GERING",
+          "Value": 5
+        },
+        {
+          "Values": "MITTEL",
+          "Value": 50
+        },
+        {
+          "Values": "HOCH",
+          "Value": 80
+        }
+      ],
+      "type": "percent",
+      "exts": [
+        "%",
+        120
+      ]
+    },
+    {
+      "Value_Code": "buyerReadiness",
+      "expressions": [
+        {
+          "Values": "GERING",
+          "Value": 3
+        },
+        {
+          "Values": "MITTEL",
+          "Value": 20
+        },
+        {
+          "Values": "HOCH",
+          "Value": 40
+        }
+      ],
+      "type": "percent",
+      "exts": [
+        "%",
+        120
+      ]
+    },
+    {
+      "Value_Code": "leads",
+      "expressions": [
+        {
+          "Values": "GERING",
+          "Value": 50
+        },
+        {
+          "Values": "MITTEL",
+          "Value": 300
+        },
+        {
+          "Values": "HOCH",
+          "Value": 1000
+        }
+      ],
+      "type": "abs",
+      "exts": [
+        "Abs.",
+        100000
+      ]
+    }
+  ],
+  "mediaFormat": [
+    {
+      "parent": "TV",
+      "Value_Code": "TV_STD",
+      "Values": "Standardspot (Default)"
+    },
+    {
+      "parent": "TV",
+      "Value_Code": "TV_ECK",
+      "Values": "Eckplatzierung"
+    },
+    {
+      "parent": "TV",
+      "Value_Code": "TV_SON",
+      "Values": "Sonderplatzierung"
+    },
+    {
+      "parent": "PZ",
+      "Value_Code": "PZ_11",
+      "Values": "1/1 Seite"
+    },
+    {
+      "parent": "PZ",
+      "Value_Code": "PZ_21",
+      "Values": "2/1 Seite (Default)"
+    },
+    {
+      "parent": "TZUER",
+      "Value_Code": "TZUER_12",
+      "Values": "1/2 Seite (Default)"
+    },
+    {
+      "parent": "TZUER",
+      "Value_Code": "TZUER_11",
+      "Values": "1/1 Seite"
+    },
+    {
+      "parent": "TZUER",
+      "Value_Code": "TZUER_21",
+      "Values": "2/1 Seite"
+    },
+    {
+      "parent": "TZUER",
+      "Value_Code": "TZUER_1000",
+      "Values": "1.000er Eckfeld"
+    },
+    {
+      "parent": "TZR",
+      "Value_Code": "TZR_12",
+      "Values": "1/2 Seite (Default)"
+    },
+    {
+      "parent": "TZR",
+      "Value_Code": "TZR_11",
+      "Values": "1/1 Seite"
+    },
+    {
+      "parent": "TZR",
+      "Value_Code": "TZR_13",
+      "Values": "1/3 Seite"
+    }
+  ],
+  "media": [
+    {
+      "Values": "TV",
+      "Value_Code": "TV",
+      "weight": 100,
+      "$durationDefault": 25,
+      "$opf": false,
+      "budget": [
+        null,
+        null
+      ],
+      "min_grp": null,
+      "max_grp": null,
+      "$payfactor": [
+        {
+          "Values": "BMW",
+          "Value": 36.22
+        },
+        {
+          "Values": "GERING",
+          "Value": 40.00
+        },
+        {
+          "Values": "MITTEL",
+          "Value": 50.00
+        },
+        {
+          "Values": "HOCH",
+          "Value": 60.00
+        }
+      ],
+      "$lengths": [
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40,
+        45,
+        50,
+        55,
+        60,
+        65,
+        70,
+        75,
+        80,
+        85
+      ]
+    },
+    {
+      "Values": "PZ",
+      "Value_Code": "PZ",
+      "$opf": false,
+      "budget": [
+        null,
+        null
+      ],
+      "min_grp": null,
+      "max_grp": null,
+      "$payfactor": [
+        {
+          "Values": "BMW",
+          "Value": 38.43
+        },
+        {
+          "Values": "NIEDRIG",
+          "Value": 40.00
+        },
+        {
+          "Values": "MITTEL",
+          "Value": 50.00
+        },
+        {
+          "Values": "HOCH",
+          "Value": 60.00
+        }
+      ],
+      "weight": 100
+    },
+    {
+      "Values": "Out-of-home",
+      "Value_Code": "PL",
+      "$opf": false,
+      "budget": [
+        null,
+        null
+      ],
+      "min_grp": null,
+      "max_grp": null,
+      "$payfactor": [
+        {
+          "Values": "BMW",
+          "Value": 35.95
+        },
+        {
+          "Values": "NIEDRIG",
+          "Value": 35.00
+        },
+        {
+          "Values": "MITTEL",
+          "Value": 45.00
+        },
+        {
+          "Values": "HOCH",
+          "Value": 55.00
+        }
+      ],
+      "weight": 100
+    },
+    {
+      "Values": "Radio",
+      "Value_Code": "RD",
+      "weight": 100,
+      "$durationDefault": 30,
+      "$opf": false,
+      "budget": [
+        null,
+        null
+      ],
+      "min_grp": null,
+      "max_grp": null,
+      "$payfactor": [
+        {
+          "Values": "BMW",
+          "Value": 47.91
+        },
+        {
+          "Values": "NIEDRIG",
+          "Value": 45.00
+        },
+        {
+          "Values": "MITTEL",
+          "Value": 55.00
+        },
+        {
+          "Values": "HOCH",
+          "Value": 65.00
+        }
+      ],
+      "$lengths": [
+        15,
+        20,
+        25,
+        30,
+        35
+      ]
+    },
+    {
+      "Values": "TZ überregional",
+      "Value_Code": "TZUER",
+      "$opf": false,
+      "budget": [
+        null,
+        null
+      ],
+      "min_grp": null,
+      "max_grp": null,
+      "$payfactor": [
+        {
+          "Values": "BMW",
+          "Value": 46.50
+        },
+        {
+          "Values": "NIEDRIG",
+          "Value": 45.00
+        },
+        {
+          "Values": "MITTEL",
+          "Value": 57.50
+        },
+        {
+          "Values": "HOCH",
+          "Value": 70.00
+        }
+      ],
+      "weight": 100
+    },
+    {
+      "Values": "TZ regional",
+      "Value_Code": "TZR",
+      "$opf": false,
+      "budget": [
+        null,
+        null
+      ],
+      "min_grp": null,
+      "max_grp": null,
+      "$payfactor": [
+        {
+          "Values": "BMW",
+          "Value": 46.50
+        },
+        {
+          "Values": "NIEDRIG",
+          "Value": 45.00
+        },
+        {
+          "Values": "MITTEL",
+          "Value": 57.50
+        },
+        {
+          "Values": "HOCH",
+          "Value": 70.00
+        }
+      ],
+      "weight": 100
+    },
+    {
+      "Values": "Kino",
+      "Value_Code": "KIN",
+      "$opf": false,
+      "budget": [
+        null,
+        null
+      ],
+      "min_grp": null,
+      "max_grp": null,
+      "$payfactor": [
+        {
+          "Values": "BMW",
+          "Value": 50.02
+        },
+        {
+          "Values": "NIEDRIG",
+          "Value": 45.00
+        },
+        {
+          "Values": "MITTEL",
+          "Value": 55.00
+        },
+        {
+          "Values": "HOCH",
+          "Value": 65.00
+        }
+      ],
+      "weight": 100
+    },
+    {
+      "Values": "Beilagen",
+      "Value_Code": "BEIL",
+      "$opf": false,
+      "budget": [
+        null,
+        null
+      ],
+      "min_grp": null,
+      "max_grp": null,
+      "$payfactor": [
+        {
+          "Values": "NIEDRIG",
+          "Value": 30.00
+        },
+        {
+          "Values": "MITTEL",
+          "Value": 40.00
+        },
+        {
+          "Values": "HOCH",
+          "Value": 50.00
+        }
+      ],
+      "weight": 100
+    },
+    {
+      "Values": "Anzeigenblätter",
+      "Value_Code": "ANZ",
+      "$opf": false,
+      "budget": [
+        null,
+        null
+      ],
+      "min_grp": null,
+      "max_grp": null,
+      "$payfactor": [
+        {
+          "Values": "NIEDRIG",
+          "Value": 30.00
+        },
+        {
+          "Values": "MITTEL",
+          "Value": 40.00
+        },
+        {
+          "Values": "HOCH",
+          "Value": 50.00
+        }
+      ],
+      "weight": 100
+    },
+    {
+      "Values": "Online Display Brand",
+      "Value_Code": "OLDBD",
+      "$opf": false,
+      "budget": [
+        null,
+        null
+      ],
+      "min_grp": null,
+      "max_grp": null,
+      "$payfactor": [
+        {
+          "Values": "BMW",
+          "Value": 21.94
+        },
+        {
+          "Values": "NIEDRIG",
+          "Value": 20.00
+        },
+        {
+          "Values": "MITTEL",
+          "Value": 27.50
+        },
+        {
+          "Values": "HOCH",
+          "Value": 35.00
+        }
+      ],
+      "weight": 100
+    },
+    {
+      "Values": "Online Display Brand - Mobile",
+      "Value_Code": "OLMBD",
+      "$opf": false,
+      "budget": [
+        null,
+        null
+      ],
+      "min_grp": null,
+      "max_grp": null,
+      "$payfactor": [
+        {
+          "Values": "BMW",
+          "Value": 21.94
+        },
+        {
+          "Values": "NIEDRIG",
+          "Value": 20.00
+        },
+        {
+          "Values": "MITTEL",
+          "Value": 27.50
+        },
+        {
+          "Values": "HOCH",
+          "Value": 35.00
+        }
+      ],
+      "weight": 100
+    },
+    {
+      "Values": "Online Video",
+      "Value_Code": "OLV",
+      "$opf": false,
+      "budget": [
+        null,
+        null
+      ],
+      "min_grp": null,
+      "max_grp": null,
+      "$payfactor": [
+        {
+          "Values": "BMW",
+          "Value": 21.94
+        },
+        {
+          "Values": "NIEDRIG",
+          "Value": 20.00
+        },
+        {
+          "Values": "MITTEL",
+          "Value": 27.50
+        },
+        {
+          "Values": "HOCH",
+          "Value": 35.00
+        }
+      ],
+      "weight": 100
+    },
+    {
+      "Values": "Social Media",
+      "Value_Code": "SOM",
+      "$opf": false,
+      "budget": [
+        null,
+        null
+      ],
+      "min_grp": null,
+      "max_grp": null,
+      "$payfactor": [
+        {
+          "Values": "NIEDRIG",
+          "Value": 30.00
+        },
+        {
+          "Values": "MITTEL",
+          "Value": 40.00
+        },
+        {
+          "Values": "HOCH",
+          "Value": 50.00
+        }
+      ],
+      "weight": 100
+    },
+    {
+      "Values": "Digitales Out-of-Home",
+      "Value_Code": "DPL",
+      "$opf": false,
+      "budget": [
+        null,
+        null
+      ],
+      "min_grp": null,
+      "max_grp": null,
+      "$payfactor": [
+        {
+          "Values": "BMW",
+          "Value": 35.95
+        },
+        {
+          "Values": "NIEDRIG",
+          "Value": 35.00
+        },
+        {
+          "Values": "MITTEL",
+          "Value": 40.00
+        },
+        {
+          "Values": "HOCH",
+          "Value": 45.00
+        }
+      ],
+      "weight": 100
+    },
+    {
+      "Values": "Infoscreen",
+      "Value_Code": "INF",
+      "$opf": false,
+      "budget": [
+        null,
+        null
+      ],
+      "min_grp": null,
+      "max_grp": null,
+      "$payfactor": [
+        {
+          "Values": "BMW",
+          "Value": 35.95
+        },
+        {
+          "Values": "NIEDRIG",
+          "Value": 35.00
+        },
+        {
+          "Values": "MITTEL",
+          "Value": 42.50
+        },
+        {
+          "Values": "HOCH",
+          "Value": 50.00
+        }
+      ],
+      "weight": 100
+    },
+    {
+      "Values": "Online Display Performance",
+      "Value_Code": "OLDPF",
+      "$opf": true,
+      "$leadsWeek": 90,
+      "$leadsCost": 250,
+      "weight": 100
+    },
+    {
+      "Values": "Search Brand",
+      "$opf": true,
+      "$leadsWeek": 180,
+      "$leadsCost": 60,
+      "Value_Code": "SEAB",
+      "weight": 100
+    },
+    {
+      "Values": "Search Non-Brand",
+      "$opf": true,
+      "$leadsWeek": 90,
+      "$leadsCost": 300,
+      "Value_Code": "SEANB",
+      "weight": 100
+    },
+    {
+      "Values": "Affiliate",
+      "$opf": true,
+      "$leadsWeek": 90,
+      "$leadsCost": 65,
+      "Value_Code": "AFF",
+      "weight": 100
+    }
+  ],
+  "targetGroupVariables": [
+    {
+      "Variable_Name": "tgv1",
+      "Variable": "Demographie",
+      "Values": [
+        {
+          "Values": "männlich",
+          "Auswahltyp": "Single Choice",
+          "Variable": "Geschlecht",
+          "Variable_Name": "S_Geschlecht",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "S_Geschlecht"
+        },
+        {
+          "Values": "weiblich",
+          "Auswahltyp": "Single Choice",
+          "Variable": "Geschlecht",
+          "Variable_Name": "S_Geschlecht",
+          "Value_Code": 2,
+          "Pseudo_Variable_Name": "S_Geschlecht"
+        },
+        {
+          "Values": "integer (14-99)",
+          "Auswahltyp": "Range (von ... bis ...)",
+          "Variable": "Alter",
+          "Variable_Name": "S_Alter",
+          "Value_Code": [
+            14,
+            99
+          ],
+          "Pseudo_Variable_Name": "S_Alter"
+        },
+        {
+          "Values": "Baden-Württemberg",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Bundesland",
+          "Variable_Name": "S_Bundesland",
+          "Value_Code": 8,
+          "Pseudo_Variable_Name": "S_Bundesland"
+        },
+        {
+          "Values": "Bayern",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Bundesland",
+          "Variable_Name": "S_Bundesland",
+          "Value_Code": 9,
+          "Pseudo_Variable_Name": "S_Bundesland"
+        },
+        {
+          "Values": "Berlin",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Bundesland",
+          "Variable_Name": "S_Bundesland",
+          "Value_Code": 11,
+          "Pseudo_Variable_Name": "S_Bundesland"
+        },
+        {
+          "Values": "Brandenburg",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Bundesland",
+          "Variable_Name": "S_Bundesland",
+          "Value_Code": 12,
+          "Pseudo_Variable_Name": "S_Bundesland"
+        },
+        {
+          "Values": "Bremen",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Bundesland",
+          "Variable_Name": "S_Bundesland",
+          "Value_Code": 4,
+          "Pseudo_Variable_Name": "S_Bundesland"
+        },
+        {
+          "Values": "Hamburg",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Bundesland",
+          "Variable_Name": "S_Bundesland",
+          "Value_Code": 2,
+          "Pseudo_Variable_Name": "S_Bundesland"
+        },
+        {
+          "Values": "Hessen",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Bundesland",
+          "Variable_Name": "S_Bundesland",
+          "Value_Code": 6,
+          "Pseudo_Variable_Name": "S_Bundesland"
+        },
+        {
+          "Values": "Mecklenburg-Vorpommern",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Bundesland",
+          "Variable_Name": "S_Bundesland",
+          "Value_Code": 13,
+          "Pseudo_Variable_Name": "S_Bundesland"
+        },
+        {
+          "Values": "Niedersachsen",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Bundesland",
+          "Variable_Name": "S_Bundesland",
+          "Value_Code": 3,
+          "Pseudo_Variable_Name": "S_Bundesland"
+        },
+        {
+          "Values": "Nordrhein-Westfalen",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Bundesland",
+          "Variable_Name": "S_Bundesland",
+          "Value_Code": 5,
+          "Pseudo_Variable_Name": "S_Bundesland"
+        },
+        {
+          "Values": "Rheinland-Pfalz",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Bundesland",
+          "Variable_Name": "S_Bundesland",
+          "Value_Code": 7,
+          "Pseudo_Variable_Name": "S_Bundesland"
+        },
+        {
+          "Values": "Saarland",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Bundesland",
+          "Variable_Name": "S_Bundesland",
+          "Value_Code": 10,
+          "Pseudo_Variable_Name": "S_Bundesland"
+        },
+        {
+          "Values": "Sachsen",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Bundesland",
+          "Variable_Name": "S_Bundesland",
+          "Value_Code": 14,
+          "Pseudo_Variable_Name": "S_Bundesland"
+        },
+        {
+          "Values": "Sachsen-Anhalt",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Bundesland",
+          "Variable_Name": "S_Bundesland",
+          "Value_Code": 15,
+          "Pseudo_Variable_Name": "S_Bundesland"
+        },
+        {
+          "Values": "Schleswig-Holstein",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Bundesland",
+          "Variable_Name": "S_Bundesland",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "S_Bundesland"
+        },
+        {
+          "Values": "Thüringen",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Bundesland",
+          "Variable_Name": "S_Bundesland",
+          "Value_Code": 16,
+          "Pseudo_Variable_Name": "S_Bundesland"
+        },
+        {
+          "Values": "Bis unter 1.000 Euro",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Haushalts-Netto-Einkommen",
+          "Variable_Name": "S_Einkommen_HH_alt_kat8",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "S_Einkommen_HH_alt_kat8"
+        },
+        {
+          "Values": "1.000 bis unter 1.500 Euro",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Haushalts-Netto-Einkommen",
+          "Variable_Name": "S_Einkommen_HH_alt_kat8",
+          "Value_Code": 2,
+          "Pseudo_Variable_Name": "S_Einkommen_HH_alt_kat8"
+        },
+        {
+          "Values": "1.500 bis unter 2.000 Euro",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Haushalts-Netto-Einkommen",
+          "Variable_Name": "S_Einkommen_HH_alt_kat8",
+          "Value_Code": 3,
+          "Pseudo_Variable_Name": "S_Einkommen_HH_alt_kat8"
+        },
+        {
+          "Values": "2.000 bis unter 2.500 Euro",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Haushalts-Netto-Einkommen",
+          "Variable_Name": "S_Einkommen_HH_alt_kat8",
+          "Value_Code": 4,
+          "Pseudo_Variable_Name": "S_Einkommen_HH_alt_kat8"
+        },
+        {
+          "Values": "2.500 bis unter 3.000 Euro",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Haushalts-Netto-Einkommen",
+          "Variable_Name": "S_Einkommen_HH_alt_kat8",
+          "Value_Code": 5,
+          "Pseudo_Variable_Name": "S_Einkommen_HH_alt_kat8"
+        },
+        {
+          "Values": "3.000 bis unter 4.000 Euro",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Haushalts-Netto-Einkommen",
+          "Variable_Name": "S_Einkommen_HH_alt_kat8",
+          "Value_Code": 6,
+          "Pseudo_Variable_Name": "S_Einkommen_HH_alt_kat8"
+        },
+        {
+          "Values": "4.000 bis unter 5.000 Euro",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Haushalts-Netto-Einkommen",
+          "Variable_Name": "S_Einkommen_HH_alt_kat8",
+          "Value_Code": 7,
+          "Pseudo_Variable_Name": "S_Einkommen_HH_alt_kat8"
+        },
+        {
+          "Values": "5.000 Euro und mehr",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Haushalts-Netto-Einkommen",
+          "Variable_Name": "S_Einkommen_HH_alt_kat8",
+          "Value_Code": 8,
+          "Pseudo_Variable_Name": "S_Einkommen_HH_alt_kat8"
+        },
+        {
+          "Values": "unter 5.000 Einw.",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Ortsgröße",
+          "Variable_Name": "U_Ortsgr_Pol",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Ortsgr_Pol"
+        },
+        {
+          "Values": "5.000 bis unter 20.000 Einw.",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Ortsgröße",
+          "Variable_Name": "U_Ortsgr_Pol",
+          "Value_Code": 2,
+          "Pseudo_Variable_Name": "U_Ortsgr_Pol"
+        },
+        {
+          "Values": "20.000 bis unter 100.000 Einw.",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Ortsgröße",
+          "Variable_Name": "U_Ortsgr_Pol",
+          "Value_Code": 3,
+          "Pseudo_Variable_Name": "U_Ortsgr_Pol"
+        },
+        {
+          "Values": "100.000 bis unter 500.000 Einw.",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Ortsgröße",
+          "Variable_Name": "U_Ortsgr_Pol",
+          "Value_Code": 4,
+          "Pseudo_Variable_Name": "U_Ortsgr_Pol"
+        },
+        {
+          "Values": "500.000 Einw. und mehr",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Ortsgröße",
+          "Variable_Name": "U_Ortsgr_Pol",
+          "Value_Code": 5,
+          "Pseudo_Variable_Name": "U_Ortsgr_Pol"
+        },
+        {
+          "Values": "(noch) kein allgemeiner Schulabschluss",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Bildung",
+          "Variable_Name": "S_Schule_Befragter",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "S_Schule_Befragter"
+        },
+        {
+          "Values": "Hauptschulabschluss ohne abgeschlossene Berufsausbildung",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Bildung",
+          "Variable_Name": "S_Schule_Befragter",
+          "Value_Code": 2,
+          "Pseudo_Variable_Name": "S_Schule_Befragter"
+        },
+        {
+          "Values": "Hauptschulabschluss mit abgeschlossener Berufsausbildung",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Bildung",
+          "Variable_Name": "S_Schule_Befragter",
+          "Value_Code": 3,
+          "Pseudo_Variable_Name": "S_Schule_Befragter"
+        },
+        {
+          "Values": "weiterführende Schule ohne Abitur",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Bildung",
+          "Variable_Name": "S_Schule_Befragter",
+          "Value_Code": 4,
+          "Pseudo_Variable_Name": "S_Schule_Befragter"
+        },
+        {
+          "Values": "Abitur ohne Studium",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Bildung",
+          "Variable_Name": "S_Schule_Befragter",
+          "Value_Code": 5,
+          "Pseudo_Variable_Name": "S_Schule_Befragter"
+        },
+        {
+          "Values": "Studium",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Bildung",
+          "Variable_Name": "S_Schule_Befragter",
+          "Value_Code": 6,
+          "Pseudo_Variable_Name": "S_Schule_Befragter"
+        },
+        {
+          "Values": "Hauptsächlich",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Haushaltsführung",
+          "Variable_Name": "S_Haushaltsfuehrung",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "S_Haushaltsfuehrung"
+        },
+        {
+          "Values": "Teilweise",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Haushaltsführung",
+          "Variable_Name": "S_Haushaltsfuehrung",
+          "Value_Code": 2,
+          "Pseudo_Variable_Name": "S_Haushaltsfuehrung"
+        },
+        {
+          "Values": "Nicht beteiligt",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Haushaltsführung",
+          "Variable_Name": "S_Haushaltsfuehrung",
+          "Value_Code": 3,
+          "Pseudo_Variable_Name": "S_Haushaltsfuehrung"
+        },
+        {
+          "Values": "1 Person",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Personen im Haushalt",
+          "Variable_Name": "U_PersHH_ges_Anzahl_kat3",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_PersHH_ges_Anzahl_kat3"
+        },
+        {
+          "Values": "2 Personen",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Personen im Haushalt",
+          "Variable_Name": "U_PersHH_ges_Anzahl_kat3",
+          "Value_Code": 2,
+          "Pseudo_Variable_Name": "U_PersHH_ges_Anzahl_kat3"
+        },
+        {
+          "Values": "3 Personen oder mehr",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Personen im Haushalt",
+          "Variable_Name": "U_PersHH_ges_Anzahl_kat3",
+          "Value_Code": 3,
+          "Pseudo_Variable_Name": "U_PersHH_ges_Anzahl_kat3"
+        },
+        {
+          "Values": "Ja",
+          "Auswahltyp": "Single Choice",
+          "Variable": "Kind(er) unter 14 Jahren im Haushalt",
+          "Variable_Name": "U_PersHH_unter_14_Anzahl_kat2",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_PersHH_unter_14_Anzahl_kat2"
+        },
+        {
+          "Values": "Nein",
+          "Auswahltyp": "Single Choice",
+          "Variable": "Kind(er) unter 14 Jahren im Haushalt",
+          "Variable_Name": "U_PersHH_unter_14_Anzahl_kat2",
+          "Value_Code": 0,
+          "Pseudo_Variable_Name": "U_PersHH_unter_14_Anzahl_kat2"
+        },
+        {
+          "Values": "ledig",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Familienstand",
+          "Variable_Name": "S_Familienstand",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "S_Familienstand"
+        },
+        {
+          "Values": "verheiratet",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Familienstand",
+          "Variable_Name": "S_Familienstand",
+          "Value_Code": 2,
+          "Pseudo_Variable_Name": "S_Familienstand"
+        },
+        {
+          "Values": "geschieden",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Familienstand",
+          "Variable_Name": "S_Familienstand",
+          "Value_Code": 3,
+          "Pseudo_Variable_Name": "S_Familienstand"
+        },
+        {
+          "Values": "verwitwet",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Familienstand",
+          "Variable_Name": "S_Familienstand",
+          "Value_Code": 4,
+          "Pseudo_Variable_Name": "S_Familienstand"
+        },
+        {
+          "Values": "Ja",
+          "Auswahltyp": "Single Choice",
+          "Variable": "In Beziehung",
+          "Variable_Name": "F_In_Beziehung_lebend",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "F_In_Beziehung_lebend"
+        },
+        {
+          "Values": "Nein",
+          "Auswahltyp": "Single Choice",
+          "Variable": "In Beziehung",
+          "Variable_Name": "F_In_Beziehung_lebend",
+          "Value_Code": 0,
+          "Pseudo_Variable_Name": "F_In_Beziehung_lebend"
+        },
+        {
+          "Values": "In Ausbildung",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Berufstätigkeit",
+          "Variable_Name": "U_Beruf",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Beruf"
+        },
+        {
+          "Values": "berufstätig",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Berufstätigkeit",
+          "Variable_Name": "U_Beruf",
+          "Value_Code": 2,
+          "Pseudo_Variable_Name": "U_Beruf"
+        },
+        {
+          "Values": "Rentner/Pensionär",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Berufstätigkeit",
+          "Variable_Name": "U_Beruf",
+          "Value_Code": 3,
+          "Pseudo_Variable_Name": "U_Beruf"
+        },
+        {
+          "Values": "nicht berufstätig",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "Berufstätigkeit",
+          "Variable_Name": "U_Beruf",
+          "Value_Code": 4,
+          "Pseudo_Variable_Name": "U_Beruf"
+        }
+      ]
+    },
+    {
+      "Variable_Name": "tgv2",
+      "Variable": "Qualitative Merkmale",
+      "Values": [
+        {
+          "Values": "Ja",
+          "Auswahltyp": "Single Choice",
+          "Variable": "Internet-Nutzung in den letzten 12 Monaten",
+          "Variable_Name": "B_Internetnutzung_kat2",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "B_Internetnutzung_kat2"
+        },
+        {
+          "Values": "Nein",
+          "Auswahltyp": "Single Choice",
+          "Variable": "Internet-Nutzung in den letzten 12 Monaten",
+          "Variable_Name": "B_Internetnutzung_kat2",
+          "Value_Code": 0,
+          "Pseudo_Variable_Name": "B_Internetnutzung_kat2"
+        },
+        {
+          "Values": "Etabliertes Milieu",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "SIGMA",
+          "Variable_Name": "C_Sigma_Milieu",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "C_Sigma_Milieu"
+        },
+        {
+          "Values": "Traditionelles bürgerliches Milieu",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "SIGMA",
+          "Variable_Name": "C_Sigma_Milieu",
+          "Value_Code": 2,
+          "Pseudo_Variable_Name": "C_Sigma_Milieu"
+        },
+        {
+          "Values": "Traditionelles Arbeitermilieu",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "SIGMA",
+          "Variable_Name": "C_Sigma_Milieu",
+          "Value_Code": 3,
+          "Pseudo_Variable_Name": "C_Sigma_Milieu"
+        },
+        {
+          "Values": "Konsum-materialistisches Milieu",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "SIGMA",
+          "Variable_Name": "C_Sigma_Milieu",
+          "Value_Code": 4,
+          "Pseudo_Variable_Name": "C_Sigma_Milieu"
+        },
+        {
+          "Values": "Aufstiegsorientiertes Milieu",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "SIGMA",
+          "Variable_Name": "C_Sigma_Milieu",
+          "Value_Code": 5,
+          "Pseudo_Variable_Name": "C_Sigma_Milieu"
+        },
+        {
+          "Values": "Modernes bürgerliches Milieu",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "SIGMA",
+          "Variable_Name": "C_Sigma_Milieu",
+          "Value_Code": 6,
+          "Pseudo_Variable_Name": "C_Sigma_Milieu"
+        },
+        {
+          "Values": "Modernes Arbeitnehmermilieu",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "SIGMA",
+          "Variable_Name": "C_Sigma_Milieu",
+          "Value_Code": 7,
+          "Pseudo_Variable_Name": "C_Sigma_Milieu"
+        },
+        {
+          "Values": "Liberal-Intellektuelles Milieu",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "SIGMA",
+          "Variable_Name": "C_Sigma_Milieu",
+          "Value_Code": 8,
+          "Pseudo_Variable_Name": "C_Sigma_Milieu"
+        },
+        {
+          "Values": "Hedonistisches Milieu",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "SIGMA",
+          "Variable_Name": "C_Sigma_Milieu",
+          "Value_Code": 9,
+          "Pseudo_Variable_Name": "C_Sigma_Milieu"
+        },
+        {
+          "Values": "Postmodernes Milieu",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "SIGMA",
+          "Variable_Name": "C_Sigma_Milieu",
+          "Value_Code": 10,
+          "Pseudo_Variable_Name": "C_Sigma_Milieu"
+        },
+        {
+          "Values": "großer Freundeskreis",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Wichtige Lebensaspekte",
+          "Variable_Name": "U_Aspekte_des_Lebens_Freundeskreis",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Aspekte_des_Lebens"
+        },
+        {
+          "Values": "Familie, Partnerschaft",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Wichtige Lebensaspekte",
+          "Variable_Name": "U_Aspekte_des_Lebens_Familie",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Aspekte_des_Lebens"
+        },
+        {
+          "Values": "Kinder haben",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Wichtige Lebensaspekte",
+          "Variable_Name": "U_Aspekte_des_Lebens_Kinder",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Aspekte_des_Lebens"
+        },
+        {
+          "Values": "finanzielle Unabhängigkeit",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Wichtige Lebensaspekte",
+          "Variable_Name": "U_Aspekte_des_Lebens_finanz_Unab",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Aspekte_des_Lebens"
+        },
+        {
+          "Values": "Erfolg im Beruf",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Wichtige Lebensaspekte",
+          "Variable_Name": "U_Aspekte_des_Lebens_Erfolg",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Aspekte_des_Lebens"
+        },
+        {
+          "Values": "Glaube, Religion",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Wichtige Lebensaspekte",
+          "Variable_Name": "U_Aspekte_des_Lebens_Glaube",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Aspekte_des_Lebens"
+        },
+        {
+          "Values": "Selbstverwirklichung",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Wichtige Lebensaspekte",
+          "Variable_Name": "U_Aspekte_des_Lebens_Selbstverwirklichung",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Aspekte_des_Lebens"
+        },
+        {
+          "Values": "gesunde Umwelt",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Wichtige Lebensaspekte",
+          "Variable_Name": "U_Aspekte_des_Lebens_Umwelt",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Aspekte_des_Lebens"
+        },
+        {
+          "Values": "Aufgeschlossenheit für neue Entwicklungen",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Wichtige Lebensaspekte",
+          "Variable_Name": "U_Aspekte_des_Lebens_Entwicklungen",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Aspekte_des_Lebens"
+        },
+        {
+          "Values": "Sicherheit im täglichen Leben",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Wichtige Lebensaspekte",
+          "Variable_Name": "U_Aspekte_des_Lebens_Sicherheit",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Aspekte_des_Lebens"
+        },
+        {
+          "Values": "Leistung",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Wichtige Lebensaspekte",
+          "Variable_Name": "U_Aspekte_des_Lebens_Leistung",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Aspekte_des_Lebens"
+        },
+        {
+          "Values": "Spaß und Freude",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Wichtige Lebensaspekte",
+          "Variable_Name": "U_Aspekte_des_Lebens_Spass",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Aspekte_des_Lebens"
+        },
+        {
+          "Values": "Arbeitsplatzsicherheit",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Wichtige Lebensaspekte",
+          "Variable_Name": "U_Aspekte_des_Lebens_Arbeitsplatzsicherheit",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Aspekte_des_Lebens"
+        },
+        {
+          "Values": "Individualität",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Wichtige Lebensaspekte",
+          "Variable_Name": "U_Aspekte_des_Lebens_Individualitaet",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Aspekte_des_Lebens"
+        },
+        {
+          "Values": "kulturelles Leben",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Wichtige Lebensaspekte",
+          "Variable_Name": "U_Aspekte_des_Lebens_kulturelles_Leben",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Aspekte_des_Lebens"
+        },
+        {
+          "Values": "soziales Engagement",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Wichtige Lebensaspekte",
+          "Variable_Name": "U_Aspekte_des_Lebens_Engagement",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Aspekte_des_Lebens"
+        },
+        {
+          "Values": "viel erleben",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Wichtige Lebensaspekte",
+          "Variable_Name": "U_Aspekte_des_Lebens_erleben",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Aspekte_des_Lebens"
+        },
+        {
+          "Values": "gute, vielseitige Bildung",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Wichtige Lebensaspekte",
+          "Variable_Name": "U_Aspekte_des_Lebens_Bildung",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Aspekte_des_Lebens"
+        },
+        {
+          "Values": "Fotografieren",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Freizeitbeschäftigung (mind. gelegentlich)",
+          "Variable_Name": "U_Freizeitaktivitaeten_Fotografieren",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Freizeitaktivitaeten"
+        },
+        {
+          "Values": "Basteln, Heimwerken, Do-it-yourself",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Freizeitbeschäftigung (mind. gelegentlich)",
+          "Variable_Name": "U_Freizeitaktivitaeten_Basteln",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Freizeitaktivitaeten"
+        },
+        {
+          "Values": "Musik hören",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Freizeitbeschäftigung (mind. gelegentlich)",
+          "Variable_Name": "U_Freizeitaktivitaeten_Musik",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Freizeitaktivitaeten"
+        },
+        {
+          "Values": "Spazieren gehen",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Freizeitbeschäftigung (mind. gelegentlich)",
+          "Variable_Name": "U_Freizeitaktivitaeten_Spazieren",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Freizeitaktivitaeten"
+        },
+        {
+          "Values": "Beschäftigung mit dem Garten, Gärtnern",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Freizeitbeschäftigung (mind. gelegentlich)",
+          "Variable_Name": "U_Freizeitaktivitaeten_Garten",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Freizeitaktivitaeten"
+        },
+        {
+          "Values": "Museen, Ausstellungen, Galerien besuchen",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Freizeitbeschäftigung (mind. gelegentlich)",
+          "Variable_Name": "U_Freizeitaktivitaeten_Museen",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Freizeitaktivitaeten"
+        },
+        {
+          "Values": "Computerspiele, Videospiele",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Freizeitbeschäftigung (mind. gelegentlich)",
+          "Variable_Name": "U_Freizeitaktivitaeten_Computerspiele",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Freizeitaktivitaeten"
+        },
+        {
+          "Values": "Gäste einladen, sich mit Freunden, Bekannten treffen",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Freizeitbeschäftigung (mind. gelegentlich)",
+          "Variable_Name": "U_Freizeitaktivitaeten_Gaeste",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Freizeitaktivitaeten"
+        },
+        {
+          "Values": "Kochen",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Freizeitbeschäftigung (mind. gelegentlich)",
+          "Variable_Name": "U_Freizeitaktivitaeten_Kochen",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Freizeitaktivitaeten"
+        },
+        {
+          "Values": "Einkaufsbummel, Schaufensterbummel",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Freizeitbeschäftigung (mind. gelegentlich)",
+          "Variable_Name": "U_Freizeitaktivitaeten_Einkaufsbummel",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Freizeitaktivitaeten"
+        },
+        {
+          "Values": "Ausgehen (Restaurant, Kneipen, Disco, Tanzen)",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Freizeitbeschäftigung (mind. gelegentlich)",
+          "Variable_Name": "U_Freizeitaktivitaeten_Ausgehen",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Freizeitaktivitaeten"
+        },
+        {
+          "Values": "Wellness-Angebote nutzen",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Freizeitbeschäftigung (mind. gelegentlich)",
+          "Variable_Name": "U_Freizeitaktivitaeten_Wellness",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Freizeitaktivitaeten"
+        },
+        {
+          "Values": "Sport treiben",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Freizeitbeschäftigung (mind. gelegentlich)",
+          "Variable_Name": "U_Freizeitaktivitaeten_Sport_treiben",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Freizeitaktivitaeten"
+        },
+        {
+          "Values": "Mit dem Auto beschäftigen (z.B. Tuning, Ausbau, Reparatur)",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "Freizeitbeschäftigung (mind. gelegentlich)",
+          "Variable_Name": "C_Freizeitaktivitaeten_Auto_kat2",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_Freizeitaktivitaeten"
+        }
+      ]
+    },
+    {
+      "Variable_Name": "tgv3",
+      "Variable": "Zusatzmerkmale Automotive",
+      "Values": [
+        {
+          "Values": "(Fast) täglich",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "PKW-Nutzung: Häufigkeit",
+          "Variable_Name": "C_Verkehrsmittelnutzung_Auto",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "C_Verkehrsmittelnutzung_Auto"
+        },
+        {
+          "Values": "Wöchentlich",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "PKW-Nutzung: Häufigkeit",
+          "Variable_Name": "C_Verkehrsmittelnutzung_Auto",
+          "Value_Code": 2,
+          "Pseudo_Variable_Name": "C_Verkehrsmittelnutzung_Auto"
+        },
+        {
+          "Values": "Seltener",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "PKW-Nutzung: Häufigkeit",
+          "Variable_Name": "C_Verkehrsmittelnutzung_Auto",
+          "Value_Code": 3,
+          "Pseudo_Variable_Name": "C_Verkehrsmittelnutzung_Auto"
+        },
+        {
+          "Values": "Ja",
+          "Auswahltyp": "Single Choice",
+          "Variable": "PKW-Führerschein",
+          "Variable_Name": "A_PK_Fuehrerschein_PKW_kat2",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "A_PK_Fuehrerschein_PKW_kat2"
+        },
+        {
+          "Values": "Nein",
+          "Auswahltyp": "Single Choice",
+          "Variable": "PKW-Führerschein",
+          "Variable_Name": "A_PK_Fuehrerschein_PKW_kat2",
+          "Value_Code": 0,
+          "Pseudo_Variable_Name": "A_PK_Fuehrerschein_PKW_kat2"
+        },
+        {
+          "Values": "0",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "PKW-Anzahl im Haushalt",
+          "Variable_Name": "A_PK_PKW_HH_kat3",
+          "Value_Code": 0,
+          "Pseudo_Variable_Name": "A_PK_PKW_HH_kat3"
+        },
+        {
+          "Values": "1",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "PKW-Anzahl im Haushalt",
+          "Variable_Name": "A_PK_PKW_HH_kat3",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "A_PK_PKW_HH_kat3"
+        },
+        {
+          "Values": "2 oder mehr",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "PKW-Anzahl im Haushalt",
+          "Variable_Name": "A_PK_PKW_HH_kat3",
+          "Value_Code": 2,
+          "Pseudo_Variable_Name": "A_PK_PKW_HH_kat3"
+        },
+        {
+          "Values": "Kein Pkw-Fahrer",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "PKW-Nutzung: Kilometerleistung pro Jahr",
+          "Variable_Name": "A_PK_Fahrleistung_kat3",
+          "Value_Code": 0,
+          "Pseudo_Variable_Name": "A_PK_Fahrleistung_kat3"
+        },
+        {
+          "Values": "Unter 10.000 km",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "PKW-Nutzung: Kilometerleistung pro Jahr",
+          "Variable_Name": "A_PK_Fahrleistung_kat3",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "A_PK_Fahrleistung_kat3"
+        },
+        {
+          "Values": "10.000 km oder mehr",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "PKW-Nutzung: Kilometerleistung pro Jahr",
+          "Variable_Name": "A_PK_Fahrleistung_kat3",
+          "Value_Code": 2,
+          "Pseudo_Variable_Name": "A_PK_Fahrleistung_kat3"
+        },
+        {
+          "Values": "Ja",
+          "Auswahltyp": "Single Choice",
+          "Variable": "PKW-Nutzung: Premium-Marke",
+          "Variable_Name": "U_PK_PKW_Marken_Premiummarke",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_PK_PKW_Marken_Premiummarke"
+        },
+        {
+          "Values": "Nein",
+          "Auswahltyp": "Single Choice",
+          "Variable": "PKW-Nutzung: Premium-Marke",
+          "Variable_Name": "U_PK_PKW_Marken_Premiummarke",
+          "Value_Code": 0,
+          "Pseudo_Variable_Name": "U_PK_PKW_Marken_Premiummarke"
+        },
+        {
+          "Values": "Neuwagen",
+          "Auswahltyp": "Single Choice",
+          "Variable": "PKW-Nutzung: Neu-/ Gebrauchtwagen",
+          "Variable_Name": "A_PK_PKW_Neuwagen_kat2",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "A_PK_PKW_Neuwagen_kat2"
+        },
+        {
+          "Values": "Gebraucht-/ Jahreswagen",
+          "Auswahltyp": "Single Choice",
+          "Variable": "PKW-Nutzung: Neu-/ Gebrauchtwagen",
+          "Variable_Name": "A_PK_PKW_Neuwagen_kat2",
+          "Value_Code": 2,
+          "Pseudo_Variable_Name": "A_PK_PKW_Neuwagen_kat2"
+        },
+        {
+          "Values": "Neuwagen",
+          "Auswahltyp": "Single Choice",
+          "Variable": "PKW-Neuanschaffung: Neu-/ Gebrauchtwagen",
+          "Variable_Name": "A_PK_neuer_PKW_kat2",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "A_PK_neuer_PKW_kat2"
+        },
+        {
+          "Values": "Gebrauchtwagen",
+          "Auswahltyp": "Single Choice",
+          "Variable": "PKW-Neuanschaffung: Neu-/ Gebrauchtwagen",
+          "Variable_Name": "A_PK_neuer_PKW_kat2",
+          "Value_Code": 2,
+          "Pseudo_Variable_Name": "A_PK_neuer_PKW_kat2"
+        },
+        {
+          "Values": "Guter Fahrkomfort",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "PKW-Neuanschaffungs-Kriterien",
+          "Variable_Name": "U_PK_neuer_PKW_Wahl_Fahrkomfort",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_PK_neuer_PKW_Wahl"
+        },
+        {
+          "Values": "Umweltschonende Antriebstechnologie",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "PKW-Neuanschaffungs-Kriterien",
+          "Variable_Name": "U_PK_neuer_PKW_Wahl_umweltschonend",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_PK_neuer_PKW_Wahl"
+        },
+        {
+          "Values": "Sportlichkeit/ Schnelligkeit",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "PKW-Neuanschaffungs-Kriterien",
+          "Variable_Name": "U_PK_neuer_PKW_Wahl_Sportlichkeit",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_PK_neuer_PKW_Wahl"
+        },
+        {
+          "Values": "Viel Stauraum",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "PKW-Neuanschaffungs-Kriterien",
+          "Variable_Name": "U_PK_neuer_PKW_Wahl_Stauraum",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_PK_neuer_PKW_Wahl"
+        },
+        {
+          "Values": "Ansprechendes Design/ Aussehen",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "PKW-Neuanschaffungs-Kriterien",
+          "Variable_Name": "U_PK_neuer_PKW_Wahl_Design",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_PK_neuer_PKW_Wahl"
+        },
+        {
+          "Values": "Hohes Ansehen der Marke/ gutes Image",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "PKW-Neuanschaffungs-Kriterien",
+          "Variable_Name": "U_PK_neuer_PKW_Wahl_Marke",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_PK_neuer_PKW_Wahl"
+        },
+        {
+          "Values": "Umfangreiche Ausstattung",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "PKW-Neuanschaffungs-Kriterien",
+          "Variable_Name": "U_PK_neuer_PKW_Wahl_Ausstattung",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_PK_neuer_PKW_Wahl"
+        },
+        {
+          "Values": "Neuester Stand der Technik",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "PKW-Neuanschaffungs-Kriterien",
+          "Variable_Name": "U_PK_neuer_PKW_Wahl_Technik",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_PK_neuer_PKW_Wahl"
+        },
+        {
+          "Values": "Familienfreundlichkeit",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "PKW-Neuanschaffungs-Kriterien",
+          "Variable_Name": "U_PK_neuer_PKW_Wahl_Familienfreundlichkeit",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_PK_neuer_PKW_Wahl"
+        },
+        {
+          "Values": "Sicherheit",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "PKW-Neuanschaffungs-Kriterien",
+          "Variable_Name": "U_PK_neuer_PKW_Wahl_Sicherheit",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_PK_neuer_PKW_Wahl"
+        },
+        {
+          "Values": "Ja",
+          "Auswahltyp": "Single Choice",
+          "Variable": "PKW-Neuanschaffung: Premium-Marke",
+          "Variable_Name": "A_PK_neuer_PKW_Premiummarke",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "A_PK_neuer_PKW_Premiummarke"
+        },
+        {
+          "Values": "Nein",
+          "Auswahltyp": "Single Choice",
+          "Variable": "PKW-Neuanschaffung: Premium-Marke",
+          "Variable_Name": "A_PK_neuer_PKW_Premiummarke",
+          "Value_Code": 0,
+          "Pseudo_Variable_Name": "A_PK_neuer_PKW_Premiummarke"
+        },
+        {
+          "Values": "Cabrio",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "PKW-Neuanschaffung: Fahrzeugform",
+          "Variable_Name": "A_PK_neuer_PKW_Fahrzeugformen_Cabrio",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "A_PK_neuer_PKW_Fahrzeugformen"
+        },
+        {
+          "Values": "Coupé",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "PKW-Neuanschaffung: Fahrzeugform",
+          "Variable_Name": "A_PK_neuer_PKW_Fahrzeugformen_Coupe",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "A_PK_neuer_PKW_Fahrzeugformen"
+        },
+        {
+          "Values": "Kombi",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "PKW-Neuanschaffung: Fahrzeugform",
+          "Variable_Name": "A_PK_neuer_PKW_Fahrzeugformen_Kombi",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "A_PK_neuer_PKW_Fahrzeugformen"
+        },
+        {
+          "Values": "Limousine",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "PKW-Neuanschaffung: Fahrzeugform",
+          "Variable_Name": "A_PK_neuer_PKW_Fahrzeugformen_Limousine",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "A_PK_neuer_PKW_Fahrzeugformen"
+        },
+        {
+          "Values": "SUV/ Geländewagen",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "PKW-Neuanschaffung: Fahrzeugform",
+          "Variable_Name": "A_PK_neuer_PKW_Fahrzeugformen_SUV",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "A_PK_neuer_PKW_Fahrzeugformen"
+        },
+        {
+          "Values": "Van/ Minivan",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "PKW-Neuanschaffung: Fahrzeugform",
+          "Variable_Name": "A_PK_neuer_PKW_Fahrzeugformen_Van",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "A_PK_neuer_PKW_Fahrzeugformen"
+        },
+        {
+          "Values": "Benziner",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "PKW-Neuanschaffung: Antriebsart",
+          "Variable_Name": "A_PK_neuer_PKW_Antriebsarten_Benziner",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "A_PK_neuer_PKW_Antriebsarten"
+        },
+        {
+          "Values": "Diesel",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "PKW-Neuanschaffung: Antriebsart",
+          "Variable_Name": "A_PK_neuer_PKW_Antriebsarten_Diesel",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "A_PK_neuer_PKW_Antriebsarten"
+        },
+        {
+          "Values": "Alternativantrieb (Hybrid, Gas, Elektro u.a.)",
+          "Auswahltyp": "Pseudo-Mehrfach-Auswahl",
+          "Variable": "PKW-Neuanschaffung: Antriebsart",
+          "Variable_Name": "A_PK_neuer_PKW_Antriebsarten_Alternativ",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "A_PK_neuer_PKW_Antriebsarten"
+        },
+        {
+          "Values": "Ja",
+          "Auswahltyp": "Single Choice",
+          "Variable": "PKW-Neuanschaffung in den nächsten 1-2 Jahren",
+          "Variable_Name": "A_PK_neuer_PKW_Anschaffung",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "A_PK_neuer_PKW_Anschaffung"
+        },
+        {
+          "Values": "Nein",
+          "Auswahltyp": "Single Choice",
+          "Variable": "PKW-Neuanschaffung in den nächsten 1-2 Jahren",
+          "Variable_Name": "A_PK_neuer_PKW_Anschaffung",
+          "Value_Code": 0,
+          "Pseudo_Variable_Name": "A_PK_neuer_PKW_Anschaffung"
+        },
+        {
+          "Values": "Ja",
+          "Auswahltyp": "Single Choice",
+          "Variable": "Einstellungen zum Thema PKW: Ausgesprochener Autofan",
+          "Variable_Name": "U_PK_Aussagen_PKW_Autofan",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_PK_Aussagen_PKW_Autofan"
+        },
+        {
+          "Values": "Nein",
+          "Auswahltyp": "Single Choice",
+          "Variable": "Einstellungen zum Thema PKW: Ausgesprochener Autofan",
+          "Variable_Name": "U_PK_Aussagen_PKW_Autofan",
+          "Value_Code": 0,
+          "Pseudo_Variable_Name": "U_PK_Aussagen_PKW_Autofan"
+        },
+        {
+          "Values": "Ja",
+          "Auswahltyp": "Single Choice",
+          "Variable": "Einstellungen zum Thema PKW: Auto als Ausdruck eines Lebensgefühls",
+          "Variable_Name": "U_PK_Aussagen_PKW_Lebensgefuehl",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "U_PK_Aussagen_PKW_Lebensgefuehl"
+        },
+        {
+          "Values": "Nein",
+          "Auswahltyp": "Single Choice",
+          "Variable": "Einstellungen zum Thema PKW: Auto als Ausdruck eines Lebensgefühls",
+          "Variable_Name": "U_PK_Aussagen_PKW_Lebensgefuehl",
+          "Value_Code": 0,
+          "Pseudo_Variable_Name": "U_PK_Aussagen_PKW_Lebensgefuehl"
+        },
+        {
+          "Values": "Ja",
+          "Auswahltyp": "Single Choice",
+          "Variable": "(Sehr) starkes Produktinformationsinteresse PKW/ Auto",
+          "Variable_Name": "A_PK_Produktinteresse_PKW_kat2",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "A_PK_Produktinteresse_PKW_kat2"
+        },
+        {
+          "Values": "Nein",
+          "Auswahltyp": "Single Choice",
+          "Variable": "(Sehr) starkes Produktinformationsinteresse PKW/ Auto",
+          "Variable_Name": "A_PK_Produktinteresse_PKW_kat2",
+          "Value_Code": 0,
+          "Pseudo_Variable_Name": "A_PK_Produktinteresse_PKW_kat2"
+        },
+        {
+          "Values": "Ja",
+          "Auswahltyp": "Single Choice",
+          "Variable": "PKW-Kauf: (Mit-)Entscheider Haupt-PKW",
+          "Variable_Name": "A_PK_Kaufentscheidung_Haupt_allein_kat2",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "A_PK_Kaufentscheidung_Haupt_allein_kat2"
+        },
+        {
+          "Values": "Nein",
+          "Auswahltyp": "Single Choice",
+          "Variable": "PKW-Kauf: (Mit-)Entscheider Haupt-PKW",
+          "Variable_Name": "A_PK_Kaufentscheidung_Haupt_allein_kat2",
+          "Value_Code": 0,
+          "Pseudo_Variable_Name": "A_PK_Kaufentscheidung_Haupt_allein_kat2"
+        },
+        {
+          "Values": "Ja",
+          "Auswahltyp": "Single Choice",
+          "Variable": "PKW-Kauf: (Mit-)Entscheider Zweit-PKW",
+          "Variable_Name": "A_PK_Kaufentscheidung_Zweit_allein_kat2",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "A_PK_Kaufentscheidung_Zweit_allein_kat2"
+        },
+        {
+          "Values": "Nein",
+          "Auswahltyp": "Single Choice",
+          "Variable": "PKW-Kauf: (Mit-)Entscheider Zweit-PKW",
+          "Variable_Name": "A_PK_Kaufentscheidung_Zweit_allein_kat2",
+          "Value_Code": 0,
+          "Pseudo_Variable_Name": "A_PK_Kaufentscheidung_Zweit_allein_kat2"
+        }
+      ]
+    },
+    {
+      "Variable_Name": "tgv4",
+      "Variable": "BMW Segmentation",
+      "Values": [
+        {
+          "Values": "Ja",
+          "Auswahltyp": "Single Choice",
+          "Variable": "BMW Grundgesamtheit",
+          "Variable_Name": "BMW_GG",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "BMW_GG"
+        },
+        {
+          "Values": "Nein",
+          "Auswahltyp": "Single Choice",
+          "Variable": "BMW Grundgesamtheit",
+          "Variable_Name": "BMW_GG",
+          "Value_Code": 0,
+          "Pseudo_Variable_Name": "BMW_GG"
+        },
+        {
+          "Values": "Ja",
+          "Auswahltyp": "Single Choice",
+          "Variable": "BMW X2-Zuschnitt",
+          "Variable_Name": "X2_Zuschnitt",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "X2_Zuschnitt"
+        },
+        {
+          "Values": "Nein",
+          "Auswahltyp": "Single Choice",
+          "Variable": "BMW X2-Zuschnitt",
+          "Variable_Name": "X2_Zuschnitt",
+          "Value_Code": 0,
+          "Pseudo_Variable_Name": "X2_Zuschnitt"
+        },
+        {
+          "Values": "Ja",
+          "Auswahltyp": "Single Choice",
+          "Variable": "BMW GKL-Zuschnitt",
+          "Variable_Name": "GKL_Zuschnitt",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "GKL_Zuschnitt"
+        },
+        {
+          "Values": "Nein",
+          "Auswahltyp": "Single Choice",
+          "Variable": "BMW GKL-Zuschnitt",
+          "Variable_Name": "GKL_Zuschnitt",
+          "Value_Code": 0,
+          "Pseudo_Variable_Name": "GKL_Zuschnitt"
+        },
+        {
+          "Values": "Ältere Autoliebhaber",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "BMW Segmentierung",
+          "Variable_Name": "Basisseg_8",
+          "Value_Code": 1,
+          "Pseudo_Variable_Name": "Basisseg_8"
+        },
+        {
+          "Values": "Jüngere Autoliebhaber",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "BMW Segmentierung",
+          "Variable_Name": "Basisseg_8",
+          "Value_Code": 2,
+          "Pseudo_Variable_Name": "Basisseg_8"
+        },
+        {
+          "Values": "Junge Performer",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "BMW Segmentierung",
+          "Variable_Name": "Basisseg_8",
+          "Value_Code": 3,
+          "Pseudo_Variable_Name": "Basisseg_8"
+        },
+        {
+          "Values": "Markenbewusste Freizeitsportler",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "BMW Segmentierung",
+          "Variable_Name": "Basisseg_8",
+          "Value_Code": 4,
+          "Pseudo_Variable_Name": "Basisseg_8"
+        },
+        {
+          "Values": "Funktionale Etablierte",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "BMW Segmentierung",
+          "Variable_Name": "Basisseg_8",
+          "Value_Code": 5,
+          "Pseudo_Variable_Name": "Basisseg_8"
+        },
+        {
+          "Values": "Luxusorientiertes Premiumsegment",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "BMW Segmentierung",
+          "Variable_Name": "Basisseg_8",
+          "Value_Code": 6,
+          "Pseudo_Variable_Name": "Basisseg_8"
+        },
+        {
+          "Values": "Familien- und Nachhaltigkeitsorientierte",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "BMW Segmentierung",
+          "Variable_Name": "Basisseg_8",
+          "Value_Code": 7,
+          "Pseudo_Variable_Name": "Basisseg_8"
+        },
+        {
+          "Values": "Einkommensstarke Hybrid-Trendsetter",
+          "Auswahltyp": "Multiple Choice",
+          "Variable": "BMW Segmentierung",
+          "Variable_Name": "Basisseg_8",
+          "Value_Code": 8,
+          "Pseudo_Variable_Name": "Basisseg_8"
+        }
+      ]
+    }
+  ]
+}
