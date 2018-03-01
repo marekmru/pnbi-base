@@ -1,4 +1,4 @@
-# brandinvestor
+# bi.vue.base
 
 > A Vue.js project
 

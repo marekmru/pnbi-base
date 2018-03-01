@@ -1,0 +1,36 @@
+.login-form,
+form {
+  height: 100vh;
+  .bi-card-container {
+    min-width: 360px;
+    max-width: 480px;
+  }
+  .md-card {
+    background-color: #fff;
+    padding: 8px 12px 24px 12px;
+    width: 100%;
+  }
+  .bi-login-button {
+    width: 100%;
+  }
+  .bi-copyright,
+  .bi-powered {
+    user-select: none;
+    width: 100%;
+    text-align: center;
+  }
+  .bi-copyright {
+    margin-top: 3px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .bi-powered {
+    color: rgba(255, 255, 255, 0.2);
+    font-weight: 800;
+    line-height: 1.44;
+    margin: -5px 0 0;
+    @media (max-width: 600px) {
+      line-height: 2;
+      font-size: 24px;
+    }
+  }
+}
