@@ -38,6 +38,6 @@ export default {
 
 <style lang="scss">
 #login {
-  margin-top: 48px;
+  margin-top: -48px;
 }
 </style>
