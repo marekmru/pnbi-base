@@ -37,5 +37,7 @@ export default {
 </template>
 
 <style lang="scss">
-
+.content--wrap {
+  padding-top: 0 !important;
+}
 </style>

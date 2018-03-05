@@ -175,4 +175,7 @@ export default {
     background-color: #0a7db4;
   }
 }
+.content--wrap {
+  padding-top: 0 !important;
+}
 </style>
