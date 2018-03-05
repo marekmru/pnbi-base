@@ -13,16 +13,12 @@ export default {
   },
   data () {
     return {
-      state: undefined,
-      bla: undefined
+      state: undefined
     }
   },
   methods: {
     setState (name) {
       this.state = name
-    },
-    dosom (a) {
-      this.bla = a
     }
   },
   created () {
