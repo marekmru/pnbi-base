@@ -14,6 +14,8 @@ textarea {
 .btn{
   font-weight: 700;
 }
+
+
 // view transtions
 .fade-enter-active,
 .fade-leave-active {
@@ -29,12 +31,6 @@ textarea {
 .fade-leave-active {
   opacity: 0
 }
-.fade-leave-active {
-  display: none;
-}
-[v-cloak] > * { display:none }
-[v-cloak]::before { content: "loading…" }
-
 #login {
   background-position: center center;
   background-size: cover;
