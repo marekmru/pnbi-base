@@ -3,13 +3,11 @@ import './routes.js'
 import './config.js'
 // app wide styles, fonts
 import Vuetify from 'vuetify'
-import VeeValidate from 'vee-validate'
 import 'vuetify/dist/vuetify.min.css'
 import './index.scss'
 
 const install = (Vue) => {
   Vue.component('pnbi-navbar', PnbiNavbar)
-  Vue.use(VeeValidate)
   Vue.use(Vuetify, { theme: {
     primary: '#d70f14',
     secondary: '#000000',

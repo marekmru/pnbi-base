@@ -71,18 +71,15 @@ export default {
             <v-card-title class="justify-center">
               <h1 class="bi-headline" >CORE</h1>
             </v-card-title>  
-              <v-layout column>
-                <v-card-text>
-                
-                    <v-text-field @focus="focus" label="Nutzername" v-model="user.username" :rules="rules.nameRules" :counter="20" required></v-text-field>
-                    <v-text-field @focus="focus" label="Passwort" v-model="user.password" :rules="rules.passwordRules" required type="password"></v-text-field>
-                  
-                </v-card-text>
-              </v-layout>
+            <v-card-text>      
+              <v-form>          
+                <v-text-field @focus="focus" label="Nutzername" v-model="user.username" :rules="rules.nameRules" :counter="20" required></v-text-field>
+                <v-text-field @focus="focus" label="Passwort" v-model="user.password" :rules="rules.passwordRules" required type="password"></v-text-field>
+              </v-form>
+            </v-card-text>   
             <v-card-actions class="white">
-              <v-layout align-center column>
-                <v-btn color="primary" block @click="onSubmit" :disabled="!rules.valid" type="submit">Login</v-btn>
-                <br>
+              <v-layout justify-center="" column>
+                <v-btn class="mb-2" color="primary" block @click="onSubmit" :disabled="!rules.valid" type="submit">Login</v-btn>
                 <v-btn @click="toForgot" flat block>Passwort zurücksetzen</v-btn>
               </v-layout>
             </v-card-actions>
@@ -93,12 +90,6 @@ export default {
   </v-container>
 
 </template>
-<style scoped lang="scss">
-
-.card {
-  max-width: 520px;
-  margin: 0 auto;
-  padding: 0 12px 24px 12px;
-}
+<style lang="css">
 
 </style>

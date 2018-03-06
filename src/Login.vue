@@ -27,13 +27,14 @@ export default {
 </script>
 <template>
     <div class="page" id="login">
-        <login-form v-if="state === 'login'" :setState="setState"></login-form>
-         <forgot-form v-if="state === 'forgot'" :setState="setState"></forgot-form>
+        <login-form id="auth-form" v-if="state === 'login'" :setState="setState"></login-form>
+         <forgot-form id="auth-form" v-if="state === 'forgot'" :setState="setState"></forgot-form>
     </div>
 </template>
 
 <style lang="scss">
 #login {
   margin-top: -48px;
+  height:calc(100vh + 48px);
 }
 </style>

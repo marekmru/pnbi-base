@@ -57,7 +57,7 @@ export default {
           this.message = {
             success: true,
             text:
-              'Eine Email mit einem Link zum zurücksetzen ihres Passwortes wurde an folgende Adresse geschickt:'
+              'Eine Email mit einem Link zum Zurücksetzen ihres Passwortes wurde an folgende Adresse geschickt:'
           }
         })
         .catch(() => {
@@ -71,25 +71,21 @@ export default {
 </script>
 
 <template>
-  <v-container fill-height>
+  <v-container fill-height id="auth-form">
     <v-layout align-center>
       <v-flex class="text-center">
         <h1 class="bi-powered">POWERED BY CORE</h1>
         <v-card v-if="!message">
-          <v-card-title>
+          <v-card-text>
             <v-layout  column>
               <h2>Passwort zurücksetzen</h2>
-              <v-form  @submit="onSubmit" v-model="rules.valid" ref="form" lazy-validation>
+              <v-form  @submit="onSubmit" v-model="rules.valid" ref="form" lazy-validation >
                 <v-text-field @focus="focus" label="Ihre E-Mail Adresse" v-model="user.email" :rules="rules.emailRules" required></v-text-field>
               <v-btn class="mt-4" :disabled="!rules.valid" block color="primary" type="submit">Anfordern</v-btn>
+              <v-btn @click="toLogin" flat block>Zurück zum Login</v-btn>
               </v-form>
             </v-layout>
-          </v-card-title>
-          <v-card-actions class="white">
-            <v-layout align-center column>
-              <v-btn @click="toLogin" flat block>Zurück zum Login</v-btn>
-            </v-layout>
-          </v-card-actions>
+          </v-card-text>
         </v-card>
         <v-card v-if="message">
           <v-card-title>
@@ -97,50 +93,14 @@ export default {
               <h2>Email wurde erfolgreich versandt</h2>
               <v-btn @click="toLogin" flat block>Zurück zum Login</v-btn>
             </v-layout>
-          </v-card-title>  
+          </v-card-title>
         </v-card>
       </v-flex>
     </v-layout>
-  </v-container>  
+  </v-container>
 </template>
 
-<style scoped lang="scss">
-.card {
-  max-width: 520px;
-  margin: 0 auto;
-  padding: 0 12px 24px 12px;
-}
-.container {
-  h1.bi-headline {
-    text-align: center;
-    font-size: 36px;
-    font-weight: 800;
-    letter-spacing: 4px;
-    margin: 0 0 0px;
-    text-align: center;
-    text-transform: uppercase;
-  }
-  .bi-copyright,
-  .bi-powered {
-    user-select: none;
-    width: 100%;
-    text-align: center;
-  }
-  .bi-copyright {
-    margin-top: 3px;
-    color: rgba(255, 255, 255, 0.6);
-  }
-  .bi-powered {
-    color: rgba(255, 255, 255, 0.2);
-    font-weight: 800;
-    line-height: 1.44;
-    margin: -5px 0 0;
-    @media (max-width: 600px) {
-      line-height: 2;
-      font-size: 24px;
-    }
-  }
-}
+<style lang="css">
+
+
 </style>
-
-

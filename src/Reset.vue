@@ -116,27 +116,27 @@ export default {
 
 <template>
   <div class="page" id="login">
-    <v-container class="page" id="login" fluid="" fill-height>
+    <v-container class="page" id="auth-form" fluid="" fill-height>
       <v-layout align-center>
         <v-flex class="text-center">
           <h1 class="bi-powered">POWERED BY CORE</h1>
           <v-form ref="form"> 
-          <v-card >
-            <v-card-title class="pb-0">
-              <h2 >Neues Passwort</h2>
-            </v-card-title>
-            <v-card-text class="py-0" v-model="rules.valid">              
-              <v-text-field type="password" @focus="focus" label="Neues Passwort" v-model="user.password" :rules="rules.passwordRules" @input="onChange" required></v-text-field>
-              <v-card-text class="pt-0 pb-0 progress-bar">
-                <span>Passwortstärke:</span>
-                <v-progress-linear slot="progress" :value="progress" height="5" :color="color"></v-progress-linear>
+            <v-card >
+              <v-card-title >
+                <h2 >Neues Passwort</h2>
+              </v-card-title>
+              <v-card-text class="py-0" v-model="rules.valid">              
+                <v-text-field type="password" @focus="focus" label="Neues Passwort" v-model="user.password" :rules="rules.passwordRules" @input="onChange" required></v-text-field>
+                <v-card-text class="pt-0 pb-0 progress-bar">
+                  <span>Passwortstärke:</span>
+                  <v-progress-linear slot="progress" :value="progress" height="5" :color="color"></v-progress-linear>
+                </v-card-text>
+                <v-text-field type="password" @focus="focus" label="Passwort wiederholen" v-model="user.password2" :rules="rules.passwordRules2" required></v-text-field>
+                <v-btn block color="primary" type="submit" :disabled="!isValid" @click="onSubmit">Neues Passwort setzen</v-btn>
+                <v-btn @click="goToLogin" flat block>Zurück zum Login</v-btn>
               </v-card-text>
-              <v-text-field type="password" @focus="focus" label="Passwort wiederholen" v-model="user.password2" :rules="rules.passwordRules2" required></v-text-field>
-              <v-btn block color="primary" type="submit" :disabled="!isValid" @click="onSubmit">Neues Passwort setzen</v-btn>
-              <v-btn @click="goToLogin" flat block>Zurück zum Login</v-btn>
-            </v-card-text>
-          </v-card>
-        </v-form>   
+            </v-card>
+          </v-form>   
         </v-flex>
       </v-layout>
     </v-container>
@@ -144,38 +144,5 @@ export default {
 </template>
 
 <style lang="scss">
-.input-group__details{
-  // provides to see the bottom border of input field inside Cards even if padding is changed
-  margin-top: 3px;
-}
-.progress-bar{
-  margin-bottom: -10px;
-  margin-top: 8px;
-}
-.title{
-  margin-top: -16px;
-}
-.spacing-inside-card-text{
-  padding-top:0px;
-}
-.card {
-  max-width: 520px;
-  margin: 0 auto;
-  padding: 0 12px 24px 12px;
-}
-.pw-strength {
-  border-radius: 3px;
-  margin: 0 -7px 0 -7px;
-  padding: 4px 12px 4px 12px;
-  color: white;
-  &.pw-weak {
-    background-color: #d70f14;
-  }
-  &.pw-strong {
-    background-color: #0a7db4;
-  }
-}
-#login {
-  margin-top: 48px;
-}
+
 </style>
