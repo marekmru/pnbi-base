@@ -49,7 +49,8 @@ export default {
     toLogin () {
       this.setState('login')
     },
-    onSubmit () {
+    onSubmit ($event) {
+      $event.preventDefault()
       this.message = undefined
       this.errorEmail400 = false
       Auth.reset(this.user)
@@ -75,8 +76,8 @@ export default {
     <v-layout align-center>
       <v-flex class="text-center">
         <h1 class="bi-powered">POWERED BY CORE</h1>
-        <v-card v-if="!message">
-          <v-card-text>
+        <v-card v-if="!message" >
+          <v-card-text class="pb-0">
             <v-layout  column>
               <h2>Passwort zurücksetzen</h2>
               <v-form  @submit="onSubmit" v-model="rules.valid" ref="form" lazy-validation >

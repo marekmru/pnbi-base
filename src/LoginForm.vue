@@ -43,7 +43,8 @@ export default {
     toForgot () {
       this.setState('forgot')
     },
-    onSubmit () {
+    onSubmit ($event) {
+      $event.preventDefault()
       this.errorAuth = false
       Auth.login(this.user).then(
         () => {
@@ -71,15 +72,15 @@ export default {
             <v-card-title class="justify-center">
               <h1 class="bi-headline" >CORE</h1>
             </v-card-title>  
-            <v-card-text>      
+            <v-card-text class="pb-0">      
               <v-form>          
                 <v-text-field @focus="focus" label="Nutzername" v-model="user.username" :rules="rules.nameRules" :counter="20" required></v-text-field>
                 <v-text-field @focus="focus" label="Passwort" v-model="user.password" :rules="rules.passwordRules" required type="password"></v-text-field>
+                <v-btn class="mb-2" color="primary" block @click="onSubmit" :disabled="!rules.valid" type="submit">Login</v-btn>
               </v-form>
             </v-card-text>   
-            <v-card-actions class="white">
-              <v-layout justify-center="" column>
-                <v-btn class="mb-2" color="primary" block @click="onSubmit" :disabled="!rules.valid" type="submit">Login</v-btn>
+            <v-card-actions class="white pt-0">
+              <v-layout justify-center="" column>             
                 <v-btn @click="toForgot" flat block>Passwort zurücksetzen</v-btn>
               </v-layout>
             </v-card-actions>
