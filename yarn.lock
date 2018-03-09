@@ -2049,10 +2049,6 @@ data-uri-to-buffer@1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/data-uri-to-buffer/-/data-uri-to-buffer-1.2.0.tgz#77163ea9c20d8641b4707e8f18abdf9a78f34835"
 
-date-fns@^1.29.0:
-  version "1.29.0"
-  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.29.0.tgz#12e609cdcb935127311d04d33334e2960a2a54e6"
-
 date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
@@ -2110,10 +2106,6 @@ deep-extend@~0.4.0:
 deep-is@~0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
-
-deepmerge@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-2.0.1.tgz#25c1c24f110fb914f80001b925264dd77f3f4312"
 
 default-require-extensions@^1.0.0:
   version "1.0.0"
@@ -3180,10 +3172,6 @@ function-bind@^1.0.2, function-bind@^1.1.1:
 functional-red-black-tree@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
-
-fuzzysearch@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/fuzzysearch/-/fuzzysearch-1.0.3.tgz#dffc80f6d6b04223f2226aa79dd194231096d008"
 
 gauge@~2.7.3:
   version "2.7.4"
@@ -5401,10 +5389,6 @@ normalize-url@^1.4.0:
     query-string "^4.1.0"
     sort-keys "^1.0.0"
 
-noty@^3.1.0:
-  version "3.1.4"
-  resolved "https://registry.yarnpkg.com/noty/-/noty-3.1.4.tgz#f9eaac9df7883921b270ec6f2869e9aeedd8071b"
-
 npm-run-path@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/npm-run-path/-/npm-run-path-2.0.2.tgz#35a9232dfa35d7067b4cb2ddf2357b1871536c5f"
@@ -5829,10 +5813,6 @@ pluralize@^7.0.0:
 pn@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/pn/-/pn-1.1.0.tgz#e2f4cef0e219f463c179ab37463e4e1ecdccbafb"
-
-popper.js@^1.12.6:
-  version "1.12.9"
-  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.12.9.tgz#0dfbc2dff96c451bb332edcfcfaaf566d331d5b3"
 
 portfinder@^1.0.13, portfinder@^1.0.9:
   version "1.0.13"
@@ -6319,12 +6299,6 @@ querystringify@0.0.x:
 querystringify@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-1.0.0.tgz#6286242112c5b712fa654e526652bf6a13ff05cb"
-
-raf@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/raf/-/raf-3.4.0.tgz#a28876881b4bc2ca9117d4138163ddb80f781575"
-  dependencies:
-    performance-now "^2.1.0"
 
 randomatic@^1.1.3:
   version "1.1.7"
@@ -7776,10 +7750,6 @@ vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
 
-vee-validate@^2.0.0-beta.17:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/vee-validate/-/vee-validate-2.0.3.tgz#f17fa3d7d53a5344a0e794938346927abb252ef7"
-
 vendors@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/vendors/-/vendors-1.0.1.tgz#37ad73c8ee417fb3d580e785312307d274847f22"
@@ -7808,10 +7778,6 @@ vue-eslint-parser@^2.0.1:
     espree "^3.5.2"
     esquery "^1.0.0"
     lodash "^4.17.4"
-
-vue-ga@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/vue-ga/-/vue-ga-1.0.0.tgz#c890fc529970af10abef2c42c81ea38cfb00cef1"
 
 vue-hot-reload-api@^2.2.0:
   version "2.2.4"
@@ -7850,19 +7816,6 @@ vue-loader@^13.3.0:
     vue-style-loader "^3.0.0"
     vue-template-es2015-compiler "^1.6.0"
 
-vue-material@^1.0.0-beta-7:
-  version "1.0.0-beta-7"
-  resolved "https://registry.yarnpkg.com/vue-material/-/vue-material-1.0.0-beta-7.tgz#cd7bbc919d4b43b71d91fafc9b5edad56bdaa327"
-  dependencies:
-    date-fns "^1.29.0"
-    deepmerge "^2.0.1"
-    fuzzysearch "^1.0.3"
-    is-promise "^2.1.0"
-    popper.js "^1.12.6"
-    raf "^3.4.0"
-    vue "^2.5.3"
-    vue-ga "^1.0.0"
-
 vue-resource@^1.3.4:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/vue-resource/-/vue-resource-1.3.5.tgz#021d8713e9d86a77e83169dfdd8eab6047369a71"
@@ -7891,15 +7844,9 @@ vue-template-es2015-compiler@^1.5.3, vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
 
-vue@^2.5.2, vue@^2.5.3:
+vue@^2.5.2:
   version "2.5.13"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.13.tgz#95bd31e20efcf7a7f39239c9aa6787ce8cf578e1"
-
-vuejs-noty@^0.1.3:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/vuejs-noty/-/vuejs-noty-0.1.3.tgz#c665b70c9cfdf7c32f0107a734ecd2b86674af78"
-  dependencies:
-    noty "^3.1.0"
 
 walker@~1.0.5:
   version "1.0.7"
