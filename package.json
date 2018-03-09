@@ -1,5 +1,5 @@
 {
-  "name": "bi.vue.base",
+  "name": "pnbi-base",
   "main": "./dist/static/js/app.js",
   "version": "0.1.6",
   "description": "A Vue.js project",
