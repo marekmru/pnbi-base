@@ -14,7 +14,44 @@ textarea {
 .btn{
   font-weight: 700;
 }
-
+.bb-3 {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.mirror{
+  transform: scaleX(-1);
+  transform-origin: center;
+}
+.bc-page-title {
+  display: block;
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  margin-top: 0;
+  text-transform: uppercase;
+}
+.bc-table-cell--head {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.bc-table-cell {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+//bug 1.0.1 icon pos in fab is top not center
+.icon.material-icons {
+  align-items: center;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  font-feature-settings: "liga";
+  font-size: 24px;
+  justify-content: center;
+  line-height: 1;
+  transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
+  vertical-align: middle;
+}
+.content--wrap {
+  padding-top: 48px;
+}
 
 // view transtions
 .fade-enter-active,
