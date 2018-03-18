@@ -1,30 +1,23 @@
-# bi.vue.base
+# pnbi-base
 
-> A Vue.js project
+> Base Routes and Components fro PNBI Webapps
 
-## Build Setup
+## Project config
 
 ``` bash
-# install dependencies
-npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
+import is from 'is'
+const port = '5000'
 
-# build for production with minification
-npm run build
+const isApiBaseDefined = is.defined(window.BIAPIBASE) && !window.BIAPIBASE.includes('echo var')
+const basePath = isApiBaseDefined ? window.BIAPIBASE : `http://localhost:${port}`
 
-# build for production and view the bundle analyzer report
-npm run build --report
+const BI_BASE_CONFIG = {
+  API: basePath,
+  MAIN_ROUTE: 'overview',
+  TITLE: 'TITLE',
+  IGNORED_ERRORS: [500]
+}
+export default BI_BASE_CONFIG
 
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
 ```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
