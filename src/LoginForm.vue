@@ -10,18 +10,13 @@ export default {
   mounted () {},
   data () {
     return {
+      title: BI_BASE_CONFIG.TITLE,
       rules: {
         valid: false,
         nameRules: [
-          v => !!v || 'Nutzername ist ein Pflichtfeld',
+          v => !!v || 'Pflichtfeld',
           v =>
-            v.length >= 3 || 'Nutzername muss mindestens 3 Zeichen lang sein.',
-          v =>
-            !this.errorAuth ||
-            'Bitte überprüfen Sie ihren Namen und das Passwort.'
-        ],
-        passwordRules: [
-          v => !!v || 'Nutzername ist ein Pflichtfeld',
+            v.length >= 3 || 'Mindestens 3 Zeichen eingeben.',
           v =>
             !this.errorAuth ||
             'Bitte überprüfen Sie ihren Namen und das Passwort.'
@@ -69,13 +64,13 @@ export default {
         <h1 class="bi-powered">POWERED BY CORE</h1>
         <v-form v-model="rules.valid" ref="form" lazy-validation>
           <v-card>
-            <v-card-title class="justify-center">
-              <h1 class="bi-headline" >CORE</h1>
+            <v-card-title class="justify-center pb-0">
+              <h1 class="bi-headline">{{title}}</h1>
             </v-card-title>  
             <v-card-text class="pb-0">      
               <v-form>          
-                <v-text-field @focus="focus" label="Nutzername" v-model="user.username" :rules="rules.nameRules" :counter="20" required></v-text-field>
-                <v-text-field @focus="focus" label="Passwort" v-model="user.password" :rules="rules.passwordRules" required type="password"></v-text-field>
+                <v-text-field @focus="focus" label="Nutzername" v-model="user.username" :rules="rules.nameRules" required></v-text-field>
+                <v-text-field @focus="focus" label="Passwort" v-model="user.password" :rules="rules.nameRules" required type="password"></v-text-field>
                 <v-btn class="mb-2" color="primary" block @click="onSubmit" :disabled="!rules.valid" type="submit">Login</v-btn>
               </v-form>
             </v-card-text>   

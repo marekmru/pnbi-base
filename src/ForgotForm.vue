@@ -19,8 +19,8 @@ export default {
       rules: {
         valid: false,
         emailRules: [
-          v => !!v || 'E-mail ist ein Pflichtfeld',
-          v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail muss valide sein',
+          v => !!v || 'Pflichtfeld',
+          v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'Die E-Mail Adresse muss valide sein',
           v => !this.errorEmail400 || 'Die E-Mail Adresse wurde nicht gefunden.'
         ]
       },
@@ -29,19 +29,6 @@ export default {
   },
 
   methods: {
-    onEmailFocus () {},
-    validateBeforeSubmit () {},
-    /*
-    onEmailFocus () {
-      this.errors.clear()
-    },
-    validateBeforeSubmit () {
-      this.$validator.validateAll().then(result => {
-        if (result) {
-          this.onSubmit()
-        }
-      })
-    }, */
     focus () {
       this.errorEmail400 = false
       this.$refs.form.validate()
@@ -91,7 +78,10 @@ export default {
         <v-card v-if="message">
           <v-card-title>
             <v-layout column>
-              <h2>Email wurde erfolgreich versandt</h2>
+              <div class="pb-3">
+                <p>{{message.text}}</p>
+                <strong>{{user.email}}</strong>
+              </div>
               <v-btn @click="toLogin" flat block>Zurück zum Login</v-btn>
             </v-layout>
           </v-card-title>
@@ -101,7 +91,9 @@ export default {
   </v-container>
 </template>
 
-<style lang="css">
-
+<style lang="css" scoped>
+  .card{
+    padding-bottom: 12px;
+  }
 
 </style>

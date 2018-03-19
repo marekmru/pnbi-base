@@ -85,8 +85,8 @@ export default {
           router.push(BI_BASE_CONFIG.MAIN_ROUTE);
         }
       },
-      error => {
-        console.log(error);
+      () => {
+        //console.info(error);
       }
     );
     EventBus.$on(PROFILE_UPDATED, profile => {
@@ -118,9 +118,9 @@ export default {
   },
 
   methods: {
-    showError(alert){
-      this.alertMessage = alert
-      this.alertOpen = true
+    showError(alert) {
+      this.alertMessage = alert;
+      this.alertOpen = true;
     },
     logout() {
       Auth.logout()
@@ -142,7 +142,8 @@ export default {
   },
   computed: {
     isNavVisible() {
-      const isVis = ["login", "reset"].indexOf(this.$route.name) === -1;
+      const isVis =
+        ["login", "reset", "forbidden"].indexOf(this.$route.name) === -1;
       return isVis;
     }
   }
@@ -151,10 +152,10 @@ export default {
 
 
 <style lang="scss" scoped>
-pre{
+pre {
   overflow: scroll;
-  word-wrap:break-word;
-  border: 1px  solid rgba(100,100,100,0.1);
+  word-wrap: break-word;
+  border: 1px solid rgba(100, 100, 100, 0.1);
 }
 .username {
   font-size: 16px;
