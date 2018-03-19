@@ -1,5 +1,6 @@
 import router from '@/router'
 import axios from 'axios'
+import is from 'is'
 import BI_BASE_CONFIG from '@/pnbi.base.config.js'
 import EventBus, { ERROR } from "./event-bus";
 function isAuthRoute() {
@@ -12,14 +13,26 @@ axios.interceptors.response.use(
     return response
   },
   (error) => {
+    if (is.undefined(error.response)) {
+      EventBus.$emit(ERROR, {
+        data: {
+          status_code: "500",
+          result: {
+            message: "Backend error"
+          }
+        }
+      })
+
+      return Promise.reject(error)
+    }
+
     if (error.response.status === 401 && isAuthRoute() === false) {
       router.push('/')
     } else {
-      
         if (ingnoredErrors.indexOf(error.response.status) > -1 || isAuthRoute() ) {
           return Promise.reject(error)
         } else {
-          EventBus.$emit(ERROR, error.response)
+          EventBus.$emit(ERROR, error.response )
           return Promise.reject(error)
         }
     }

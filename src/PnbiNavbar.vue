@@ -51,7 +51,7 @@
     <v-dialog v-model="alertOpen" max-width="760px">
       <v-card v-if="alertOpen && alertMessage" class="pa-1">
         <v-card-title>
-          <h3><v-icon style="margin-top: -2px;" color="error">error</v-icon> <span class="error--text">BRANDINVESTOR - FEHLER ({{alertMessage.data.status_code}})</span></h3>
+          <h3><v-icon style="margin-top: -2px;" color="error">error</v-icon> <span class="error--text">FEHLER {{alertMessage.data.status_code}}</span></h3>
         </v-card-title>
         <v-card-text>
           <strong  v-if="alertMessage.data.result.message">{{alertMessage.data.result.message}}</strong>
