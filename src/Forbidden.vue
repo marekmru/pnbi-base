@@ -1,16 +1,3 @@
-<script>
-export default {
-  mounted() {},
-  components: {},
-  data() {
-    return {
-      state: undefined
-    };
-  },
-  methods: {},
-  created() {}
-};
-</script>
 <template>
   <div class="page" id="login">
       <v-container fill-height id="auth-form">
@@ -24,10 +11,11 @@ export default {
       <v-card-text class="pb-0">
         <p  sytle="line-height: 1.2em;">Bitte kontaktieren Sie uns unter folgender E-Mail Adresse:<br><a href="mailto:bi-ops@plan-net.com"><strong>bi-ops@plan-net.com</strong></a></p>
       </v-card-text>
-      <c-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn :to="login" flat block>Zurück zum Login</v-btn>
-      </c-card-actions>
+      <v-card-actions>
+          <v-layout justify-center="" column>             
+                <v-btn :to="{name: 'login'}" flat block>Zurück zum Login</v-btn>
+            </v-layout>
+      </v-card-actions>
     </v-card>
           </v-flex>
     </v-layout>
