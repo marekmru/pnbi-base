@@ -8,7 +8,7 @@
         <v-flex>  
           <v-layout row>
             <v-flex class="pl-2 user-image">
-              <v-icon color="white" class="account-icon" size="66">account_circle</v-icon>
+              <v-icon color="white" class="account-icon">account_circle</v-icon>
               <v-chip v-if="profile.admin" color="primary" text-color="white">Admin</v-chip>      
             </v-flex>
             <v-layout column>
@@ -151,7 +151,11 @@ export default {
 </script>
 
 
-<style lang="scss" scoped>
+<style scoped>
+div >>> .account-icon{
+  font-size: 66px;
+}
+
 pre {
   overflow: scroll;
   word-wrap: break-word;
@@ -179,11 +183,11 @@ pre {
 }
 .user-image {
   position: relative;
-  .chip {
-    position: absolute;
-    top: -10px;
-    left: 45px;
-  }
+}
+.user-image  .chip {
+  position: absolute;
+  top: -10px;
+  left: 45px;
 }
 .user-background {
   background: rgba(0, 0, 0, 0.2);
