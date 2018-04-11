@@ -1,6 +1,7 @@
 import Login from './Login'
 import Reset from './Reset'
 import Forbidden from './Forbidden'
+import ForbiPageNotFounddden from './PageNotFound'
 import router from '@/router'
 
 router.addRoutes([
@@ -19,5 +20,5 @@ router.addRoutes([
     name: 'forbidden',
     component: Forbidden
   },
-  { path: '*', component: PageNotFound }
+  { path: '*', name:'notfound', component: PageNotFound }
 ])
