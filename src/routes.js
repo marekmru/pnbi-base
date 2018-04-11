@@ -18,5 +18,6 @@ router.addRoutes([
     path: '/forbidden',
     name: 'forbidden',
     component: Forbidden
-  }
+  },
+  { path: '*', component: PageNotFound }
 ])
