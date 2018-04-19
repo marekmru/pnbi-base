@@ -65,46 +65,61 @@
         </v-card-actions>
       </v-card>
   </v-dialog>
+  <script type="text/javascript">
+   
+  </script>
+
   </div>
 </template>
 <script>
-import EventBus, { LOADING, PROFILE_UPDATED, ERROR } from "./event-bus";
-import Auth from "./Auth";
-import router from "@/router";
-import BI_BASE_CONFIG from "@/pnbi.base.config.js";
+import EventBus, { LOADING, PROFILE_UPDATED, ERROR } from './event-bus'
+import Auth from './Auth'
+import router from '@/router'
+import BI_BASE_CONFIG from '@/pnbi.base.config.js'
+
+const tealiumEnabler = (a, b, c, d) => {
+  a = '//tags.tiqcdn.com/utag/plan-net-training/b.zimmermann/dev/utag.js'
+  b = document
+  c = 'script'; d = b.createElement(c)
+  d.src = a; d.type = 'text/java' + c
+  d.async = true
+  a = b.getElementsByTagName(c)[0]
+  a.parentNode.insertBefore(d, a)
+}
 
 export default {
-  mounted() {
+  mounted () {
+    tealiumEnabler()
     Auth.profile().then(
       profile => {
-        this.profile = profile;
+        this.profile = profile
         if (
-          router.history.current.name === "login" ||
-          router.history.current.name === "reset"
+          router.history.current.name === 'login' ||
+          router.history.current.name === 'reset'
         ) {
-          router.push(BI_BASE_CONFIG.MAIN_ROUTE);
+          router.push(BI_BASE_CONFIG.MAIN_ROUTE)
         }
       },
       () => {
-        //console.info(error);
+        // console.info(error);
       }
-    );
+    )
     EventBus.$on(PROFILE_UPDATED, profile => {
-      if (typeof profile !== "undefined") {
-        this.profile.realname = profile.realname;
+      if (typeof profile !== 'undefined') {
+        this.profile.realname = profile.realname
       } else {
-        this.profile.realname = undefined;
+        this.profile.realname = undefined
       }
-    });
+    })
     EventBus.$on(LOADING, status => {
-      this.loading = status;
-    });
-    EventBus.$on(ERROR, this.showError);
+      this.loading = status
+    })
+    EventBus.$on(ERROR, this.showError)
   },
   props: {
     login: Function
   },
-  data() {
+  data () {
     return {
       alertMessage: null,
       loading: false,
@@ -114,40 +129,40 @@ export default {
       profile: {
         realname: undefined
       }
-    };
+    }
   },
 
   methods: {
-    showError(alert) {
-      this.alertMessage = alert;
-      this.alertOpen = true;
+    showError (alert) {
+      this.alertMessage = alert
+      this.alertOpen = true
     },
-    logout() {
+    logout () {
       Auth.logout()
         .then(val => {
-          router.push({ name: "login" });
+          router.push({ name: 'login' })
         })
         .catch(error => {
-          router.push({ name: "login" });
-        });
+          router.push({ name: 'login' })
+        })
     }
   },
-  created() {
-    const title = BI_BASE_CONFIG.TITLE;
-    if (typeof title === "undefined") {
-      alert("NO BI_BASE_CONFIG.TITLE");
+  created () {
+    const title = BI_BASE_CONFIG.TITLE
+    if (typeof title === 'undefined') {
+      alert('NO BI_BASE_CONFIG.TITLE')
     }
-    this.title = title || "CORE";
-    document.title = title;
+    this.title = title || 'CORE'
+    document.title = title
   },
   computed: {
-    isNavVisible() {
+    isNavVisible () {
       const isVis =
-        ["login", "reset", "forbidden"].indexOf(this.$route.name) === -1;
-      return isVis;
+        ['login', 'reset', 'forbidden'].indexOf(this.$route.name) === -1
+      return isVis
     }
   }
-};
+}
 </script>
 
 
