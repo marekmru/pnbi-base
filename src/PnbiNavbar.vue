@@ -65,10 +65,6 @@
         </v-card-actions>
       </v-card>
   </v-dialog>
-  <script type="text/javascript">
-   
-  </script>
-
   </div>
 </template>
 <script>
