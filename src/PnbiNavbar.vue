@@ -5,33 +5,33 @@
         <v-card-media height="48px" style="background:rgb(0, 0, 0)"></v-card-media>
       </v-card>
       <v-layout class="user-background" py-3 column>
-        <v-flex>  
+        <v-flex>
           <v-layout row>
             <v-flex class="pl-2 user-image">
               <v-icon color="white" class="account-icon">account_circle</v-icon>
-              <v-chip v-if="profile.admin" color="primary" text-color="white">Admin</v-chip>      
+              <v-chip v-if="profile.admin" color="primary" text-color="white">Admin</v-chip>
             </v-flex>
             <v-layout column>
               <v-layout row>
-                <v-flex> 
+                <v-flex>
                 </v-flex>
-              </v-layout>            
+              </v-layout>
               <v-layout v-if="profile.email" justify-center>
-                <v-flex> 
-                  <span>{{profile.email}}</span>          
+                <v-flex>
+                  <span>{{profile.email}}</span>
                 </v-flex>
               </v-layout>
               <v-layout justify-center>
-                
-                <v-flex> 
-                  <span>{{profile.realname}}</span>          
+
+                <v-flex>
+                  <span>{{profile.realname}}</span>
                 </v-flex>
               </v-layout>
             </v-layout>
           </v-layout>
-        </v-flex>   
+        </v-flex>
         <v-layout>
-          <v-flex xs3 class="pt-2">        
+          <v-flex xs3 class="pt-2">
           </v-flex>
         </v-layout>
       </v-layout>
@@ -88,6 +88,7 @@ export default {
     tealiumEnabler()
     Auth.profile().then(
       profile => {
+        window.CORE = profile
         this.profile = profile
         if (
           router.history.current.name === 'login' ||
@@ -102,6 +103,7 @@ export default {
     )
     EventBus.$on(PROFILE_UPDATED, profile => {
       if (typeof profile !== 'undefined') {
+        window.CORE = profile
         this.profile.realname = profile.realname
       } else {
         this.profile.realname = undefined
@@ -160,7 +162,6 @@ export default {
   }
 }
 </script>
-
 
 <style scoped>
 div >>> .account-icon{
