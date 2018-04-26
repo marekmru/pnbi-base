@@ -141,7 +141,7 @@ export default {
         .then(val => {
           router.push({ name: 'login' })
         })
-        .catch(error => {
+        .catch(() => {
           router.push({ name: 'login' })
         })
     }
