@@ -103,8 +103,8 @@ export default {
       }
     )
     EventBus.$on(PROFILE_UPDATED, profile => {
+      window.CORE = profile
       if (typeof profile !== 'undefined') {
-        window.CORE = profile
         this.profile.realname = profile.realname
       } else {
         this.profile.realname = undefined
