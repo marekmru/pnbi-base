@@ -9,6 +9,7 @@ export function unwrap(object) {
   return object.data;
 }
 export default {
+
   login(user) {
     const login = axios
       .post(`${BI_BASE_CONFIG.API}/login2`, user)
@@ -26,6 +27,7 @@ export default {
       .get(`${BI_BASE_CONFIG.API}/logout`)
       .then(result => {
         EventBus.$emit(PROFILE_UPDATED, undefined);
+        this._profile = undefined
         return result.data.result;
       })
       .catch(error => Promise.reject(error.response));
@@ -45,7 +47,7 @@ export default {
   },
   password(password) {
     return axios
-      .post(`https://bi.plan-net.com//api/v2/password`, password)
+      .post(`https://bi.plan-net.com/api/v2/password`, password)
       .then(result => result.data.result)
       .catch(error => Promise.reject(error.response));
   },

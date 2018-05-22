@@ -1,7 +1,8 @@
 import Login from './Login'
 import Reset from './Reset'
-import Forbidden from './Forbidden'
-import PageNotFound from './PageNotFound'
+import Imprint from './Imprint'
+import Privacy from './Privacy'
+import PageNotFound from './internal/PageNotFound'
 import router from '@/router'
 
 router.addRoutes([
@@ -16,9 +17,15 @@ router.addRoutes([
     component: Reset
   },
   {
-    path: '/forbidden',
-    name: 'forbidden',
-    component: Forbidden
+    path: '/imprint',
+    name: 'imprint',
+    component: Imprint
+  },
+  {
+    path: '/privacy-policy',
+    name: 'privacy',
+    component: Privacy
+    
   },
   { path: '*', name:'notfound', component: PageNotFound }
 ])
