@@ -73,6 +73,8 @@
           opt_in: cookie || CookieService.getCookieDate()
         }).then(() => {
           this.$router.push(BI_BASE_CONFIG.MAIN_ROUTE)
+        }, error => {
+
         })
       },
       onOptInClickLight(cookie = false) {

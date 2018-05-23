@@ -10,7 +10,7 @@ export default {
   },
   optIn(data) {
     return axios
-      .put(`${BI_BASE_CONFIG.API}/opt-in`, data)
+      .put(`${BI_BASE_CONFIG.API}/optin`, data)
       .then(result => result)
       .catch(error => Promise.reject(error.response));
   },

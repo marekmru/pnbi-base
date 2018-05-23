@@ -6,28 +6,29 @@
       </v-card>
       <v-layout class="user-background" py-3 column>
         <v-flex>
+
           <v-layout row>
-            <v-flex class="pl-2 user-image">
+            <v-flex xs5 class="pl-2 user-image">
               <v-icon color="grey" class="account-icon">account_circle</v-icon>
               <v-chip v-if="profile.admin" color="primary" text-color="white">Admin</v-chip>
             </v-flex>
-            <v-layout column>
-              <v-layout row>
-                <v-flex>
-                </v-flex>
+            <v-flex>
+              <v-layout column class="pt-3">
+                <v-layout>
+                  <v-flex>
+                    <strong class="grey--text">{{profile.realname}}</strong>
+                  </v-flex>
+                </v-layout>
+                <v-layout v-if="profile.email" justify-center>
+                  <v-flex>
+                    <span class="grey--text">{{profile.email}}</span>
+                  </v-flex>
+                </v-layout>
               </v-layout>
-              <v-layout justify-center>
-                <v-flex>
-                  <strong class="grey--text">{{profile.realname}}</strong>
-                </v-flex>
-              </v-layout>
-              <v-layout v-if="profile.email" justify-center>
-                <v-flex>
-                  <span class="grey--text">{{profile.email}}</span>
-                </v-flex>
-              </v-layout>
-            </v-layout>
+            </v-flex>
           </v-layout>
+
+
         </v-flex>
         <v-layout>
           <v-flex xs3 class="pt-2">
@@ -42,7 +43,7 @@
 
       <v-list dense class="default-navigation-list grey lighten-4 pt-0 pb-0">
           <v-divider dark></v-divider>
-          <v-list-tile to="privacy-policy">
+          <v-list-tile @click="goto('privacy')">
             <v-list-tile-action>
               <v-icon>visibility_off</v-icon>
             </v-list-tile-action>
@@ -53,9 +54,9 @@
             </v-list-tile-content>
           </v-list-tile>
 
-          <v-list-tile to="imprint">
+          <v-list-tile @click="goto('imprint')">
             <v-list-tile-action>
-              <v-icon class="pl-2" style="margin-top: -6px;">§</v-icon>
+              <v-icon class="pl-2" style="margin-top: -8px; margin-left: -3px;">§</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title class="grey--text">
@@ -113,6 +114,7 @@
     mounted() {
       Auth.profile().then(
         profile => {
+          window.CORE = profile
           this.profile = profile;
         },
         () => {
@@ -141,21 +143,14 @@
         showNavigation: false,
         profile: {
           realname: undefined
-        },
-        items: [
-          {
-            icon: '§',
-            text: 'Datenschutz'
-          },
-          {
-            icon: 'touch_app',
-            text: 'Impressum'
-          }
-        ]
+        }
       }
       },
 
       methods: {
+          goto(name){
+            this.$router.push({name})
+          },
           showError(alert) {
             this.alertMessage = alert;
             this.alertOpen = true;
