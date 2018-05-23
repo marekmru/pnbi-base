@@ -11,7 +11,7 @@
               Nachfolgend erklären wir, welche Daten wir über Sie erheben, wozu dies erforderlich ist, und welche Rechte
               Sie in Bezug auf Ihre Daten haben. Verantwortlich für die Verarbeitung von personenbezogenen Daten auf dieser
               Website ist (vgl.
-                <router-link to="/imprint">Impressum</router-link>):
+                <router-link @click="onClick()">Impressum</router-link>):
               <br>
               <address>
                 <br>Plan.Net Business Intelligence GmbH & Co. KG
@@ -151,7 +151,7 @@
         if(this.type === 'dialog'){
           this.$emit('imprint-click');
         }else{
-          this.$router.puh('imprint')
+          this.$router.push('imprint')
         }
       }
     },
