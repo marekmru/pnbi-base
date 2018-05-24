@@ -11,7 +11,7 @@
               Nachfolgend erklären wir, welche Daten wir über Sie erheben, wozu dies erforderlich ist, und welche Rechte
               Sie in Bezug auf Ihre Daten haben. Verantwortlich für die Verarbeitung von personenbezogenen Daten auf dieser
               Website ist (vgl.
-                <span color="primary" @click="onClick()">Impressum</span>):
+                <span class="link" @click="onClick()">Impressum</span>):
               <br>
               <address>
                 <br>Plan.Net Business Intelligence GmbH & Co. KG
@@ -158,4 +158,9 @@
   }
 </script>
 <style lang="scss" scoped>
+ .link{
+   text-decoration: underline;
+   cursor: pointer;
+   color: #d70f14;
+ }
 </style>
