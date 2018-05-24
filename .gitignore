@@ -59,3 +59,7 @@ typings/
 
 # .babelrc 
 .babelrc
+.idea/misc.xml
+.idea/modules.xml
+.idea/pnbi-base.iml
+.idea/workspace.xml

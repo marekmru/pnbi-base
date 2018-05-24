@@ -107,7 +107,7 @@ export default {
 
 <template>
   <div class="page" id="login">
-    <v-container class="page" id="auth-form" fluid="" fill-height>
+    <v-container class="page auth-form" fluid="" fill-height>
       <v-layout align-center>
         <v-flex class="text-center">
           <h1 class="bi-powered">POWERED BY CORE</h1>

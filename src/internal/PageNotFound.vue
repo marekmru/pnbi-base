@@ -1,6 +1,6 @@
 <template>
   <div class="page" id="login">
-      <v-container fill-height id="auth-form">
+      <v-container fill-height class="auth-form">
     <v-layout align-center>
       <v-flex class="text-center">
          <h1 class="bi-powered">POWERED BY CORE</h1>

@@ -2,14 +2,9 @@ import router from '@/router'
 import axios from 'axios'
 import is from 'is'
 import BI_BASE_CONFIG from '@/pnbi.base.config.js'
-import EventBus, { ERROR } from './event-bus'
+import EventBus, { ERROR, FORBIDDEN } from './event-bus'
 function isErrorIgnoreRoute() {
-  console.log(['login', 'reset', 'forbidden'].indexOf(router.history.current.name))
-  return ['login', 'reset', 'forbidden'].indexOf(router.history.current.name) > -1;
-/*   return (
-    router.history.current.name === 'login' ||
-    router.history.current.name === 'reset'
-  ) */
+  return ['login', 'reset', 'imprint'].indexOf(router.history.current.name) > -1;
 }
 const ingnoredErrors = BI_BASE_CONFIG.IGNORED_ERRORS || []
 axios.interceptors.response.use(
@@ -31,14 +26,13 @@ axios.interceptors.response.use(
     }
     if (isErrorIgnoreRoute() === false) {
       // 401 >> not authorized
-      if (error.response.status === 401) {
+        //router.push({ name: 'forbidden' })
+      const isProfile = error.response.request.responseURL.includes('/profile') 
+      if (error.response.status === 401 || isProfile) {
         router.push({ name: 'login' })
-      }
-      // 403 >> not allowed -> goto forbidden page
-      if (error.response.status === 403) {
-        router.push({ name: 'forbidden' })
-      }
-      if (ingnoredErrors.indexOf(error.response.status) === -1) {
+      }else if (error.response.status === 403) {
+        EventBus.$emit(FORBIDDEN, error.response)
+      }else if (ingnoredErrors.indexOf(error.response.status) === -1) {
         EventBus.$emit(ERROR, error.response)
       }
     } 
