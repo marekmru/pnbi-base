@@ -2,9 +2,9 @@ import router from '@/router'
 import axios from 'axios'
 import is from 'is'
 import BI_BASE_CONFIG from '@/pnbi.base.config.js'
-import EventBus, { ERROR, FORBIDDEN } from './event-bus'
+import EventBus, { LOADING, ERROR, FORBIDDEN } from './event-bus'
 function isErrorIgnoreRoute() {
-  return ['login', 'reset', 'imprint'].indexOf(router.history.current.name) > -1;
+  return ['login', 'reset', 'imprint', 'privacy'].indexOf(router.history.current.name) > -1;
 }
 const ingnoredErrors = BI_BASE_CONFIG.IGNORED_ERRORS || []
 axios.interceptors.response.use(
@@ -13,6 +13,7 @@ axios.interceptors.response.use(
   },
   error => {
     // 500
+    EventBus.$emit(LOADING, false)
     if (is.undefined(error.response)) {
       EventBus.$emit(ERROR, {
         data: {
