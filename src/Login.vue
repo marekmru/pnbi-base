@@ -26,6 +26,7 @@
     },
     beforeDestroy() {},
     mounted() {
+
       //this.state = 'cookie'
     },
     components: {
@@ -44,6 +45,11 @@
         dialogImprint: false
       }
     },
+    computed: {
+      nextRoute() {
+        return this.$route.query.next != null ? this.$route.query.next:BI_BASE_CONFIG.MAIN_ROUTE
+      }
+    },
     methods: {
       checkCookieLayer() {
         Auth.profile().then(
@@ -60,7 +66,7 @@
               if (typeof cookie !== 'string') {
                 CookieService.setPriPolCookie()
               }
-              this.$router.push(BI_BASE_CONFIG.MAIN_ROUTE)
+              this.$router.push(this.nextRoute)
             }
           },
           () => {}

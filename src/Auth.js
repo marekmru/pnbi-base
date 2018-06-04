@@ -40,8 +40,15 @@ export default {
       .get(`${BI_BASE_CONFIG.API}/profile`)
       .then(result => {
         EventBus.$emit(PROFILE_UPDATED, result.data.result);
-        this._profile = result.data.result;
-        return result.data.result;
+        const rn = result.data.result.realname
+        let short = null
+        if (rn.includes(' ')) {
+          short = rn.split(' ').map(val =>  val.charAt(0).toUpperCase()).join('')
+        } else {
+          short = rn.substring(0,1)
+        }
+        this._profile = Object.assign(result.data.result, {short})
+        return this._profile;
       })
       .catch(error => Promise.reject(error.response));
   },
