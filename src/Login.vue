@@ -141,10 +141,10 @@
 </template>
 
 <style lang="scss">
-  #login {
+/*   #login {
     margin-top: -48px;
     height: calc(100vh + 48px);
-  }
+  } */
 
   #login form {
     position: relative;
