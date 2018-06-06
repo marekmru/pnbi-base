@@ -47,10 +47,10 @@
     width: 102%;
   }
 
-/*   #login {
+  #login {
     margin-top: -48px;
     height: calc(100vh + 48px);
-  } */
+  }
 
   .title {
     line-height: 2rem;
