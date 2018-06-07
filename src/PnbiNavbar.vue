@@ -243,11 +243,11 @@
   .slide-leave-to {
     top: -48px;
   }
-  .list__tile .avatar span {
-    font-weight: 700;
-    letter-spacing: -0.1em;
-    font-size: 14px;
-    line-height: 14px;
+  .list__tile .avatar span, .profile-button .avatar span {
+    font-weight: 700 !important;
+    letter-spacing: -0.1em !important;
+    font-size: 14px !important;
+    line-height: 14px !important;
     margin-left: -1px;
 
   }
