@@ -98,9 +98,9 @@
 </script>
 <template>
   <div class="page" id="login">
-    <v-dialog v-model="dialogPrivacy" fullscreen hide-overlay transition="dialog-bottom-transition" scrollable>
+    <v-dialog v-model="dialogPrivacy" fullscreen hide-overlay transition="dialog-bottom-transition" scrollable >
       <v-card tile>
-        <v-toolbar card dark color="primary">
+        <v-toolbar card dark color="primary" dense>
           <v-btn icon dark @click.native="dialogPrivacy = false">
             <v-icon>close</v-icon>
           </v-btn>
@@ -111,9 +111,9 @@
         </v-card-text>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="dialogImprint" fullscreen hide-overlay transition="dialog-bottom-transition" scrollable>
+    <v-dialog v-model="dialogImprint" fullscreen hide-overlay transition="dialog-bottom-transition" scrollable >
       <v-card tile>
-        <v-toolbar card dark color="primary">
+        <v-toolbar card dark color="primary" dense>
           <v-btn icon dark @click.native="dialogImprint = false">
             <v-icon>close</v-icon>
           </v-btn>

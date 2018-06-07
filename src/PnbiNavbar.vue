@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-navigation-drawer v-if="isNavVisible" v-model="sidenavOpen" fixed clipped class="grey lighten-4" app>
-      <div class="pt-2">
+      <div class="pt-3">
         <slot name="navigation-slot"></slot>
       </div>
       <v-list dense class="default-routes">
@@ -55,21 +55,34 @@
 
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar v-if="isNavVisible" dense color="secondary" class="white--text" app fixed clipped-left>
-      <v-toolbar-side-icon class="white--text" @click.native="sidenavOpen = !sidenavOpen"></v-toolbar-side-icon>
-      <slot name="title-slot"></slot>
-      <v-spacer></v-spacer>
-      <v-tooltip bottom>
-        <v-btn slot="activator" class="pr-0 mr-0" flat icon @click="logout()">
-          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMTkyIDI3Ny40aDE4OS43bC00My42IDQ0LjdMMzY4IDM1Mmw5Ni05Ni05Ni05Ni0zMSAyOS45IDQ0LjcgNDQuN0gxOTJ2NDIuOHoiLz48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMjU1LjcgNDIxLjNjLTQ0LjEgMC04NS41LTE3LjItMTE2LjctNDguNC0zMS4yLTMxLjItNDguMy03Mi43LTQ4LjMtMTE2LjkgMC00NC4xIDE3LjItODUuNyA0OC4zLTExNi45IDMxLjItMzEuMiA3Mi42LTQ4LjQgMTE2LjctNDguNCA0NCAwIDg1LjMgMTcuMSAxMTYuNSA0OC4ybDMwLjMtMzAuM2MtOC41LTguNC0xNy44LTE2LjItMjcuNy0yMy4yQzMzOS43IDYxIDI5OC42IDQ4IDI1NS43IDQ4IDE0MS4yIDQ4IDQ4IDE0MS4zIDQ4IDI1NnM5My4yIDIwOCAyMDcuNyAyMDhjNDIuOSAwIDg0LTEzIDExOS0zNy41IDEwLTcgMTkuMi0xNC43IDI3LjctMjMuMmwtMzAuMi0zMC4yYy0zMS4xIDMxLjEtNzIuNSA0OC4yLTExNi41IDQ4LjJ6TTQ0OC4wMDQgMjU2Ljg0N2wtLjg0OS0uODQ4Ljg0OS0uODQ5Ljg0OC44NDl6Ii8+PC9zdmc+"
-            width="22px" height="22px" title="logout" />
-        </v-btn>
-        <span>Logout</span>
-      </v-tooltip>
-    </v-toolbar>
+    <transition name="slide">
+      <v-toolbar v-if="isNavVisible" dense color="secondary" class="white--text" app fixed clipped-left>
+        <v-toolbar-side-icon class="white--text" @click.native="sidenavOpen = !sidenavOpen"></v-toolbar-side-icon>
+        <slot name="title-slot"></slot>
+        <v-spacer></v-spacer>
+
+        <v-tooltip bottom>
+          <v-btn slot="activator" class="pr-0 mr-0 profile-button" flat icon to="profile">
+            <v-avatar>
+              <span class="">{{profile.short}}</span>
+            </v-avatar>
+          </v-btn>
+          <span>Profile</span>
+        </v-tooltip>
+        <v-tooltip bottom>
+          <v-btn slot="activator" class="pr-0 mr-0" flat icon @click="logout()">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMTkyIDI3Ny40aDE4OS43bC00My42IDQ0LjdMMzY4IDM1Mmw5Ni05Ni05Ni05Ni0zMSAyOS45IDQ0LjcgNDQuN0gxOTJ2NDIuOHoiLz48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMjU1LjcgNDIxLjNjLTQ0LjEgMC04NS41LTE3LjItMTE2LjctNDguNC0zMS4yLTMxLjItNDguMy03Mi43LTQ4LjMtMTE2LjkgMC00NC4xIDE3LjItODUuNyA0OC4zLTExNi45IDMxLjItMzEuMiA3Mi42LTQ4LjQgMTE2LjctNDguNCA0NCAwIDg1LjMgMTcuMSAxMTYuNSA0OC4ybDMwLjMtMzAuM2MtOC41LTguNC0xNy44LTE2LjItMjcuNy0yMy4yQzMzOS43IDYxIDI5OC42IDQ4IDI1NS43IDQ4IDE0MS4yIDQ4IDQ4IDE0MS4zIDQ4IDI1NnM5My4yIDIwOCAyMDcuNyAyMDhjNDIuOSAwIDg0LTEzIDExOS0zNy41IDEwLTcgMTkuMi0xNC43IDI3LjctMjMuMmwtMzAuMi0zMC4yYy0zMS4xIDMxLjEtNzIuNSA0OC4yLTExNi41IDQ4LjJ6TTQ0OC4wMDQgMjU2Ljg0N2wtLjg0OS0uODQ4Ljg0OS0uODQ5Ljg0OC44NDl6Ii8+PC9zdmc+"
+              width="22px" height="22px" title="logout" />
+          </v-btn>
+          <span>Logout</span>
+        </v-tooltip>
+      </v-toolbar>
+    </transition>
+
+
     <v-content v-if="isNavVisible" class="pt-0">
       <v-container fluid fill-height class="grey lighten-4">
-        <v-layout class="pt-1">
+        <v-layout class="pt-2">
           <v-flex>
             <slot name="router"></slot>
           </v-flex>
@@ -125,7 +138,7 @@
       Auth.profile().then(
         profile => {
           window.CORE = profile
-          this.profile = profile;
+          this.profile = Object.assign({}, profile);
         },
         () => {
           //console.info(error);
@@ -133,10 +146,10 @@
       );
       EventBus.$on(PROFILE_UPDATED, profile => {
         if (typeof profile !== "undefined") {
-          this.profile.realname = profile.realname;
+          this.profile = Object.assign({}, profile);
 
         } else {
-          this.profile.realname = undefined;
+          this.profile.realname = {};
         }
       });
       EventBus.$on(LOADING, status => {
@@ -153,7 +166,8 @@
         alertOpen: false,
         showNavigation: false,
         profile: {
-          realname: undefined
+          realname: undefined,
+          short: null
         }
       }
     },
@@ -220,13 +234,22 @@
 </style>
 
 <style scoped lang="css">
+  .slide-enter-active,
+  .slide-leave-active {
+    top: 0;
+  }
+
+  .slide-enter,
+  .slide-leave-to {
+    top: -48px;
+  }
   .list__tile .avatar span {
     font-weight: 700;
     letter-spacing: -0.1em;
     font-size: 14px;
     line-height: 14px;
     margin-left: -1px;
-    
+
   }
 
   .default-routes .list__tile .avatar {
@@ -234,24 +257,32 @@
     height: 24px !important;
     width: 24px !important;
   }
-  .default-routes .list__tile__title
-  ,
-  .default-routes .list__tile__action .material-icons{
+
+  .default-routes .list__tile__title,
+  .default-routes .list__tile__action .material-icons {
     color: rgba(0, 0, 0, .4) !important;
   }
 
 
 
   .default-routes .list__tile--active .list__tile__title,
-  .default-routes .list__tile--active .list__tile__action .material-icons
-   {
+  .default-routes .list__tile--active .list__tile__action .material-icons {
     color: #d70f14 !important;
   }
-  .default-routes .list__tile--active .avatar
-   {
+
+  .default-routes .list__tile--active .avatar {
     background-color: #d70f14 !important;
   }
 
+  .profile-button .avatar {
+    background-color: white;
+    height: 22px !important;
+    width: 22px !important;
+  }
+
+  .profile-button .avatar span {
+    margin-top: -1px;
+  }
 
 
 
@@ -275,4 +306,5 @@
     top: 48px;
     margin: 0;
   }
+
 </style>

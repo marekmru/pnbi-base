@@ -39,7 +39,6 @@ export default {
     return axios
       .get(`${BI_BASE_CONFIG.API}/profile`)
       .then(result => {
-        EventBus.$emit(PROFILE_UPDATED, result.data.result);
         const rn = result.data.result.realname
         let short = null
         if (rn.includes(' ')) {
@@ -48,6 +47,8 @@ export default {
           short = rn.substring(0,1)
         }
         this._profile = Object.assign(result.data.result, {short})
+        EventBus.$emit(PROFILE_UPDATED, this._profile);
+        console.log(this._profile)
         return this._profile;
       })
       .catch(error => Promise.reject(error.response));

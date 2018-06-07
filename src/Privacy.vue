@@ -2,8 +2,8 @@
   <v-layout column>
     <h1 class="bc-page-title">Unsere Datenschutzerklärung</h1>
     <v-flex class="text-center">
-      <v-card :flat="type === 'dialog'">
-        <v-card-text :class="{'pa-0 ': type === 'dialog'}" style="max-width: 960px;">
+      <!-- <div :flat="type === 'dialog'"> -->
+      <div style="max-width: 960px;">
           Hier finden Sie Informationen über den Umgang mit Ihren personenbezogenen Daten beim Besuch unserer Website. Zur Bereitstellung
           der Funktionen und Dienste unserer Website ist es erforderlich, dass wir personenbezogene Daten über Sie erheben.
           Nachfolgend erklären wir, welche Daten wir über Sie erheben, wozu dies erforderlich ist, und welche Rechte Sie
@@ -130,8 +130,7 @@
             <br> Außerdem können Sie jederzeit Beschwerde bei einer Datenschutzaufsichtsbehörde einlegen, wenn Sie der Meinung
             sind, dass die Datenverarbeitung nicht im Einklang mit datenschutzrechtlichen Vorschriften steht.
           </p>
-        </v-card-text>
-      </v-card>
+      </div>
     </v-flex>
   </v-layout>
 

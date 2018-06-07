@@ -2,8 +2,7 @@
   <v-layout column>
     <h1 class="bc-page-title">Impressum</h1>
     <v-flex class="text-center">
-      <v-card :flat="type === 'dialog'">
-        <v-card-text :class="{'pa-0 ': type === 'dialog'}">
+      <div>
           <address>
             <span style="font-weight: 700;">Plan.Net Business Intelligence</span>
             <br>Brienner Str. 45a-d
@@ -42,11 +41,8 @@
             Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links.
             <br>Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.
           </div>
-        </v-card-text>
-        <v-card-actions>
 
-        </v-card-actions>
-      </v-card>
+        </div>
     </v-flex>
   </v-layout>
 </template>
