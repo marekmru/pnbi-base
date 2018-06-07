@@ -246,8 +246,8 @@
   .list__tile .avatar span, .profile-button .avatar span {
     font-weight: 700 !important;
     letter-spacing: -0.1em !important;
-    font-size: 14px !important;
-    line-height: 14px !important;
+    font-size: 11px !important;
+    line-height: 12px !important;
     margin-left: -1px;
 
   }
