@@ -14,7 +14,7 @@
   import BI_BASE_CONFIG from "@/pnbi.base.config.js";
 
   const tealiumEnabler = (a, b, c, d) => {
-    if(window.lcation.href.includes('localhost')){
+    if(window.location.href.includes('localhost')){
       return false
     }
     a = '//tags.tiqcdn.com/utag/plan-net-training/b.zimmermann/dev/utag.js'
