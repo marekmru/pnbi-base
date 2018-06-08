@@ -94,7 +94,6 @@
       }
     }
   }
-
 </script>
 <template>
   <div class="page" id="login">
