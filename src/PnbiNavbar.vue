@@ -108,13 +108,14 @@
   } from "./event-bus";
   import Auth from "./Auth";
   import router from "@/router";
+  import h from './helper'
   import BI_BASE_CONFIG from "@/pnbi.base.config.js";
 
   export default {
     mounted() {
       Auth.profile().then(
         profile => {
-          window.CORE = profile
+          window.CORE.user = h.clone(profile)
           this.profile = profile;
         },
         () => {
@@ -170,6 +171,7 @@
           }
         },
         created() {
+          window.CORE = {}
           const title = BI_BASE_CONFIG.TITLE;
           if (typeof title === "undefined") {
             alert("NO BI_BASE_CONFIG.TITLE");
