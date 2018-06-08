@@ -41,6 +41,7 @@ export default {
       .then(result => {
         EventBus.$emit(PROFILE_UPDATED, result.data.result);
         this._profile = result.data.result;
+        window.CORE = result.data.result
         return result.data.result;
       })
       .catch(error => Promise.reject(error.response));
