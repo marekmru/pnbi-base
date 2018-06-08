@@ -113,7 +113,7 @@
 
   export default {
     mounted() {
-      console.log('pnbi-base: 08.06.2018')
+      console.log('####pnbi-base: 08.06.2018####')
       Auth.profile().then(
         profile => {
           window.CORE.user = h.clone(profile)
