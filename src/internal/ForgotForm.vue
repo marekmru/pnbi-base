@@ -56,8 +56,8 @@
 <template>
   <v-container fill-height class="auth-form">
     <v-layout align-center>
-      <v-flex class="text-center" v-if="!message">
-        <v-form @submit="onSubmit" v-model="rules.valid" ref="form" lazy-validation>
+      <v-flex class="text-center" >
+        <v-form v-if="!message" @submit="onSubmit" v-model="rules.valid" ref="form" lazy-validation>
           <v-card>
             <v-card-text class="pb-0">
               <v-layout column>
@@ -69,7 +69,7 @@
             </v-card-text>
           </v-card>
         </v-form>
-        <v-card v-if="message">
+        <v-card v-else>
           <v-card-title>
             <v-layout column>
               <div class="pb-3">
