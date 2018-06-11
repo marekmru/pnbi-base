@@ -47,7 +47,7 @@
     },
     computed: {
       nextRoute() {
-        return this.$route.query.next != null ? this.$route.query.next:BI_BASE_CONFIG.MAIN_ROUTE
+        return this.$route.query.next
       }
     },
     methods: {
@@ -66,7 +66,11 @@
               if (typeof cookie !== 'string') {
                 CookieService.setPriPolCookie()
               }
-              window.location.assign(this.nextRoute)
+              if (this.nextRoute == null) {
+                this.$router.push(BI_BASE_CONFIG.MAIN_ROUTE)
+              } else {
+                window.location.assign(this.nextRoute)
+              }
             }
           },
           () => {}
@@ -78,7 +82,11 @@
           _id: this.profile._id,
           opt_in: cookie || CookieService.getCookieDate()
         }).then(() => {
-          this.$router.push(BI_BASE_CONFIG.MAIN_ROUTE)
+          if (this.nextRoute == null) {
+            this.$router.push(BI_BASE_CONFIG.MAIN_ROUTE)
+          } else {
+            window.location.assign(this.nextRoute)
+          }
         }, error => {
 
         })
@@ -89,15 +97,20 @@
           _id: this.profile._id,
           opt_in: cookie || CookieService.getCookieDate()
         }).then(() => {
-          this.$router.push(BI_BASE_CONFIG.MAIN_ROUTE)
+          if (this.nextRoute == null) {
+            this.$router.push(BI_BASE_CONFIG.MAIN_ROUTE)
+          } else {
+            window.location.assign(this.nextRoute)
+          }
         })
       }
     }
   }
+
 </script>
 <template>
   <div class="page" id="login">
-    <v-dialog v-model="dialogPrivacy" fullscreen hide-overlay transition="dialog-bottom-transition" scrollable >
+    <v-dialog v-model="dialogPrivacy" fullscreen hide-overlay transition="dialog-bottom-transition" scrollable>
       <v-card tile>
         <v-toolbar card dark color="primary" dense>
           <v-btn icon dark @click.native="dialogPrivacy = false">
@@ -110,7 +123,7 @@
         </v-card-text>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="dialogImprint" fullscreen hide-overlay transition="dialog-bottom-transition" scrollable >
+    <v-dialog v-model="dialogImprint" fullscreen hide-overlay transition="dialog-bottom-transition" scrollable>
       <v-card tile>
         <v-toolbar card dark color="primary" dense>
           <v-btn icon dark @click.native="dialogImprint = false">
@@ -181,7 +194,8 @@
     opacity: 0;
     transform: scale(.9);
   }
-  footer{
+
+  footer {
     background-color: #fff;
     position: fixed;
     bottom: 0;
