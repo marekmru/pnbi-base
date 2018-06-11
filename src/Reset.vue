@@ -10,7 +10,7 @@ export default {
     return {
       message: [],
       strength: 0,
-      success: true,
+      success: false,
       user: {
         password: '',
         password2: ''
