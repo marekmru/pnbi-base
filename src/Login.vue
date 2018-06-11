@@ -66,7 +66,7 @@
               if (typeof cookie !== 'string') {
                 CookieService.setPriPolCookie()
               }
-              this.$router.push(this.nextRoute)
+              window.location.assign(this.nextRoute)
             }
           },
           () => {}
