@@ -7,7 +7,7 @@
       <v-list dense class="default-routes">
         <v-divider dark class="my-3"></v-divider>
 
-        <v-list-tile to="profile">
+        <v-list-tile :to="{name: 'profile'}">
           <v-list-tile-action>
             <v-avatar>
               <span class="white--text">{{profile.short}}</span>
@@ -19,7 +19,7 @@
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile to="privacy-policy">
+        <v-list-tile :to="{name: 'privacy'}">
           <v-list-tile-action>
             <v-icon>visibility_off</v-icon>
           </v-list-tile-action>
@@ -30,7 +30,7 @@
           </v-list-tile-content>
         </v-list-tile>
 
-        <v-list-tile to="imprint">
+        <v-list-tile :to="{name: 'imprint'}">
           <v-list-tile-action>
             <v-icon class="impressum">§</v-icon>
           </v-list-tile-action>
@@ -62,7 +62,7 @@
         <v-spacer></v-spacer>
 
         <v-tooltip bottom>
-          <v-btn slot="activator" class="pr-0 mr-0 profile-button" flat icon to="profile">
+          <v-btn slot="activator" class="pr-0 mr-0 profile-button" flat icon :to="{name: 'profile'}">
             <v-avatar>
               <span class="">{{profile.short}}</span>
             </v-avatar>
@@ -81,8 +81,8 @@
 
 
     <v-content v-if="isNavVisible" class="pt-0">
-      <v-container fluid fill-height class="grey lighten-4">
-        <v-layout class="pt-2">
+      <v-container fluid class="grey lighten-4">
+        <v-layout class="pt-0">
           <v-flex>
             <slot name="router"></slot>
           </v-flex>
