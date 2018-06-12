@@ -137,8 +137,8 @@
     mounted() {
       Auth.profile().then(
         profile => {
-          window.CORE = profile
           this.profile = Object.assign({}, profile);
+          window.CORE.user = h.clone(profile)
         },
         () => {
           //console.info(error);
@@ -197,6 +197,7 @@
       }
     },
     created() {
+      window.CORE = window.CORE ||{}
       const title = BI_BASE_CONFIG.TITLE;
       if (typeof title === "undefined") {
         alert("NO BI_BASE_CONFIG.TITLE");

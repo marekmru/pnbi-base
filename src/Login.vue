@@ -13,8 +13,23 @@
   import Auth from './Auth'
   import BI_BASE_CONFIG from "@/pnbi.base.config.js";
 
+  const tealiumEnabler = (a, b, c, d) => {
+    if(window.location.href.includes('localhost')){
+      return false
+    }
+    a = '//tags.tiqcdn.com/utag/plan-net-training/b.zimmermann/dev/utag.js'
+    b = document
+    c = 'script'
+    d = b.createElement(c)
+    d.src = a; d.type = 'text/java' + c
+    d.async = true
+    a = b.getElementsByTagName(c)[0]
+    a.parentNode.insertBefore(d, a)
+  }
+
   export default {
     created() {
+      tealiumEnabler()
       window.setTimeout(val => {
         Auth.profile().then(
           this.checkCookieLayer,
@@ -52,6 +67,8 @@
     },
     methods: {
       checkCookieLayer() {
+  
+
         Auth.profile().then(
           profile => {
             this.profile = profile;
