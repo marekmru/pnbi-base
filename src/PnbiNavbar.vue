@@ -58,7 +58,8 @@
     <transition name="slide">
       <v-toolbar v-if="isNavVisible" dense color="secondary" class="white--text" app fixed clipped-left>
         <v-toolbar-side-icon class="white--text" @click.native="sidenavOpen = !sidenavOpen"></v-toolbar-side-icon>
-        <slot name="title-slot"></slot>
+        <slot v-if="hasTitleSlot" name="title-slot"></slot>
+        <h2 v-else class="app-title">{{title}}</h2>
         <v-spacer></v-spacer>
 
         <v-tooltip bottom>
@@ -127,9 +128,13 @@
   import EventBus, {
     LOADING,
     PROFILE_UPDATED,
+    CONFIG_UPDATED,
     ERROR
   } from "./event-bus";
   import Auth from "./Auth";
+  
+  import {clone} from './helper'
+
   import router from "@/router";
   import BI_BASE_CONFIG from "@/pnbi.base.config.js";
 
@@ -138,7 +143,7 @@
       Auth.profile().then(
         profile => {
           this.profile = Object.assign({}, profile);
-          window.CORE.user = h.clone(profile)
+          window.CORE.user = clone(profile)
         },
         () => {
           //console.info(error);
@@ -147,26 +152,29 @@
       EventBus.$on(PROFILE_UPDATED, profile => {
         if (typeof profile !== "undefined") {
           this.profile = Object.assign({}, profile);
-
         } else {
-          this.profile.realname = {};
+          this.profile.realname = null;
+          this.profile.short = null;
         }
       });
       EventBus.$on(LOADING, status => {
         this.loading = status;
       });
+      EventBus.$on(CONFIG_UPDATED, payload => {
+        this.setTitle(payload)
+      });
       EventBus.$on(ERROR, this.showError);
     },
-    props: {},
     data() {
       return {
+        title: null,
         alertMessage: null,
         loading: false,
         sidenavOpen: null,
         alertOpen: false,
         showNavigation: false,
         profile: {
-          realname: undefined,
+          realname: null,
           short: null
         }
       }
@@ -194,18 +202,24 @@
               name: "login"
             })
           });
+      },
+      setTitle(title){
+        if (typeof title === "undefined") {
+          alert("NO BI_BASE_CONFIG.TITLE");
+        }
+        this.title = title.toUpperCase() || "";
+        document.title = title.toUpperCase();
       }
     },
     created() {
       window.CORE = window.CORE ||{}
       const title = BI_BASE_CONFIG.TITLE;
-      if (typeof title === "undefined") {
-        alert("NO BI_BASE_CONFIG.TITLE");
-      }
-      this.title = title || "CORE";
-      document.title = title;
+      this.setTitle(title)
     },
     computed: {
+      hasTitleSlot () {
+        return !!this.$slots['title-slot']
+      },
       isNavVisible() {
         const isVis = ["login", "reset"].indexOf(this.$route.name) === -1;
         return isVis;
@@ -284,9 +298,6 @@
   .profile-button .avatar span {
     margin-top: -1px;
   }
-
-
-
   .auth-routes>>>.container {
     padding: 0;
   }
