@@ -48,8 +48,8 @@ export default {
         }
         this._profile = Object.assign(result.data.result, {short})
         EventBus.$emit(PROFILE_UPDATED, this._profile);
-        window.CORE = window.CORE || {}
-        window.CORE.user = result.data.result
+        window.utag_data = window.utag_data || {}
+        window.utag_data.user = result.data.result
         return this._profile;
       })
       .catch(error => Promise.reject(error.response));

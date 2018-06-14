@@ -96,7 +96,6 @@ export default {
       } else if (this.strength > 66) {
         return ['error', 'warning', 'success'][2]
       }
-
       /* if (true){
         return ["error", "warning", "success"][Math.floor(this.progress / 40)];
       }else {

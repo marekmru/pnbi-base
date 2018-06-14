@@ -143,7 +143,7 @@
       Auth.profile().then(
         profile => {
           this.profile = Object.assign({}, profile);
-          window.CORE.user = clone(profile)
+          window.utag_data.user = clone(profile)
         },
         () => {
           //console.info(error);
@@ -212,7 +212,7 @@
       }
     },
     created() {
-      window.CORE = window.CORE ||{}
+      window.utag_data = window.utag_data ||{}
       const title = BI_BASE_CONFIG.TITLE;
       this.setTitle(title)
     },
