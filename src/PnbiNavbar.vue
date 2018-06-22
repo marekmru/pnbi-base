@@ -80,7 +80,6 @@
       </v-toolbar>
     </transition>
 
-
     <v-content v-if="isNavVisible" class="pt-0">
       <v-container fluid class="grey lighten-4">
         <v-layout class="pt-0">
@@ -125,110 +124,123 @@
   </v-app>
 </template>
 <script>
-  import EventBus, {
-    LOADING,
-    PROFILE_UPDATED,
-    CONFIG_UPDATED,
-    ERROR
-  } from "./event-bus";
-  import Auth from "./Auth";
-  
-  import {clone} from './helper'
+import EventBus, {
+  LOADING,
+  TRACK,
+  PROFILE_UPDATED,
+  CONFIG_UPDATED,
+  ERROR
+} from './event-bus'
+import Auth from './Auth'
 
-  import router from "@/router";
-  import BI_BASE_CONFIG from "@/pnbi.base.config.js";
+// import {clone} from './helper'
 
-  export default {
-    mounted() {
-      Auth.profile().then(
-        profile => {
-          this.profile = Object.assign({}, profile);
-          window.utag_data.user = clone(profile)
-        },
-        () => {
-          //console.info(error);
-        }
-      );
-      EventBus.$on(PROFILE_UPDATED, profile => {
-        if (typeof profile !== "undefined") {
-          this.profile = Object.assign({}, profile);
-        } else {
-          this.profile.realname = null;
-          this.profile.short = null;
-        }
-      });
-      EventBus.$on(LOADING, status => {
-        this.loading = status;
-      });
-      EventBus.$on(CONFIG_UPDATED, payload => {
-        this.setTitle(payload)
-      });
-      EventBus.$on(ERROR, this.showError);
-    },
-    data() {
-      return {
-        title: null,
-        alertMessage: null,
-        loading: false,
-        sidenavOpen: null,
-        alertOpen: false,
-        showNavigation: false,
-        profile: {
-          realname: null,
-          short: null
-        }
+// import router from '@/router'
+import BI_BASE_CONFIG from '@/pnbi.base.config.js'
+
+export default {
+  mounted () {
+    Auth.profile().then(
+      profile => {
+        this.profile = Object.assign({}, profile)
+        // window.utag_data.user = clone(profile)
+      },
+      () => {
+        // console.info(error);
       }
-    },
-
-    methods: {
-      goto(name) {
-        this.$router.push({
-          name
-        })
-      },
-      showError(alert) {
-        this.alertMessage = alert;
-        this.alertOpen = true;
-      },
-      logout() {
-        Auth.logout()
-          .then(val => {
-            this.$router.push({
-              name: "login"
-            })
-          })
-          .catch(error => {
-            this.$router.push({
-              name: "login"
-            })
-          });
-      },
-      setTitle(title){
-        if (typeof title === "undefined") {
-          alert("NO BI_BASE_CONFIG.TITLE");
-        }
-        this.title = title.toUpperCase() || "";
-        document.title = title.toUpperCase();
+    )
+    EventBus.$on(PROFILE_UPDATED, profile => {
+      if (typeof profile !== 'undefined') {
+        this.profile = Object.assign({}, profile)
+      } else {
+        this.profile.realname = null
+        this.profile.short = null
       }
-    },
-    created() {
-      window.utag_data = window.utag_data ||{}
-      const title = BI_BASE_CONFIG.TITLE;
-      this.setTitle(title)
-    },
-    computed: {
-      hasTitleSlot () {
-        return !!this.$slots['title-slot']
-      },
-      isNavVisible() {
-        const isVis = ["login", "reset"].indexOf(this.$route.name) === -1;
-        return isVis;
+    })
+    EventBus.$on(LOADING, status => {
+      this.loading = status
+    })
+    EventBus.$on(CONFIG_UPDATED, payload => {
+      this.setTitle(payload)
+    })
+    EventBus.$on(TRACK, payload => {
+      const dto = Object.assign(
+        {
+          customer_id: this.profile._id,
+          customer_email: this.profile.email,
+          realname: this.profile.realname
+        }, payload)
+      if (payload.tealium_event === 'page_view') {
+        window.utag.view(dto)
+      } else {
+        window.utag.link(dto)
+      }
+    })
+
+    EventBus.$on(ERROR, this.showError)
+  },
+  data () {
+    return {
+      title: null,
+      alertMessage: null,
+      loading: false,
+      sidenavOpen: null,
+      alertOpen: false,
+      showNavigation: false,
+      profile: {
+        realname: null,
+        short: null
       }
     }
-  };
+  },
+
+  methods: {
+    goto (name) {
+      this.$router.push({
+        name
+      })
+    },
+    showError (alert) {
+      this.alertMessage = alert
+      this.alertOpen = true
+    },
+    logout () {
+      Auth.logout()
+        .then(val => {
+          this.$router.push({
+            name: 'login'
+          })
+        })
+        .catch(() => {
+          this.$router.push({
+            name: 'login'
+          })
+        })
+    },
+    setTitle (title) {
+      if (typeof title === 'undefined') {
+        alert('NO BI_BASE_CONFIG.TITLE')
+      }
+      this.title = title.toUpperCase() || ''
+      document.title = title.toUpperCase()
+    }
+  },
+  created () {
+    const title = BI_BASE_CONFIG.TITLE
+    this.setTitle(title)
+  },
+  computed: {
+    hasTitleSlot () {
+      return !!this.$slots['title-slot']
+    },
+    isNavVisible () {
+      const isVis = ['login', 'reset'].indexOf(this.$route.name) === -1
+      return isVis
+    }
+  }
+}
 
 </script>
-
 
 <style lang="css">
   .application.theme--light {
@@ -277,8 +289,6 @@
   .default-routes .list__tile__action .material-icons {
     color: rgba(0, 0, 0, .4) !important;
   }
-
-
 
   .default-routes .list__tile--active .list__tile__title,
   .default-routes .list__tile--active .list__tile__action .material-icons {
