@@ -5,7 +5,8 @@ import Privacy from './Privacy'
 import Profile from './Profile'
 import PageNotFound from './internal/PageNotFound'
 import router from '@/router'
-import bus, {TRACK} from 'pnbi-base/src/event-bus'
+import bus, { TRACK } from 'pnbi-base/src/event-bus'
+
 router.addRoutes([
   {
     path: '/',
@@ -48,6 +49,7 @@ const tealiumEnabler = (a, b, c, d) => {
   a.parentNode.insertBefore(d, a)
 }
 if (window.location.href.includes('localhost') === false) {
+  const APP_NAME = 
   window.utag_cfg_ovrd = window.utag_cfg_ovrd || {}
   window.utag_cfg_ovrd.noview = true
   window.utag_data = window.utag_data || {}

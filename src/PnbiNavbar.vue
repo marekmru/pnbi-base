@@ -133,9 +133,6 @@ import EventBus, {
 } from './event-bus'
 import Auth from './Auth'
 
-// import {clone} from './helper'
-
-// import router from '@/router'
 import BI_BASE_CONFIG from '@/pnbi.base.config.js'
 
 export default {
@@ -168,7 +165,8 @@ export default {
         {
           customer_id: this.profile._id,
           customer_email: this.profile.email,
-          realname: this.profile.realname
+          realname: this.profile.realname,
+          webapp: this.title
         }, payload)
       if (payload.tealium_event === 'page_view') {
         window.utag.view(dto)
