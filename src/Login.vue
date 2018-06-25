@@ -152,8 +152,8 @@ export default {
 
 <style lang="scss">
   #login {
-    margin-top: -48px;
-    height: calc(100vh + 48px);
+/*     margin-top: -48px;
+    height: calc(100vh + 48px); */
   }
 
   #login form {

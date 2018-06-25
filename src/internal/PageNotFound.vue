@@ -25,16 +25,16 @@
   </div>
 </template>
 <script>
-  import router from '@/router'
+import router from '@/router'
 
-  import BI_BASE_CONFIG from '@/pnbi.base.config.js'
-  export default {
-    methods: {
-      gotoStart() {
-        router.push(BI_BASE_CONFIG.MAIN_ROUTE)
-      }
+import BI_BASE_CONFIG from '@/pnbi.base.config.js'
+export default {
+  methods: {
+    gotoStart () {
+      router.push(BI_BASE_CONFIG.MAIN_ROUTE)
     }
   }
+}
 
 </script>
 <style lang="scss" scoped>
@@ -48,8 +48,8 @@
   }
 
   #login {
-    margin-top: -48px;
-    height: calc(100vh + 48px);
+/*     margin-top: -48px;
+    height: calc(100vh + 48px); */
   }
 
   .title {
