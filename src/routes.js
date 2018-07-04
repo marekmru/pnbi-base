@@ -48,8 +48,7 @@ const tealiumEnabler = (a, b, c, d) => {
   a = b.getElementsByTagName(c)[0]
   a.parentNode.insertBefore(d, a)
 }
-if (window.location.href.includes('localhost') === false) {
-  const APP_NAME = 
+if (window.location.href.includes('localhost222') === false) {
   window.utag_cfg_ovrd = window.utag_cfg_ovrd || {}
   window.utag_cfg_ovrd.noview = true
   window.utag_data = window.utag_data || {}

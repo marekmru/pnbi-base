@@ -2,7 +2,7 @@ import axios from 'axios'
 import BI_BASE_CONFIG from '@/pnbi.base.config.js'
 import EventBus, { PROFILE_UPDATED } from './event-bus'
 export function unwrap (object) {
-  if (typeof object.data.result.message !== 'undefined') {
+  if (object.data.result.message != null) {
     return object.data.result.message
   }
   return object.data
@@ -15,17 +15,16 @@ export default {
         return result.data.result
       })
       .catch(error => Promise.reject(error.response))
-
     return Promise.all([login]).then(() => {
       return this.profile()
     })
   },
   logout () {
+    EventBus.$emit(PROFILE_UPDATED, undefined)
+    this._profile = undefined
     return axios
       .get(`${BI_BASE_CONFIG.API}/logout`)
       .then(result => {
-        EventBus.$emit(PROFILE_UPDATED, undefined)
-        this._profile = undefined
         return result.data.result
       })
       .catch(error => Promise.reject(error.response))

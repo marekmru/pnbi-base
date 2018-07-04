@@ -100,24 +100,33 @@
     </v-content>
 
     <v-progress-linear indeterminate v-if="loading"></v-progress-linear>
-
-    <v-dialog v-model="alertOpen" max-width="760px">
-      <v-card v-if="alertOpen && alertMessage" class="pa-1">
-        <v-card-title>
-          <h3>
-            <v-icon style="margin-top: -2px;" color="error">error</v-icon>
-            <span class="error--text">FEHLER {{alertMessage.data.status_code}}</span>
-          </h3>
-        </v-card-title>
-        <v-card-text>
-          <strong v-if="alertMessage.data.result.message">{{alertMessage.data.result.message}}</strong>
-          <div>
-            <pre class="mt-2">{{alertMessage.data}}</pre>
+    <v-dialog persistent v-model="alertOpen" max-width="640">
+      <v-card tile v-if="alertOpen && alertMessage">
+        <v-toolbar dense card dark color="error">
+          <v-toolbar-title>
+            ERROR {{alertMessage.status_code || alertMessage.data.status_code }}
+          </v-toolbar-title>
+          <v-spacer></v-spacer>
+        </v-toolbar>
+        <v-card-text class="px-3 py-3">
+          <div v-if="alertMessage.html || alertMessage.json">
+            <p v-if="alertMessage.html" v-html="alertMessage.html"></p>
+            <div v-if="alertMessage.json">
+              <pre class="mt-2 pa-1">{{alertMessage.json}}</pre>
+            </div>
+          </div>
+          <div v-else>
+            <pre class="mt-2 pa-1">{{alertMessage.data}}</pre>
           </div>
         </v-card-text>
-        <v-card-actions>
+        <v-card-actions class="pl-3 pr-3 pb-3 pt-0">
           <v-spacer></v-spacer>
-          <v-btn @click="alertOpen = !alertOpen" color="primary" flat>OK</v-btn>
+          <v-btn type="button" @click="logout()" flat color="secondary">
+            Zum Login
+          </v-btn>
+          <v-btn type="button" v-if="(alertMessage.status_code || alertMessage.data.status_code) != 401 && (alertMessage.status_code || alertMessage.data.status_code) != 403" flat @click="alertOpen = false" color="primary">
+            OK
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -159,20 +168,21 @@ export default {
     EventBus.$on(CONFIG_UPDATED, payload => {
       this.setTitle(payload)
     })
-    EventBus.$on(TRACK, payload => {
-      const dto = Object.assign(
-        {
+    if (window.utag != null) {
+      EventBus.$on(TRACK, payload => {
+        const dto = Object.assign({
           customer_id: this.profile._id,
           customer_email: this.profile.email,
           realname: this.profile.realname,
-          webapp: this.title
+          webapp: BI_BASE_CONFIG.APP_IDENTIFIER || this.title.toLowerCase()
         }, payload)
-      if (payload.tealium_event === 'page_view') {
-        window.utag.view(dto)
-      } else {
-        window.utag.link(dto)
-      }
-    })
+        if (payload.tealium_event === 'page_view') {
+          window.utag.view(dto)
+        } else {
+          window.utag.link(dto)
+        }
+      })
+    }
 
     EventBus.$on(ERROR, this.showError)
   },
@@ -203,16 +213,14 @@ export default {
     },
     logout () {
       Auth.logout()
-        .then(val => {
+      window.setTimeout(
+        function(){
+          this.alertOpen = false 
           this.$router.push({
             name: 'login'
           })
-        })
-        .catch(() => {
-          this.$router.push({
-            name: 'login'
-          })
-        })
+        }.bind(this), 200
+      )
     },
     setTitle (title = '') {
       this.title = title.toUpperCase()
@@ -264,7 +272,9 @@ export default {
   .slide-leave-to {
     top: -48px;
   }
-  .list__tile .avatar span, .profile-button .avatar span {
+
+  .list__tile .avatar span,
+  .profile-button .avatar span {
     font-weight: 700 !important;
     letter-spacing: -0.1em !important;
     font-size: 11px !important;
@@ -302,6 +312,7 @@ export default {
   .profile-button .avatar span {
     margin-top: -1px;
   }
+
   .auth-routes>>>.container {
     padding: 0;
   }
