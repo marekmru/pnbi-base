@@ -140,7 +140,6 @@ export default {
     Auth.profile().then(
       profile => {
         this.profile = Object.assign({}, profile)
-        // window.utag_data.user = clone(profile)
       },
       () => {
         // console.info(error);
@@ -215,12 +214,9 @@ export default {
           })
         })
     },
-    setTitle (title) {
-      if (typeof title === 'undefined') {
-        alert('NO BI_BASE_CONFIG.TITLE')
-      }
-      this.title = title.toUpperCase() || ''
-      document.title = title.toUpperCase()
+    setTitle (title = '') {
+      this.title = title.toUpperCase()
+      document.title = this.title
     }
   },
   created () {

@@ -1,7 +1,6 @@
 import axios from 'axios'
 import BI_BASE_CONFIG from '@/pnbi.base.config.js'
 import EventBus, { PROFILE_UPDATED } from './event-bus'
-import is from 'is'
 export function unwrap (object) {
   if (typeof object.data.result.message !== 'undefined') {
     return object.data.result.message
@@ -9,7 +8,6 @@ export function unwrap (object) {
   return object.data
 }
 export default {
-
   login (user) {
     const login = axios
       .post(`${BI_BASE_CONFIG.API}/login2`, user)
@@ -33,7 +31,7 @@ export default {
       .catch(error => Promise.reject(error.response))
   },
   profile () {
-    if (is.defined(this._profile)) {
+    if (this._profile != null) {
       return Promise.resolve(this._profile)
     }
     return axios
