@@ -168,8 +168,8 @@ export default {
     EventBus.$on(CONFIG_UPDATED, payload => {
       this.setTitle(payload)
     })
-    if (window.utag != null) {
-      EventBus.$on(TRACK, payload => {
+    EventBus.$on(TRACK, payload => {
+      if (window.utag != null) {
         const dto = Object.assign({
           customer_id: this.profile._id,
           customer_email: this.profile.email,
@@ -181,8 +181,8 @@ export default {
         } else {
           window.utag.link(dto)
         }
-      })
-    }
+      }
+    })
 
     EventBus.$on(ERROR, this.showError)
   },
@@ -214,8 +214,8 @@ export default {
     logout () {
       Auth.logout()
       window.setTimeout(
-        function(){
-          this.alertOpen = false 
+        function () {
+          this.alertOpen = false
           this.$router.push({
             name: 'login'
           })
