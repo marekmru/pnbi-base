@@ -19,7 +19,7 @@ axios.interceptors.response.use(
     if (error.response == null) {
       EventBus.$emit(ERROR, {
         status_code: 500,
-        message: 'Unknown error'
+        html: 'Unknown error'
       })
       return Promise.reject(error)
     }

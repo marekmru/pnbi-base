@@ -111,6 +111,7 @@
         <v-card-text class="px-3 py-3">
           <div v-if="alertMessage.html || alertMessage.json">
             <p v-if="alertMessage.html" v-html="alertMessage.html"></p>
+            <p v-if="alertMessage.message" v-html="alertMessage.message"></p>
             <div v-if="alertMessage.json">
               <pre class="mt-2 pa-1">{{alertMessage.json}}</pre>
             </div>
