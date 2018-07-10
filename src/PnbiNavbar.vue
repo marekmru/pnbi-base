@@ -56,10 +56,10 @@
       </v-list>
     </v-navigation-drawer>
     <transition name="slide">
-      <v-toolbar v-if="isNavVisible" dense color="secondary" class="white--text" app fixed clipped-left>
+      <v-toolbar v-if="isNavVisible" dense color="accent" class="white--text" app fixed clipped-left>
         <v-toolbar-side-icon class="white--text" @click.native="sidenavOpen = !sidenavOpen"></v-toolbar-side-icon>
         <slot v-if="hasTitleSlot" name="title-slot"></slot>
-        <h2 v-else class="app-title">{{title}}</h2>
+        <h2 v-else class="app-title pl-3">{{title}}</h2>
         <v-spacer></v-spacer>
 
         <v-tooltip bottom>
@@ -288,6 +288,7 @@ export default {
     background-color: rgba(0, 0, 0, .4) !important;
     height: 24px !important;
     width: 24px !important;
+
   }
 
   .default-routes .list__tile__title,

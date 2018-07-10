@@ -11,7 +11,7 @@ const install = (Vue) => {
   Vue.use(Vuetify, { theme: {
     primary: '#d70f14',
     secondary: '#000000',
-    accent: '#0a7db4',
+    accent: '#3f515d',
     error: '#ff6400',
     info: '#2196F3',
     success: '#4CAF50',
