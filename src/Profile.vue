@@ -36,81 +36,78 @@
 </template>
 
 <script>
-  import Auth from './Auth'
+import Auth from './Auth'
 
-  export default {
-    created() {
-      window.setTimeout(() => {
-        Auth.profile().then(
-          (val) => {
-            this.profile = val
-          },
-          error => {
-            console.log(error)
-          }
-        );
-
-      }, 500) 
-    },
-    computed: {
-      email() {
-        if(this.profile.email.length){
-          return this.profile.email
+export default {
+  created () {
+    window.setTimeout(() => {
+      Auth.profile().then(
+        (val) => {
+          this.profile = val
+        },
+        error => {
+          console.log(error)
         }
-        return "No email"
+      )
+    }, 500)
+  },
+  computed: {
+    email () {
+      if (this.profile.email.length) {
+        return this.profile.email
       }
-    },
-    data() {
-      return {
-        profile: {
-          short: '',
-          admin: false,
-          email: ''
-        }
-      }
-    },
-    props: {
-      type: String
-    },
-    methods: {
-
+      return 'No email'
     }
+  },
+  data () {
+    return {
+      profile: {
+        short: '',
+        admin: false,
+        email: ''
+      }
+    }
+  },
+  props: {
+    type: String
+  },
+  methods: {
+
   }
+}
 
 </script>
 <style lang="scss" scoped>
-  .chip{
-    margin-right: -36px;
-    //margin-top: -12px;
-    font-weight: 700 !important; 
+.v-chip {
+  margin-right: -36px;
+  font-weight: 700 !important;
+}
+.avatar-container {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  > div:first-child {
+    height: 70px;
+    background: linear-gradient(to bottom, #232526, #414345);
+    position: relative;
+    margin-bottom: 52px;
   }
-  .avatar-container {
-    border: 1px solid rgba(0,0,0,0.1);
-    >div:first-child {
-      height: 70px;
-      background: linear-gradient(to bottom, #232526, #414345);
-      position: relative;
-      margin-bottom: 52px;
-    }
-    >div:nth-child(2){
-      text-align: center;
-    }
+  > div:nth-child(2) {
+    text-align: center;
   }
+}
 
-  .avatar {
-    width: 70px !important;
-    height: 70px !important;
-    position: absolute;
-    bottom: -35px;
-    left: calc(50% - 30px);
-    box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.25);
-    span {
-      font-size: 40px;
-      letter-spacing: -0.05em;
-      margin-left: -5px;
-      line-height: 40px;
-      font-weight: 700;
-    }
+.v-avatar {
+  width: 70px !important;
+  height: 70px !important;
+  position: absolute;
+  bottom: -35px;
+  left: calc(50% - 30px);
+  box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.25);
+  span {
+    font-size: 40px;
+    letter-spacing: -0.05em;
+    margin-left: -5px;
+    line-height: 40px;
+    font-weight: 700;
   }
-
+}
 </style>

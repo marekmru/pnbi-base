@@ -65,7 +65,7 @@
         <v-tooltip bottom>
           <v-btn slot="activator" class="pr-0 mr-0 profile-button" flat icon :to="{name: 'profile'}">
             <v-avatar>
-              <span class="">{{profile.short}}</span>
+              <span>{{profile.short}}</span>
             </v-avatar>
           </v-btn>
           <span>Profile</span>
@@ -245,95 +245,86 @@ export default {
 </script>
 
 <style lang="css">
-  .application.theme--light {
-    background: rgb(245, 245, 245)
-  }
+.impressum {
+  width: 22px;
+  margin-top: -7px;
+  text-align: center;
+  font-weight: 700;
+}
 
-  .impressum {
-    width: 22px;
-    margin-top: -7px;
-    text-align: center;
-    font-weight: 700;
-  }
-
-  .navigation-drawer__border {
-    display: none;
-  }
-
+.v-navigation-drawer__border {
+  opacity: 0.15;
+}
 </style>
 
 <style scoped lang="css">
-  .slide-enter-active,
-  .slide-leave-active {
-    top: 0;
-  }
+.slide-enter-active,
+.slide-leave-active {
+  top: 0;
+}
 
-  .slide-enter,
-  .slide-leave-to {
-    top: -48px;
-  }
+.slide-enter,
+.slide-leave-to {
+  top: -48px;
+}
 
-  .v-list__tile .v-avatar span,
-  .profile-button .v-avatar span {
-    font-weight: 700 !important;
-    letter-spacing: -0.1em !important;
-    font-size: 11px !important;
-    line-height: 12px !important;
-    margin-left: -1px;
+.v-list__tile .v-avatar span,
+.profile-button .v-avatar span {
+  font-weight: 700 !important;
+  letter-spacing: -0.1em !important;
+  font-size: 11px !important;
+  line-height: 12px !important;
+  margin-left: -1px;
+}
 
-  }
+.default-routes .v-list__tile .v-avatar {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  height: 24px !important;
+  width: 24px !important;
+}
 
-  .default-routes .v-list__tile .v-avatar {
-    background-color: rgba(0, 0, 0, .4) !important;
-    height: 24px !important;
-    width: 24px !important;
-  }
+.default-routes .v-list__tile__title,
+.default-routes .v-list__tile__action .material-icons {
+  color: rgba(0, 0, 0, 0.5) !important;
+}
 
-  .default-routes .v-list__tile__title,
-  .default-routes .v-list__tile__action .material-icons {
-    color: rgba(0, 0, 0, .4) !important;
-  }
+.default-routes .v-list__tile--active .v-list__tile__title,
+.default-routes .v-list__tile--active .v-list__tile__action .material-icons {
+  color: #d70f14 !important;
+}
 
-  .default-routes .v-list__tile--active .v-list__tile__title,
-  .default-routes .v-list__tile--active .v-list__tile__action .material-icons {
-    color: #d70f14 !important;
-  }
+.default-routes .v-list__tile--active .v-avatar {
+  background-color: #d70f14 !important;
+}
 
-  .default-routes .v-list__tile--active .v-avatar {
-    background-color: #d70f14 !important;
-  }
+.profile-button .v-avatar {
+  background-color: white;
+  height: 22px !important;
+  width: 22px !important;
+}
 
-  .profile-button .v-avatar {
-    background-color: white;
-    height: 22px !important;
-    width: 22px !important;
-  }
+.profile-button .v-avatar span {
+  margin-top: -1px;
+}
 
-  .profile-button .v-avatar span {
-    margin-top: -1px;
-  }
+.auth-routes >>> .container {
+  padding: 0;
+}
 
-  .auth-routes>>>.container {
-    padding: 0;
-  }
+.auth-routes >>> .v-content__wrap {
+  padding-top: 0;
+}
 
-  .auth-routes>>>.v-content__wrap {
-    padding-top: 0;
-  }
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  border: 1px solid rgba(100, 100, 100, 0.2);
+}
 
-  pre {
-    white-space: pre-wrap;       /* Since CSS 2.1 */
-    word-wrap: break-word;       /* Internet Explorer 5.5+ */
-    /* overflow: scroll;
-    word-wrap: break-word; */
-    border: 1px solid rgba(100, 100, 100, 0.2);
-  }
-
-  .v-progress-linear {
-    position: absolute;
-    z-index: 10;
-    top: 48px;
-    margin: 0;
-  }
-
+.v-progress-linear {
+  position: absolute;
+  z-index: 10;
+  top: 48px;
+  margin: 0;
+}
 </style>
