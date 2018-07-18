@@ -100,7 +100,7 @@
     </v-content>
 
     <v-progress-linear indeterminate v-if="loading"></v-progress-linear>
-    <v-dialog persistent v-model="alertOpen" max-width="640">
+    <v-dialog scrollable persistent v-model="alertOpen" max-width="720">
       <v-card tile v-if="alertOpen && alertMessage">
         <v-toolbar dense card dark color="error">
           <v-toolbar-title>
@@ -111,7 +111,6 @@
         <v-card-text class="px-3 py-3">
           <div v-if="alertMessage.html || alertMessage.json">
             <p v-if="alertMessage.html" v-html="alertMessage.html"></p>
-            <p v-if="alertMessage.message" v-html="alertMessage.message"></p>
             <div v-if="alertMessage.json">
               <pre class="mt-2 pa-1">{{alertMessage.json}}</pre>
             </div>
@@ -274,8 +273,8 @@ export default {
     top: -48px;
   }
 
-  .list__tile .avatar span,
-  .profile-button .avatar span {
+  .v-list__tile .v-avatar span,
+  .profile-button .v-avatar span {
     font-weight: 700 !important;
     letter-spacing: -0.1em !important;
     font-size: 11px !important;
@@ -284,33 +283,33 @@ export default {
 
   }
 
-  .default-routes .list__tile .avatar {
+  .default-routes .v-list__tile .v-avatar {
     background-color: rgba(0, 0, 0, .4) !important;
     height: 24px !important;
     width: 24px !important;
   }
 
-  .default-routes .list__tile__title,
-  .default-routes .list__tile__action .material-icons {
+  .default-routes .v-list__tile__title,
+  .default-routes .v-list__tile__action .material-icons {
     color: rgba(0, 0, 0, .4) !important;
   }
 
-  .default-routes .list__tile--active .list__tile__title,
-  .default-routes .list__tile--active .list__tile__action .material-icons {
+  .default-routes .v-list__tile--active .v-list__tile__title,
+  .default-routes .v-list__tile--active .v-list__tile__action .material-icons {
     color: #d70f14 !important;
   }
 
-  .default-routes .list__tile--active .avatar {
+  .default-routes .v-list__tile--active .v-avatar {
     background-color: #d70f14 !important;
   }
 
-  .profile-button .avatar {
+  .profile-button .v-avatar {
     background-color: white;
     height: 22px !important;
     width: 22px !important;
   }
 
-  .profile-button .avatar span {
+  .profile-button .v-avatar span {
     margin-top: -1px;
   }
 
@@ -318,17 +317,19 @@ export default {
     padding: 0;
   }
 
-  .auth-routes>>>.content--wrap {
+  .auth-routes>>>.v-content__wrap {
     padding-top: 0;
   }
 
   pre {
-    overflow: scroll;
-    word-wrap: break-word;
-    border: 1px solid rgba(100, 100, 100, 0.1);
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+    /* overflow: scroll;
+    word-wrap: break-word; */
+    border: 1px solid rgba(100, 100, 100, 0.2);
   }
 
-  .progress-linear {
+  .v-progress-linear {
     position: absolute;
     z-index: 10;
     top: 48px;

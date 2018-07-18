@@ -1,0 +1,30 @@
+@import url(//fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800,400italic|Material+Icons);
+body,
+button,
+div,
+html,
+input,
+p,
+select,
+span,
+textarea {
+  font-family: "Open Sans", serif !important;
+}
+
+.v-btn {
+  font-weight: 600;
+}
+
+//bug 1.0.1 icon pos in fab is top not center
+.v-icon.material-icons {
+  align-items: center;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  font-feature-settings: "liga";
+  font-size: 24px;
+  justify-content: center;
+  line-height: 1;
+  transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
+  vertical-align: middle;
+}
