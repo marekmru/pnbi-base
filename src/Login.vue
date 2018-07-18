@@ -1,117 +1,116 @@
 <script>
-  // import router from '@/router'
-  import LoginForm from './internal/LoginForm'
-  import ForgotForm from './internal/ForgotForm'
-  import CookieForm from './internal/CookieForm'
-  import CookieFooter from './internal/CookieFooter'
-  import Privacy from './Privacy'
-  import Imprint from './Imprint'
-  import EventBus, {
-    PROFILE_UPDATED
-  } from "./event-bus";
-  import CookieService from './internal/cookie.service.js'
-  import Auth from './Auth'
-  import BI_BASE_CONFIG from "@/pnbi.base.config.js";
+// import router from '@/router'
+import LoginForm from './internal/LoginForm'
+import ForgotForm from './internal/ForgotForm'
+import CookieForm from './internal/CookieForm'
+import CookieFooter from './internal/CookieFooter'
+import Privacy from './Privacy'
+import Imprint from './Imprint'
 
-  const tealiumEnabler = (a, b, c, d) => {
-    if(window.location.href.includes('localhost')){
-      return false
+import CookieService from './internal/cookie.service.js'
+import Auth from './Auth'
+import BI_BASE_CONFIG from '@/pnbi.base.config.js'
+
+export default {
+  created () {
+    window.setTimeout(val => {
+      Auth.profile().then(
+        this.checkCookieLayer,
+        () => {
+          this.state = 'login'
+        }
+      )
+    }, 250)
+  },
+  beforeDestroy () {},
+  mounted () {
+
+    // this.state = 'cookie'
+  },
+  components: {
+    LoginForm,
+    ForgotForm,
+    CookieForm,
+    CookieFooter,
+    Privacy,
+    Imprint
+  },
+  data () {
+    return {
+      profile: null,
+      state: undefined,
+      dialogPrivacy: false,
+      dialogImprint: false
     }
-    a = '//tags.tiqcdn.com/utag/plan-net-training/b.zimmermann/dev/utag.js'
-    b = document
-    c = 'script'
-    d = b.createElement(c)
-    d.src = a; d.type = 'text/java' + c
-    d.async = true
-    a = b.getElementsByTagName(c)[0]
-    a.parentNode.insertBefore(d, a)
-  }
-
-  export default {
-    created() {
-      tealiumEnabler()
-      window.setTimeout(val => {
-        Auth.profile().then(
-          this.checkCookieLayer,
-          () => {
-            this.state = 'login'
-          }
-        );
-      }, 250) 
-    },
-    beforeDestroy() {},
-    mounted() {
-      //this.state = 'cookie'
-    },
-    components: {
-      LoginForm,
-      ForgotForm,
-      CookieForm,
-      CookieFooter,
-      Privacy,
-      Imprint
-    },
-    data() {
-      return {
-        profile: null,
-        state: undefined,
-        dialogPrivacy: false,
-        dialogImprint: false
-      }
-    },
-    methods: {
-      checkCookieLayer() {
-  
-
-        Auth.profile().then(
-          profile => {
-            this.profile = profile;
-            const cookie = CookieService.isPriPolCookieSet();
-            if (profile.opt_in == null) {
-              if (typeof cookie === 'string') {
-                this.onOptInClick(cookie)
-              } else {
-                this.state = 'cookie'
-              }
+  },
+  computed: {
+    nextRoute () {
+      return this.$route.query.next
+    }
+  },
+  methods: {
+    checkCookieLayer () {
+      Auth.profile().then(
+        profile => {
+          this.profile = profile
+          const cookie = CookieService.isPriPolCookieSet()
+          if (profile.opt_in == null) {
+            if (typeof cookie === 'string') {
+              this.onOptInClick(cookie)
             } else {
-              if (typeof cookie !== 'string') {
-                CookieService.setPriPolCookie()
-              }
-              this.$router.push(BI_BASE_CONFIG.MAIN_ROUTE)
+              this.state = 'cookie'
             }
-          },
-          () => {}
-        );
-      },
-      onOptInClick(cookie = false) {
-        CookieService.setPriPolCookie()
-        CookieService.optIn({
-          _id: this.profile._id,
-          opt_in: cookie || CookieService.getCookieDate()
-        }).then(() => {
+          } else {
+            if (typeof cookie !== 'string') {
+              CookieService.setPriPolCookie()
+            }
+            if (this.nextRoute == null) {
+              this.$router.push(BI_BASE_CONFIG.MAIN_ROUTE)
+            } else {
+              window.location.assign(this.nextRoute)
+            }
+          }
+        },
+        () => {}
+      )
+    },
+    onOptInClick (cookie = false) {
+      CookieService.setPriPolCookie()
+      CookieService.optIn({
+        _id: this.profile._id,
+        opt_in: cookie || CookieService.getCookieDate()
+      }).then(() => {
+        if (this.nextRoute == null) {
           this.$router.push(BI_BASE_CONFIG.MAIN_ROUTE)
-        }, error => {
+        } else {
+          window.location.assign(this.nextRoute)
+        }
+      }, () => {
 
-        })
-      },
-      onOptInClickLight(cookie = false) {
-        CookieService.setPriPolCookie()
-        CookieService.optIn({
-          _id: this.profile._id,
-          opt_in: cookie || CookieService.getCookieDate()
-        }).then(() => {
+      })
+    },
+    onOptInClickLight (cookie = false) {
+      CookieService.setPriPolCookie()
+      CookieService.optIn({
+        _id: this.profile._id,
+        opt_in: cookie || CookieService.getCookieDate()
+      }).then(() => {
+        if (this.nextRoute == null) {
           this.$router.push(BI_BASE_CONFIG.MAIN_ROUTE)
-        })
-      }
+        } else {
+          window.location.assign(this.nextRoute)
+        }
+      })
     }
   }
+}
 
 </script>
 <template>
   <div class="page" id="login">
     <v-dialog v-model="dialogPrivacy" fullscreen hide-overlay transition="dialog-bottom-transition" scrollable>
       <v-card tile>
-        <v-toolbar card dark color="primary">
+        <v-toolbar card dark color="primary" dense>
           <v-btn icon dark @click.native="dialogPrivacy = false">
             <v-icon>close</v-icon>
           </v-btn>
@@ -124,7 +123,7 @@
     </v-dialog>
     <v-dialog v-model="dialogImprint" fullscreen hide-overlay transition="dialog-bottom-transition" scrollable>
       <v-card tile>
-        <v-toolbar card dark color="primary">
+        <v-toolbar card dark color="primary" dense>
           <v-btn icon dark @click.native="dialogImprint = false">
             <v-icon>close</v-icon>
           </v-btn>
@@ -153,8 +152,8 @@
 
 <style lang="scss">
   #login {
-    margin-top: -48px;
-    height: calc(100vh + 48px);
+/*     margin-top: -48px;
+    height: calc(100vh + 48px); */
   }
 
   #login form {
@@ -193,7 +192,8 @@
     opacity: 0;
     transform: scale(.9);
   }
-  footer{
+
+  footer {
     background-color: #fff;
     position: fixed;
     bottom: 0;

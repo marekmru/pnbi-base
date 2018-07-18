@@ -1,202 +1,325 @@
 <template>
-  <div v-if="isNavVisible">
-    <v-navigation-drawer v-model="sidenavOpen" fixed temporary clipped>
-      <v-card>
-        <v-card-media height="48px" style="background:rgb(0, 0, 0)"></v-card-media>
-      </v-card>
-      <v-layout class="user-background" py-3 column>
-        <v-flex>
+  <v-app>
+    <v-navigation-drawer v-if="isNavVisible" v-model="sidenavOpen" fixed clipped class="grey lighten-4" app>
+      <div class="pt-3">
+        <slot name="navigation-slot"></slot>
+      </div>
+      <v-list dense class="default-routes">
+        <v-divider dark class="my-3"></v-divider>
 
-          <v-layout row>
-            <v-flex xs5 class="pl-2 user-image">
-              <v-icon color="grey" class="account-icon">account_circle</v-icon>
-              <v-chip v-if="profile.admin" color="primary" text-color="white">Admin</v-chip>
-            </v-flex>
-            <v-flex>
-              <v-layout column class="pt-3">
-                <v-layout>
-                  <v-flex>
-                    <strong class="grey--text">{{profile.realname}}</strong>
-                  </v-flex>
-                </v-layout>
-                <v-layout v-if="profile.email" justify-center>
-                  <v-flex>
-                    <span class="grey--text">{{profile.email}}</span>
-                  </v-flex>
-                </v-layout>
-              </v-layout>
-            </v-flex>
-          </v-layout>
+        <v-list-tile :to="{name: 'profile'}">
+          <v-list-tile-action>
+            <v-avatar>
+              <span class="white--text">{{profile.short}}</span>
+            </v-avatar>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>
+              Profile
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile :to="{name: 'privacy'}">
+          <v-list-tile-action>
+            <v-icon>visibility_off</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>
+              Privacy Policy
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
 
+        <v-list-tile :to="{name: 'imprint'}">
+          <v-list-tile-action>
+            <v-icon class="impressum">§</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>
+              Imprint
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
 
-        </v-flex>
-        <v-layout>
-          <v-flex xs3 class="pt-2">
+        <v-list-tile @click="logout()">
+          <v-list-tile-action>
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjOTA5MDkwIiBkPSJNMTkyIDI3Ny40aDE4OS43bC00My42IDQ0LjdMMzY4IDM1Mmw5Ni05Ni05Ni05Ni0zMSAyOS45IDQ0LjcgNDQuN0gxOTJ2NDIuOHoiLz48cGF0aCBmaWxsPSIjOTA5MDkwIiBkPSJNMjU1LjcgNDIxLjNjLTQ0LjEgMC04NS41LTE3LjItMTE2LjctNDguNC0zMS4yLTMxLjItNDguMy03Mi43LTQ4LjMtMTE2LjkgMC00NC4xIDE3LjItODUuNyA0OC4zLTExNi45IDMxLjItMzEuMiA3Mi42LTQ4LjQgMTE2LjctNDguNCA0NCAwIDg1LjMgMTcuMSAxMTYuNSA0OC4ybDMwLjMtMzAuM2MtOC41LTguNC0xNy44LTE2LjItMjcuNy0yMy4yQzMzOS43IDYxIDI5OC42IDQ4IDI1NS43IDQ4IDE0MS4yIDQ4IDQ4IDE0MS4zIDQ4IDI1NnM5My4yIDIwOCAyMDcuNyAyMDhjNDIuOSAwIDg0LTEzIDExOS0zNy41IDEwLTcgMTkuMi0xNC43IDI3LjctMjMuMmwtMzAuMi0zMC4yYy0zMS4xIDMxLjEtNzIuNSA0OC4yLTExNi41IDQ4LjJ6TTQ0OC4wMDQgMjU2Ljg0N2wtLjg0OS0uODQ4Ljg0OS0uODQ5Ljg0OC44NDl6Ii8+PC9zdmc+"
+              width="22px" height="22px" title="logout" />
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>
+              Logout
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
+      </v-list>
+    </v-navigation-drawer>
+    <transition name="slide">
+      <v-toolbar v-if="isNavVisible" dense color="secondary" class="white--text" app fixed clipped-left>
+        <v-toolbar-side-icon class="white--text" @click.native="sidenavOpen = !sidenavOpen"></v-toolbar-side-icon>
+        <slot v-if="hasTitleSlot" name="title-slot"></slot>
+        <h2 v-else class="app-title">{{title}}</h2>
+        <v-spacer></v-spacer>
+
+        <v-tooltip bottom>
+          <v-btn slot="activator" class="pr-0 mr-0 profile-button" flat icon :to="{name: 'profile'}">
+            <v-avatar>
+              <span class="">{{profile.short}}</span>
+            </v-avatar>
+          </v-btn>
+          <span>Profile</span>
+        </v-tooltip>
+        <v-tooltip bottom>
+          <v-btn slot="activator" class="pr-0 mr-0" flat icon @click="logout()">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMTkyIDI3Ny40aDE4OS43bC00My42IDQ0LjdMMzY4IDM1Mmw5Ni05Ni05Ni05Ni0zMSAyOS45IDQ0LjcgNDQuN0gxOTJ2NDIuOHoiLz48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMjU1LjcgNDIxLjNjLTQ0LjEgMC04NS41LTE3LjItMTE2LjctNDguNC0zMS4yLTMxLjItNDguMy03Mi43LTQ4LjMtMTE2LjkgMC00NC4xIDE3LjItODUuNyA0OC4zLTExNi45IDMxLjItMzEuMiA3Mi42LTQ4LjQgMTE2LjctNDguNCA0NCAwIDg1LjMgMTcuMSAxMTYuNSA0OC4ybDMwLjMtMzAuM2MtOC41LTguNC0xNy44LTE2LjItMjcuNy0yMy4yQzMzOS43IDYxIDI5OC42IDQ4IDI1NS43IDQ4IDE0MS4yIDQ4IDQ4IDE0MS4zIDQ4IDI1NnM5My4yIDIwOCAyMDcuNyAyMDhjNDIuOSAwIDg0LTEzIDExOS0zNy41IDEwLTcgMTkuMi0xNC43IDI3LjctMjMuMmwtMzAuMi0zMC4yYy0zMS4xIDMxLjEtNzIuNSA0OC4yLTExNi41IDQ4LjJ6TTQ0OC4wMDQgMjU2Ljg0N2wtLjg0OS0uODQ4Ljg0OS0uODQ5Ljg0OC44NDl6Ii8+PC9zdmc+"
+              width="22px" height="22px" title="logout" />
+          </v-btn>
+          <span>Logout</span>
+        </v-tooltip>
+      </v-toolbar>
+    </transition>
+
+    <v-content v-if="isNavVisible" class="pt-0">
+      <v-container fluid class="grey lighten-4">
+        <v-layout class="pt-0">
+          <v-flex>
+            <slot name="router"></slot>
           </v-flex>
         </v-layout>
-      </v-layout>
-      <v-layout column>
-        <v-flex>
-          <slot name="navigation-slot"></slot>
-        </v-flex>
-      </v-layout>
+      </v-container>
+    </v-content>
+    <v-content v-else class="pa-0  ma-0 auth-routes">
+      <v-container fluid fill-height class="grey lighten-4">
+        <v-layout class="pa-0  ma-0">
+          <v-flex class="pa-0  ma-0">
+            <router-view/>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
 
-      <v-list dense class="default-navigation-list grey lighten-4 pt-0 pb-0">
-          <v-divider dark></v-divider>
-          <v-list-tile @click="goto('privacy')">
-            <v-list-tile-action>
-              <v-icon>visibility_off</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title class="grey--text">
-                Datenschutz
-              </v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-
-          <v-list-tile @click="goto('imprint')">
-            <v-list-tile-action>
-              <v-icon class="pl-2" style="margin-top: -8px; margin-left: -3px;">§</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title class="grey--text">
-                Impressum
-              </v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-      </v-list>
-
-    </v-navigation-drawer>
-    <v-toolbar fixed dark dense color="secondary">
-      <v-toolbar-side-icon @click.stop="sidenavOpen = !sidenavOpen"></v-toolbar-side-icon>
-      <v-toolbar-title class="white--text">{{title}}</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn icon @click="logout">
-        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSJ3aGl0ZSIgZD0iTTE5MiAyNzcuNGgxODkuN2wtNDMuNiA0NC43TDM2OCAzNTJsOTYtOTYtOTYtOTYtMzEgMjkuOSA0NC43IDQ0LjdIMTkydjQyLjh6Ii8+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0yNTUuNyA0MjEuM2MtNDQuMSAwLTg1LjUtMTcuMi0xMTYuNy00OC40LTMxLjItMzEuMi00OC4zLTcyLjctNDguMy0xMTYuOSAwLTQ0LjEgMTcuMi04NS43IDQ4LjMtMTE2LjkgMzEuMi0zMS4yIDcyLjYtNDguNCAxMTYuNy00OC40IDQ0IDAgODUuMyAxNy4xIDExNi41IDQ4LjJsMzAuMy0zMC4zYy04LjUtOC40LTE3LjgtMTYuMi0yNy43LTIzLjJDMzM5LjcgNjEgMjk4LjYgNDggMjU1LjcgNDggMTQxLjIgNDggNDggMTQxLjMgNDggMjU2czkzLjIgMjA4IDIwNy43IDIwOGM0Mi45IDAgODQtMTMgMTE5LTM3LjUgMTAtNyAxOS4yLTE0LjcgMjcuNy0yMy4ybC0zMC4yLTMwLjJjLTMxLjEgMzEuMS03Mi41IDQ4LjItMTE2LjUgNDguMnpNNDQ4LjAwNCAyNTYuODQ3bC0uODQ5LS44NDguODQ5LS44NDkuODQ4Ljg0OXoiLz48L3N2Zz4="
-          width="24px" height="24px" title="logout" />
-        <!-- <v-icon>power_settings_new</v-icon> -->
-      </v-btn>
-    </v-toolbar>
     <v-progress-linear indeterminate v-if="loading"></v-progress-linear>
-    <v-dialog v-model="alertOpen" max-width="760px">
-      <v-card v-if="alertOpen && alertMessage" class="pa-1">
-        <v-card-title>
-          <h3>
-            <v-icon style="margin-top: -2px;" color="error">error</v-icon>
-            <span class="error--text">FEHLER {{alertMessage.data.status_code}}</span>
-          </h3>
-        </v-card-title>
-        <v-card-text>
-          <strong v-if="alertMessage.data.result.message">{{alertMessage.data.result.message}}</strong>
-          <div>
-            <pre class="mt-2">{{alertMessage.data}}</pre>
+    <v-dialog persistent v-model="alertOpen" max-width="640">
+      <v-card tile v-if="alertOpen && alertMessage">
+        <v-toolbar dense card dark color="error">
+          <v-toolbar-title>
+            ERROR {{alertMessage.status_code || alertMessage.data.status_code }}
+          </v-toolbar-title>
+          <v-spacer></v-spacer>
+        </v-toolbar>
+        <v-card-text class="px-3 py-3">
+          <div v-if="alertMessage.html || alertMessage.json">
+            <p v-if="alertMessage.html" v-html="alertMessage.html"></p>
+            <p v-if="alertMessage.message" v-html="alertMessage.message"></p>
+            <div v-if="alertMessage.json">
+              <pre class="mt-2 pa-1">{{alertMessage.json}}</pre>
+            </div>
+          </div>
+          <div v-else>
+            <pre class="mt-2 pa-1">{{alertMessage.data}}</pre>
           </div>
         </v-card-text>
-        <v-card-actions>
+        <v-card-actions class="pl-3 pr-3 pb-3 pt-0">
           <v-spacer></v-spacer>
-          <v-btn @click="alertOpen = !alertOpen" color="primary" flat>OK</v-btn>
+          <v-btn type="button" @click="logout()" flat color="secondary">
+            Zum Login
+          </v-btn>
+          <v-btn type="button" v-if="(alertMessage.status_code || alertMessage.data.status_code) != 401 && (alertMessage.status_code || alertMessage.data.status_code) != 403" flat @click="alertOpen = false" color="primary">
+            OK
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </div>
+  </v-app>
 </template>
 <script>
-  import EventBus, {
-    LOADING,
-    PROFILE_UPDATED,
-    ERROR
-  } from "./event-bus";
-  import Auth from "./Auth";
-  import router from "@/router";
-  import h from './helper'
-  import BI_BASE_CONFIG from "@/pnbi.base.config.js";
+import EventBus, {
+  LOADING,
+  TRACK,
+  PROFILE_UPDATED,
+  CONFIG_UPDATED,
+  ERROR
+} from './event-bus'
+import Auth from './Auth'
 
-  export default {
-    mounted() {
-      console.log('pnbi-base: 08.06.2018')
-      Auth.profile().then(
-        profile => {
-          window.CORE.user = h.clone(profile)
-          this.profile = profile;
-        },
-        () => {
-          //console.info(error);
-        }
-      );
-      EventBus.$on(PROFILE_UPDATED, profile => {
-        if (typeof profile !== "undefined") {
-          this.profile.realname = profile.realname;
+import BI_BASE_CONFIG from '@/pnbi.base.config.js'
+
+export default {
+  mounted () {
+    Auth.profile().then(
+      profile => {
+        this.profile = Object.assign({}, profile)
+      },
+      () => {
+        // console.info(error);
+      }
+    )
+    EventBus.$on(PROFILE_UPDATED, profile => {
+      if (typeof profile !== 'undefined') {
+        this.profile = Object.assign({}, profile)
+      } else {
+        this.profile.realname = null
+        this.profile.short = null
+      }
+    })
+    EventBus.$on(LOADING, status => {
+      this.loading = status
+    })
+    EventBus.$on(CONFIG_UPDATED, payload => {
+      this.setTitle(payload)
+    })
+    EventBus.$on(TRACK, payload => {
+      if (window.utag != null) {
+        const dto = Object.assign({
+          customer_id: this.profile._id,
+          customer_email: this.profile.email,
+          realname: this.profile.realname,
+          webapp: BI_BASE_CONFIG.APP_IDENTIFIER || this.title.toLowerCase()
+        }, payload)
+        if (payload.tealium_event === 'page_view') {
+          window.utag.view(dto)
         } else {
-          this.profile.realname = undefined;
-        }
-      });
-      EventBus.$on(LOADING, status => {
-        this.loading = status;
-      });
-      EventBus.$on(ERROR, this.showError);
-    },
-    props: {},
-    data() {
-      return {
-        alertMessage: null,
-        loading: false,
-        sidenavOpen: false,
-        alertOpen: false,
-        showNavigation: false,
-        profile: {
-          realname: undefined
+          window.utag.link(dto)
         }
       }
-      },
+    })
 
-      methods: {
-          goto(name){
-            this.$router.push({name})
-          },
-          showError(alert) {
-            this.alertMessage = alert;
-            this.alertOpen = true;
-          },
-          logout() {
-            Auth.logout()
-              .then(val => {
-                this.$router.push({
-                  name: "login"
-                })
-              })
-              .catch(error => {
-                this.$router.push({
-                  name: "login"
-                })
-              });
-          }
-        },
-        created() {
-          window.CORE = {}
-          const title = BI_BASE_CONFIG.TITLE;
-          if (typeof title === "undefined") {
-            alert("NO BI_BASE_CONFIG.TITLE");
-          }
-          this.title = title || "CORE";
-          document.title = title;
-        },
-        computed: {
-          isNavVisible() {
-            const isVis = ["login", "reset", "forbidden"].indexOf(this.$route.name) === -1;
-            return isVis;
-          }
-        }
-    };
+    EventBus.$on(ERROR, this.showError)
+  },
+  data () {
+    return {
+      title: null,
+      alertMessage: null,
+      loading: false,
+      sidenavOpen: null,
+      alertOpen: false,
+      showNavigation: false,
+      profile: {
+        realname: null,
+        short: null
+      }
+    }
+  },
+
+  methods: {
+    goto (name) {
+      this.$router.push({
+        name
+      })
+    },
+    showError (alert) {
+      this.alertMessage = alert
+      this.alertOpen = true
+    },
+    logout () {
+      Auth.logout()
+      window.setTimeout(
+        function () {
+          this.alertOpen = false
+          this.$router.push({
+            name: 'login'
+          })
+        }.bind(this), 200
+      )
+    },
+    setTitle (title = '') {
+      this.title = title.toUpperCase()
+      document.title = this.title
+    }
+  },
+  created () {
+    const title = BI_BASE_CONFIG.TITLE
+    this.setTitle(title)
+  },
+  computed: {
+    hasTitleSlot () {
+      return !!this.$slots['title-slot']
+    },
+    isNavVisible () {
+      const isVis = ['login', 'reset'].indexOf(this.$route.name) === -1
+      return isVis
+    }
+  }
+}
 
 </script>
 
+<style lang="css">
+  .application.theme--light {
+    background: rgb(245, 245, 245)
+  }
+
+  .impressum {
+    width: 22px;
+    margin-top: -7px;
+    text-align: center;
+    font-weight: 700;
+  }
+
+  .navigation-drawer__border {
+    display: none;
+  }
+
+</style>
 
 <style scoped lang="css">
-  div>>>.account-icon {
-    font-size: 66px;
+  .slide-enter-active,
+  .slide-leave-active {
+    top: 0;
   }
-  div>>>.navigation-drawer>.default-navigation-list .list__tile--active .list__tile__title{
-    color: inherit !important
+
+  .slide-enter,
+  .slide-leave-to {
+    top: -48px;
+  }
+
+  .list__tile .avatar span,
+  .profile-button .avatar span {
+    font-weight: 700 !important;
+    letter-spacing: -0.1em !important;
+    font-size: 11px !important;
+    line-height: 12px !important;
+    margin-left: -1px;
+
+  }
+
+  .default-routes .list__tile .avatar {
+    background-color: rgba(0, 0, 0, .4) !important;
+    height: 24px !important;
+    width: 24px !important;
+  }
+
+  .default-routes .list__tile__title,
+  .default-routes .list__tile__action .material-icons {
+    color: rgba(0, 0, 0, .4) !important;
+  }
+
+  .default-routes .list__tile--active .list__tile__title,
+  .default-routes .list__tile--active .list__tile__action .material-icons {
+    color: #d70f14 !important;
+  }
+
+  .default-routes .list__tile--active .avatar {
+    background-color: #d70f14 !important;
+  }
+
+  .profile-button .avatar {
+    background-color: white;
+    height: 22px !important;
+    width: 22px !important;
+  }
+
+  .profile-button .avatar span {
+    margin-top: -1px;
+  }
+
+  .auth-routes>>>.container {
+    padding: 0;
+  }
+
+  .auth-routes>>>.content--wrap {
+    padding-top: 0;
   }
 
   pre {
@@ -205,44 +328,11 @@
     border: 1px solid rgba(100, 100, 100, 0.1);
   }
 
-  .username {
-    font-size: 16px;
-  }
-
   .progress-linear {
     position: absolute;
     z-index: 10;
     top: 48px;
     margin: 0;
-  }
-
-  .toolbar__title {
-    text-align: center;
-    font-weight: 400;
-    font-size: 1.6rem;
-    letter-spacing: 0px;
-    cursor: pointer;
-    text-transform: uppercase;
-  }
-
-  .account-icon {
-    font-size: 66px;
-  }
-
-  .user-image {
-    position: relative;
-  }
-
-  .user-image .chip {
-    position: absolute;
-    top: -10px;
-    left: 45px;
-  }
-
-  .user-background {
-    background: rgba(0, 0, 0, 0.2);
-    background: rgb(245, 245, 245);
-;
   }
 
 </style>

@@ -8,7 +8,9 @@ export default {
   components: {},
   data () {
     return {
+      message: [],
       strength: 0,
+      success: false,
       user: {
         password: '',
         password2: ''
@@ -43,9 +45,8 @@ export default {
       Auth.reset({
         password: this.user.password,
         password_code: this.$route.params.code
-      })
-        .then(response => {
-          console.log(response)
+      }).then(response => {
+          this.success = true
         })
         .catch(err => {
           console.log(err)
@@ -58,6 +59,7 @@ export default {
         })
           .then(response => {
             this.strength = Math.round(response.strength * 100)
+            this.message = response.message
           })
           .catch(err => {
             console.log(err)
@@ -66,6 +68,9 @@ export default {
     }
   },
   computed: {
+    internalMessage(){
+      return this.message.filter(val => val.includes('obfuscated sentence') === false)
+    },
     isValid: {
       get: function () {
         const valid = this.user.password === this.user.password2
@@ -80,10 +85,8 @@ export default {
     progress () {
       if (this.strength < 20) {
         this.strength = 0
-        return this.strength
-      } else {
-        return this.strength
-      }
+      } 
+      return this.strength
     },
     color () {
       if (this.strength < 33) {
@@ -93,7 +96,6 @@ export default {
       } else if (this.strength > 66) {
         return ['error', 'warning', 'success'][2]
       }
-
       /* if (true){
         return ["error", "warning", "success"][Math.floor(this.progress / 40)];
       }else {
@@ -112,18 +114,35 @@ export default {
         <v-flex class="text-center">
           <h1 class="bi-powered">POWERED BY CORE</h1>
           <v-form ref="form" v-model="rules.valid"> 
-            <v-card >
+            <v-card v-if="!success">
               <v-card-title >
-                <h2 >Neues Passwort</h2>
+                <h2>Neues Passwort</h2>
               </v-card-title>
+
               <v-card-text class="py-0" >              
                 <v-text-field type="password" @focus="focus" label="Neues Passwort" v-model="user.password" :rules="rules.passwordRules" @input="onChange" required></v-text-field>
-                <v-card-text class="pt-0 pb-0 progress-bar">
-                  <span>Passwortstärke:</span>
-                  <v-progress-linear slot="progress" :value="progress" height="5" :color="color"></v-progress-linear>
-                </v-card-text>
                 <v-text-field type="password" @focus="focus" label="Passwort wiederholen" v-model="user.password2" :rules="rules.passwordRules2" required></v-text-field>
+
+                <v-layout pb-1>
+                  <v-flex>
+                    <span class="grey--text">Passwortstärke:</span>
+                    <v-progress-linear class="mt-2" slot="progress" :value="progress" height="5" :color="color"></v-progress-linear>
+                  </v-flex>
+                </v-layout>
+                <v-layout column pb-3 style="opacity:1" v-if="internalMessage.length">
+                  <v-flex v-for="(m,i) in internalMessage" :key="i" class="error--text" style="font-size:12px;">{{m}}</v-flex>
+                </v-layout>
+
                 <v-btn block color="primary" type="submit" :disabled="!rules.valid" @click="onSubmit">Neues Passwort setzen</v-btn>
+                <v-btn @click="goToLogin" flat block>Zurück zum Login</v-btn>
+              </v-card-text>
+            </v-card>
+
+            <v-card v-else>
+              <v-card-title >
+                <h2>Passwort zurückgesetzt</h2>
+              </v-card-title>
+              <v-card-text>
                 <v-btn @click="goToLogin" flat block>Zurück zum Login</v-btn>
               </v-card-text>
             </v-card>
