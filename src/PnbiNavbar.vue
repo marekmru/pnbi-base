@@ -43,8 +43,7 @@
 
         <v-list-tile @click="logout()">
           <v-list-tile-action>
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjOTA5MDkwIiBkPSJNMTkyIDI3Ny40aDE4OS43bC00My42IDQ0LjdMMzY4IDM1Mmw5Ni05Ni05Ni05Ni0zMSAyOS45IDQ0LjcgNDQuN0gxOTJ2NDIuOHoiLz48cGF0aCBmaWxsPSIjOTA5MDkwIiBkPSJNMjU1LjcgNDIxLjNjLTQ0LjEgMC04NS41LTE3LjItMTE2LjctNDguNC0zMS4yLTMxLjItNDguMy03Mi43LTQ4LjMtMTE2LjkgMC00NC4xIDE3LjItODUuNyA0OC4zLTExNi45IDMxLjItMzEuMiA3Mi42LTQ4LjQgMTE2LjctNDguNCA0NCAwIDg1LjMgMTcuMSAxMTYuNSA0OC4ybDMwLjMtMzAuM2MtOC41LTguNC0xNy44LTE2LjItMjcuNy0yMy4yQzMzOS43IDYxIDI5OC42IDQ4IDI1NS43IDQ4IDE0MS4yIDQ4IDQ4IDE0MS4zIDQ4IDI1NnM5My4yIDIwOCAyMDcuNyAyMDhjNDIuOSAwIDg0LTEzIDExOS0zNy41IDEwLTcgMTkuMi0xNC43IDI3LjctMjMuMmwtMzAuMi0zMC4yYy0zMS4xIDMxLjEtNzIuNSA0OC4yLTExNi41IDQ4LjJ6TTQ0OC4wMDQgMjU2Ljg0N2wtLjg0OS0uODQ4Ljg0OS0uODQ5Ljg0OC44NDl6Ii8+PC9zdmc+"
-              width="22px" height="22px" title="logout" />
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjOTA5MDkwIiBkPSJNMTkyIDI3Ny40aDE4OS43bC00My42IDQ0LjdMMzY4IDM1Mmw5Ni05Ni05Ni05Ni0zMSAyOS45IDQ0LjcgNDQuN0gxOTJ2NDIuOHoiLz48cGF0aCBmaWxsPSIjOTA5MDkwIiBkPSJNMjU1LjcgNDIxLjNjLTQ0LjEgMC04NS41LTE3LjItMTE2LjctNDguNC0zMS4yLTMxLjItNDguMy03Mi43LTQ4LjMtMTE2LjkgMC00NC4xIDE3LjItODUuNyA0OC4zLTExNi45IDMxLjItMzEuMiA3Mi42LTQ4LjQgMTE2LjctNDguNCA0NCAwIDg1LjMgMTcuMSAxMTYuNSA0OC4ybDMwLjMtMzAuM2MtOC41LTguNC0xNy44LTE2LjItMjcuNy0yMy4yQzMzOS43IDYxIDI5OC42IDQ4IDI1NS43IDQ4IDE0MS4yIDQ4IDQ4IDE0MS4zIDQ4IDI1NnM5My4yIDIwOCAyMDcuNyAyMDhjNDIuOSAwIDg0LTEzIDExOS0zNy41IDEwLTcgMTkuMi0xNC43IDI3LjctMjMuMmwtMzAuMi0zMC4yYy0zMS4xIDMxLjEtNzIuNSA0OC4yLTExNi41IDQ4LjJ6TTQ0OC4wMDQgMjU2Ljg0N2wtLjg0OS0uODQ4Ljg0OS0uODQ5Ljg0OC44NDl6Ii8+PC9zdmc+" width="22px" height="22px" title="logout" />
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>
@@ -56,24 +55,23 @@
       </v-list>
     </v-navigation-drawer>
     <transition name="slide">
-      <v-toolbar v-if="isNavVisible" dense color="accent" class="white--text" app fixed clipped-left>
+      <v-toolbar v-if="isNavVisible" dense color="secondary" app fixed clipped-left>
         <v-toolbar-side-icon class="white--text" @click.native="sidenavOpen = !sidenavOpen"></v-toolbar-side-icon>
         <slot v-if="hasTitleSlot" name="title-slot"></slot>
-        <h2 v-else class="app-title pl-3">{{title}}</h2>
+        <h2 v-else class="app-title">{{title}}</h2>
         <v-spacer></v-spacer>
 
         <v-tooltip bottom>
           <v-btn slot="activator" class="pr-0 mr-0 profile-button" flat icon :to="{name: 'profile'}">
             <v-avatar>
-              <span class="">{{profile.short}}</span>
+              <span>{{profile.short}}</span>
             </v-avatar>
           </v-btn>
           <span>Profile</span>
         </v-tooltip>
         <v-tooltip bottom>
           <v-btn slot="activator" class="pr-0 mr-0" flat icon @click="logout()">
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMTkyIDI3Ny40aDE4OS43bC00My42IDQ0LjdMMzY4IDM1Mmw5Ni05Ni05Ni05Ni0zMSAyOS45IDQ0LjcgNDQuN0gxOTJ2NDIuOHoiLz48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMjU1LjcgNDIxLjNjLTQ0LjEgMC04NS41LTE3LjItMTE2LjctNDguNC0zMS4yLTMxLjItNDguMy03Mi43LTQ4LjMtMTE2LjkgMC00NC4xIDE3LjItODUuNyA0OC4zLTExNi45IDMxLjItMzEuMiA3Mi42LTQ4LjQgMTE2LjctNDguNCA0NCAwIDg1LjMgMTcuMSAxMTYuNSA0OC4ybDMwLjMtMzAuM2MtOC41LTguNC0xNy44LTE2LjItMjcuNy0yMy4yQzMzOS43IDYxIDI5OC42IDQ4IDI1NS43IDQ4IDE0MS4yIDQ4IDQ4IDE0MS4zIDQ4IDI1NnM5My4yIDIwOCAyMDcuNyAyMDhjNDIuOSAwIDg0LTEzIDExOS0zNy41IDEwLTcgMTkuMi0xNC43IDI3LjctMjMuMmwtMzAuMi0zMC4yYy0zMS4xIDMxLjEtNzIuNSA0OC4yLTExNi41IDQ4LjJ6TTQ0OC4wMDQgMjU2Ljg0N2wtLjg0OS0uODQ4Ljg0OS0uODQ5Ljg0OC44NDl6Ii8+PC9zdmc+"
-              width="22px" height="22px" title="logout" />
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMTkyIDI3Ny40aDE4OS43bC00My42IDQ0LjdMMzY4IDM1Mmw5Ni05Ni05Ni05Ni0zMSAyOS45IDQ0LjcgNDQuN0gxOTJ2NDIuOHoiLz48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMjU1LjcgNDIxLjNjLTQ0LjEgMC04NS41LTE3LjItMTE2LjctNDguNC0zMS4yLTMxLjItNDguMy03Mi43LTQ4LjMtMTE2LjkgMC00NC4xIDE3LjItODUuNyA0OC4zLTExNi45IDMxLjItMzEuMiA3Mi42LTQ4LjQgMTE2LjctNDguNCA0NCAwIDg1LjMgMTcuMSAxMTYuNSA0OC4ybDMwLjMtMzAuM2MtOC41LTguNC0xNy44LTE2LjItMjcuNy0yMy4yQzMzOS43IDYxIDI5OC42IDQ4IDI1NS43IDQ4IDE0MS4yIDQ4IDQ4IDE0MS4zIDQ4IDI1NnM5My4yIDIwOCAyMDcuNyAyMDhjNDIuOSAwIDg0LTEzIDExOS0zNy41IDEwLTcgMTkuMi0xNC43IDI3LjctMjMuMmwtMzAuMi0zMC4yYy0zMS4xIDMxLjEtNzIuNSA0OC4yLTExNi41IDQ4LjJ6TTQ0OC4wMDQgMjU2Ljg0N2wtLjg0OS0uODQ4Ljg0OS0uODQ5Ljg0OC44NDl6Ii8+PC9zdmc+" width="22px" height="22px" title="logout" />
           </v-btn>
           <span>Logout</span>
         </v-tooltip>
@@ -81,10 +79,11 @@
     </transition>
 
     <v-content v-if="isNavVisible" class="pt-0">
-      <v-container fluid class="grey lighten-4">
+      <v-container class="grey lighten-4" style="border: 1px solid red;">
         <v-layout class="pt-0">
           <v-flex>
             <slot name="router"></slot>
+            <snackbar></snackbar>
           </v-flex>
         </v-layout>
       </v-container>
@@ -100,7 +99,7 @@
     </v-content>
 
     <v-progress-linear indeterminate v-if="loading"></v-progress-linear>
-    <v-dialog persistent v-model="alertOpen" max-width="640">
+    <v-dialog scrollable persistent v-model="alertOpen" max-width="720">
       <v-card tile v-if="alertOpen && alertMessage">
         <v-toolbar dense card dark color="error">
           <v-toolbar-title>
@@ -111,7 +110,6 @@
         <v-card-text class="px-3 py-3">
           <div v-if="alertMessage.html || alertMessage.json">
             <p v-if="alertMessage.html" v-html="alertMessage.html"></p>
-            <p v-if="alertMessage.message" v-html="alertMessage.message"></p>
             <div v-if="alertMessage.json">
               <pre class="mt-2 pa-1">{{alertMessage.json}}</pre>
             </div>
@@ -144,8 +142,12 @@ import EventBus, {
 import Auth from './Auth'
 
 import BI_BASE_CONFIG from '@/pnbi.base.config.js'
+import Snackbar from './Snackbar'
 
 export default {
+  components: {
+    Snackbar
+  },
   mounted () {
     Auth.profile().then(
       profile => {
@@ -246,94 +248,86 @@ export default {
 </script>
 
 <style lang="css">
-  .application.theme--light {
-    background: rgb(245, 245, 245)
-  }
+.impressum {
+  width: 22px;
+  margin-top: -7px;
+  text-align: center;
+  font-weight: 700;
+}
 
-  .impressum {
-    width: 22px;
-    margin-top: -7px;
-    text-align: center;
-    font-weight: 700;
-  }
-
-  .navigation-drawer__border {
-    display: none;
-  }
-
+.v-navigation-drawer__border {
+  opacity: 0.15;
+}
 </style>
 
 <style scoped lang="css">
-  .slide-enter-active,
-  .slide-leave-active {
-    top: 0;
-  }
+.slide-enter-active,
+.slide-leave-active {
+  top: 0;
+}
 
-  .slide-enter,
-  .slide-leave-to {
-    top: -48px;
-  }
+.slide-enter,
+.slide-leave-to {
+  top: -48px;
+}
 
-  .list__tile .avatar span,
-  .profile-button .avatar span {
-    font-weight: 700 !important;
-    letter-spacing: -0.1em !important;
-    font-size: 11px !important;
-    line-height: 12px !important;
-    margin-left: -1px;
+.v-list__tile .v-avatar span,
+.profile-button .v-avatar span {
+  font-weight: 700 !important;
+  letter-spacing: -0.1em !important;
+  font-size: 11px !important;
+  line-height: 12px !important;
+  margin-left: -1px;
+}
 
-  }
+.default-routes .v-list__tile .v-avatar {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  height: 24px !important;
+  width: 24px !important;
+}
 
-  .default-routes .list__tile .avatar {
-    background-color: rgba(0, 0, 0, .4) !important;
-    height: 24px !important;
-    width: 24px !important;
+.default-routes .v-list__tile__title,
+.default-routes .v-list__tile__action .material-icons {
+  color: rgba(0, 0, 0, 0.5) !important;
+}
 
-  }
+.default-routes .v-list__tile--active .v-list__tile__title,
+.default-routes .v-list__tile--active .v-list__tile__action .material-icons {
+  color: #d70f14 !important;
+}
 
-  .default-routes .list__tile__title,
-  .default-routes .list__tile__action .material-icons {
-    color: rgba(0, 0, 0, .4) !important;
-  }
+.default-routes .v-list__tile--active .v-avatar {
+  background-color: #d70f14 !important;
+}
 
-  .default-routes .list__tile--active .list__tile__title,
-  .default-routes .list__tile--active .list__tile__action .material-icons {
-    color: #d70f14 !important;
-  }
+.profile-button .v-avatar {
+  background-color: white;
+  height: 22px !important;
+  width: 22px !important;
+}
 
-  .default-routes .list__tile--active .avatar {
-    background-color: #d70f14 !important;
-  }
+.profile-button .v-avatar span {
+  margin-top: -1px;
+}
 
-  .profile-button .avatar {
-    background-color: white;
-    height: 22px !important;
-    width: 22px !important;
-  }
+.auth-routes >>> .container {
+  padding: 0;
+}
 
-  .profile-button .avatar span {
-    margin-top: -1px;
-  }
+.auth-routes >>> .v-content__wrap {
+  padding-top: 0;
+}
 
-  .auth-routes>>>.container {
-    padding: 0;
-  }
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  border: 1px solid rgba(100, 100, 100, 0.2);
+}
 
-  .auth-routes>>>.content--wrap {
-    padding-top: 0;
-  }
-
-  pre {
-    overflow: scroll;
-    word-wrap: break-word;
-    border: 1px solid rgba(100, 100, 100, 0.1);
-  }
-
-  .progress-linear {
-    position: absolute;
-    z-index: 10;
-    top: 48px;
-    margin: 0;
-  }
-
+.v-progress-linear {
+  position: absolute;
+  z-index: 10;
+  top: 48px;
+  margin: 0;
+}
 </style>

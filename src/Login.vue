@@ -24,8 +24,6 @@ export default {
   },
   beforeDestroy () {},
   mounted () {
-
-    // this.state = 'cookie'
   },
   components: {
     LoginForm,
@@ -86,7 +84,6 @@ export default {
           window.location.assign(this.nextRoute)
         }
       }, () => {
-
       })
     },
     onOptInClickLight (cookie = false) {
@@ -151,33 +148,6 @@ export default {
 </template>
 
 <style lang="scss">
-  #login {
-/*     margin-top: -48px;
-    height: calc(100vh + 48px); */
-  }
-
-  #login form {
-    position: relative;
-    top: -30px;
-    &:before {
-      position: absolute;
-      width: 100%;
-      content: "POWERED BY CORE";
-      display: block;
-      user-select: none;
-      text-align: center;
-      color: rgba(255, 255, 255, 0.2);
-      font-weight: 800;
-      line-height: 1.44;
-      top: -46px;
-      font-size: 32px;
-      @media (max-width: 600px) {
-        top: -42px;
-        line-height: 2;
-        font-size: 24px;
-      }
-    }
-  }
 
 </style>
 <style lang="css" scoped>
