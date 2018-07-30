@@ -4,6 +4,7 @@ import './config.js'
 
 import PnbiDataTable from './PnbiTable'
 import PnbiEmpty from './PnbiEmpty'
+
 import bus from './event-bus'
 import helper from './helper'
 // app wide styles, fonts
@@ -14,18 +15,22 @@ import './typography.scss'
 
 const install = (Vue) => {
   Vue.prototype.$bus = bus
-
   Vue.prototype.$helper = helper
+  // Vue.prototype.$dialogMixin = DialogMixin
 
-  // Vue.component('pnbi-snackbar', Snackbar)
   Vue.component('pnbi-datatable', PnbiDataTable)
   Vue.component('pnbi-navbar', PnbiNavbar)
   Vue.component('pnbi-empty', PnbiEmpty)
+
+  // Vue.mixin(DialogMixin)
+  // Vue.use(DialogMixin)
+
   Vue.use(Vuetify, {
     theme: {
       primary: '#d70f14',
       secondary: '#000000',
       accent: '#3f515d',
+      // accent: '#2a2f43',
       error: '#ff6400',
       info: '#2196F3',
       success: '#4CAF50',

@@ -10,9 +10,7 @@ export default {
     data: {
       type: Object | null,
       default: () => {
-      	return {
-      		label: 'Keine Datensätze vorhanden. Bitte erstellen sie ein neues Element.'
-      	}
+      	return { label: 'Keine Datensätze vorhanden. Bitte erstellen sie ein neues Element.'}
       }
     }
   },
@@ -25,7 +23,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
-	.warning{
-		background-color: rgba(0,0,0,0.1) !important
-	}
+.warning {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+}
 </style>

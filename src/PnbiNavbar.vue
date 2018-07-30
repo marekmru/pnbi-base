@@ -55,7 +55,7 @@
       </v-list>
     </v-navigation-drawer>
     <transition name="slide">
-      <v-toolbar v-if="isNavVisible" dense color="secondary" app fixed clipped-left>
+      <v-toolbar v-if="isNavVisible" dense dark color="accent darken-1" app fixed clipped-left>
         <v-toolbar-side-icon class="white--text" @click.native="sidenavOpen = !sidenavOpen"></v-toolbar-side-icon>
         <slot v-if="hasTitleSlot" name="title-slot"></slot>
         <h2 v-else class="app-title">{{title}}</h2>
@@ -77,15 +77,10 @@
         </v-tooltip>
       </v-toolbar>
     </transition>
-
     <v-content v-if="isNavVisible" class="pt-0">
-      <v-container class="grey lighten-4" style="border: 1px solid red;">
-        <v-layout class="pt-0">
-          <v-flex>
-            <slot name="router"></slot>
-            <snackbar></snackbar>
-          </v-flex>
-        </v-layout>
+      <v-container :fluid="clientWidth < 1260" class="grey lighten-4">
+        <slot name="router"></slot>
+        <snackbar></snackbar>
       </v-container>
     </v-content>
     <v-content v-else class="pa-0  ma-0 auth-routes">
@@ -132,7 +127,7 @@
   </v-app>
 </template>
 <script>
-import EventBus, {
+import {
   LOADING,
   TRACK,
   PROFILE_UPDATED,
@@ -149,45 +144,54 @@ export default {
     Snackbar
   },
   mounted () {
-    Auth.profile().then(
-      profile => {
-        this.profile = Object.assign({}, profile)
-      },
-      () => {
-        // console.info(error);
-      }
-    )
-    EventBus.$on(PROFILE_UPDATED, profile => {
-      if (typeof profile !== 'undefined') {
-        this.profile = Object.assign({}, profile)
-      } else {
-        this.profile.realname = null
-        this.profile.short = null
-      }
-    })
-    EventBus.$on(LOADING, status => {
-      this.loading = status
-    })
-    EventBus.$on(CONFIG_UPDATED, payload => {
-      this.setTitle(payload)
-    })
-    EventBus.$on(TRACK, payload => {
-      if (window.utag != null) {
-        const dto = Object.assign({
-          customer_id: this.profile._id,
-          customer_email: this.profile.email,
-          realname: this.profile.realname,
-          webapp: BI_BASE_CONFIG.APP_IDENTIFIER || this.title.toLowerCase()
-        }, payload)
-        if (payload.tealium_event === 'page_view') {
-          window.utag.view(dto)
+    this.$nextTick(() => {
+      this._updateDimensions()
+      window.addEventListener('resize', this._updateDimensions,
+        {'passive': true})
+      this.$bus.$on(PROFILE_UPDATED, profile => {
+        if (typeof profile !== 'undefined') {
+          this.profile = Object.assign({}, profile)
         } else {
-          window.utag.link(dto)
+          this.profile.realname = null
+          this.profile.short = null
         }
-      }
-    })
+      })
+      this.$bus.$on(LOADING, status => {
+        this.loading = status
+      })
+      this.$bus.$on(CONFIG_UPDATED, payload => {
+        this.setTitle(payload)
+      })
+      this.$bus.$on(TRACK, payload => {
+        if (window.utag != null) {
+          const dto = Object.assign({
+            customer_id: this.profile._id,
+            customer_email: this.profile.email,
+            realname: this.profile.realname,
+            webapp: BI_BASE_CONFIG.APP_IDENTIFIER || this.title.toLowerCase()
+          }, payload)
+          if (payload.tealium_event === 'page_view') {
+            window.utag.view(dto)
+          } else {
+            window.utag.link(dto)
+          }
+        }
+      })
 
-    EventBus.$on(ERROR, this.showError)
+      this.$bus.$on(ERROR, this.showError)
+      Auth.profile().then(
+        profile => {
+          this.profile = Object.assign({}, profile)
+        },
+        () => {
+        // console.info(error);
+        }
+
+      )
+    })
+  },
+  destroyed () {
+    window.removeEventListener('resize', this._updateDimensions)
   },
   data () {
     return {
@@ -197,6 +201,7 @@ export default {
       sidenavOpen: null,
       alertOpen: false,
       showNavigation: false,
+      clientWidth: 0,
       profile: {
         realname: null,
         short: null
@@ -205,6 +210,12 @@ export default {
   },
 
   methods: {
+    _updateDimensions () {
+      this.clientWidth = Math.max(document.documentElement.clientWidth,
+        window.innerWidth || 0)
+      /*       this.clientHeight = Math.max(document.documentElement.clientHeight,
+                                   window.innerHeight || 0); */
+    },
     goto (name) {
       this.$router.push({
         name
@@ -308,6 +319,7 @@ export default {
 
 .profile-button .v-avatar span {
   margin-top: -1px;
+  color: #3f515d;
 }
 
 .auth-routes >>> .container {
