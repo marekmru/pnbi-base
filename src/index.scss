@@ -33,9 +33,9 @@
 table.v-table tfoot tr td {
     padding: 0 0;
 }
-td.item-actions{
+/* td.item-actions{
   width: 140px;
-}
+} */
 .expandable {
   position: relative;
   .v-icon.expandable{
@@ -53,22 +53,48 @@ td.item-actions{
   transform-origin: center;
 } */
 
-.bc-page-title {
+/* .bc-page-title {
   display: block;
   font-size: 26px;
   font-weight: 800;
   margin-bottom: 16px;
   margin-top: 0;
   text-transform: uppercase;
+} */
+.pnbi-title-line {
+  width: 100%;
+  display: flex;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
+.pnbi-title-line:after {
+  content: "";
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
+  align-self: center;
+  background-color: #37474f;
+  border-radius: 1px 0 0 1px;
+  display: inline-block;
+  flex-grow: 1;
+  height: 2px;
+  line-height: 1px;
+  margin-left: 20px;
+  text-align: center;
+  vertical-align: middle;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
 .bc-table-cell--head {
   font-weight: 600;
+  color: #3f515d;
+  font-size: 13px;
   text-transform: uppercase;
 }
 
 .bc-table-cell {
-  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .v-content__wrap {
@@ -91,7 +117,14 @@ td.item-actions{
 .fade-leave-active {
   opacity: 0
 }
+.v-select__selections .v-select__selection {
+  font-size: 15px;
+}
 
+.v-text-field input,
+.v-text-field textarea {
+  font-size: 15px;
+}
 #login form {
   position: relative;
   top: -30px;

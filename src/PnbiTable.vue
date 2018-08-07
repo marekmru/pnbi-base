@@ -1,9 +1,9 @@
 <template>
   <div class="pnbi-datatable dark">
-    <v-toolbar flat color="white" class="pnbi-datatable__toolbar pb-2 pt-2">
-      <h3 class="accent--text" :class="{'title': title.length, 'headline': headline.length}">{{label}}</h3>
+    <v-toolbar flat color="white" class="pnbi-datatable__toolbar pb-1 pt-2">
+      <h3 class="accent--text card-headline">{{label}}</h3>
       <v-spacer></v-spacer>
-      <slot name="controls">
+      <slot name="primary-controls">
       </slot>
       <v-flex xs3>
         <v-text-field clearable class="pnbi-datatable__search" solo-inverted flat v-model="search" label="Suche…" append-icon="search"></v-text-field>
@@ -13,39 +13,39 @@
         {{buttonLabel}}
       </v-btn>
     </v-toolbar>
+    <div v-if="!!$slots['secondary-controls']" class="px-4 py-3 pnbi-secondary-controls" name="secondary-controls">
+    </div>
     <slot name="datatable">
     </slot>
   </div>
 </template>
 
 <script>
+import ContentContainerMixin from './internal/ContentContainerMixin'
 export default {
+  name: 'pnbi-datatable',
+  mixins: [ContentContainerMixin],
   props: {
-    title: {
-      type: String | null,
-      default: ''
-    },
-    headline: {
-      type: String | null,
-      default: ''
-    },
-    /*     type: {
-      type: String | null,
-      default: 'full'
-    }, */
     buttonLabel: {
       type: String | null,
       default: 'Neu'
+    },
+    flat: {
+      type: Boolean | null,
+      default: false
+    }
+  },
+  mounted () {
+    // :class="{'elevation-1': !flat}"
+    if (this.flat === false) {
+      this.$el.classList.add('elevation-1')
+    } else {
+      this.$el.classList.add('flat')
     }
   },
   watch: {
     search (newValue) {
       this.$emit('search', newValue)
-    }
-  },
-  computed: {
-    label () {
-      return this.title.length ? this.title : this.headline
     }
   },
   data () {
@@ -55,8 +55,25 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.pnbi-secondary-controls {
+  background-color: #fff;
+}
+</style>
+<style lang="css">
+.pnbi-page table.v-table thead tr {
+  height: 34px;
+}
+.pnbi-page table.v-table thead tr th {
+  font-weight: 600;
+}
+</style>
 
 <style lang="css" scoped>
+.flat >>> .v-toolbar__content {
+  padding-left: 0;
+  padding-right: 0;
+}
 div >>> .pnbi-datatable__toolbar .v-toolbar__content {
   xxheight: 54px !important;
 }
@@ -71,7 +88,7 @@ div >>> .v-input.pnbi-datatable__search .v-input__control {
   min-height: 32px;
 }
 .pnbi-datatable >>> thead tr {
-  height: 30px;
+  height: 34px;
 }
 .pnbi-datatable >>> thead tr th {
   font-weight: 600;

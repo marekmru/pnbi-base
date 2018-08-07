@@ -1,4 +1,7 @@
-import PnbiNavbar from './PnbiNavbar'
+import PnbiWebapp from './PnbiWebapp'
+import PnbiPage from './PnbiPage'
+import PnbiCard from './PnbiCard'
+import PnbiDialog from './PnbiDialog'
 import './routes.js'
 import './config.js'
 
@@ -18,8 +21,11 @@ const install = (Vue) => {
   Vue.prototype.$helper = helper
   // Vue.prototype.$dialogMixin = DialogMixin
 
+  Vue.component('pnbi-dialog', PnbiDialog)
+  Vue.component('pnbi-card', PnbiCard)
+  Vue.component('pnbi-page', PnbiPage)
   Vue.component('pnbi-datatable', PnbiDataTable)
-  Vue.component('pnbi-navbar', PnbiNavbar)
+  Vue.component('pnbi-webapp', PnbiWebapp)
   Vue.component('pnbi-empty', PnbiEmpty)
 
   // Vue.mixin(DialogMixin)
@@ -47,5 +53,5 @@ export default {
 }
 
 export {
-  PnbiNavbar
+  PnbiWebapp
 }

@@ -216,11 +216,11 @@ export default {
       /*       this.clientHeight = Math.max(document.documentElement.clientHeight,
                                    window.innerHeight || 0); */
     },
-    goto (name) {
+    /*     goto (name) {
       this.$router.push({
         name
       })
-    },
+    }, */
     showError (alert) {
       this.alertMessage = alert
       this.alertOpen = true
@@ -242,8 +242,7 @@ export default {
     }
   },
   created () {
-    const title = BI_BASE_CONFIG.TITLE
-    this.setTitle(title)
+    this.setTitle(BI_BASE_CONFIG.TITLE)
   },
   computed: {
     hasTitleSlot () {

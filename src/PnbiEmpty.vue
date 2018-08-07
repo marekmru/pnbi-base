@@ -1,7 +1,8 @@
 <template>
-<v-alert :value="true" color="warning" icon="warning">
-	<span class="grey--text">{{data.label}}</span>
-</v-alert>
+  <v-alert :value="true" color="warning" icon="warning">
+    <span v-if="data.label" class="grey--text">{{data.label}}</span>
+    <span v-if="data.html" class="grey--text" v-html="data.html"></span>
+  </v-alert>
 </template>
 
 <script>
