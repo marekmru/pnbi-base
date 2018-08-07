@@ -12,11 +12,9 @@ export default {
     }
   },
   mounted () {
-    const headline = this.headline.length
-    const title = this.headline.length
-    if (headline) {
+    if (this.headline.length) {
       this.$el.querySelector('.card-headline').classList.add('headline')
-    } else if (title) {
+    } else if (this.title.length) {
       this.$el.querySelector('.card-headline').classList.add('title')
     }
   },
@@ -25,9 +23,9 @@ export default {
       const headline = this.headline.length
       const title = this.title.length
       if (headline) {
-        return this.headline
+        return this.headline.toUpperCase()
       } else if (title) {
-        return this.title
+        return this.title.toUpperCase()
       }
     }
   }

@@ -9,7 +9,7 @@
         <v-text-field clearable class="pnbi-datatable__search" solo-inverted flat v-model="search" label="Suche…" append-icon="search"></v-text-field>
       </v-flex>
       <v-btn small color="primary" dark @click="$emit('new')">
-        <v-icon class="mr-2" dark left>add</v-icon>
+        <v-icon class="mr-1" dark left>add</v-icon>
         {{buttonLabel}}
       </v-btn>
     </v-toolbar>
