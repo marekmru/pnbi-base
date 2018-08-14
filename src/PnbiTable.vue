@@ -15,7 +15,7 @@
     </v-toolbar>
     <div v-if="!!$slots['secondary-controls']" class="px-4 py-3 pnbi-secondary-controls" name="secondary-controls">
     </div>
-    <slot name="datatable">
+    <slot>
     </slot>
   </div>
 </template>
@@ -61,11 +61,16 @@ export default {
 }
 </style>
 <style lang="css">
-.pnbi-page table.v-table thead tr {
+.pnbi-webapp table.v-table thead tr {
   height: 34px;
 }
-.pnbi-page table.v-table thead tr th {
+.application.pnbi-webapp table.v-table thead tr th {
   font-weight: 600;
+  text-transform: uppercase;
+}
+.application.pnbi-webapp .v-icon.pnbi-icon {
+  color: rgb(158, 158, 158);
+  font-size: 16px;
 }
 </style>
 

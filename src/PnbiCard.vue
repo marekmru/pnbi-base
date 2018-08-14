@@ -7,7 +7,7 @@
       </slot>
     </v-toolbar>
     <v-card-text class="px-4 py-2">
-      <slot name="card-text"></slot>
+      <slot></slot>
     </v-card-text>
     <v-card-text class="px-4 py-2" v-if="!!$slots['card-actions']">
       <slot name="card-actions"></slot>

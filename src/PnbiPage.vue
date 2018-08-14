@@ -8,7 +8,7 @@
       </div>
     </v-flex>
     <v-flex xs12 class="pnbi-content-container">
-      <slot name="page-content"></slot>
+      <slot></slot>
     </v-flex>
   </v-layout>
 </template>
@@ -41,8 +41,8 @@ export default {
       pageHC.style.height = '36px'
       header.style.height = '106px'
     } else if (this.medium === true || this.medium === '') {
-      pageHC.style.height = '110px'
-      header.style.height = '180px'
+      pageHC.style.height = '100px'
+      header.style.height = '170px'
     } else {
       pageHC.style.height = '170px'
       header.style.height = '240px'

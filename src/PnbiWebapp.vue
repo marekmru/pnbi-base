@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="pnbi-webapp">
     <v-navigation-drawer v-if="isNavVisible" v-model="sidenavOpen" fixed clipped class="grey lighten-4" app>
       <div class="pt-3">
         <slot name="navigation-slot"></slot>
