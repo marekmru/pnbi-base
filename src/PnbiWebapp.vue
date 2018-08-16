@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="pnbi-webapp">
     <v-navigation-drawer v-if="isNavVisible" v-model="sidenavOpen" fixed clipped class="grey lighten-4" app>
       <div class="pt-3">
         <slot name="navigation-slot"></slot>
@@ -43,8 +43,7 @@
 
         <v-list-tile @click="logout()">
           <v-list-tile-action>
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjOTA5MDkwIiBkPSJNMTkyIDI3Ny40aDE4OS43bC00My42IDQ0LjdMMzY4IDM1Mmw5Ni05Ni05Ni05Ni0zMSAyOS45IDQ0LjcgNDQuN0gxOTJ2NDIuOHoiLz48cGF0aCBmaWxsPSIjOTA5MDkwIiBkPSJNMjU1LjcgNDIxLjNjLTQ0LjEgMC04NS41LTE3LjItMTE2LjctNDguNC0zMS4yLTMxLjItNDguMy03Mi43LTQ4LjMtMTE2LjkgMC00NC4xIDE3LjItODUuNyA0OC4zLTExNi45IDMxLjItMzEuMiA3Mi42LTQ4LjQgMTE2LjctNDguNCA0NCAwIDg1LjMgMTcuMSAxMTYuNSA0OC4ybDMwLjMtMzAuM2MtOC41LTguNC0xNy44LTE2LjItMjcuNy0yMy4yQzMzOS43IDYxIDI5OC42IDQ4IDI1NS43IDQ4IDE0MS4yIDQ4IDQ4IDE0MS4zIDQ4IDI1NnM5My4yIDIwOCAyMDcuNyAyMDhjNDIuOSAwIDg0LTEzIDExOS0zNy41IDEwLTcgMTkuMi0xNC43IDI3LjctMjMuMmwtMzAuMi0zMC4yYy0zMS4xIDMxLjEtNzIuNSA0OC4yLTExNi41IDQ4LjJ6TTQ0OC4wMDQgMjU2Ljg0N2wtLjg0OS0uODQ4Ljg0OS0uODQ5Ljg0OC44NDl6Ii8+PC9zdmc+"
-              width="22px" height="22px" title="logout" />
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjOTA5MDkwIiBkPSJNMTkyIDI3Ny40aDE4OS43bC00My42IDQ0LjdMMzY4IDM1Mmw5Ni05Ni05Ni05Ni0zMSAyOS45IDQ0LjcgNDQuN0gxOTJ2NDIuOHoiLz48cGF0aCBmaWxsPSIjOTA5MDkwIiBkPSJNMjU1LjcgNDIxLjNjLTQ0LjEgMC04NS41LTE3LjItMTE2LjctNDguNC0zMS4yLTMxLjItNDguMy03Mi43LTQ4LjMtMTE2LjkgMC00NC4xIDE3LjItODUuNyA0OC4zLTExNi45IDMxLjItMzEuMiA3Mi42LTQ4LjQgMTE2LjctNDguNCA0NCAwIDg1LjMgMTcuMSAxMTYuNSA0OC4ybDMwLjMtMzAuM2MtOC41LTguNC0xNy44LTE2LjItMjcuNy0yMy4yQzMzOS43IDYxIDI5OC42IDQ4IDI1NS43IDQ4IDE0MS4yIDQ4IDQ4IDE0MS4zIDQ4IDI1NnM5My4yIDIwOCAyMDcuNyAyMDhjNDIuOSAwIDg0LTEzIDExOS0zNy41IDEwLTcgMTkuMi0xNC43IDI3LjctMjMuMmwtMzAuMi0zMC4yYy0zMS4xIDMxLjEtNzIuNSA0OC4yLTExNi41IDQ4LjJ6TTQ0OC4wMDQgMjU2Ljg0N2wtLjg0OS0uODQ4Ljg0OS0uODQ5Ljg0OC44NDl6Ii8+PC9zdmc+" width="22px" height="22px" title="logout" />
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>
@@ -56,7 +55,7 @@
       </v-list>
     </v-navigation-drawer>
     <transition name="slide">
-      <v-toolbar v-if="isNavVisible" dense color="secondary" class="white--text" app fixed clipped-left>
+      <v-toolbar v-if="isNavVisible" dense dark color="accent darken-1" app fixed clipped-left>
         <v-toolbar-side-icon class="white--text" @click.native="sidenavOpen = !sidenavOpen"></v-toolbar-side-icon>
         <slot v-if="hasTitleSlot" name="title-slot"></slot>
         <h2 v-else class="app-title">{{title}}</h2>
@@ -72,21 +71,16 @@
         </v-tooltip>
         <v-tooltip bottom>
           <v-btn slot="activator" class="pr-0 mr-0" flat icon @click="logout()">
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMTkyIDI3Ny40aDE4OS43bC00My42IDQ0LjdMMzY4IDM1Mmw5Ni05Ni05Ni05Ni0zMSAyOS45IDQ0LjcgNDQuN0gxOTJ2NDIuOHoiLz48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMjU1LjcgNDIxLjNjLTQ0LjEgMC04NS41LTE3LjItMTE2LjctNDguNC0zMS4yLTMxLjItNDguMy03Mi43LTQ4LjMtMTE2LjkgMC00NC4xIDE3LjItODUuNyA0OC4zLTExNi45IDMxLjItMzEuMiA3Mi42LTQ4LjQgMTE2LjctNDguNCA0NCAwIDg1LjMgMTcuMSAxMTYuNSA0OC4ybDMwLjMtMzAuM2MtOC41LTguNC0xNy44LTE2LjItMjcuNy0yMy4yQzMzOS43IDYxIDI5OC42IDQ4IDI1NS43IDQ4IDE0MS4yIDQ4IDQ4IDE0MS4zIDQ4IDI1NnM5My4yIDIwOCAyMDcuNyAyMDhjNDIuOSAwIDg0LTEzIDExOS0zNy41IDEwLTcgMTkuMi0xNC43IDI3LjctMjMuMmwtMzAuMi0zMC4yYy0zMS4xIDMxLjEtNzIuNSA0OC4yLTExNi41IDQ4LjJ6TTQ0OC4wMDQgMjU2Ljg0N2wtLjg0OS0uODQ4Ljg0OS0uODQ5Ljg0OC44NDl6Ii8+PC9zdmc+"
-              width="22px" height="22px" title="logout" />
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMTkyIDI3Ny40aDE4OS43bC00My42IDQ0LjdMMzY4IDM1Mmw5Ni05Ni05Ni05Ni0zMSAyOS45IDQ0LjcgNDQuN0gxOTJ2NDIuOHoiLz48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMjU1LjcgNDIxLjNjLTQ0LjEgMC04NS41LTE3LjItMTE2LjctNDguNC0zMS4yLTMxLjItNDguMy03Mi43LTQ4LjMtMTE2LjkgMC00NC4xIDE3LjItODUuNyA0OC4zLTExNi45IDMxLjItMzEuMiA3Mi42LTQ4LjQgMTE2LjctNDguNCA0NCAwIDg1LjMgMTcuMSAxMTYuNSA0OC4ybDMwLjMtMzAuM2MtOC41LTguNC0xNy44LTE2LjItMjcuNy0yMy4yQzMzOS43IDYxIDI5OC42IDQ4IDI1NS43IDQ4IDE0MS4yIDQ4IDQ4IDE0MS4zIDQ4IDI1NnM5My4yIDIwOCAyMDcuNyAyMDhjNDIuOSAwIDg0LTEzIDExOS0zNy41IDEwLTcgMTkuMi0xNC43IDI3LjctMjMuMmwtMzAuMi0zMC4yYy0zMS4xIDMxLjEtNzIuNSA0OC4yLTExNi41IDQ4LjJ6TTQ0OC4wMDQgMjU2Ljg0N2wtLjg0OS0uODQ4Ljg0OS0uODQ5Ljg0OC44NDl6Ii8+PC9zdmc+" width="22px" height="22px" title="logout" />
           </v-btn>
           <span>Logout</span>
         </v-tooltip>
       </v-toolbar>
     </transition>
-
     <v-content v-if="isNavVisible" class="pt-0">
-      <v-container fluid class="grey lighten-4">
-        <v-layout class="pt-0">
-          <v-flex>
-            <slot name="router"></slot>
-          </v-flex>
-        </v-layout>
+      <v-container :fluid="clientWidth < 1260" class="grey lighten-4">
+        <slot name="router"></slot>
+        <snackbar></snackbar>
       </v-container>
     </v-content>
     <v-content v-else class="pa-0  ma-0 auth-routes">
@@ -133,7 +127,7 @@
   </v-app>
 </template>
 <script>
-import EventBus, {
+import {
   LOADING,
   TRACK,
   PROFILE_UPDATED,
@@ -143,48 +137,61 @@ import EventBus, {
 import Auth from './Auth'
 
 import BI_BASE_CONFIG from '@/pnbi.base.config.js'
+import Snackbar from './Snackbar'
 
 export default {
+  components: {
+    Snackbar
+  },
   mounted () {
-    Auth.profile().then(
-      profile => {
-        this.profile = Object.assign({}, profile)
-      },
-      () => {
-        // console.info(error);
-      }
-    )
-    EventBus.$on(PROFILE_UPDATED, profile => {
-      if (typeof profile !== 'undefined') {
-        this.profile = Object.assign({}, profile)
-      } else {
-        this.profile.realname = null
-        this.profile.short = null
-      }
-    })
-    EventBus.$on(LOADING, status => {
-      this.loading = status
-    })
-    EventBus.$on(CONFIG_UPDATED, payload => {
-      this.setTitle(payload)
-    })
-    EventBus.$on(TRACK, payload => {
-      if (window.utag != null) {
-        const dto = Object.assign({
-          customer_id: this.profile._id,
-          customer_email: this.profile.email,
-          realname: this.profile.realname,
-          webapp: BI_BASE_CONFIG.APP_IDENTIFIER || this.title.toLowerCase()
-        }, payload)
-        if (payload.tealium_event === 'page_view') {
-          window.utag.view(dto)
+    this.$nextTick(() => {
+      this._updateDimensions()
+      window.addEventListener('resize', this._updateDimensions,
+        {'passive': true})
+      this.$bus.$on(PROFILE_UPDATED, profile => {
+        if (typeof profile !== 'undefined') {
+          this.profile = Object.assign({}, profile)
         } else {
-          window.utag.link(dto)
+          this.profile.realname = null
+          this.profile.short = null
         }
-      }
-    })
+      })
+      this.$bus.$on(LOADING, status => {
+        this.loading = status
+      })
+      this.$bus.$on(CONFIG_UPDATED, payload => {
+        this.setTitle(payload)
+      })
+      this.$bus.$on(TRACK, payload => {
+        if (window.utag != null) {
+          const dto = Object.assign({
+            customer_id: this.profile._id,
+            customer_email: this.profile.email,
+            realname: this.profile.realname,
+            webapp: BI_BASE_CONFIG.APP_IDENTIFIER || this.title.toLowerCase()
+          }, payload)
+          if (payload.tealium_event === 'page_view') {
+            window.utag.view(dto)
+          } else {
+            window.utag.link(dto)
+          }
+        }
+      })
 
-    EventBus.$on(ERROR, this.showError)
+      this.$bus.$on(ERROR, this.showError)
+      Auth.profile().then(
+        profile => {
+          this.profile = Object.assign({}, profile)
+        },
+        () => {
+        // console.info(error);
+        }
+
+      )
+    })
+  },
+  destroyed () {
+    window.removeEventListener('resize', this._updateDimensions)
   },
   data () {
     return {
@@ -194,6 +201,7 @@ export default {
       sidenavOpen: null,
       alertOpen: false,
       showNavigation: false,
+      clientWidth: 0,
       profile: {
         realname: null,
         short: null
@@ -202,11 +210,17 @@ export default {
   },
 
   methods: {
-    goto (name) {
+    _updateDimensions () {
+      this.clientWidth = Math.max(document.documentElement.clientWidth,
+        window.innerWidth || 0)
+      /*       this.clientHeight = Math.max(document.documentElement.clientHeight,
+                                   window.innerHeight || 0); */
+    },
+    /*     goto (name) {
       this.$router.push({
         name
       })
-    },
+    }, */
     showError (alert) {
       this.alertMessage = alert
       this.alertOpen = true
@@ -228,8 +242,7 @@ export default {
     }
   },
   created () {
-    const title = BI_BASE_CONFIG.TITLE
-    this.setTitle(title)
+    this.setTitle(BI_BASE_CONFIG.TITLE)
   },
   computed: {
     hasTitleSlot () {
@@ -305,6 +318,7 @@ export default {
 
 .profile-button .v-avatar span {
   margin-top: -1px;
+  color: #3f515d;
 }
 
 .auth-routes >>> .container {
