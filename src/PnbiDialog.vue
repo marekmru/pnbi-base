@@ -37,31 +37,7 @@ export default {
       default: ':title'
     }
   },
-  mixins: [ DialogMixin ]/* ,
-  data () {
-    return {
-
-    }
-  },
-  components: {
-  },
-  created () {
-  },
-  mounted () {
-
-  },
-  beforeDestroy () {
-  },
-
-  watch: {
-
-  },
-  computed: {
-
-  },
-  methods: {
-
-  } */
+  mixins: [ DialogMixin ]
 }
 </script>
 <style scoped>

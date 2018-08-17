@@ -1,32 +1,9 @@
 <script>
-  import Auth from '../Auth'
-  import CookieService from './cookie.service.js'
-  import router from '@/router'
-
-  import BI_BASE_CONFIG from "@/pnbi.base.config.js";
-  export default {
-    created() {
-
-    },
-    props: {
-      state: String
-    },
-    components: {
-    },
-    data() {
-      return {
-
-      }
-    },
-    methods: {
-      onClick(){
-        console.log('click')
-        //this.$emit('privacy-ok-clicked')
-      }
-    },
-    computed: {}
-  }
-
+export default {
+/*   props: {
+    state: String
+  } */
+}
 </script>
 <template>
   <v-container fill-height>
@@ -39,8 +16,7 @@
             </v-card-title>
             <v-card-text class="">
               <p class="ma-0">Wir verwenden
-                <strong>Cookies</strong>, um die Aufrufe unserer Website zu analysieren. Mit der Nutzung unserer Website erklären
-                Sie sich damit einverstanden.
+                <strong>Cookies</strong>, um die Aufrufe unserer Website zu analysieren. Mit der Nutzung unserer Website erklären Sie sich damit einverstanden.
               </p>
             </v-card-text>
             <v-card-actions class="white pt-0">
@@ -61,6 +37,4 @@
 
 </template>
 <style scoped lang="scss">
-
-
 </style>

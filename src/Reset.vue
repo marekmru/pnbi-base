@@ -1,6 +1,5 @@
 <script>
 /* eslint-disable--  */
-import router from '@/router'
 import Auth from './Auth'
 
 export default {
@@ -38,7 +37,7 @@ export default {
       this.$refs.form.validate()
     },
     goToLogin () {
-      router.push('/')
+      this.$router.push('/')
     },
     onSubmit ($event) {
       $event.preventDefault()
@@ -46,8 +45,8 @@ export default {
         password: this.user.password,
         password_code: this.$route.params.code
       }).then(response => {
-          this.success = true
-        })
+        this.success = true
+      })
         .catch(err => {
           console.log(err)
         })
@@ -68,7 +67,7 @@ export default {
     }
   },
   computed: {
-    internalMessage(){
+    internalMessage () {
       return this.message.filter(val => val.includes('obfuscated sentence') === false)
     },
     isValid: {
@@ -85,7 +84,7 @@ export default {
     progress () {
       if (this.strength < 20) {
         this.strength = 0
-      } 
+      }
       return this.strength
     },
     color () {
@@ -113,13 +112,13 @@ export default {
       <v-layout align-center>
         <v-flex class="text-center">
           <h1 class="bi-powered">POWERED BY CORE</h1>
-          <v-form ref="form" v-model="rules.valid"> 
+          <v-form ref="form" v-model="rules.valid">
             <v-card v-if="!success">
-              <v-card-title >
+              <v-card-title>
                 <h2>Neues Passwort</h2>
               </v-card-title>
 
-              <v-card-text class="py-0" >              
+              <v-card-text class="py-0">
                 <v-text-field type="password" @focus="focus" label="Neues Passwort" v-model="user.password" :rules="rules.passwordRules" @input="onChange" required></v-text-field>
                 <v-text-field type="password" @focus="focus" label="Passwort wiederholen" v-model="user.password2" :rules="rules.passwordRules2" required></v-text-field>
 
@@ -139,14 +138,14 @@ export default {
             </v-card>
 
             <v-card v-else>
-              <v-card-title >
+              <v-card-title>
                 <h2>Passwort zurückgesetzt</h2>
               </v-card-title>
               <v-card-text>
                 <v-btn @click="goToLogin" flat block>Zurück zum Login</v-btn>
               </v-card-text>
             </v-card>
-          </v-form>   
+          </v-form>
         </v-flex>
       </v-layout>
     </v-container>
@@ -154,5 +153,4 @@ export default {
 </template>
 
 <style lang="scss">
-
 </style>

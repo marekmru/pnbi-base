@@ -2,12 +2,21 @@ import PnbiWebapp from './PnbiWebapp'
 import PnbiPage from './PnbiPage'
 import PnbiCard from './PnbiCard'
 import PnbiDialog from './PnbiDialog'
-import './routes.js'
-import './config.js'
+import {
+  setRoutes
+} from './routes.js'
+import {
+  setAjaxConfig
+} from './config.js'
+import {
+  setApiConfig
+} from './Auth.js'
+import {
+  setCookieConfig
+} from './internal/cookie.service.js'
 
 import PnbiDataTable from './PnbiTable'
 import PnbiEmpty from './PnbiEmpty'
-
 import bus from './event-bus'
 import helper from './helper'
 // app wide styles, fonts
@@ -16,10 +25,14 @@ import 'vuetify/dist/vuetify.min.css'
 import './index.scss'
 import './typography.scss'
 
-const install = (Vue) => {
+const install = (Vue, options) => {
   Vue.prototype.$bus = bus
   Vue.prototype.$helper = helper
-  // Vue.prototype.$dialogMixin = DialogMixin
+  Vue.prototype.$config = options.config
+  setRoutes(options.router)
+  setApiConfig(options.config)
+  setAjaxConfig(options)
+  setCookieConfig(options.config.API)
 
   Vue.component('pnbi-dialog', PnbiDialog)
   Vue.component('pnbi-card', PnbiCard)
@@ -28,15 +41,11 @@ const install = (Vue) => {
   Vue.component('pnbi-webapp', PnbiWebapp)
   Vue.component('pnbi-empty', PnbiEmpty)
 
-  // Vue.mixin(DialogMixin)
-  // Vue.use(DialogMixin)
-
   Vue.use(Vuetify, {
     theme: {
       primary: '#d70f14',
       secondary: '#000000',
       accent: '#3f515d',
-      // accent: '#2a2f43',
       error: '#ff6400',
       info: '#2196F3',
       success: '#4CAF50',

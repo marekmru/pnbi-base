@@ -135,8 +135,6 @@ import {
   ERROR
 } from './event-bus'
 import Auth from './Auth'
-
-import BI_BASE_CONFIG from '@/pnbi.base.config.js'
 import Snackbar from './Snackbar'
 
 export default {
@@ -168,7 +166,7 @@ export default {
             customer_id: this.profile._id,
             customer_email: this.profile.email,
             realname: this.profile.realname,
-            webapp: BI_BASE_CONFIG.APP_IDENTIFIER || this.title.toLowerCase()
+            webapp: this.$config.APP_IDENTIFIER || this.title.toLowerCase()
           }, payload)
           if (payload.tealium_event === 'page_view') {
             window.utag.view(dto)
@@ -242,7 +240,7 @@ export default {
     }
   },
   created () {
-    this.setTitle(BI_BASE_CONFIG.TITLE)
+    this.setTitle(this.$config.TITLE)
   },
   computed: {
     hasTitleSlot () {

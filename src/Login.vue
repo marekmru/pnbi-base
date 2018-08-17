@@ -1,5 +1,4 @@
 <script>
-// import router from '@/router'
 import LoginForm from './internal/LoginForm'
 import ForgotForm from './internal/ForgotForm'
 import CookieForm from './internal/CookieForm'
@@ -9,7 +8,6 @@ import Imprint from './Imprint'
 
 import CookieService from './internal/cookie.service.js'
 import Auth from './Auth'
-import BI_BASE_CONFIG from '@/pnbi.base.config.js'
 
 export default {
   created () {
@@ -63,7 +61,7 @@ export default {
               CookieService.setPriPolCookie()
             }
             if (this.nextRoute == null) {
-              this.$router.push(BI_BASE_CONFIG.MAIN_ROUTE)
+              this.$router.push(this.$config.MAIN_ROUTE)
             } else {
               window.location.assign(this.nextRoute)
             }
@@ -79,7 +77,7 @@ export default {
         opt_in: cookie || CookieService.getCookieDate()
       }).then(() => {
         if (this.nextRoute == null) {
-          this.$router.push(BI_BASE_CONFIG.MAIN_ROUTE)
+          this.$router.push(this.$config.MAIN_ROUTE)
         } else {
           window.location.assign(this.nextRoute)
         }
@@ -93,7 +91,7 @@ export default {
         opt_in: cookie || CookieService.getCookieDate()
       }).then(() => {
         if (this.nextRoute == null) {
-          this.$router.push(BI_BASE_CONFIG.MAIN_ROUTE)
+          this.$router.push(this.$config.MAIN_ROUTE)
         } else {
           window.location.assign(this.nextRoute)
         }
@@ -138,8 +136,7 @@ export default {
       <forgot-form key="2" class="auth-form" v-if="state === 'forgot'" v-model="state"></forgot-form>
     </transition>
     <transition name="fade">
-      <cookie-form v-on:open-privacy-dialog="dialogPrivacy = true" v-on:privacy-ok-clicked="onOptInClick()" key="3" class="auth-form"
-        v-if="state === 'cookie'" v-model="state"></cookie-form>
+      <cookie-form v-on:open-privacy-dialog="dialogPrivacy = true" v-on:privacy-ok-clicked="onOptInClick()" key="3" class="auth-form" v-if="state === 'cookie'" v-model="state"></cookie-form>
     </transition>
     <transition name="fade">
       <cookie-footer v-if="state === 'login'" key="4" v-on:open-privacy-dialog="dialogPrivacy = true" v-on:privacy-ok-clicked="onOptInClickLight()"></cookie-footer>
@@ -148,26 +145,24 @@ export default {
 </template>
 
 <style lang="scss">
-
 </style>
 <style lang="css" scoped>
-  div>>>.fade-enter-active,
-  div>>>.fade-leave-active {
-    transition: all .33s ease-out;
-  }
+div >>> .fade-enter-active,
+div >>> .fade-leave-active {
+  transition: all 0.33s ease-out;
+}
 
-  div>>>.fade-enter,
-  .fade-leave-to {
-    transition: all .33s ease-out;
-    opacity: 0;
-    transform: scale(.9);
-  }
+div >>> .fade-enter,
+.fade-leave-to {
+  transition: all 0.33s ease-out;
+  opacity: 0;
+  transform: scale(0.9);
+}
 
-  footer {
-    background-color: #fff;
-    position: fixed;
-    bottom: 0;
-    width: 100vw;
-  }
-
+footer {
+  background-color: #fff;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+}
 </style>
