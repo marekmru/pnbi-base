@@ -148,7 +148,7 @@ Any HTML
 </pnbi-page>
 ```
 
-## ![PNBI Page](./src/assets/pnbi-page.jpg "PNBI Page")
+## ![PNBI Page](https://github.com/marekmru/pnbi-base/blob/candidate/src/assets/pnbi-page.jpg "PNBI Page")
 
 ## pnbi-datatable
 
