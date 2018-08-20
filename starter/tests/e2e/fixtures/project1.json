@@ -1,0 +1,670 @@
+{
+  "status": "OK", 
+  "status_code": 200, 
+  "request_id": "c460edc0-6ee7-11e8-9da7-0800272678c8", 
+  "result": {
+      "author": "admin", 
+      "timestamp": "2018-06-13T10:46:58.021000", 
+      "label": "cypress---custom", 
+      "_id": "5b20da02330f496d6507564d", 
+      "data": {
+          "campaignType": "Launch-Kampagne", 
+          "description": "dvdvcsdx", 
+          "mediaChannels": [
+              {
+                  "budget_exclude": false, 
+                  "weight": 100, 
+                  "format": [
+                      {
+                          "Medium": "TV", 
+                          "Values": "Standardspot (Default)", 
+                          "Value_Code": "TV_STD"
+                      }
+                  ], 
+                  "payfactor": 47.5, 
+                  "budget": [
+                      null, 
+                      null
+                  ], 
+                  "max_grp": null, 
+                  "length": 25, 
+                  "Values": "TV", 
+                  "Value_Code": "TV", 
+                  "min_grp": null
+              }
+          ], 
+          "dateRange": {
+              "flights": [
+                  [
+                      1515923800, 
+                      1518947804
+                  ], 
+                  [
+                      1519552604, 
+                      1538902613
+                  ]
+              ], 
+              "total": [
+                  1515318994, 
+                  1546163796
+              ]
+          }, 
+          "targetGroups": [
+              {
+                  "KPIStart": [
+                      {
+                          "Values": "KAMPAGNENERINNERUNG", 
+                          "Value": 15, 
+                          "Value_Code": "adAwareness"
+                      }, 
+                      {
+                          "Values": "BEKANNTHEIT", 
+                          "Value": 50, 
+                          "Value_Code": "brandAwareness"
+                      }, 
+                      {
+                          "Values": "KAUFBEREITSCHAFT", 
+                          "Value": 20, 
+                          "Value_Code": "buyerReadiness"
+                      }, 
+                      {
+                          "Values": "LEADS PRO WOCHE", 
+                          "Value": 30000, 
+                          "Value_Code": "leads"
+                      }
+                  ], 
+                  "S_Bundesland": [
+                      {
+                          "Values": "Berlin", 
+                          "Value_Code": 11
+                      }, 
+                      {
+                          "Values": "Bayern", 
+                          "Value_Code": 9
+                      }
+                  ], 
+                  "meta": {
+                      "title": "Zielgruppe (13.06.2018 10:55:49)", 
+                      "type": "F", 
+                      "description": null, 
+                      "id": 1528880149784
+                  }, 
+                  "targeting_guete": 70, 
+                  "grp_justierung": [], 
+                  "potential": {
+                      "count": 13779744.0827, 
+                      "percent": 0.1980990394170255
+                  }
+              }, 
+              {
+                  "KPIStart": [
+                      {
+                          "Values": "KAMPAGNENERINNERUNG", 
+                          "Value": 15, 
+                          "Value_Code": "adAwareness"
+                      }, 
+                      {
+                          "Values": "BEKANNTHEIT", 
+                          "Value": 50, 
+                          "Value_Code": "brandAwareness"
+                      }, 
+                      {
+                          "Values": "KAUFBEREITSCHAFT", 
+                          "Value": 20, 
+                          "Value_Code": "buyerReadiness"
+                      }, 
+                      {
+                          "Values": "LEADS PRO WOCHE", 
+                          "Value": 30000, 
+                          "Value_Code": "leads"
+                      }
+                  ], 
+                  "meta": {
+                      "title": "Zielgruppe (13.06.2018 10:56:01)", 
+                      "type": "C", 
+                      "description": null, 
+                      "id": 1528880161470
+                  }, 
+                  "S_Geschlecht": {
+                      "Values": "männlich", 
+                      "Value_Code": 1
+                  }, 
+                  "targeting_guete": 70, 
+                  "grp_justierung": [], 
+                  "potential": {
+                      "count": 69559873.3, 
+                      "percent": 1
+                  }
+              }, 
+              {
+                  "KPIStart": [
+                      {
+                          "Values": "KAMPAGNENERINNERUNG", 
+                          "Value": 15, 
+                          "Value_Code": "adAwareness"
+                      }, 
+                      {
+                          "Values": "BEKANNTHEIT", 
+                          "Value": 50, 
+                          "Value_Code": "brandAwareness"
+                      }, 
+                      {
+                          "Values": "KAUFBEREITSCHAFT", 
+                          "Value": 20, 
+                          "Value_Code": "buyerReadiness"
+                      }, 
+                      {
+                          "Values": "LEADS PRO WOCHE", 
+                          "Value": 30000, 
+                          "Value_Code": "leads"
+                      }
+                  ], 
+                  "meta": {
+                      "title": "Zielgruppe (13.06.2018 10:56:11)", 
+                      "type": "C", 
+                      "description": null, 
+                      "id": 1528880171751
+                  }, 
+                  "S_Geschlecht": {
+                      "Values": "weiblich", 
+                      "Value_Code": 2
+                  }, 
+                  "targeting_guete": 65, 
+                  "grp_justierung": [], 
+                  "potential": {
+                      "count": 69559873.3, 
+                      "percent": 1
+                  }
+              }
+          ], 
+          "protected": false, 
+          "goals": {
+              "priority": {
+                  "Values_2": "KAMPAGNENERINNERUNG", 
+                  "type": "percent", 
+                  "Values": "KAMPAGNENERINNERUNG", 
+                  "Value_Code": "adAwareness"
+              }, 
+              "kpi": null, 
+              "budget": 3000000
+          }, 
+          "validation": {
+              "mediaChannels": true, 
+              "dateRange": true, 
+              "targetGroups": true, 
+              "meta": true, 
+              "goals": true, 
+              "coefficients": true
+          }, 
+          "coefficients": [
+              {
+                  "Values": "KAMPAGNENERINNERUNG", 
+                  "coefficients": [
+                      {
+                          "Koeffizient": 1.65, 
+                          "AdStock": 90, 
+                          "Values": "TV", 
+                          "Value_Code": "TV", 
+                          "ots_gewichtung": 0, 
+                          "Hyperbel": 0.5
+                      }, 
+                      {
+                          "Koeffizient": 1.55, 
+                          "AdStock": 83, 
+                          "Values": "PZ", 
+                          "Value_Code": "PZ", 
+                          "ots_gewichtung": 0, 
+                          "Hyperbel": 1
+                      }, 
+                      {
+                          "Koeffizient": 2.2, 
+                          "AdStock": 65, 
+                          "Values": "Radio", 
+                          "Value_Code": "RD", 
+                          "ots_gewichtung": 0, 
+                          "Hyperbel": 3.5
+                      }, 
+                      {
+                          "Koeffizient": 1.9, 
+                          "AdStock": 45, 
+                          "Values": "TZ überregional", 
+                          "Value_Code": "TZUER", 
+                          "ots_gewichtung": 0, 
+                          "Hyperbel": 0.2
+                      }, 
+                      {
+                          "Koeffizient": 3, 
+                          "AdStock": 45, 
+                          "Values": "TZ regional", 
+                          "Value_Code": "TZR", 
+                          "ots_gewichtung": 0, 
+                          "Hyperbel": 0.2
+                      }, 
+                      {
+                          "Koeffizient": 0.04, 
+                          "AdStock": 35, 
+                          "Values": "Digitales Out-Of-Home", 
+                          "Value_Code": "DPL", 
+                          "ots_gewichtung": 0, 
+                          "Hyperbel": 1
+                      }, 
+                      {
+                          "Koeffizient": 9.2, 
+                          "AdStock": 35, 
+                          "Values": "Out-of_Home", 
+                          "Value_Code": "PL", 
+                          "ots_gewichtung": 0, 
+                          "Hyperbel": 5
+                      }, 
+                      {
+                          "Koeffizient": 0, 
+                          "AdStock": 0, 
+                          "Values": "Kino", 
+                          "Value_Code": "KIN", 
+                          "ots_gewichtung": 0, 
+                          "Hyperbel": 0
+                      }, 
+                      {
+                          "Koeffizient": 0, 
+                          "AdStock": 0, 
+                          "Values": "Beilagen", 
+                          "Value_Code": "BEIL", 
+                          "ots_gewichtung": 0, 
+                          "Hyperbel": 0
+                      }, 
+                      {
+                          "Koeffizient": 0, 
+                          "AdStock": 0, 
+                          "Values": "Anzeigenblätter", 
+                          "Value_Code": "ANZ", 
+                          "ots_gewichtung": 0, 
+                          "Hyperbel": 0
+                      }, 
+                      {
+                          "Koeffizient": 1.2, 
+                          "AdStock": 80, 
+                          "Values": "Online Display Brand", 
+                          "Value_Code": "OLDBD", 
+                          "ots_gewichtung": 6.5, 
+                          "Hyperbel": 1.5
+                      }, 
+                      {
+                          "Koeffizient": 0.45, 
+                          "AdStock": 80, 
+                          "Values": "Online Display Brand - Mobile", 
+                          "Value_Code": "OLMBD", 
+                          "ots_gewichtung": 7, 
+                          "Hyperbel": 1.5
+                      }, 
+                      {
+                          "Koeffizient": 0.55, 
+                          "AdStock": 85, 
+                          "Values": "Online Video", 
+                          "Value_Code": "OLV", 
+                          "ots_gewichtung": 3.6, 
+                          "Hyperbel": 0.25
+                      }, 
+                      {
+                          "Koeffizient": 2.2, 
+                          "AdStock": 73, 
+                          "Values": "Social Media", 
+                          "Value_Code": "SOM", 
+                          "ots_gewichtung": 3.6, 
+                          "Hyperbel": 0.25
+                      }, 
+                      {
+                          "Koeffizient": 0.04, 
+                          "AdStock": 35, 
+                          "Values": "Infoscreen", 
+                          "Value_Code": "INF", 
+                          "ots_gewichtung": 0, 
+                          "Hyperbel": 1
+                      }
+                  ], 
+                  "Value_Code": "adAwareness"
+              }, 
+              {
+                  "Values": "BEKANNTHEIT", 
+                  "coefficients": [
+                      {
+                          "AdStock": 95, 
+                          "Koeffizient": 1.94, 
+                          "Hyperbel": 1, 
+                          "Values": "TV", 
+                          "Value_Code": "TV"
+                      }, 
+                      {
+                          "AdStock": 85, 
+                          "Koeffizient": 1.4, 
+                          "Hyperbel": 1, 
+                          "Values": "PZ", 
+                          "Value_Code": "PZ"
+                      }, 
+                      {
+                          "AdStock": 65, 
+                          "Koeffizient": 1.96, 
+                          "Hyperbel": 3.5, 
+                          "Values": "Radio", 
+                          "Value_Code": "RD"
+                      }, 
+                      {
+                          "AdStock": 45, 
+                          "Koeffizient": 1.78, 
+                          "Hyperbel": 0.2, 
+                          "Values": "TZ überregional", 
+                          "Value_Code": "TZUER"
+                      }, 
+                      {
+                          "AdStock": 45, 
+                          "Koeffizient": 3, 
+                          "Hyperbel": 0.2, 
+                          "Values": "TZ regional", 
+                          "Value_Code": "TZR"
+                      }, 
+                      {
+                          "AdStock": 30, 
+                          "Koeffizient": 0.04, 
+                          "Hyperbel": 0.55, 
+                          "Values": "Digitales Out-Of-Home", 
+                          "Value_Code": "DPL"
+                      }, 
+                      {
+                          "AdStock": 70, 
+                          "Koeffizient": 3.89, 
+                          "Hyperbel": 5, 
+                          "Values": "Out-of_Home", 
+                          "Value_Code": "PL"
+                      }, 
+                      {
+                          "AdStock": 0, 
+                          "Koeffizient": 0, 
+                          "Hyperbel": 0, 
+                          "Values": "Kino", 
+                          "Value_Code": "KIN"
+                      }, 
+                      {
+                          "AdStock": 0, 
+                          "Koeffizient": 0, 
+                          "Hyperbel": 0, 
+                          "Values": "Beilagen", 
+                          "Value_Code": "BEIL"
+                      }, 
+                      {
+                          "AdStock": 0, 
+                          "Koeffizient": 0, 
+                          "Hyperbel": 0, 
+                          "Values": "Anzeigenblätter", 
+                          "Value_Code": "ANZ"
+                      }, 
+                      {
+                          "AdStock": 80, 
+                          "Koeffizient": 1.96, 
+                          "Hyperbel": 3, 
+                          "Values": "Online Display Brand", 
+                          "Value_Code": "OLDBD"
+                      }, 
+                      {
+                          "AdStock": 80, 
+                          "Koeffizient": 0.73, 
+                          "Hyperbel": 3, 
+                          "Values": "Online Display Brand - Mobile", 
+                          "Value_Code": "OLMBD"
+                      }, 
+                      {
+                          "AdStock": 90, 
+                          "Koeffizient": 0.61, 
+                          "Hyperbel": 0.5, 
+                          "Values": "Online Video", 
+                          "Value_Code": "OLV"
+                      }, 
+                      {
+                          "AdStock": 75, 
+                          "Koeffizient": 3.48, 
+                          "Hyperbel": 0.5, 
+                          "Values": "Social Media", 
+                          "Value_Code": "SOM"
+                      }, 
+                      {
+                          "AdStock": 30, 
+                          "Koeffizient": 0.05, 
+                          "Hyperbel": 0.55, 
+                          "Values": "Infoscreen", 
+                          "Value_Code": "INF"
+                      }
+                  ], 
+                  "Value_Code": "brandAwareness"
+              }, 
+              {
+                  "Values": "KAUFBEREITSCHAFT", 
+                  "coefficients": [
+                      {
+                          "AdStock": 97, 
+                          "Koeffizient": 1.8, 
+                          "Hyperbel": 1, 
+                          "Values": "TV", 
+                          "Value_Code": "TV"
+                      }, 
+                      {
+                          "AdStock": 95, 
+                          "Koeffizient": 1.09, 
+                          "Hyperbel": 1, 
+                          "Values": "PZ", 
+                          "Value_Code": "PZ"
+                      }, 
+                      {
+                          "AdStock": 65, 
+                          "Koeffizient": 2, 
+                          "Hyperbel": 3.5, 
+                          "Values": "Radio", 
+                          "Value_Code": "RD"
+                      }, 
+                      {
+                          "AdStock": 45, 
+                          "Koeffizient": 2.2, 
+                          "Hyperbel": 0.2, 
+                          "Values": "TZ überregional", 
+                          "Value_Code": "TZUER"
+                      }, 
+                      {
+                          "AdStock": 45, 
+                          "Koeffizient": 3.4, 
+                          "Hyperbel": 0.2, 
+                          "Values": "TZ regional", 
+                          "Value_Code": "TZR"
+                      }, 
+                      {
+                          "AdStock": 55, 
+                          "Koeffizient": 0.14, 
+                          "Hyperbel": 0.55, 
+                          "Values": "Digitales Out-Of-Home", 
+                          "Value_Code": "DPL"
+                      }, 
+                      {
+                          "AdStock": 55, 
+                          "Koeffizient": 6.4, 
+                          "Hyperbel": 5, 
+                          "Values": "Out-of_Home", 
+                          "Value_Code": "PL"
+                      }, 
+                      {
+                          "AdStock": 0, 
+                          "Koeffizient": 0, 
+                          "Hyperbel": 0, 
+                          "Values": "Kino", 
+                          "Value_Code": "KIN"
+                      }, 
+                      {
+                          "AdStock": 0, 
+                          "Koeffizient": 0, 
+                          "Hyperbel": 0, 
+                          "Values": "Beilagen", 
+                          "Value_Code": "BEIL"
+                      }, 
+                      {
+                          "AdStock": 0, 
+                          "Koeffizient": 0, 
+                          "Hyperbel": 0, 
+                          "Values": "Anzeigenblätter", 
+                          "Value_Code": "ANZ"
+                      }, 
+                      {
+                          "AdStock": 90, 
+                          "Koeffizient": 0.8, 
+                          "Hyperbel": 1.5, 
+                          "Values": "Online Display Brand", 
+                          "Value_Code": "OLDBD"
+                      }, 
+                      {
+                          "AdStock": 90, 
+                          "Koeffizient": 0.46, 
+                          "Hyperbel": 1.5, 
+                          "Values": "Online Display Brand - Mobile", 
+                          "Value_Code": "OLMBD"
+                      }, 
+                      {
+                          "AdStock": 95, 
+                          "Koeffizient": 0.6, 
+                          "Hyperbel": 0.5, 
+                          "Values": "Online Video", 
+                          "Value_Code": "OLV"
+                      }, 
+                      {
+                          "AdStock": 85, 
+                          "Koeffizient": 4.32, 
+                          "Hyperbel": 0.5, 
+                          "Values": "Social Media", 
+                          "Value_Code": "SOM"
+                      }, 
+                      {
+                          "AdStock": 55, 
+                          "Koeffizient": 0.17, 
+                          "Hyperbel": 0.55, 
+                          "Values": "Infoscreen", 
+                          "Value_Code": "INF"
+                      }
+                  ], 
+                  "Value_Code": "buyerReadiness"
+              }, 
+              {
+                  "Values": "LEADS PRO WOCHE", 
+                  "coefficients": [
+                      {
+                          "AdStock": 80, 
+                          "Koeffizient": 913.92, 
+                          "Hyperbel": 0.25, 
+                          "Values": "TV", 
+                          "Value_Code": "TV"
+                      }, 
+                      {
+                          "AdStock": 75, 
+                          "Koeffizient": 642.06, 
+                          "Hyperbel": 0.5, 
+                          "Values": "PZ", 
+                          "Value_Code": "PZ"
+                      }, 
+                      {
+                          "AdStock": 0, 
+                          "Koeffizient": 0, 
+                          "Hyperbel": 0, 
+                          "Values": "Radio", 
+                          "Value_Code": "RD"
+                      }, 
+                      {
+                          "AdStock": 0, 
+                          "Koeffizient": 0, 
+                          "Hyperbel": 0, 
+                          "Values": "TZ überregional", 
+                          "Value_Code": "TZUER"
+                      }, 
+                      {
+                          "AdStock": 0, 
+                          "Koeffizient": 0, 
+                          "Hyperbel": 0, 
+                          "Values": "TZ regional", 
+                          "Value_Code": "TZR"
+                      }, 
+                      {
+                          "AdStock": 0, 
+                          "Koeffizient": 0, 
+                          "Hyperbel": 0, 
+                          "Values": "Digitales Out-Of-Home", 
+                          "Value_Code": "DPL"
+                      }, 
+                      {
+                          "AdStock": 0, 
+                          "Koeffizient": 0, 
+                          "Hyperbel": 0, 
+                          "Values": "Out-of_Home", 
+                          "Value_Code": "PL"
+                      }, 
+                      {
+                          "AdStock": 0, 
+                          "Koeffizient": 0, 
+                          "Hyperbel": 0, 
+                          "Values": "Kino", 
+                          "Value_Code": "KIN"
+                      }, 
+                      {
+                          "AdStock": 0, 
+                          "Koeffizient": 0, 
+                          "Hyperbel": 0, 
+                          "Values": "Beilagen", 
+                          "Value_Code": "BEIL"
+                      }, 
+                      {
+                          "AdStock": 0, 
+                          "Koeffizient": 0, 
+                          "Hyperbel": 0, 
+                          "Values": "Anzeigenblätter", 
+                          "Value_Code": "ANZ"
+                      }, 
+                      {
+                          "AdStock": 70, 
+                          "Koeffizient": 4255.94, 
+                          "Hyperbel": 1, 
+                          "Values": "Online Display Brand", 
+                          "Value_Code": "OLDBD"
+                      }, 
+                      {
+                          "AdStock": 70, 
+                          "Koeffizient": 3068.34, 
+                          "Hyperbel": 1, 
+                          "Values": "Online Display Brand - Mobile", 
+                          "Value_Code": "OLMBD"
+                      }, 
+                      {
+                          "AdStock": 75, 
+                          "Koeffizient": 554.53, 
+                          "Hyperbel": 0.1, 
+                          "Values": "Online Video", 
+                          "Value_Code": "OLV"
+                      }, 
+                      {
+                          "AdStock": 65, 
+                          "Koeffizient": 1016.13, 
+                          "Hyperbel": 0.1, 
+                          "Values": "Social Media", 
+                          "Value_Code": "SOM"
+                      }, 
+                      {
+                          "AdStock": 0, 
+                          "Koeffizient": 0, 
+                          "Hyperbel": 0, 
+                          "Values": "Infoscreen", 
+                          "Value_Code": "INF"
+                      }
+                  ], 
+                  "Value_Code": "leads"
+              }
+          ], 
+          "result": {
+              "timestamp": null, 
+              "runtime": null, 
+              "deprecated": true
+          }
+      }, 
+      "public": false, 
+      "principal": "bmw"
+  }, 
+  "timestamp": "2018-06-13T10:57:14.837559"
+}
