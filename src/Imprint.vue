@@ -4,7 +4,7 @@
     <v-flex class="text-center">
       <div>
         <address>
-          <span style="font-weight: 700;">Plan.Net Business Intelligence</span>
+          <span style="font-weight: 700;">Plan.Net Business Intelligence GmbH & Co.KG</span>
           <br>Brienner Str. 45a-d
           <br>80333 München / Deutschland
         </address>
