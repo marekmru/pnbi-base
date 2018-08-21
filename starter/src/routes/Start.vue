@@ -20,9 +20,11 @@
   </pnbi-page>
 </template>
 <script>
+import config from '@/api/config'
 
 export default {
   mounted () {
+    console.log(config)
   },
   props: {
     propName: {
