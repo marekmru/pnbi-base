@@ -8,38 +8,14 @@
       </ul>
     </div>
 
-    <pnbi-datatable headline="Headline">
-
-      <!-- secondary slot -->
-      <v-menu
-        origin="center center"
-        :close-on-content-click="false"
-        transition="v-scale-transition"
-        bottom
-        slot="secondary-controls">
-        <v-btn primary light slot="activator">Columns</v-btn>
-        <v-list>
-          <v-list-tile v-for="header in headers" :key="header.text">
-            <v-list-tile-title>
-              <v-checkbox :label="header.text" v-model="header.selected" :value="header.selected" ></v-checkbox>
-            </v-list-tile-title>
-          </v-list-tile>
-        </v-list>
-      </v-menu>
-
-      <!-- default slot -->
-      <v-data-table :headers="filteredHeaders"
-        :items="items"
-        :rows-per-page-items="[10,25,50, {'text':'Alle','value':-1}]" rows-per-page-text="Elemente pro Seite"
-        :loading="!items">
-        <!-- table template -->
-        <template slot="items" slot-scope="props">
-          <td v-if="show('name')">{{props.item.name}}</td>
-          <td v-if="show('age')">{{props.item.age}}</td>
-          <td v-if="show('value')">{{props.item.value}}</td>
-        </template>
-      </v-data-table>
-    </pnbi-datatable>
+    <pnbi-card headline="Pagename"  >
+      <!-- Optional Slot-->
+      <div slot="primary-controls"></div>
+      <!-- Default Slot-->
+      <div>Any Content can be placed here with any tag</div>
+      <!-- Optional Slot-->
+      <div slot="card-actions"></div>
+    </pnbi-card>
 
   </pnbi-page>
 </template>
