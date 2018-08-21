@@ -1,28 +1,54 @@
 <template>
   <pnbi-page header-type="2" large>
     <div slot="page-header-content">
-      <h2 class="headline white--text">Information abut current item</h2>
+      <h2 class="headline white--text">Information about current item</h2>
       <ul class="white--text">
         <li>KPI 1</li>
         <li>KPI 2</li>
       </ul>
     </div>
-    <pnbi-card :headline="$route.meta.title">
-      <div slot="primary-controls">
-        primary-controls
-      </div>
-      <div>
-        default slot<br>
-        <a href="https://github.com/marekmru/pnbi-base/blob/candidate/README.md" target="_blank">pnbi-base readme</a>
-      </div>
-    </pnbi-card>
+
+    <pnbi-datatable headline="Headline">
+
+      <!-- secondary slot -->
+      <v-menu
+        origin="center center"
+        :close-on-content-click="false"
+        transition="v-scale-transition"
+        bottom
+        slot="secondary-controls">
+        <v-btn primary light slot="activator">Columns</v-btn>
+        <v-list>
+          <v-list-tile v-for="header in headers" :key="header.text">
+            <v-list-tile-title>
+              <v-checkbox :label="header.text" v-model="header.selected" :value="header.selected" ></v-checkbox>
+            </v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
+
+      <!-- default slot -->
+      <v-data-table :headers="filteredHeaders"
+        :items="items"
+        :rows-per-page-items="[10,25,50, {'text':'Alle','value':-1}]" rows-per-page-text="Elemente pro Seite"
+        :loading="!items">
+        <!-- table template -->
+        <template slot="items" slot-scope="props">
+          <td v-if="show('name')">{{props.item.name}}</td>
+          <td v-if="show('age')">{{props.item.age}}</td>
+          <td v-if="show('value')">{{props.item.value}}</td>
+        </template>
+      </v-data-table>
+    </pnbi-datatable>
 
   </pnbi-page>
 </template>
 <script>
 import config from '@/api/config'
 
+import PnbiTable from 'pnbi-base/src'
 export default {
+  components: {PnbiTable},
   mounted () {
     console.log(config)
   },
@@ -32,16 +58,34 @@ export default {
       default: 0
     }
   },
-  components: {},
   computed: {
     name () {
       return 'test'
+    },
+    filteredHeaders () {
+      return this.headers.filter(h => h.selected)
     }
   },
   data: () => {
-    return {}
+    return {
+      headers: [
+        {text: 'Name', value: 'name', selected: false},
+        {text: 'Age', value: 'age', selected: true},
+        {text: 'Value', value: 'value', selected: true}
+      ],
+      items: [
+        {name: 'ab', age: '1', value: 10},
+        {name: 'abc', age: '2', value: 11},
+        {name: 'abcd', age: '3', value: 5}
+      ]
+    }
   },
-  methods: {},
+  methods: {
+
+    show (col) {
+      return this.headers.find(h => h.value === col).selected
+    }
+  },
   beforeDestroy () {
   }
 }

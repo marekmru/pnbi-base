@@ -1,4 +1,4 @@
-const port = '5060'
+const port = '5050'
 const isApiBaseDefined = (window.BIAPIBASE != null) && !window.BIAPIBASE.includes('echo var')
 const basePath = isApiBaseDefined ? window.BIAPIBASE : `http://localhost:${port}`
 const config = {
