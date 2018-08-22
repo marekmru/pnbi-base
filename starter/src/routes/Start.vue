@@ -14,7 +14,7 @@
 
       <!-- default slot -->
         <pnbi-datatable-plus :items="items" :headers="headers">
-          <tr slot="trs" slot-scope="props">
+          <tr slot="row" slot-scope="props">
             <td>{{props.props.item.name}}</td>
             <td>{{props.props.item.age}}</td>
             <td>{{props.props.item.value}}</td>
