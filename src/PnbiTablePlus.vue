@@ -19,7 +19,7 @@
       </v-menu>
     </v-toolbar>
 
-    <v-data-table v-if="filteredHeaders" v-bind="myattrs" :headers="filteredHeaders">
+    <v-data-table v-if="myattrs" v-bind="myattrs"                  :headers="filteredHeaders">
       <template slot="items" slot-scope="props">
         <slot name="row" :props="props"></slot>
       </template>
@@ -32,11 +32,12 @@
 export default {
   name: 'pnbi-datatable-plus',
   props: {},
+  created () {},
   mounted () {
     this.filterColumns(this.myattrs.headers)
   },
   watch: {
-    $attrs: {
+    myattrs: {
       handler: function (val, oldVal) {
         this.filterColumns(val.headers)
       },
@@ -44,9 +45,10 @@ export default {
     }
   },
   computed: {
-    // clone all attributes from parent
     myattrs () {
-      return JSON.parse(JSON.stringify(this.$attrs))
+      let temp = JSON.parse(JSON.stringify(this.$attrs))
+      temp = this.settingAttrs(temp)
+      return temp
     }
   },
   data () {
@@ -55,6 +57,13 @@ export default {
     }
   },
   methods: {
+    settingAttrs (temp) {
+      temp.headers = temp.headers.map(lh => {
+        lh.selected = lh.selected
+        return lh
+      })
+      return temp
+    },
     filterColumns (headers) {
       this.filteredHeaders = this.myattrs.headers.filter(h => h.selected)
       const tbody = this.$el.querySelector('tbody')
