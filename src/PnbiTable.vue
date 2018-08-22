@@ -8,15 +8,17 @@
       <v-flex xs3>
         <v-text-field clearable class="pnbi-datatable__search" solo-inverted flat v-model="search" label="Suche…" append-icon="search"></v-text-field>
       </v-flex>
-      <v-btn small color="primary" dark @click="$emit('new')">
+      <v-btn v-if="buttonLabel !== false" small color="primary" dark @click="$emit('new')">
         <v-icon class="mr-1" dark left>add</v-icon>
         {{buttonLabel}}
       </v-btn>
     </v-toolbar>
     <div v-if="!!$slots['secondary-controls']" class="px-4 py-3 pnbi-secondary-controls" name="secondary-controls">
     </div>
+
     <slot>
     </slot>
+
   </div>
 </template>
 
@@ -27,8 +29,9 @@ export default {
   mixins: [ContentContainerMixin],
   props: {
     buttonLabel: {
-      type: String | null,
-      default: 'Neu'
+      type: String | Boolean,
+      default: 'Neu',
+      required: true
     },
     flat: {
       type: Boolean | null,

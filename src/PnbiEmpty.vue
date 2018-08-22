@@ -1,23 +1,43 @@
 <template>
   <v-alert :value="true" color="warning" icon="warning">
-    <span v-if="data.label" class="grey--text">{{data.label}}</span>
-    <span v-if="data.html" class="grey--text" v-html="data.html"></span>
+    <span v-if="content.html" class="grey--text" v-html="content.html"></span>
+    <span v-else class="grey--text">{{content.label}}</span>
   </v-alert>
 </template>
 
 <script>
 export default {
   props: {
+    text: {
+      type: String | null
+    },
+    html: {
+      type: String | null
+    },
     data: {
+      // deprecated...
       type: Object | null,
       default: () => {
-      	return { label: 'Keine Datensätze vorhanden. Bitte erstellen sie ein neues Element.'}
+        const dto = {
+          label: 'Keine Datensätze vorhanden. Bitte erstellen sie ein neues Element.'
+        }
+        return dto
       }
     }
   },
-  data () {
-    return {
-
+  computed: {
+    content () {
+      if (this.text) {
+        return {
+          label: this.text
+        }
+      }
+      if (this.html) {
+        return {
+          html: this.html
+        }
+      }
+      return this.data
     }
   }
 }
