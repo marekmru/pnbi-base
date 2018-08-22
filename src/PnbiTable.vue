@@ -3,8 +3,11 @@
     <v-toolbar flat color="white" class="pnbi-datatable__toolbar pb-1 pt-2">
       <h3 class="accent--text card-headline">{{label}}</h3>
       <v-spacer></v-spacer>
+
+      <!-- primary controls -->
       <slot name="primary-controls">
       </slot>
+
       <v-flex xs3>
         <v-text-field clearable class="pnbi-datatable__search" solo-inverted flat v-model="search" label="Suche…" append-icon="search"></v-text-field>
       </v-flex>
@@ -13,9 +16,13 @@
         {{buttonLabel}}
       </v-btn>
     </v-toolbar>
-    <div v-if="!!$slots['secondary-controls']" class="px-4 py-3 pnbi-secondary-controls" name="secondary-controls">
-    </div>
 
+    <!-- secondary slot -->
+    <v-toolbar v-if="$slots['secondary-controls']" flat color="white" class="pnbi-datatable__toolbar pb-1 pt-2">
+      <slot class="px-4 py-3 pnbi-secondary-controls" name="secondary-controls"></slot>
+    </v-toolbar>
+
+    <!-- default slot -->
     <slot>
     </slot>
 
