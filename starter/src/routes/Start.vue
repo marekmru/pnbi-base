@@ -13,7 +13,7 @@
       <!-- secondary slot -->
 
       <!-- default slot -->
-        <pnbi-datatable-plus :items="items" :headers="headers">
+        <pnbi-datatable-plus :items="items" :headers="headers"                    tableIdentifier="123">
           <tr slot="row" slot-scope="props">
             <td>{{props.props.item.name}}</td>
             <td>{{props.props.item.age}}</td>

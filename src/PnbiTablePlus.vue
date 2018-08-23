@@ -10,7 +10,7 @@
         bottom>
         <v-btn primary light slot="activator">Columns</v-btn>
         <v-list>
-          <v-list-tile v-if="computedHeaders" v-for="(header, index) in computedHeaders" :key="header.text">
+          <v-list-tile v-if="computedHeaders" v-for="header in computedHeaders" :key="header.text">
             <v-list-tile-title>
               <v-checkbox :label="header.text" v-model="header.selected" :value="header.selected" ></v-checkbox>
             </v-list-tile-title>
@@ -34,12 +34,23 @@ export default {
   props: {},
   created () {
     this.computedHeaders = this.myattrs.headers
-    this.computedHeaders.forEach((h, index) => {
-      if (index === 1) {
+    // this.computedHeaders.forEach((h, index) => {
+    //   if (index === 1) {
+    //     this.computedHeaders[index].selected = true
+    //   }
+    // })
+    // this.read()
+    // this.computedHeaders = this.computedHeaders
+    const temp = JSON.parse(localStorage.getItem('headers'))
+    console.log('read', temp)
+    if (temp) {
+      this.computedHeaders = temp
+      this.myattrs.headers = temp
+    } else {
+      this.computedHeaders.forEach((h, index) => {
         this.computedHeaders[index].selected = true
-      }
-    })
-    this.computedHeaders = this.computedHeaders
+      })
+    }
   },
   mounted () {
     // this.filterColumns(this.myattrs.headers)
@@ -74,8 +85,12 @@ export default {
       localStorage.setItem('headers', JSON.stringify(this.computedHeaders))
     },
     read () {
-      console.log('save')
-      return localStorage.getItem('headers', JSON.stringify(this.computedHeaders))
+      const temp = JSON.parse(localStorage.getItem('headers'))
+      console.log('read', temp)
+      if (temp) {
+        this.computedHeaders = temp
+        this.computedHeaders = this.computedHeaders
+      }
     },
     headerChanged (index) {
       this.computedHeaders[index].selected = !this.computedHeaders[index].selected
