@@ -59,9 +59,9 @@ export default {
   data: () => {
     return {
       headers: [
-        {text: 'Name', value: 'name', selected: false},
-        {text: 'Age', value: 'age', selected: true},
-        {text: 'Value', value: 'value', selected: true}
+        {text: 'Name', value: 'name'},
+        {text: 'Age', value: 'age'},
+        {text: 'Value', value: 'value'}
       ],
       items: [
         {name: 'ab', age: '1', value: 10},
