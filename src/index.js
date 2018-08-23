@@ -46,7 +46,7 @@ const install = (Vue, options) => {
 
   Vue.use(Vuetify, {
     theme: {
-      primary: '#00FF00',
+      primary: '#d70F14',
       secondary: '#000000',
       accent: '#3f515d',
       error: '#ff6400',
