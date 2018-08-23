@@ -15,9 +15,9 @@ import {
   setCookieConfig
 } from './internal/cookie.service.js'
 
+
 import PnbiDataTable from './PnbiTable'
 import PnbiDataTablePlus from './PnbiTablePlus'
-import MyComponent from './MyComponent'
 import PnbiEmpty from './PnbiEmpty'
 import bus from './event-bus'
 import helper from './helper'
@@ -41,13 +41,12 @@ const install = (Vue, options) => {
   Vue.component('pnbi-page', PnbiPage)
   Vue.component('pnbi-datatable', PnbiDataTable)
   Vue.component('pnbi-datatable-plus', PnbiDataTablePlus)
-  Vue.component('MyComponent', MyComponent)
   Vue.component('pnbi-webapp', PnbiWebapp)
   Vue.component('pnbi-empty', PnbiEmpty)
 
   Vue.use(Vuetify, {
     theme: {
-      primary: '#d70f14',
+      primary: '#00FF00',
       secondary: '#000000',
       accent: '#3f515d',
       error: '#ff6400',
