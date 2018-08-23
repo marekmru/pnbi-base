@@ -10,7 +10,7 @@
         bottom>
         <v-btn primary light slot="activator">Columns</v-btn>
         <v-list>
-          <v-list-tile v-for="header in $attrs.headers" :key="header.text">
+          <v-list-tile v-if="computedHeaders" v-for="(header, index) in computedHeaders" :key="header.text">
             <v-list-tile-title>
               <v-checkbox :label="header.text" v-model="header.selected" :value="header.selected" ></v-checkbox>
             </v-list-tile-title>
@@ -19,7 +19,7 @@
       </v-menu>
     </v-toolbar>
 
-    <v-data-table v-if="myattrs" v-bind="myattrs"                  :headers="filteredHeaders">
+    <v-data-table v-if="myattrs" v-bind="myattrs" :headers="filteredHeaders">
       <template slot="items" slot-scope="props">
         <slot name="row" :props="props"></slot>
       </template>
@@ -32,19 +32,31 @@
 export default {
   name: 'pnbi-datatable-plus',
   props: {},
-  created () {},
+  created () {
+    this.computedHeaders = this.myattrs.headers
+    this.computedHeaders.forEach((h, index) => {
+      if (index === 1) {
+        this.computedHeaders[index].selected = true
+      }
+    })
+    this.computedHeaders = this.computedHeaders
+  },
   mounted () {
-    this.filterColumns(this.myattrs.headers)
+    // this.filterColumns(this.myattrs.headers)
   },
   watch: {
-    myattrs: {
+    computedHeaders: {
       handler: function (val, oldVal) {
-        this.filterColumns(val.headers)
+        this.save()
+        this.filterColumns(val)
       },
       deep: true
     }
   },
   computed: {
+    filteredHeaders () {
+      return this.myattrs.headers.filter(h => h.selected)
+    },
     myattrs () {
       let temp = JSON.parse(JSON.stringify(this.$attrs))
       temp = this.settingAttrs(temp)
@@ -53,10 +65,23 @@ export default {
   },
   data () {
     return {
-      filteredHeaders: []
+      computedHeaders: []
     }
   },
   methods: {
+    save () {
+      console.log('save')
+      localStorage.setItem('headers', JSON.stringify(this.computedHeaders))
+    },
+    read () {
+      console.log('save')
+      return localStorage.getItem('headers', JSON.stringify(this.computedHeaders))
+    },
+    headerChanged (index) {
+      this.computedHeaders[index].selected = !this.computedHeaders[index].selected
+      this.computedHeaders = this.computedHeaders
+      console.log(index, this.computedHeaders)
+    },
     settingAttrs (temp) {
       temp.headers = temp.headers.map(lh => {
         lh.selected = lh.selected
@@ -65,7 +90,14 @@ export default {
       return temp
     },
     filterColumns (headers) {
-      this.filteredHeaders = this.myattrs.headers.filter(h => h.selected)
+      console.log('-', headers, this.computedHeaders)
+      // this.computedHeaders = this.computedHeaders.map((h, i) => {
+      //   if (i === 1) {
+      //     h.selected = true
+      //   }
+      //   return h
+      // })
+      // this.filteredHeaders = this.myattrs.headers.filter(h => h.selected)
       const tbody = this.$el.querySelector('tbody')
       // run over headers
       headers.map(function (h, index) {
