@@ -16,7 +16,7 @@ import {
 } from './internal/cookie.service.js'
 
 import PnbiDataTable from './PnbiTable'
-import PnbiDataTablePlus from './PnbiTablePlus'
+import PnbiDataTablePlus from './pnbiTablePlus/PnbiTablePlus'
 import MyComponent from './MyComponent'
 import PnbiEmpty from './PnbiEmpty'
 import bus from './event-bus'

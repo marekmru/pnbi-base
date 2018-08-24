@@ -59,13 +59,30 @@ export default {
   data: () => {
     return {
       headers: [
-        {text: 'Name', value: 'name'},
+        {text: 'Name 2', value: 'name'},
         {text: 'Age', value: 'age'},
         {text: 'Value', value: 'value'}
       ],
       items: [
         {name: 'ab', age: '1', value: 10},
         {name: 'abc', age: '2', value: 11},
+        {name: 'abcd', age: '3', value: 5},
+        {name: 'abcd', age: '3', value: 5},
+        {name: 'abcd', age: '3', value: 5},
+        {name: 'abcd', age: '3', value: 5},
+        {name: 'abcd', age: '3', value: 5},
+        {name: 'abcd', age: '3', value: 5},
+        {name: 'abcd', age: '3', value: 5},
+        {name: 'abcd', age: '3', value: 5},
+        {name: 'abcd', age: '3', value: 5},
+        {name: 'abcd', age: '3', value: 5},
+        {name: 'abcd', age: '3', value: 5},
+        {name: 'abcd', age: '3', value: 5},
+        {name: 'abcd', age: '3', value: 5},
+        {name: 'abcd', age: '3', value: 5},
+        {name: 'abcd', age: '3', value: 5},
+        {name: 'abcd', age: '3', value: 5},
+        {name: 'abcd', age: '3', value: 5},
         {name: 'abcd', age: '3', value: 5}
       ]
     }
