@@ -1,5 +1,5 @@
 export default {
-  created () {
+  created() {
     this.localStorageName = this.tableIdentifier + '_tableheaders'
     const data = window.localStorage.getItem(this.localStorageName)
     if (data == null) {
@@ -8,7 +8,7 @@ export default {
     }
     this.localStorageHeaders = this.loadFromLocalStorage().headers
   },
-  mounted () {
+  mounted() {
     console.log('mounted')
     this.$updateHeaderDom(this.localStorageHeaders)
   },
@@ -24,19 +24,21 @@ export default {
       }
     }
   },
-  data () {
+  data() {
     return {
       localStorageName: null,
       localStorageHeaders: []
     }
   },
   methods: {
-    update () {
+    update() {
       this.$nextTick(function () {
+        // pagination event used by tableplus for triggering request
+        this.$emit('padinationEvent', this.pagination)
         this.$updateHeaderDom(this.localStorageHeaders)
       })
     },
-    saveToLocalStorage (headers) {
+    saveToLocalStorage(headers) {
       if (headers == null) {
         headers = this.$attrs.headers.map(val => {
           val.selected = true
@@ -47,26 +49,28 @@ export default {
       storageObject.headers = headers
       window.localStorage.setItem(this.localStorageName, JSON.stringify(storageObject))
     },
-    loadFromLocalStorage () {
+    loadFromLocalStorage() {
       return JSON.parse(window.localStorage.getItem(this.localStorageName))
     },
-    updateHeaders () {
+    updateHeaders() {
       this.saveToLocalStorage(this.localStorageHeaders)
       this.$updateHeaderDom(this.localStorageHeaders)
     },
-    $updateHeaderDom (headers) {
+    $updateHeaderDom(headers) {
       if (this.$el) {
-        const tbody = this.$el.querySelector('tbody')
-        headers.forEach(function (h, index) {
-          // get columns that should be filtered
-          const cols = tbody.querySelectorAll(`tr td:nth-child(${index + 1})`)
-          // toggle columns
-          cols.forEach(c => {
-            if (h.selected !== true) {
-              c.style.display = 'none'
-            } else {
-              c.style.display = 'table-cell'
-            }
+        this.$nextTick(function () {
+          const tbody = this.$el.querySelector('tbody')
+          headers.forEach(function (h, index) {
+            // get columns that should be filtered
+            const cols = tbody.querySelectorAll(`tr td:nth-child(${index + 1})`)
+            // toggle columns
+            cols.forEach(c => {
+              if (h.selected !== true) {
+                c.style.display = 'none'
+              } else {
+                c.style.display = 'table-cell'
+              }
+            })
           })
         })
       }

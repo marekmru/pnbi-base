@@ -37,8 +37,8 @@
       </v-menu>
     </v-toolbar>
 
-    <v-data-table v-bind="localAttrs" @update:pagination="update()">
-      <template slot="items" slot-scope="props">
+    <v-data-table v-bind="localAttrs" @update:pagination="update()" :pagination.sync="pagination">
+      <template slot="items" slot-scope="props" >
         <slot name="row" :props="props"></slot>
       </template>
     </v-data-table>
@@ -57,6 +57,11 @@ export default {
       type: String,
       required: true,
       default: 'default'
+    }
+  },
+  data: function () {
+    return {
+      pagination: {}
     }
   }
 }
