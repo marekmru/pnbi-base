@@ -15,11 +15,12 @@ import {
   setCookieConfig
 } from './internal/cookie.service.js'
 
-
 import PnbiDataTable from './PnbiTable'
 import PnbiDataTablePlus from './PnbiTablePlus'
 import PnbiEmpty from './PnbiEmpty'
-import bus from './event-bus'
+import bus, {
+  LOADING
+} from './event-bus'
 import helper from './helper'
 // app wide styles, fonts
 import Vuetify from 'vuetify'
@@ -31,6 +32,11 @@ const install = (Vue, options) => {
   Vue.prototype.$bus = bus
   Vue.prototype.$helper = helper
   Vue.prototype.$config = options.config
+  Vue.prototype.$loader = function (status) {
+    bus.$emit(LOADING, status => {
+      this.loading = status
+    })
+  }
   setRoutes(options.router)
   setApiConfig(options.config)
   setAjaxConfig(options)
@@ -47,8 +53,8 @@ const install = (Vue, options) => {
   Vue.use(Vuetify, {
     theme: {
       primary: '#d70F14',
-      secondary: '#000000',
       accent: '#3f515d',
+      secondary: '#000000',
       error: '#ff6400',
       info: '#2196F3',
       success: '#4CAF50',
