@@ -34,12 +34,12 @@ export default {
   // mixins: [TablePlusMixin],
   mounted () {
     console.log(config)
-    // this.getDataFromApi()
-    //   .then(data => {
-    //     console.log('data', data)
-    //     this.items = data.items
-    //     this.totalItems = data.totalItems
-    //   })
+    this.getDataFromApi()
+      .then(data => {
+        console.log('data', data)
+        this.items = data.items
+        this.totalItems = data.totalItems
+      })
   },
   props: {
     propName: {
