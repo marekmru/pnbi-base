@@ -199,6 +199,54 @@ Vuetify Datatable
 
 ---
 
+## pnbi-datatable-plus
+> Used for displaing rich datatables.Features as column-sorting, serverside pagination and fixed-header are available
+
+This is a wrapper for v-data-table and acceps all attributes and slots from original v-data-table. 
+
+##### Attributes
+`tableIdentifier` - id for table. It should be uniq in all applications. Example `tableIdentifier="{app}-{pagename}"`
+
+### Features
+#### Column filterng
+Enabled by default. This feature makes posible to filter the columns. You can hide some columns. The selected set of columns are saved to localstorage in browser. 
+
+#### Server side pagination
+Disabled by default. Enable it by defining folowing props:
+
+Define `total-items` prop. Total-items prop will disable the built-in frontend sorting and pagination. Define `loading` prop. Use Loading prop to display a progress bar while fetching data.
+
+Define listener for events
+
+API endpoint requirements:
+1. Support `page` atribute - requested page number 
+2. Support `rowsPerPage` atrribute - requested rows count per page
+
+#### Fixed header & Footer
+Disabled by default. Enable it by defining folowing props:
+
+Define  `fixed-header` prop. It makes header be always visible. If user scroll to the end of a large table header positioned sticky on top of application. Define  `fixed-footer` prop. It makes header be always visible. If user scroll to the end of a large table header positioned sticky on bottom of application.
+
+Place footer template inside of `footer` slot
+
+## Markup
+Use default slot inside of pnbi-datatable 
+
+```html
+<pnbi-datatable headline="Headline">
+  <!-- default slot -->
+    <pnbi-datatable-plus
+      :items="items" :headers="headers" :loading="loading" tableIdentifier="123" :total-items="totalItems" @padinationEvent="pagination_test">
+      <tr slot="row" slot-scope="props">
+        <td>{{props.props.item.name}}</td>
+        <td>{{props.props.item.age}}</td>
+        <td>{{props.props.item.value}}</td>
+      </tr>
+    </pnbi-datatable-plus>
+
+</pnbi-datatable>
+```
+
 ## pnbi-card
 
 > Usually used inside a pnbi-page with headline as VIP or title as secondary Table Element
