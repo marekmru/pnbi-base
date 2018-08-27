@@ -9,7 +9,6 @@ export default {
     this.localStorageHeaders = this.loadFromLocalStorage().headers
   },
   mounted() {
-    console.log('mounted')
     this.$updateHeaderDom(this.localStorageHeaders)
   },
   computed: {
@@ -58,6 +57,7 @@ export default {
     },
     $updateHeaderDom(headers) {
       if (this.$el) {
+        console.log('update ');
         this.$nextTick(function () {
           const tbody = this.$el.querySelector('tbody')
           headers.forEach(function (h, index) {
