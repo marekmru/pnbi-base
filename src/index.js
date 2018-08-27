@@ -17,7 +17,6 @@ import {
 
 import PnbiDataTable from './PnbiTable'
 import PnbiDataTablePlus from './pnbiTablePlus/PnbiTablePlus'
-import MyComponent from './MyComponent'
 import PnbiEmpty from './PnbiEmpty'
 import bus from './event-bus'
 import helper from './helper'
@@ -41,7 +40,6 @@ const install = (Vue, options) => {
   Vue.component('pnbi-page', PnbiPage)
   Vue.component('pnbi-datatable', PnbiDataTable)
   Vue.component('pnbi-datatable-plus', PnbiDataTablePlus)
-  Vue.component('MyComponent', MyComponent)
   Vue.component('pnbi-webapp', PnbiWebapp)
   Vue.component('pnbi-empty', PnbiEmpty)
 
