@@ -100,15 +100,19 @@ export default {
           {name: 'abcd', age: 20, value: 5}
         ]
 
-        const totalItems = items.length
         const { sortBy, descending, page, rowsPerPage } = this.request.pagination
 
         // BE search
         if (this.request.search) {
+          console.log('this.request.search', this.request.search)
           items = items.filter(i => {
             return i.age === parseInt(this.request.search)
           })
+        } else {
+          this.request.search = null
         }
+
+        const totalItems = items.length
 
         // BE sorting
         if (this.request.pagination.sortBy && items.length > 1) {

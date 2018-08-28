@@ -23,22 +23,13 @@
                   </v-list-tile>
                 </v-list>
               </v-flex>
-              <!--
-              <v-flex>
-                 save user present
-                 <v-form class="pa-4" @submit.prevent="saveColumnsPreset()">
-                  <v-text-field solo v-model="name" label="Save your select as preset"></v-text-field>
-                  <v-btn @click="saveColumnsPreset">Save</v-btn>
-                 </v-form>
-              </v-flex>
-              -->
             </v-layout>
           </v-card>
       </v-menu>
     </v-toolbar>
 
-    <v-data-table v-bind="localAttrs" @update:pagination="update()" :pagination.sync="pagination">
-      <template slot="items" slot-scope="props" >
+    <v-data-table v-bind="localAttrs" :pagination.sync="pagination">
+      <template slot="items" slot-scope="props">
         <slot name="row" :props="props"></slot>
       </template>
     </v-data-table>
