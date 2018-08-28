@@ -37,7 +37,6 @@
 export default {
   // mixins: [TablePlusMixin],
   mounted () {
-    console.log(config)
     this.getDataFromApi()
       .then(data => {
         console.log('data', data)
