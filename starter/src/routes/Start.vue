@@ -13,7 +13,7 @@
       <!-- default slot -->
       <pnbi-datatable-plus
           :items="items" :headers="headers" :loading="loading" table-identifier="123" :total-items="totalItems"
-          @padinationEvent="pagination_test" fixed-header fixed-footer
+          @padinationEvent="pagination_test" fixed-header
           :rows-per-page-items="[10,25,50, {'text':'Alle','value':-1}]" rows-per-page-text="Elemente pro Seite">
         <tr slot="row" slot-scope="props">
           <td>{{props.props.item.name}}</td>
