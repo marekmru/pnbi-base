@@ -240,7 +240,7 @@ Your data object:
       loading: true,
       request: {
         pagination: {},
-        search: ""
+        search: null
       },
       headers: [
         {text: 'Name 2', value: 'name'},
@@ -251,11 +251,29 @@ Your data object:
   }
 ```
 
-API endpoint request params:
+Wrap API endpoint request params in request object and send to Backend:
 1. `page` -  page number (int)
 2. `rowsPerPage` -  rows count per page (int)
 3. `sortBy` - column to sort by (string)
 4. `descending` - flag for sorting (boolean)
+
+Request Example: 
+``` json
+request: {
+  pagination: {
+    "descending":false,
+    "page":1,
+    "rowsPerPage":5,
+    "sortBy":"name",
+    "totalItems":20
+    },
+  search: null
+}
+```
+
+Response should include:
+1. `totalItems` - length of found items list
+2. `items` - plain list of items
 
 ## Markup
 Use default slot inside of pnbi-datatable. Let `secondary-controls` slot blank. Datatable plus has own toolbar with controls.
