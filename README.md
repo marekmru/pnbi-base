@@ -199,6 +199,91 @@ Vuetify Datatable
 
 ---
 
+## pnbi-datatable-plus
+> Used for displaing rich datatables.Features as column-sorting, serverside pagination and fixed-header are available
+
+This is a wrapper for v-data-table and acceps all attributes and slots from
+ original v-data-table. 
+
+##### Attributes
+`tableIdentifier` - id for table. It should be uniq in all applications. Example `tableIdentifier="{app}-{pagename}"`. We use this ID for storage selected columns in browser localstorage.
+
+### Features
+#### Column filterng
+Enabled by default. This feature makes posible to filter the columns. You can hide some columns. The selected set of columns are saved to localstorage in browser. 
+
+#### Server side pagination
+Disabled by default. Enable it by defining folowing props:
+
+Define `total-items` prop. Total-items prop will disable the built-in frontend sorting and pagination. Define `loading` prop. Use Loading prop to display a progress bar while fetching data.
+
+Define listener for events: `@padinationEvent="onPaginationEvent"` this event is fired if user change something in the pagination. So you take new pagination object and make a request to the backend:
+
+```javascript
+onPaginationEvent (data, event) {
+  // update pagination
+  this.request.pagination = data
+  this.getDataFromApi(this.request)
+    .then(data => {
+      this.items = data.items
+      this.totalItems = data.totalItems
+    })
+}
+````
+
+Your data object:
+``` javascript
+  data: () => {
+    return {
+      items: [],
+      totalItems: 0, 
+      loading: true,
+      request: {
+        pagination: {},
+        search: ""
+      },
+      headers: [
+        {text: 'Name 2', value: 'name'},
+        {text: 'Age', value: 'age'},
+        {text: 'Value', value: 'value'}
+      ]
+    }
+  }
+```
+
+API endpoint request params:
+1. `page` -  page number (int)
+2. `rowsPerPage` -  rows count per page (int)
+3. `sortBy` - column to sort by (string)
+4. `descending` - flag for sorting (boolean)
+
+## Markup
+Use default slot inside of pnbi-datatable. Let `secondary-controls` slot blank. Datatable plus has own toolbar with controls.
+
+```html
+<pnbi-datatable headline="Headline">
+  <!-- don't use secondary slot -->
+  <!-- default slot -->
+    <pnbi-datatable-plus
+      :items="items" :headers="headers" :loading="loading" tableIdentifier="123" :total-items="totalItems" @padinationEvent="onPaginationEvent">
+      <tr slot="row" slot-scope="props">
+        <td>{{props.props.item.name}}</td>
+        <td>{{props.props.item.age}}</td>
+        <td>{{props.props.item.value}}</td>
+      </tr>
+    </pnbi-datatable-plus>
+
+</pnbi-datatable>
+```
+
+#### Fixed header & Footer
+Disabled by default. Enable it by defining folowing props:
+
+Define  `fixed-header` prop. It makes header be always visible. If user scroll to the end of a large table header positioned sticky on top of application. Define  `fixed-footer` prop. It makes header be always visible. If user scroll to the end of a large table header positioned sticky on bottom of application.
+
+Place footer template inside of `footer` slot
+
+
 ## pnbi-card
 
 > Usually used inside a pnbi-page with headline as VIP or title as secondary Table Element
