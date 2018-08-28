@@ -8,13 +8,18 @@
       </ul>
     </div>
 
-    <pnbi-datatable headline="Headline">
+    <pnbi-datatable headline="Headline" @search="request.search = $event">
+
+      <div slot="primary-controls ">
+        fff
+      </div>
 
       <!-- secondary slot -->
 
       <!-- default slot -->
         <pnbi-datatable-plus
-          :items="items" :headers="headers" :loading="loading"               tableIdentifier="123" :total-items="totalItems" @padinationEvent="onPagination">
+          :items="items" :headers="headers" tableIdentifier="123"
+          :loading="loading" :total-items="totalItems" :search="request.search" @padinationEvent="onPaginationEvent">
           <tr slot="row" slot-scope="props">
             <td>{{props.props.item.name}}</td>
             <td>{{props.props.item.age}}</td>
@@ -27,16 +32,13 @@
   </pnbi-page>
 </template>
 <script>
-import config from '@/api/config'
 // import TablePlusMixin from 'pnbi-base/src/internal/TablePlusMixin'
 // import {PnbiTable, PnbiTablePlus} from 'pnbi-base/src'
 export default {
   // mixins: [TablePlusMixin],
   mounted () {
-    console.log(config)
     this.getDataFromApi()
       .then(data => {
-        console.log('data', data)
         this.items = data.items
         this.totalItems = data.totalItems
       })
@@ -47,30 +49,15 @@ export default {
       default: 0
     }
   },
-  watch: {
-    pagination: {
-      handler () {
-        this.getDataFromApi()
-          .then(data => {
-            console.log('pagination event', data)
-            this.items = data.items
-            this.totalItems = data.totalItems
-          })
-      },
-      deep: true
-    }
-  },
-  computed: {
-    name () {
-      return 'test'
-    }
-  },
   data: () => {
     return {
       items: [],
       totalItems: 0,
       loading: true,
-      pagination: {},
+      request: {
+        pagination: {},
+        search: null
+      },
       headers: [
         {text: 'Name 2', value: 'name'},
         {text: 'Age', value: 'age'},
@@ -79,8 +66,13 @@ export default {
     }
   },
   methods: {
-    onPagination (data, event) {
-      this.pagination = data
+    onPaginationEvent (data, event) {
+      this.request.pagination = data
+      this.getDataFromApi()
+        .then(data => {
+          this.items = data.items
+          this.totalItems = data.totalItems
+        })
     },
     getDataFromApi () {
       this.loading = true
@@ -109,11 +101,17 @@ export default {
         ]
 
         const totalItems = items.length
-        const { sortBy, descending, page, rowsPerPage } = this.pagination
-        console.log('this.pagination', this.pagination)
+        const { sortBy, descending, page, rowsPerPage } = this.request.pagination
+
+        // BE search
+        if (this.request.search) {
+          items = items.filter(i => {
+            return i.age === parseInt(this.request.search)
+          })
+        }
 
         // BE sorting
-        if (this.pagination.sortBy) {
+        if (this.request.pagination.sortBy && items.length > 1) {
           items = items.sort((a, b) => {
             const sortA = a[sortBy]
             const sortB = b[sortBy]
@@ -131,7 +129,7 @@ export default {
         }
 
         // BE paging
-        if (rowsPerPage > 0) {
+        if (rowsPerPage > 0 && items.length > 1) {
           items = items.slice((page - 1) * rowsPerPage, page * rowsPerPage)
         }
 
