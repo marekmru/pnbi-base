@@ -2,31 +2,33 @@
 
   <div class="pnbi-datatable">
 
-    <v-toolbar flat color="white" class="pnbi-datatable__toolbar pb-1 pt-2">
-      <v-menu
-        origin="center center"
-        :close-on-content-click="false"
-        transition="v-scale-transition"
-        bottom>
-        <v-btn primary light slot="activator">Columns</v-btn>
-          <v-card>
-            <v-layout row wrap>
-              <v-flex>
-                <v-list>
-                  <v-subheader>
-                    Select visible column
-                  </v-subheader>
-                  <v-list-tile v-for="header in localStorageHeaders" :key="header.text">
-                    <v-list-tile-title>
-                      <v-checkbox :label="header.text" v-model="header.selected" @change="updateHeaders" :value="header.selected"></v-checkbox>
-                    </v-list-tile-title>
-                  </v-list-tile>
-                </v-list>
-              </v-flex>
-            </v-layout>
-          </v-card>
-      </v-menu>
-    </v-toolbar>
+    <v-dialog
+      v-model="customiseDialog"
+      width="500">
+        <v-card>
+          <v-layout row wrap>
+            <v-flex>
+              <v-toolbar color="accent">
+                <v-toolbar-title class="white--text">Customise colums</v-toolbar-title>
+              </v-toolbar>
+              <v-list>
+                <v-subheader>
+                  Select visible column
+                </v-subheader>
+                <v-list-tile v-for="header in localStorageHeaders" :key="header.text">
+                  <v-list-tile-title>
+                    <v-checkbox :label="header.text" v-model="header.selected" :value="header.selected"></v-checkbox>
+                  </v-list-tile-title>
+                </v-list-tile>
+              </v-list>
+            </v-flex>
+          </v-layout>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" @click="customiseDialog = false" flat>Cancel</v-btn>
+          </v-card-actions>
+        </v-card>
+    </v-dialog>
 
     <v-data-table v-bind="localAttrs" :pagination.sync="pagination">
       <template slot="items" slot-scope="props">

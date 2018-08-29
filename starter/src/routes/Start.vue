@@ -8,18 +8,29 @@
       </ul>
     </div>
 
-    <pnbi-datatable headline="Headline" @search="request.search = $event">
+    <pnbi-datatable headline="Headline"
+      @search="request.search = $event"
+      button-label="sfsdf">
 
       <div slot="primary-controls">
-        <v-btn small>button</v-btn>
+        <v-btn small
+          @click.stop="$bus.$emit('customiseEvent')">customise</v-btn>
       </div>
 
       <!-- secondary slot -->
+      <div slot="secondary-controls">
+        <v-toolbar flat color="white">
+          <v-btn small>Button</v-btn>
+          <v-btn small>Button 2</v-btn>
+          <v-btn small>Button 3</v-btn>
+          <v-btn small>Button 4</v-btn>
+          <v-btn small>Button 5</v-btn>
+        </v-toolbar>
+      </div>
 
       <!-- default slot -->
         <pnbi-datatable-plus
-          :items="items" :headers="headers" tableIdentifier="123" fixed-header
-          :loading="loading" :total-items="totalItems" :search="request.search" @padinationEvent="onPaginationEvent">
+          :items="items" :headers="headers" tableIdentifier="123" fixed-header :loading="loading" :total-items="totalItems" :search="request.search" @padinationEvent="onPaginationEvent">
           <tr slot="row" slot-scope="props">
             <td>{{props.props.item.name}}</td>
             <td>{{props.props.item.age}}</td>
