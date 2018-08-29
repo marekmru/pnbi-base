@@ -92,9 +92,8 @@ export default {
 div >>> .pnbi-datatable__toolbar .v-toolbar__content {
   xxheight: 54px !important;
 }
-div >>> .v-input.pnbi-datatable__search {
-  height: 30px !important;
-  min-height: 30px !important;
+div >>> .v-input.pnbi-datatable__search .v-input__slot {
+    margin: 0 !important;
 }
 div >>> .v-input.pnbi-datatable__search .v-label {
   font-size: 14px;
