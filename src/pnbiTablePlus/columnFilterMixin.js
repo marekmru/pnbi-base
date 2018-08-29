@@ -1,5 +1,5 @@
 export default {
-  created() {
+  created () {
     this.localStorageName = this.tableIdentifier + '_tableheaders'
     const data = window.localStorage.getItem(this.localStorageName)
     if (data == null) {
@@ -8,7 +8,7 @@ export default {
     }
     this.localStorageHeaders = this.loadFromLocalStorage().headers
   },
-  mounted() {
+  mounted () {
     this.$updateHeaderDom(this.localStorageHeaders)
   },
   computed: {
@@ -23,7 +23,7 @@ export default {
       }
     }
   },
-  data() {
+  data () {
     return {
       localStorageName: null,
       localStorageHeaders: []
@@ -41,7 +41,7 @@ export default {
     }
   },
   methods: {
-    saveToLocalStorage(headers) {
+    saveToLocalStorage (headers) {
       if (headers == null) {
         headers = this.$attrs.headers.map(val => {
           val.selected = true
@@ -52,14 +52,14 @@ export default {
       storageObject.headers = headers
       window.localStorage.setItem(this.localStorageName, JSON.stringify(storageObject))
     },
-    loadFromLocalStorage() {
+    loadFromLocalStorage () {
       return JSON.parse(window.localStorage.getItem(this.localStorageName))
     },
-    updateHeaders() {
+    updateHeaders () {
       this.saveToLocalStorage(this.localStorageHeaders)
       this.$updateHeaderDom(this.localStorageHeaders)
     },
-    $updateHeaderDom(headers) {
+    $updateHeaderDom (headers) {
       const tbody = this.$el.querySelector('tbody')
       this.$nextTick(function () {
         headers.forEach(function (h, index) {

@@ -10,9 +10,10 @@ export default {
       default: false
     }
   },
-  mounted() {
+  mounted () {
     this.$nextTick(function () {
       const fixedHeader = this.fixedHeader
+      console.log('fixedHeader', fixedHeader)
       const fixedFooter = this.fixedFooter
       if (fixedHeader || fixedFooter) {
         datatable = this.$el.querySelector('.v-datatable')
@@ -24,13 +25,13 @@ export default {
       }
     })
   },
-  data() {
+  data () {
     return {
       headerIsFixed: false
     }
   },
   methods: {
-    throttle(fn, wait) {
+    throttle (fn, wait) {
       var time = Date.now()
       return function () {
         if ((time + wait - Date.now()) < 0) {
@@ -39,7 +40,7 @@ export default {
         }
       }
     },
-    handleResize(rect = tbody.getBoundingClientRect()) {
+    handleResize (rect = tbody.getBoundingClientRect()) {
       if (this.headerIsFixed) {
         scrollHeader.style.width = Math.round(rect.width) + 'px'
         this.$nextTick(function () {
@@ -64,7 +65,8 @@ export default {
         })
       }
     },
-    handleScroll(event) {
+    handleScroll (event) {
+      console.log('scroll')
       const rect = tbody.getBoundingClientRect()
       if (rect.top < HEADER_OFFSET && this.headerIsFixed === false) {
         this.headerIsFixed = true
@@ -80,7 +82,7 @@ export default {
         }
       }
     },
-    destroyed() {
+    destroyed () {
       window.removeEventListener('scroll', this.handleScroll)
       window.removeEventListener('resize', this.handleScroll)
     }

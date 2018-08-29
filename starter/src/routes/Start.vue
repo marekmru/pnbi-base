@@ -10,15 +10,15 @@
 
     <pnbi-datatable headline="Headline" @search="request.search = $event">
 
-      <div slot="primary-controls ">
-        fff
+      <div slot="primary-controls">
+        <v-btn small>button</v-btn>
       </div>
 
       <!-- secondary slot -->
 
       <!-- default slot -->
         <pnbi-datatable-plus
-          :items="items" :headers="headers" tableIdentifier="123" fixed-headers
+          :items="items" :headers="headers" tableIdentifier="123" fixed-header
           :loading="loading" :total-items="totalItems" :search="request.search" @padinationEvent="onPaginationEvent">
           <tr slot="row" slot-scope="props">
             <td>{{props.props.item.name}}</td>
