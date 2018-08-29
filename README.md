@@ -64,27 +64,20 @@ export default {
 #### src/main.js in Host App
 
 ```bash
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import router from './router'
-import numeral from 'numeral'
-import moment from 'moment'
-//...
-
+import config from './pnbi.base.config'
+import router from './routes'
+import store from './store'
+import '@/config/filters.js'
+// import '@/config/highcharts.js'
+import '@/config/packages.js'
 import PnbiBase from 'pnbi-base/src'
-import de from 'vee-validate/dist/locale/de'
-import VeeValidate, {
-  Validator
-} from 'vee-validate'
 
-const locale = 'de'
-Validator.localize(locale, de)
-Vue.use(VeeValidate)
-momentDuration(moment)
-moment.locale(locale)
-Vue.use(PnbiBase)
+Vue.use(PnbiBase, {
+  router,
+  config
+})
 Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
@@ -96,6 +89,48 @@ new Vue({
   },
   template: '<App/>'
 })
+```
+
+##$Helpers / Convenience
+
+### Loader
+
+> Show / Hide loader
+
+```bash
+this.$loader(true) // this.$loader(false)
+```
+
+> or
+
+```bash
+this.$bus.$emit('LOADING', true)
+```
+
+> or
+
+```bash
+import EventBus from 'pnbi-base/src/event-bus'
+EventBus.$emit('LOADING', payload)
+```
+
+### EventBus
+
+> Events
+
+```bash
+export const LOADING = 'LOADING'
+export const PROFILE_UPDATED = 'PROFILE_UPDATED'
+export const CONFIG_UPDATED = 'CONFIG_UPDATED'
+export const ERROR = 'ERROR'
+export const FORBIDDEN = 'FORBIDDEN'
+export const TRACK = 'TRACK'
+```
+
+> Use EventBus in components
+
+```bash
+this.$bus.$emit('LOADING', true)
 ```
 
 ##Available PNBI Components

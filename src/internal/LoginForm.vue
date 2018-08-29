@@ -10,7 +10,7 @@
 
             <v-card-text>
               <v-text-field @focus="focus" label="Nutzername" v-model="user.username" :rules="rules.nameRules" required></v-text-field>
-              <v-text-field @focus="focus" label="Passwort" v-model="user.password" :rules="rules.nameRules" required :append-icon="passwordVisible ? 'visibility' : 'visibility_off'" :append-icon-cb="() => (passwordVisible = !passwordVisible)" :type="passwordVisible ? 'text' : 'password'"></v-text-field>
+              <v-text-field @focus="focus" label="Passwort" v-model="user.password" :rules="rules.nameRules" required :append-icon="passwordVisible ? 'visibility' : 'visibility_off'" @click:append="passwordVisible = !passwordVisible" :type="passwordVisible ? 'text' : 'password'"></v-text-field>
             </v-card-text>
 
             <v-card-actions>

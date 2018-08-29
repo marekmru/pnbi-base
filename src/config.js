@@ -4,11 +4,11 @@ import EventBus, {
   ERROR
 } from './event-bus'
 
-export function setAjaxConfig (options) {
+export function setAjaxConfig(options) {
   const router = options.router
   const biBaseConfig = options.config
 
-  function isErrorIgnoreRoute () {
+  function isErrorIgnoreRoute() {
     if (router.history.current.name == null) {
       return true
     }
