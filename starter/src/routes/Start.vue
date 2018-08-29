@@ -32,14 +32,11 @@
   </pnbi-page>
 </template>
 <script>
-// import TablePlusMixin from 'pnbi-base/src/internal/TablePlusMixin'
-// import {PnbiTable, PnbiTablePlus} from 'pnbi-base/src'
+
 export default {
-  // mixins: [TablePlusMixin],
   mounted () {
     this.getDataFromApi()
       .then(data => {
-        console.log('data', data)
         this.items = data.items
         this.totalItems = data.totalItems
       })
