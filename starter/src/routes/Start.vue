@@ -57,9 +57,9 @@ export default {
         search: null
       },
       headers: [
-        {text: 'Name 2', value: 'name'},
-        {text: 'Age', value: 'age'},
-        {text: 'Value', value: 'value'}
+        { text: 'Name 2', value: 'name' },
+        { text: 'Age', value: 'age' },
+        { text: 'Value', value: 'value' }
       ]
     }
   },
@@ -76,26 +76,26 @@ export default {
       this.loading = true
       return new Promise((resolve, reject) => {
         let items = [
-          {name: 'ab', age: 1, value: 10},
-          {name: 'abc', age: 2, value: 11},
-          {name: 'abcd', age: 3, value: 5},
-          {name: 'abcd', age: 4, value: 5},
-          {name: 'abcd', age: 5, value: 5},
-          {name: 'abcd', age: 6, value: 5},
-          {name: 'abcd', age: 7, value: 5},
-          {name: 'abcd', age: 8, value: 5},
-          {name: 'abcd', age: 9, value: 5},
-          {name: 'abcd', age: 10, value: 5},
-          {name: 'abcd', age: 11, value: 5},
-          {name: 'abcd', age: 12, value: 5},
-          {name: 'abcd', age: 13, value: 5},
-          {name: 'abcd', age: 14, value: 5},
-          {name: 'abcd', age: 15, value: 5},
-          {name: 'abcd', age: 16, value: 5},
-          {name: 'abcd', age: 17, value: 5},
-          {name: 'abcd', age: 18, value: 5},
-          {name: 'abcd', age: 19, value: 5},
-          {name: 'abcd', age: 20, value: 5}
+          { name: 'ab', age: 1, value: 10 },
+          { name: 'abc', age: 2, value: 11 },
+          { name: 'abcd', age: 3, value: 5 },
+          { name: 'abcd', age: 4, value: 5 },
+          { name: 'abcd', age: 5, value: 5 },
+          { name: 'abcd', age: 6, value: 5 },
+          { name: 'abcd', age: 7, value: 5 },
+          { name: 'abcd', age: 8, value: 5 },
+          { name: 'abcd', age: 9, value: 5 },
+          { name: 'abcd', age: 10, value: 5 },
+          { name: 'abcd', age: 11, value: 5 },
+          { name: 'abcd', age: 12, value: 5 },
+          { name: 'abcd', age: 13, value: 5 },
+          { name: 'abcd', age: 14, value: 5 },
+          { name: 'abcd', age: 15, value: 5 },
+          { name: 'abcd', age: 16, value: 5 },
+          { name: 'abcd', age: 17, value: 5 },
+          { name: 'abcd', age: 18, value: 5 },
+          { name: 'abcd', age: 19, value: 5 },
+          { name: 'abcd', age: 20, value: 5 }
         ]
         while (items.length < 300) {
           items.push({

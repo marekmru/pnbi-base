@@ -66,7 +66,6 @@ export default {
       }
     },
     handleScroll (event) {
-      console.log('scroll')
       const rect = tbody.getBoundingClientRect()
       if (rect.top < HEADER_OFFSET && this.headerIsFixed === false) {
         this.headerIsFixed = true
