@@ -1,39 +1,47 @@
 <template>
-  <v-layout column>
-    <h1 class="bc-page-title">Profile</h1>
-    <v-flex class="text-center">
-      <v-card>
-        <v-card-text class="pa-0">
-          <v-layout>
-            <v-flex offset-xs0 xs12 class="avatar-container pb-3">
-              <div>
-                <v-avatar color="primary">
-                  <span class="white--text">{{profile.short}}</span>
-                </v-avatar>
-              </div>
-              <v-layout>
-                <v-flex>
-                  <h2 class="headline">
-                    {{profile.realname}}
-                    <v-chip v-if="profile.admin" color="accent" text-color="white">ADMIN</v-chip>
-                  </h2>
-                  <h3 class="subheadingfont text--grey lighten-2">
-                    <span class="grey--text">{{profile.username}}</span>
-                  </h3>
-                  <h3 class="subheadingfont text--grey lighten-2">
-                    <span class="grey--text ml-1">{{email}}
-                      <v-icon v-if="email === 'No email'" color="orange" small>warning</v-icon>
-                    </span>
-                  </h3>
-                </v-flex>
-              </v-layout>
+  <pnbi-page header-type="2" small>
+    <pnbi-card headline="Profile">
+      <!-- Reset password: to be implemented
+      <div slot="primary-controls">
+        <v-btn color="primary">
+          <v-icon left>vpn_key</v-icon>Password reset</v-btn>
+      </div>
+      -->
+      <v-layout row wrap>
+        <v-flex xs12>
+          <v-card flat>
+            <v-card-text class="title">
+              <v-icon class="mr-2">account_box</v-icon>{{profile.username}}
+              <v-chip v-if="profile.admin" color="accent" text-color="white">ADMIN</v-chip>
+            </v-card-text>
+          </v-card>
+        </v-flex>
+        <v-flex xs10 offset-xs1>
+          <v-card flat>
+            <v-card-text class="subheading">{{profile.realname}} - {{profile.language}}</v-card-text>
+            <hr>
+            <v-divider></v-divider>
+          </v-card>
+        </v-flex>
+        <v-flex xs10 offset-xs1>
+          <v-layout row wrap class="ml-3 profile-container">
+            <v-flex xs1>Email:</v-flex>
+            <v-flex xs11 class="pl-1">{{email}}
+              <v-icon v-if="email === 'No email'" color="orange" small>warning</v-icon>
+            </v-flex>
+            <v-flex xs1>Role:</v-flex>
+            <v-flex xs11 class="mt-1">
+              <v-chip class="mx-1" v-if="role" outline color="accent" v-for="item in role" :key="item.name">{{item}}</v-chip>
+            </v-flex>
+            <v-flex xs1>Board:</v-flex>
+            <v-flex xs11 class="mt-1">
+              <v-chip class="mx-1" v-if="board" outline color="accent" v-for="item in board" :key="item.name">{{item}}</v-chip>
             </v-flex>
           </v-layout>
-        </v-card-text>
-      </v-card>
-    </v-flex>
-  </v-layout>
-
+        </v-flex>
+      </v-layout>
+    </pnbi-card>
+  </pnbi-page>
 </template>
 
 <script>
@@ -58,6 +66,16 @@ export default {
         return this.profile.email
       }
       return 'No email'
+    },
+    role () {
+      if (this.profile.role) {
+        return this.profile.role.map((val) => val.rolename)
+      }
+    },
+    board () {
+      if (this.profile.board) {
+        return this.profile.board.map((val) => val.name)
+      }
     }
   },
   data () {
@@ -79,36 +97,15 @@ export default {
 
 </script>
 <style lang="scss" scoped>
+.v-icon.material-icons {
+  font-size: 90px;
+}
+.profile-container {
+  > div {
+    margin: 15px 0 15px 0;
+  }
+}
 .v-chip {
-  margin-right: -36px;
   font-weight: 700 !important;
-}
-.avatar-container {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  > div:first-child {
-    height: 70px;
-    background: linear-gradient(to bottom, #232526, #414345);
-    position: relative;
-    margin-bottom: 52px;
-  }
-  > div:nth-child(2) {
-    text-align: center;
-  }
-}
-
-.v-avatar {
-  width: 70px !important;
-  height: 70px !important;
-  position: absolute;
-  bottom: -35px;
-  left: calc(50% - 30px);
-  box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.25);
-  span {
-    font-size: 40px;
-    letter-spacing: -0.05em;
-    margin-left: -5px;
-    line-height: 40px;
-    font-weight: 700;
-  }
 }
 </style>

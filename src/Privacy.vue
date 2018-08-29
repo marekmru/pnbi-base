@@ -148,4 +148,7 @@ export default {
   cursor: pointer;
   color: #d70f14;
 }
+.v-card__text {
+  padding-left: 0;
+}
 </style>
