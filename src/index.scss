@@ -11,12 +11,11 @@
 }
 
 .pnbi-tablehead-fixed{
-  
+  padding-top: 8px;
   position: fixed;
   top: 48px;
   background-color: darken(white, 1); 
   box-shadow: 0 7px 8px rgba(0, 0, 0, 0.1)  ;
-
 }
 .pnbi-tablehead-fixed + tbody{
    tr:first-child > td{
