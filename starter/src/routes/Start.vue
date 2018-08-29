@@ -10,7 +10,7 @@
 
     <pnbi-datatable headline="Headline"
       @search="request.search = $event"
-      button-label="sfsdf">
+      :button-label="false">
 
       <div slot="primary-controls">
         <v-btn small

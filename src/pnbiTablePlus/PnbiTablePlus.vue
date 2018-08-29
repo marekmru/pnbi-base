@@ -17,7 +17,7 @@
                 </v-subheader>
                 <v-list-tile v-for="header in localStorageHeaders" :key="header.text">
                   <v-list-tile-title>
-                    <v-checkbox :label="header.text" v-model="header.selected" :value="header.selected"></v-checkbox>
+                    <v-checkbox :label="header.text" @change="updateHeaders()" v-model="header.selected" :value="header.selected"></v-checkbox>
                   </v-list-tile-title>
                 </v-list-tile>
               </v-list>
@@ -25,7 +25,7 @@
           </v-layout>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" @click="customiseDialog = false" flat>Cancel</v-btn>
+            <v-btn color="primary" @click="customiseDialog = false" flat>Close</v-btn>
           </v-card-actions>
         </v-card>
     </v-dialog>
