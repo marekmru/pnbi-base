@@ -209,7 +209,7 @@ Vuetify Datatable
 - title: Smaller Headline for second Table on a page
 - button-label: "Neues Element"
 - flat | default: false; true|false
-- button-customise | default: false. Set it on 
+- customise-label | default: false. Set the label for customise feature 
 
 #### Events / Emits
 
@@ -300,8 +300,7 @@ request: {
     "descending":false,
     "page":1,
     "rowsPerPage":5,
-    "sortBy":"name",
-    "totalItems":20
+    "sortBy":"name"
     },
   search: null
 }
