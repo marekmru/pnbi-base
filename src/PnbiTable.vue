@@ -8,6 +8,12 @@
       <slot name="primary-controls">
       </slot>
 
+      <!-- customise button for pnbi-datatable-plus -->
+      <div v-if="$attrs['customise-label']">
+        <v-btn small
+          @click.stop="$bus.$emit('customiseEvent')">{{$attrs['customise-label']}}</v-btn>
+      </div>
+
       <v-flex xs3>
         <v-text-field clearable class="pnbi-datatable__search" solo-inverted flat v-model="search" label="Suche…" append-icon="search"></v-text-field>
       </v-flex>
@@ -18,9 +24,10 @@
     </v-toolbar>
 
     <!-- secondary slot -->
-    <v-toolbar v-if="$slots['secondary-controls']" flat color="white" class="pnbi-datatable__toolbar pb-1 pt-2">
+    <slot name="secondary-controls"></slot>
+    <!-- <v-toolbar v-if="$slots['secondary-controls']" flat color="white" class="pnbi-datatable__toolbar pb-1 pt-2">
       <slot class="px-4 py-3 pnbi-secondary-controls" name="secondary-controls"></slot>
-    </v-toolbar>
+    </v-toolbar> -->
 
     <!-- default slot -->
     <slot>
@@ -46,6 +53,7 @@ export default {
     }
   },
   mounted () {
+    console.log('this', this)
     // :class="{'elevation-1': !flat}"
     if (this.flat === false) {
       this.$el.classList.add('elevation-1')
@@ -90,7 +98,7 @@ export default {
   padding-right: 0;
 }
 div >>> .pnbi-datatable__toolbar .v-toolbar__content {
-  xxheight: 54px !important;
+  height: 54px !important;
 }
 div >>> .v-input.pnbi-datatable__search .v-input__slot {
     margin: 0 !important;

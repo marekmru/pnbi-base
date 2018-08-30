@@ -10,12 +10,11 @@
 
     <pnbi-datatable headline="Headline"
       @search="request.search = $event"
-      :button-label="false">
+      :button-label="false" customise-label="Customise">
 
-      <div slot="primary-controls">
-        <v-btn small
-          @click.stop="$bus.$emit('customiseEvent')">customise</v-btn>
-      </div>
+      <!-- <div slot="primary-controls">
+        sds
+      </div> -->
 
       <!-- secondary slot -->
       <div slot="secondary-controls">

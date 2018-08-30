@@ -209,6 +209,7 @@ Vuetify Datatable
 - title: Smaller Headline for second Table on a page
 - button-label: "Neues Element"
 - flat | default: false; true|false
+- button-customise | default: false. Set it on 
 
 #### Events / Emits
 
