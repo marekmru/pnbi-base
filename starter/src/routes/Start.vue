@@ -20,7 +20,8 @@
       <!-- secondary slot -->
       <div slot="secondary-controls">
         <v-toolbar flat color="white">
-          <v-btn small>Button</v-btn>
+          <v-text-field style="max-width:150px" class="pnbi-datatable__search" solo label="Filter 1"></v-text-field>
+          <v-text-field style="max-width:150px" class="pnbi-datatable__search" solo label="Filter 2"></v-text-field>
           <v-btn small>Button 2</v-btn>
           <v-btn small>Button 3</v-btn>
           <v-btn small>Button 4</v-btn>
@@ -30,11 +31,19 @@
 
       <!-- default slot -->
         <pnbi-datatable-plus
-          :items="items" :headers="headers" tableIdentifier="123" fixed-header :loading="loading" :total-items="totalItems" :search="request.search" @padinationEvent="onPaginationEvent">
+          :items="items" :headers="headers" tableIdentifier="123" :loading="loading" :total-items="totalItems" :search="request.search" @padinationEvent="onPaginationEvent">
           <tr slot="row" slot-scope="props">
             <td>{{props.props.item.name}}</td>
             <td>{{props.props.item.age}}</td>
             <td>{{props.props.item.value}}</td>
+            <td>{{props.props.item.value1}}</td>
+            <td>{{props.props.item.value2}}</td>
+            <td>{{props.props.item.value3}}</td>
+            <td>{{props.props.item.value4}}</td>
+            <td>{{props.props.item.value5}}</td>
+            <td>{{props.props.item.value6}}</td>
+            <td>{{props.props.item.value7}}</td>
+            <td>{{props.props.item.value8}}</td>
           </tr>
         </pnbi-datatable-plus>
 
@@ -70,7 +79,15 @@ export default {
       headers: [
         { text: 'Name 2', value: 'name' },
         { text: 'Age', value: 'age' },
-        { text: 'Value', value: 'value' }
+        { text: 'Value', value: 'value' },
+        { text: 'Value1', value: 'value1' },
+        { text: 'Value2', value: 'value2' },
+        { text: 'Value3', value: 'value3' },
+        { text: 'Value4', value: 'value4' },
+        { text: 'Value5', value: 'value5' },
+        { text: 'Value6', value: 'value6' },
+        { text: 'Value7', value: 'value7' },
+        { text: 'Value8', value: 'value8' }
       ]
     }
   },
@@ -86,33 +103,20 @@ export default {
     getDataFromApi () {
       this.loading = true
       return new Promise((resolve, reject) => {
-        let items = [
-          { name: 'ab', age: 1, value: 10 },
-          { name: 'abc', age: 2, value: 11 },
-          { name: 'abcd', age: 3, value: 5 },
-          { name: 'abcd', age: 4, value: 5 },
-          { name: 'abcd', age: 5, value: 5 },
-          { name: 'abcd', age: 6, value: 5 },
-          { name: 'abcd', age: 7, value: 5 },
-          { name: 'abcd', age: 8, value: 5 },
-          { name: 'abcd', age: 9, value: 5 },
-          { name: 'abcd', age: 10, value: 5 },
-          { name: 'abcd', age: 11, value: 5 },
-          { name: 'abcd', age: 12, value: 5 },
-          { name: 'abcd', age: 13, value: 5 },
-          { name: 'abcd', age: 14, value: 5 },
-          { name: 'abcd', age: 15, value: 5 },
-          { name: 'abcd', age: 16, value: 5 },
-          { name: 'abcd', age: 17, value: 5 },
-          { name: 'abcd', age: 18, value: 5 },
-          { name: 'abcd', age: 19, value: 5 },
-          { name: 'abcd', age: 20, value: 5 }
-        ]
+        let items = []
         while (items.length < 300) {
           items.push({
             name: 'abc' + Math.random(),
             age: Math.random() * Math.random(),
-            value: 56
+            value: 56,
+            value1: 1,
+            value2: 2,
+            value3: 3,
+            value4: 4,
+            value5: 5,
+            value6: 6,
+            value7: 7,
+            value8: 8
           })
         }
         const { sortBy, descending, page, rowsPerPage } = this.request.pagination
