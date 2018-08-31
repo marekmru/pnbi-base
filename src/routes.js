@@ -4,43 +4,40 @@ import Imprint from './Imprint'
 import Privacy from './Privacy'
 import Profile from './Profile'
 import PageNotFound from './internal/PageNotFound'
-import bus, {
-  TRACK
-} from './event-bus'
+import bus, { TRACK } from './event-bus'
 
 export function setRoutes (router) {
-  router.addRoutes([{
-    path: '/',
-    name: 'login',
-    component: Login
-  },
-  {
-    path: '/reset/:code',
-    name: 'reset',
-    component: Reset
-  },
-  {
-    path: '/imprint',
-    name: 'imprint',
-    component: Imprint
-  },
-  {
-    path: '/privacy-policy',
-    name: 'privacy',
-    component: Privacy
-
-  },
-  {
-    path: '/profile',
-    name: 'profile',
-    component: Profile
-
-  },
-  {
-    path: '*',
-    name: 'notfound',
-    component: PageNotFound
-  }
+  router.addRoutes([
+    {
+      path: '/',
+      name: 'login',
+      component: Login
+    },
+    {
+      path: '/reset/:code',
+      name: 'reset',
+      component: Reset
+    },
+    {
+      path: '/imprint',
+      name: 'imprint',
+      component: Imprint
+    },
+    {
+      path: '/privacy-policy',
+      name: 'privacy',
+      component: Privacy
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile
+    },
+    {
+      path: '*',
+      name: 'notfound',
+      component: PageNotFound
+    }
   ])
   const tealiumEnabler = (a, b, c, d) => {
     a = '//tags.tiqcdn.com/utag/plan-net-training/b.zimmermann/dev/utag.js'
@@ -65,7 +62,8 @@ export function setRoutes (router) {
         if (window.utag != null) {
           resolve()
         } else {
-          int = window.setInterval(() => { // hmmm...
+          int = window.setInterval(() => {
+            // hmmm...
             if (window.utag != null) {
               window.clearInterval(int)
               resolve()
@@ -78,8 +76,8 @@ export function setRoutes (router) {
       resolve().then(() => {
         const pageName = to.meta != null ? to.meta.title : 'No page name'
         bus.$emit(TRACK, {
-          'tealium_event': 'page_view',
-          'page_name': pageName
+          tealium_event: 'page_view',
+          page_name: pageName
         })
         if (from.name === 'login' && to.name !== 'reset') {
           bus.$emit(TRACK, {
