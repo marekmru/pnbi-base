@@ -1,7 +1,8 @@
 <template>
-  <v-container>
-    <v-layout row wrap>
-      <v-flex class="headline">Datenschutzerklärung</v-flex>
+  <pnbi-page header-type="2" small>
+
+    <pnbi-card headline="Datenschutzerklärung">
+
       <v-flex d-flex xs12>
         <v-layout column>
           <v-flex>
@@ -121,8 +122,8 @@
           </v-flex>
         </v-layout>
       </v-flex>
-    </v-layout>
-  </v-container>
+    </pnbi-card>
+  </pnbi-page>
 </template>
 
 <script>

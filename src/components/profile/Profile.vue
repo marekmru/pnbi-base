@@ -8,9 +8,9 @@
       </div>
       -->
       <v-layout row wrap>
-        <v-flex xs12>
+        <v-flex xs10 offset-xs1 class="ml-5">
           <v-card flat>
-            <v-card-text class="title">
+            <v-card-text class="title pl-0">
               <v-icon class="mr-2">account_box</v-icon>{{profile.username}}
               <v-chip v-if="profile.admin" color="accent" text-color="white">ADMIN</v-chip>
             </v-card-text>
@@ -22,8 +22,6 @@
             <hr>
             <v-divider></v-divider>
           </v-card>
-        </v-flex>
-        <v-flex xs10 offset-xs1>
           <v-layout row wrap class="ml-3 profile-container">
             <v-flex xs1>Email:</v-flex>
             <v-flex xs11 class="pl-1">{{email}}
