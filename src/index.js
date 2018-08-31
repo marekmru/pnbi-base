@@ -1,32 +1,22 @@
-import PnbiWebapp from './PnbiWebapp'
-import PnbiPage from './PnbiPage'
-import PnbiCard from './PnbiCard'
-import PnbiDialog from './PnbiDialog'
-import {
-  setRoutes
-} from './routes.js'
-import {
-  setAjaxConfig
-} from './config.js'
-import {
-  setApiConfig
-} from './Auth.js'
-import {
-  setCookieConfig
-} from './internal/cookie.service.js'
+import PnbiWebapp from './components/pnbi-webapp/PnbiWebapp'
+import PnbiPage from './components/pnbi-page/PnbiPage'
+import PnbiCard from './components/pnbi-card/PnbiCard'
+import PnbiDialog from './components/pnbi-dialog/PnbiDialog'
+import { setRoutes } from './internal/routes.js'
+import { setAjaxConfig } from './internal/config.js'
+import { setApiConfig } from './Auth.js'
+import { setCookieConfig } from './internal/cookie.service.js'
 
-import PnbiDataTable from './PnbiTable'
-import PnbiDataTablePlus from './PnbiTablePlus'
-import PnbiEmpty from './PnbiEmpty'
-import bus, {
-  LOADING
-} from './event-bus'
+import PnbiDataTable from './components/pnbi-table/PnbiTable'
+import PnbiDataTablePlus from './components/pnbi-table-plus/PnbiTablePlus'
+import PnbiEmpty from './components/pnbi-empty/PnbiEmpty'
+import bus, { LOADING } from './event-bus'
 import helper from './helper'
 // app wide styles, fonts
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
-import './index.scss'
-import './typography.scss'
+import './styles/index.scss'
+import './styles/typography.scss'
 
 const install = (Vue, options) => {
   Vue.prototype.$bus = bus
@@ -70,6 +60,4 @@ export default {
   install
 }
 
-export {
-  PnbiWebapp
-}
+export { PnbiWebapp }
