@@ -110,7 +110,9 @@ $perc: random(20) + 60%;
   background: linear-gradient(
     #{random(50) + 100}deg,
     darken(#d70f14, 10) 70%,
-    #d70f14 70%
+    26 #d70f14 70%
   );
 }
 </style>
+
+

@@ -8,9 +8,8 @@
 </template>
 
 <script>
-
+console.log('refactored snackbar')
 export default {
-
   mounted () {
     this.$bus.$on('SHOW_NOTIFICATION', (dto) => {
       this.snack = Object.assign(this.snack, dto)

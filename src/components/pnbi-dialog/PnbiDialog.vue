@@ -1,5 +1,13 @@
 <template>
+
   <v-dialog :scrollable="scrollable" lazy v-model="isOpen" :max-width="width">
+
+    <!-- start: button for showcase only -->
+    <v-btn slot="activator" color="red lighten-2" dark>
+      Click Me
+    </v-btn>
+    <!-- end: button for showcase only -->
+
     <v-card tile>
       <v-toolbar dense card dark color="accent">
         <v-toolbar-title class="ml-0">
@@ -8,10 +16,12 @@
         <v-spacer></v-spacer>
       </v-toolbar>
       <v-card-text class="px-3 py-3">
+        <!-- @slot default dialog content -->
         <slot name="dialog-content"></slot>
       </v-card-text>
       <v-card-actions class="pl-3 pr-3 py-3" style="background-color: rgba(100,100,100, .025)">
         <v-spacer></v-spacer>
+        <!-- @slot default dialog actions -->
         <slot name="dialog-actions"></slot>
       </v-card-actions>
     </v-card>
@@ -24,14 +34,23 @@ import DialogMixin from '../../DialogMixin'
 
 export default {
   props: {
+    /**
+     * Sets dialog width
+     */
     width: {
       type: String | Number,
       default: '640px'
     },
+    /**
+     * Sets scrollable variable to true or false
+     */
     scrollable: {
       type: Boolean,
       default: false
     },
+    /**
+     * Sets dialog headline
+     */
     title: {
       type: String,
       required: true,
@@ -43,3 +62,6 @@ export default {
 </script>
 <style scoped>
 </style>
+
+
+

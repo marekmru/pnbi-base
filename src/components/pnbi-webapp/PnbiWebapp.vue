@@ -80,7 +80,7 @@
     <v-content v-if="isNavVisible" class="pt-0">
       <v-container :fluid="clientWidth < 1260" class="grey lighten-4">
         <slot name="router"></slot>
-        <snackbar></snackbar>
+        <pnbi-snackbar></pnbi-snackbar>
       </v-container>
     </v-content>
     <v-content v-else class="pa-0  ma-0 auth-routes">
@@ -135,11 +135,11 @@ import {
   ERROR
 } from '../../event-bus'
 import Auth from '../../Auth'
-import Snackbar from '../snackbar/Snackbar'
+import PnbiSnackbar from '../pnbi-snackbar/PnbiSnackbar'
 
 export default {
   components: {
-    Snackbar
+    PnbiSnackbar
   },
   mounted () {
     this.$nextTick(() => {
@@ -340,3 +340,4 @@ pre {
   margin: 0;
 }
 </style>
+

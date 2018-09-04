@@ -1,16 +1,26 @@
+/**
+ * @mixin
+ */
 export default {
   props: {
+    /**
+     * Sets headline
+     */
     headline: {
       default: '',
       type: String,
       required: false
     },
+    /**
+     * Sets title
+     */
     title: {
       required: false,
       type: String,
       default: ''
     }
   },
+
   mounted () {
     if (this.headline.length) {
       this.$el.querySelector('.card-headline').classList.add('headline')

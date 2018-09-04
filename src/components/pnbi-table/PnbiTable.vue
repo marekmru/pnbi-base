@@ -167,3 +167,4 @@ div >>> .v-input.pnbi-datatable__search .v-input__control {
   background-color: rgba(204, 212, 218, 0.6) !important;
 }
 </style>
+
