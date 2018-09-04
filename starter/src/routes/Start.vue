@@ -8,7 +8,7 @@
       </ul>
     </div>
 
-    <pnbi-datatable headline="Headline"
+    <pnbi-datatable headline="Datatable plus"
       @search="request.search = $event"
       :button-label="false" customise-label="Customise">
 
@@ -122,7 +122,6 @@ export default {
 
         // BE search
         if (this.request.search) {
-          console.log('this.request.search', this.request.search)
           items = items.filter(i => {
             return i.age === parseInt(this.request.search)
           })
