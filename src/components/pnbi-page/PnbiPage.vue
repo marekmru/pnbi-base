@@ -17,18 +17,30 @@
 
 export default {
   props: {
+     /**
+     * Sets small header image 
+     */
     small: {
       type: Boolean | null,
       default: false
     },
+     /**
+     * Sets medium header image 
+     */
     medium: {
       type: Boolean | null,
       default: false
     },
+     /**
+     * Sets large header image 
+     */
     large: {
       type: Boolean | null,
       default: false
     },
+     /**
+     * Sets 1 of 3 header image type 
+     */
     headerType: {
       type: String | null,
       default: '1'
@@ -58,11 +70,6 @@ export default {
     } else {
       header.classList.add('gradient-2')
     }
-  },
-  components: {
-  },
-  computed: {
-
   }
 }
 </script>
@@ -78,14 +85,15 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  top: 48px;
+  top: 0;
+  /*top: 48px;*/
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   /* z-index: 0; */
 }
 .page-header-content {
-  height: 170px;
+  /*height: 170px;*/
 }
 </style>
 <style scoped lang="scss">
