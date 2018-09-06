@@ -12,6 +12,7 @@ Vue.use(PnbiBase, {
   router,
   config
 })
+
 Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
