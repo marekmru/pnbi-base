@@ -3,9 +3,9 @@
   <v-dialog :scrollable="scrollable" lazy v-model="isOpen" :max-width="width">
 
     <!-- start: button for showcase only -->
-    <v-btn slot="activator" color="red lighten-2" dark>
+<!--     <v-btn slot="activator" color="red lighten-2" dark>
       Click Me
-    </v-btn>
+    </v-btn> -->
     <!-- end: button for showcase only -->
 
     <v-card tile>
@@ -13,7 +13,6 @@
         <v-toolbar-title class="ml-0">
           {{title}}
         </v-toolbar-title>
-        <v-spacer></v-spacer>
       </v-toolbar>
       <v-card-text class="px-3 py-3">
         <!-- @slot default dialog content -->
