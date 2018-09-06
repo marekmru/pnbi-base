@@ -17,7 +17,7 @@
       </div> -->
 
       <!-- secondary slot -->
-      <div slot="secondary-controls">
+      <!-- <div slot="secondary-controls">
         <v-toolbar flat color="white">
           <v-text-field style="max-width:150px" class="pnbi-datatable__search" solo label="Filter 1"></v-text-field>
           <v-text-field style="max-width:150px" class="pnbi-datatable__search" solo label="Filter 2"></v-text-field>
@@ -26,7 +26,7 @@
           <v-btn small>Button 4</v-btn>
           <v-btn small>Button 5</v-btn>
         </v-toolbar>
-      </div>
+      </div> -->
 
       <!-- default slot -->
         <pnbi-datatable-plus
