@@ -43,11 +43,19 @@ export default {
   name: 'PnbiDatatable',
   mixins: [ContentContainerMixin],
   props: {
+    /**
+    * Use for text in creation button.
+    * set is to false if button should be hidden
+    */
     buttonLabel: {
       type: String | Boolean,
       default: 'Neu',
       required: true
     },
+    /**
+    * If defined customise button is visible.
+    * value is used as button text
+    */
     customiseLabel: {
       typ: String,
       default: 'Customise'
