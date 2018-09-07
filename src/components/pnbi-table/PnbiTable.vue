@@ -9,15 +9,9 @@
       </slot>
 
       <!-- customise button for pnbi-datatable-plus -->
-<!--       <div v-if="$attrs['customise-label']">
+      <div v-if="customiseLabel">
         <v-btn small
-          @click.stop="$bus.$emit('customiseEvent')">{{$attrs['customise-label']}}</v-btn>
-      </div> -->
-      <div v-if="$attrs['customise-label']">
-        <v-btn small color="accent" flat
-          @click.stop="$bus.$emit('customiseEvent')">
-            <v-icon small class="mr-1">table_chart</v-icon>{{$attrs['customise-label']}}
-          </v-btn>
+          @click.stop="$bus.$emit('customiseEvent')">{{customiseLabel}}</v-btn>
       </div>
 
       <v-flex xs3>
@@ -30,7 +24,7 @@
     </v-toolbar>
 
     <!-- secondary slot -->
-    <slot name="secondary-controls" v-if="$slots['secondary-controls']"></slot>
+    <slot name="secondary-controls"></slot>
     <!-- <v-toolbar v-if="$slots['secondary-controls']" flat color="white" class="pnbi-datatable__toolbar pb-1 pt-2">
       <slot class="px-4 py-3 pnbi-secondary-controls" name="secondary-controls"></slot>
     </v-toolbar> -->
@@ -54,12 +48,17 @@ export default {
       default: 'Neu',
       required: true
     },
+    customiseLabel: {
+      typ: String,
+      default: 'Customise'
+    },
     flat: {
       type: Boolean | null,
       default: false
     }
   },
   mounted () {
+    console.log('this', this)
     // :class="{'elevation-1': !flat}"
     if (this.flat === false) {
       this.$el.classList.add('elevation-1')
@@ -131,10 +130,12 @@ div >>> .v-input.pnbi-datatable__search .v-input__control {
 }
 /*shared*/
 .pnbi-datatable.dark {
+  xxxbackground-color: #3f515d;
   xxxcolor: #fff;
 }
 
 .pnbi-datatable.dark >>> thead tr th {
+  xxxbackground-color: #fafafa;
   color: rgba(0, 0, 0, 0.87);
   color: #3f515d;
 }
