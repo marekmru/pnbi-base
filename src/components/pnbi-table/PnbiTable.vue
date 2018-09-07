@@ -9,9 +9,9 @@
       </slot>
 
       <!-- customise button for pnbi-datatable-plus -->
-      <div v-if="customiseLabel">
-        <v-btn small
-          @click.stop="$bus.$emit('customiseEvent')">{{customiseLabel}}</v-btn>
+      <div v-if="customizeLabel">
+        <v-btn small color="accent"
+          @click.stop="$bus.$emit('customizeEvent')">{{customizeLabel}}</v-btn>
       </div>
 
       <v-flex xs3>
@@ -56,9 +56,9 @@ export default {
     * If defined customise button is visible.
     * value is used as button text
     */
-    customiseLabel: {
-      typ: String,
-      default: 'Customise'
+    customizeLabel: {
+      typ: String | Boolean,
+      default: false
     },
     flat: {
       type: Boolean | null,

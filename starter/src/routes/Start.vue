@@ -10,7 +10,7 @@
 
     <pnbi-datatable headline="Datatable plus"
       @search="request.search = $event"
-      :button-label="false" customise-label="Customise">
+      :button-label="false" customize-label="Customize">
 
       <!-- <div slot="primary-controls">
         sds
