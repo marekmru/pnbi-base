@@ -9,11 +9,11 @@
           <v-layout row wrap>
             <v-flex>
               <v-toolbar color="accent">
-                <v-toolbar-title class="white--text">Customise colums</v-toolbar-title>
+                <v-toolbar-title class="white--text">{{dialogTitle}}</v-toolbar-title>
               </v-toolbar>
               <v-list>
                 <v-subheader>
-                  Select visible column
+                  {{dialogSubtitle}}
                 </v-subheader>
                 <v-list-tile v-for="header in localStorageHeaders" :key="header.text">
                   <v-list-tile-title>
@@ -47,10 +47,28 @@ export default {
   name: 'pnbi-datatable-plus',
   mixins: [ColumnFilterMixin, FixedMixin],
   props: {
+    /**
+    * Uniq identifier for table.
+    * used for saving the customised settings in localstorage
+    */
     tableIdentifier: {
       type: String,
       required: true,
       default: 'default'
+    },
+    /**
+    * Defined the dialog title for customised dialog.
+    */
+    dialogTitle: {
+      type: String,
+      default: 'Customise table'
+    },
+    /**
+    * Defined the dialog subtitle for customised dialog.
+    */
+    dialogSubtitle: {
+      type: String,
+      default: 'Select visible columns'
     }
   },
   data: function () {
