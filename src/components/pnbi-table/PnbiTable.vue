@@ -1,6 +1,7 @@
 <template>
-  <div class="pnbi-datatable dark">
-    <v-toolbar flat color="white" class="pnbi-datatable__toolbar pb-1 pt-2">
+  <div class="pnbi-datatable dark elevation-1">
+    <!--  flat" :class="{'elevation-1': !flat}" -->
+    <v-toolbar flat color="white" class="pnbi-datatable__toolbar pb-3 pt-3">
       <h3 class="accent--text card-headline">{{label}}</h3>
       <v-spacer></v-spacer>
 
@@ -66,6 +67,7 @@ export default {
     if (this.flat === false) {
       this.$el.classList.add('elevation-1')
     } else {
+      this.$el.classList.remove('elevation-1')
       this.$el.classList.add('flat')
     }
   },
@@ -88,7 +90,7 @@ export default {
 </style>
 <style lang="css">
 .pnbi-webapp table.v-table thead tr {
-  height: 34px;
+  height: 36px;
 }
 .application.pnbi-webapp table.v-table thead tr th {
   font-weight: 600;
@@ -109,6 +111,7 @@ div >>> .pnbi-datatable__toolbar .v-toolbar__content {
   height: 54px !important;
 }
 div >>> .v-input.pnbi-datatable__search .v-input__slot {
+    background: rgba(0,0,0,.1);
     margin: 0 !important;
 }
 div >>> .v-input.pnbi-datatable__search .v-label {
@@ -122,6 +125,7 @@ div >>> .v-input.pnbi-datatable__search .v-input__control {
 }
 .pnbi-datatable >>> thead tr th {
   font-weight: 600;
+  text-transform: uppercase;
 }
 
 .pnbi-datatable .v-alert.warning {
@@ -129,17 +133,8 @@ div >>> .v-input.pnbi-datatable__search .v-input__control {
   margin-left: -24px;
   margin-right: -24px;
 }
-.pnbi-datatable.dark {
-}
-/*shared*/
-.pnbi-datatable.dark {
-  xxxbackground-color: #3f515d;
-  xxxcolor: #fff;
-}
 
 .pnbi-datatable.dark >>> thead tr th {
-  xxxbackground-color: #fafafa;
-  color: rgba(0, 0, 0, 0.87);
   color: #3f515d;
 }
 
@@ -148,7 +143,7 @@ div >>> .v-input.pnbi-datatable__search .v-input__control {
   background: rgba(204, 212, 218, 0.5) !important;
 }
 
-.pnbi-datatable.dark thead tr th.column.active,
+/* .pnbi-datatable.dark thead tr th.column.active,
 .pnbi-datatable.dark thead tr th.column:hover,
 .pnbi-datatable.dark thead tr th.column.active:hover,
 .pnbi-datatable.dark thead tr th.column.active.sortable:hover,
@@ -161,21 +156,15 @@ div >>> .v-input.pnbi-datatable__search .v-input__control {
 .pnbi-datatable.dark thead tr th.column .icon,
 .pnbi-datatable.dark thead tr th.column.active .icon {
   color: rgba(255, 255, 255, 0.9) !important;
-}
+} */
 
 /*light theme*/
-.pnbi-datatable.light {
-  background-color: #3f515d;
-  padding-top: 32px;
-}
+
 .pnbi-datatable tr.active {
   background: rgba(204, 212, 218, 0.6) !important;
 }
 .pnbi-datatable tr.active + tr.datatable__expand-row .card {
   background-color: rgba(204, 212, 218, 0.6) !important;
-}
-.pnbi-child-table {
-  xxbackground-color: rgba(204, 212, 218, 0.6) !important;
 }
 .pnbi-child-table .table {
   background-color: rgba(204, 212, 218, 0.6) !important;
