@@ -42,10 +42,10 @@
 <script>
 // import columns filterung feature
 import ColumnFilterMixin from './columnFilterMixin.js'
-import FixedMixin from './FixedMixin.js'
+// import FixedMixin from './FixedMixin.js'
 export default {
   name: 'pnbi-datatable-plus',
-  mixins: [ColumnFilterMixin, FixedMixin],
+  mixins: [ColumnFilterMixin],
   props: {
     /**
     * Uniq identifier for table.

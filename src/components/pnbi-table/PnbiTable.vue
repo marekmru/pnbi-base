@@ -24,10 +24,7 @@
     </v-toolbar>
 
     <!-- secondary slot -->
-    <slot name="secondary-controls"></slot>
-    <!-- <v-toolbar v-if="$slots['secondary-controls']" flat color="white" class="pnbi-datatable__toolbar pb-1 pt-2">
-      <slot class="px-4 py-3 pnbi-secondary-controls" name="secondary-controls"></slot>
-    </v-toolbar> -->
+    <slot v-if="$slots['secondary-controls']" name="secondary-controls"></slot>
 
     <!-- default slot -->
     <slot>
@@ -66,8 +63,6 @@ export default {
     }
   },
   mounted () {
-    console.log('this', this)
-    // :class="{'elevation-1': !flat}"
     if (this.flat === false) {
       this.$el.classList.add('elevation-1')
     } else {
