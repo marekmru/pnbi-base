@@ -2,12 +2,6 @@
 
   <v-dialog :scrollable="scrollable" lazy v-model="isOpen" :max-width="width">
 
-    <!-- start: button for showcase only -->
-<!--     <v-btn slot="activator" color="red lighten-2" dark>
-      Click Me
-    </v-btn> -->
-    <!-- end: button for showcase only -->
-
     <v-card tile>
       <v-toolbar dense card dark color="accent">
         <v-toolbar-title class="ml-0">
@@ -61,6 +55,3 @@ export default {
 </script>
 <style scoped>
 </style>
-
-
-
