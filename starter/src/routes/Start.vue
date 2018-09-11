@@ -8,9 +8,16 @@
       </ul>
     </div>
 
-    <pnbi-datatable headline="Datatable plus"
-      @search="request.search = $event"
-      :button-label="false" customise-label="Customise">
+    <pnbi-card style="width:300px;" title="numbers">
+
+      <pnbi-numbers class="pr-3" label="Budget" v-model.number="newBudget" :unit="1000" type="lead" name="Budget" :validation="'required|min:4'">
+        <div class="input-group__details input-group__details_custom" slot="validation-slot">
+        </div>
+      </pnbi-numbers>
+
+    </pnbi-card>
+
+    <pnbi-datatable headline="Datatable plus" @search="request.search = $event" :button-label="false" customise-label="Customise">
 
       <!-- <div slot="primary-controls">
         sds
@@ -29,28 +36,48 @@
       </div> -->
 
       <!-- default slot -->
-        <pnbi-datatable-plus
-          :items="items" :headers="headers" tableIdentifier="123" :loading="loading" :total-items="totalItems" :search="request.search" @padinationEvent="onPaginationEvent">
-          <tr slot="row" slot-scope="props">
-            <td>{{props.props.item.name}}</td>
-            <td>{{props.props.item.age}}</td>
-            <td>{{props.props.item.value}}</td>
-            <td>{{props.props.item.value1}}</td>
-            <td>{{props.props.item.value2}}</td>
-            <td>{{props.props.item.value3}}</td>
-            <td>{{props.props.item.value4}}</td>
-            <td>{{props.props.item.value5}}</td>
-            <td>{{props.props.item.value6}}</td>
-            <td>{{props.props.item.value7}}</td>
-            <td>{{props.props.item.value8}}</td>
-          </tr>
-        </pnbi-datatable-plus>
+      <pnbi-datatable-plus :items="items" :headers="headers" tableIdentifier="123" :loading="loading" :total-items="totalItems" :search="request.search" @padinationEvent="onPaginationEvent">
+        <tr slot="row" slot-scope="props">
+          <td>{{props.props.item.name}}</td>
+          <td>{{props.props.item.age}}</td>
+          <td>{{props.props.item.value}}</td>
+          <td>{{props.props.item.value1}}</td>
+          <td>{{props.props.item.value2}}</td>
+          <td>{{props.props.item.value3}}</td>
+          <td>{{props.props.item.value4}}</td>
+          <td>{{props.props.item.value5}}</td>
+          <td>{{props.props.item.value6}}</td>
+          <td>{{props.props.item.value7}}</td>
+          <td>{{props.props.item.value8}}</td>
+        </tr>
+      </pnbi-datatable-plus>
 
     </pnbi-datatable>
 
   </pnbi-page>
 </template>
 <script>
+import { Validator } from 'vee-validate'
+
+const dictionary = {
+  en: {
+    messages: {
+      alpha: () => 'Some English Message'
+    }
+  },
+  ar: {
+    messages: {
+      alpha: 'حاجة عربي'
+    }
+  }
+}
+
+// Override and merge the dictionaries
+Validator.localize(dictionary)
+
+const validator = new Validator({ first_name: 'alpha' })
+
+validator.localize('ar') // now this validator will generate messages in Arabic.
 
 export default {
   mounted () {
@@ -59,12 +86,6 @@ export default {
         this.items = data.items
         this.totalItems = data.totalItems
       })
-  },
-  props: {
-    propName: {
-      type: Number,
-      default: 0
-    }
   },
   data: () => {
     return {
@@ -75,6 +96,7 @@ export default {
         pagination: {},
         search: null
       },
+      newBudget: null,
       headers: [
         { text: 'Name 2', value: 'name' },
         { text: 'Age', value: 'age' },
