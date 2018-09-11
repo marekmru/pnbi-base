@@ -2,33 +2,27 @@
 
   <div class="pnbi-datatable">
 
-    <v-dialog
-      v-model="customiseDialog"
+    <pnbi-dialog :title="dialogTitle"
+      :open="customiseDialog"
       width="500">
-        <v-card>
-          <v-layout row wrap>
-            <v-flex>
-              <v-toolbar color="accent">
-                <v-toolbar-title class="white--text">{{dialogTitle}}</v-toolbar-title>
-              </v-toolbar>
-              <v-list>
-                <v-subheader>
-                  {{dialogSubtitle}}
-                </v-subheader>
-                <v-list-tile v-for="header in localStorageHeaders" :key="header.text">
-                  <v-list-tile-title>
-                    <v-checkbox :label="header.text" @change="updateHeaders()" v-model="header.selected" :value="header.selected"></v-checkbox>
-                  </v-list-tile-title>
-                </v-list-tile>
-              </v-list>
-            </v-flex>
-          </v-layout>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="primary" @click="customiseDialog = false" flat>Close</v-btn>
-          </v-card-actions>
-        </v-card>
-    </v-dialog>
+      <div slot="dialog-content">
+        <v-list>
+          <v-subheader>
+            {{dialogSubtitle}}
+          </v-subheader>
+          <v-list-tile v-for="header in localStorageHeaders" :key="header.text">
+            <v-list-tile-title>
+              <v-checkbox :label="header.text" @change="updateHeaders()" v-model="header.selected" :value="header.selected"></v-checkbox>
+            </v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </div>
+      <div slot="dialog-actions">
+        <v-btn dark color="primary" @click="customiseDialog = false" flat>
+          {{dialogCloselabel}}
+        </v-btn>
+      </div>
+    </pnbi-dialog>
 
     <v-data-table v-bind="localAttrs" :pagination.sync="pagination">
       <template slot="items" slot-scope="props">
@@ -42,10 +36,10 @@
 <script>
 // import columns filterung feature
 import ColumnFilterMixin from './columnFilterMixin.js'
-// import FixedMixin from './FixedMixin.js'
+import FixedMixin from './FixedMixin.js'
 export default {
   name: 'pnbi-datatable-plus',
-  mixins: [ColumnFilterMixin],
+  mixins: [ColumnFilterMixin, FixedMixin],
   props: {
     /**
     * Uniq identifier for table.
@@ -69,6 +63,13 @@ export default {
     dialogSubtitle: {
       type: String,
       default: 'Select visible columns'
+    },
+    /**
+    * Defined label for dialog close button
+    */
+    dialogCloselabel: {
+      type: String,
+      default: 'Close'
     }
   },
   data: function () {

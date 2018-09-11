@@ -36,7 +36,7 @@ export default {
   watch: {
     pagination: function () {
       // pagination event used by tableplus for triggering request.
-      this.$emit('padinationEvent', this.pagination)
+      this.$emit('paginationEvent', this.pagination)
       this.$updateHeaderDom(this.localStorageHeaders)
     },
     localAttrs: function () {

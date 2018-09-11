@@ -33,9 +33,10 @@
           :items="items" :headers="headers"
           tableIdentifier="123" :loading="loading"
           :total-items="totalItems" :search="request.search"
-          @padinationEvent="onPaginationEvent"
+          @paginationEvent="onPaginationEvent"
           dialog-title="Tabele anpassen"
-          dialog-subtitle="Wähle Spalten, die angezeigt werden sollen">
+          dialog-subtitle="Wähle Spalten, die angezeigt werden sollen"
+          dialog-closelabel="Schließen">
           <tr slot="row" slot-scope="props">
             <td>{{props.props.item.name}}</td>
             <td>{{props.props.item.age}}</td>
