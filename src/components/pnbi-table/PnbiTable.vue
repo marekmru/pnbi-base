@@ -9,9 +9,9 @@
       </slot>
 
       <!-- customise button for pnbi-datatable-plus -->
-      <div v-if="customiseLabel">
-        <v-btn small
-          @click.stop="$bus.$emit('customiseEvent')">{{customiseLabel}}</v-btn>
+      <div v-if="customizeLabel">
+        <v-btn small color="accent"
+          @click.stop="$bus.$emit('customizeEvent')">{{customizeLabel}}</v-btn>
       </div>
 
       <v-flex xs3>
@@ -24,10 +24,7 @@
     </v-toolbar>
 
     <!-- secondary slot -->
-    <slot name="secondary-controls"></slot>
-    <!-- <v-toolbar v-if="$slots['secondary-controls']" flat color="white" class="pnbi-datatable__toolbar pb-1 pt-2">
-      <slot class="px-4 py-3 pnbi-secondary-controls" name="secondary-controls"></slot>
-    </v-toolbar> -->
+    <slot v-if="$slots['secondary-controls']" name="secondary-controls"></slot>
 
     <!-- default slot -->
     <slot>
@@ -56,18 +53,12 @@ export default {
     * If defined customise button is visible.
     * value is used as button text
     */
-    customiseLabel: {
-      typ: String,
-      default: 'Customise'
-    },
-    flat: {
-      type: Boolean | null,
+    customizeLabel: {
+      typ: String | Boolean,
       default: false
     }
   },
   mounted () {
-    console.log('this', this)
-    // :class="{'elevation-1': !flat}"
     if (this.flat === false) {
       this.$el.classList.add('elevation-1')
     } else {
