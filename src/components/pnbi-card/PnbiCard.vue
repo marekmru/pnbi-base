@@ -11,10 +11,11 @@
       <!-- @slot Use this slot to place the button content -->
       <slot></slot>
     </v-card-text>
-    <v-card-text class="px-4 py-2" v-if="!!$slots['card-actions']">
+    <v-card-actions class="px-3 py-2" v-if="!!$slots['card-actions']">
       <!-- @slot Use this slot card actions -->
+      <v-spacer></v-spacer>
       <slot name="card-actions"></slot>
-    </v-card-text>
+    </v-card-actions>
   </v-card>
 </template>
 

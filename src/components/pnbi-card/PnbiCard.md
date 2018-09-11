@@ -50,7 +50,7 @@ Usually used inside a pnbi-page with headline as VIP or title as secondary Table
   <div>Any Content can be placed here with any tag</div>
   <!-- Optional Slot-->
   <div slot="card-actions">
-  <v-btn color="accent">some actions</v-btn>
+    <v-btn flat color="primary">More</v-btn>
   </div>
 </pnbi-card>
 ```
