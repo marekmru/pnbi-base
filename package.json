@@ -15,9 +15,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-
   },
-
   "devDependencies": {},
   "engines": {
     "node": ">= 6.0.0",
