@@ -8,15 +8,6 @@
       </ul>
     </div>
 
-    <pnbi-card style="width:300px;" title="numbers">
-
-      <pnbi-numbers class="pr-3" label="Budget" v-model.number="newBudget" :unit="1000" type="lead" name="Budget" :validation="'required|min:4'">
-        <div class="input-group__details input-group__details_custom" slot="validation-slot">
-        </div>
-      </pnbi-numbers>
-
-    </pnbi-card>
-
     <pnbi-datatable headline="Datatable plus" @search="request.search = $event" :button-label="false" customise-label="Customise">
 
       <!-- <div slot="primary-controls">
@@ -58,6 +49,7 @@
 </template>
 <script>
 import { Validator } from 'vee-validate'
+import PnbiNumbers from './PnbiNumbers'
 
 const dictionary = {
   en: {
@@ -87,6 +79,9 @@ export default {
         this.totalItems = data.totalItems
       })
   },
+  components: {
+    PnbiNumbers
+  },
   data: () => {
     return {
       items: [],
@@ -97,6 +92,7 @@ export default {
         search: null
       },
       newBudget: null,
+      projectName: null,
       headers: [
         { text: 'Name 2', value: 'name' },
         { text: 'Age', value: 'age' },
