@@ -17,7 +17,7 @@ This is a wrapper for v-data-table and acceps all attributes and slots from
     :items="items" :headers="headers"
     tableIdentifier="123"
     :search="search"
-    @padinationEvent="onPaginationEvent"
+    @paginationEvent="onPaginationEvent"
     dialog-title="Tabele anpassen"
     dialog-subtitle="Wähle Spalten, die angezeigt werden sollen">
     <tr slot="row" slot-scope="props">
