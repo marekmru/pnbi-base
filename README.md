@@ -16,7 +16,12 @@ yarn add pnbi-base
 2. use the command ```npm link```
 3. cd into pnbi-base/starter
 4. use the command ```npm link pnbi-base```
-> Explanation: npm link creates a symlink 
+5. remove node_modules/yarn.lock then yarn
+6. Run yarn run dev in starter
+7. Edit pnbi-base/src
+8. Live reload works
+9. commit changes after editing
+> Explanation: npm link creates a symlink to root of pnbi-base, so it is not neccessary to edit node_modules/pnbi-base
 
 
 #### package.json
