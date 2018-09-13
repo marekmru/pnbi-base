@@ -14,7 +14,6 @@
         <v-btn small color="accent"
           @click.stop="$bus.$emit('customizeEvent')">{{customizeLabel}}</v-btn>
       </div>
-
       <v-flex xs3>
         <v-text-field clearable class="pnbi-datatable__search" solo-inverted flat v-model="search" label="Suche…" append-icon="search"></v-text-field>
       </v-flex>

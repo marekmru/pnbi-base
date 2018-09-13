@@ -2,11 +2,22 @@
 
 > Authentication, Helpers and Components for PNBI webapps based on VueJS
 
+
+
+
 ## Installation
 
 ```
 yarn add pnbi-base
 ```
+
+## Development Workflow
+1. cd into root directory
+2. use the command ```npm link```
+3. cd into pnbi-base/starter
+4. use the command ```npm link pnbi-base```
+> Explanation: npm link creates a symlink 
+
 
 #### package.json
 

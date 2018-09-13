@@ -50,7 +50,6 @@
 </template>
 <script>
 import { Validator } from 'vee-validate'
-import PnbiNumbers from './PnbiNumbers'
 
 const dictionary = {
   en: {
@@ -81,7 +80,6 @@ export default {
       })
   },
   components: {
-    PnbiNumbers
   },
   data: () => {
     return {
