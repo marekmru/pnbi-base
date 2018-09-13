@@ -42,58 +42,58 @@
     </pnbi-page>
   </template>
 
-  <script>
-  import Auth from '../../Auth'
+<script>
+import Auth from '../../Auth'
 
-  export default {
-    created () {
-      window.setTimeout(() => {
-        Auth.profile().then(
-          (val) => {
-            this.profile = val
-          },
-          error => {
-            console.log(error)
-          }
-        )
-      }, 500)
+export default {
+  created () {
+    window.setTimeout(() => {
+      Auth.profile().then(
+        (val) => {
+          this.profile = val
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    }, 500)
+  },
+  computed: {
+    email () {
+      if (this.profile.email.length) {
+        return this.profile.email
+      }
+      return 'No email'
     },
-    computed: {
-      email () {
-        if (this.profile.email.length) {
-          return this.profile.email
-        }
-        return 'No email'
-      },
-      role () {
-        if (this.profile.role) {
-          return this.profile.role.map((val) => val.rolename)
-        }
-      },
-      board () {
-        if (this.profile.board) {
-          return this.profile.board.map((val) => val.name)
-        }
+    role () {
+      if (this.profile.role) {
+        return this.profile.role.map((val) => val.rolename)
       }
     },
-    data () {
-      return {
-        profile: {
-          short: '',
-          admin: false,
-          email: ''
-        }
+    board () {
+      if (this.profile.board) {
+        return this.profile.board.map((val) => val.name)
       }
-    },
-    props: {
-      type: String
-    },
-    methods: {
-
     }
-  }
+  },
+  data () {
+    return {
+      profile: {
+        short: '',
+        admin: false,
+        email: ''
+      }
+    }
+  },
+  props: {
+    type: String
+  },
+  methods: {
 
-  </script>
+  }
+}
+
+</script>
   <style lang="scss" scoped>
   .v-icon.material-icons {
     font-size: 90px;
