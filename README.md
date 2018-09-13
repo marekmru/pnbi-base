@@ -2,9 +2,6 @@
 
 > Authentication, Helpers and Components for PNBI webapps based on VueJS
 
-
-
-
 ## Installation
 
 ```
@@ -12,17 +9,17 @@ yarn add pnbi-base
 ```
 
 ## Development Workflow
+
 1. cd into root directory
-2. use the command ```npm link```
+2. use the command `npm link`
 3. cd into pnbi-base/starter
-4. use the command ```npm link pnbi-base```
-5. remove node_modules/yarn.lock then yarn
-6. Run yarn run dev in starter
+4. remove node_modules/yarn.lock
+5. use the command `npm link pnbi-base`
+6. Run yarn then yarn run dev in starter
 7. Edit pnbi-base/src
 8. Live reload works
 9. commit changes after editing
-> Explanation: npm link creates a symlink to root of pnbi-base, so it is not neccessary to edit node_modules/pnbi-base
-
+   > Explanation: npm link creates a symlink to root of pnbi-base, so it is not neccessary to edit node_modules/pnbi-base
 
 #### package.json
 
@@ -225,7 +222,7 @@ Vuetify Datatable
 - title: Smaller Headline for second Table on a page
 - button-label: "Neues Element"
 - flat | default: false; true|false
-- customise-label | default: false. Set the label for customise feature 
+- customise-label | default: false. Set the label for customise feature
 
 #### Events / Emits
 
@@ -252,19 +249,24 @@ Vuetify Datatable
 ---
 
 ## pnbi-datatable-plus
+
 > Used for displaing rich datatables.Features as column-sorting, serverside pagination and fixed-header are available
 
 This is a wrapper for v-data-table and acceps all attributes and slots from
- original v-data-table. 
+original v-data-table.
 
 ##### Attributes
+
 `tableIdentifier` - id for table. It should be uniq in all applications. Example `tableIdentifier="{app}-{pagename}"`. We use this ID for storage selected columns in browser localstorage.
 
 ### Features
+
 #### Column filterng
-Enabled by default. This feature makes posible to filter the columns. You can hide some columns. The selected set of columns are saved to localstorage in browser. 
+
+Enabled by default. This feature makes posible to filter the columns. You can hide some columns. The selected set of columns are saved to localstorage in browser.
 
 #### Server side pagination
+
 Disabled by default. Enable it by defining folowing props:
 
 Define `total-items` prop. Total-items prop will disable the built-in frontend sorting and pagination. Define `loading` prop. Use Loading prop to display a progress bar while fetching data.
@@ -281,36 +283,39 @@ onPaginationEvent (data, event) {
       this.totalItems = data.totalItems
     })
 }
-````
+```
 
 Your data object:
-``` javascript
-  data: () => {
-    return {
-      items: [],
-      totalItems: 0, 
-      loading: true,
-      request: {
-        pagination: {},
-        search: null
-      },
-      headers: [
-        {text: 'Name 2', value: 'name'},
-        {text: 'Age', value: 'age'},
-        {text: 'Value', value: 'value'}
-      ]
-    }
-  }
+
+```javascript
+data: () => {
+  return {
+    items: [],
+    totalItems: 0,
+    loading: true,
+    request: {
+      pagination: {},
+      search: null
+    },
+    headers: [
+      { text: "Name 2", value: "name" },
+      { text: "Age", value: "age" },
+      { text: "Value", value: "value" }
+    ]
+  };
+};
 ```
 
 Wrap API endpoint request params in request object and send to Backend:
-1. `page` -  page number (int)
-2. `rowsPerPage` -  rows count per page (int)
+
+1. `page` - page number (int)
+2. `rowsPerPage` - rows count per page (int)
 3. `sortBy` - column to sort by (string)
 4. `descending` - flag for sorting (boolean)
 
-Request Example: 
-``` json
+Request Example:
+
+```json
 request: {
   pagination: {
     "descending":false,
@@ -323,10 +328,12 @@ request: {
 ```
 
 Response should include:
+
 1. `totalItems` - length of found items list
 2. `items` - plain list of items
 
 ## Markup
+
 Use default slot inside of pnbi-datatable. Let `secondary-controls` slot blank. Datatable plus has own toolbar with controls.
 
 ```html
@@ -346,12 +353,12 @@ Use default slot inside of pnbi-datatable. Let `secondary-controls` slot blank. 
 ```
 
 #### Fixed header & Footer
+
 Disabled by default. Enable it by defining folowing props:
 
-Define  `fixed-header` prop. It makes header be always visible. If user scroll to the end of a large table header positioned sticky on top of application. Define  `fixed-footer` prop. It makes header be always visible. If user scroll to the end of a large table header positioned sticky on bottom of application.
+Define `fixed-header` prop. It makes header be always visible. If user scroll to the end of a large table header positioned sticky on top of application. Define `fixed-footer` prop. It makes header be always visible. If user scroll to the end of a large table header positioned sticky on bottom of application.
 
 Place footer template inside of `footer` slot
-
 
 ## pnbi-card
 

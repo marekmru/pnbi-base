@@ -1,5 +1,5 @@
 <script>
-/* eslint-disable--  */
+/* eslint-disable  */
 import Auth from '../../Auth'
 
 export default {

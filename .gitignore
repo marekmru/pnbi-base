@@ -63,3 +63,6 @@ typings/
 .idea/modules.xml
 .idea/pnbi-base.iml
 .idea/workspace.xml
+
+# visual code plugin
+.history

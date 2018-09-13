@@ -7,13 +7,11 @@ import { setRoutes } from "./internal/routes.js";
 import { setAjaxConfig } from "./internal/config.js";
 import { setApiConfig } from "./Auth.js";
 import { setCookieConfig } from "./internal/cookie.service.js";
-import PnbiDataTable from './components/pnbi-table/PnbiTable'
-import PnbiDataTablePlus from './components/pnbi-table-plus/PnbiTablePlus'
-import PnbiEmpty from './components/pnbi-empty/PnbiEmpty'
-import bus, {
-  LOADING
-} from './event-bus'
-import helper from './helper'
+import PnbiDataTable from "./components/pnbi-table/PnbiTable";
+import PnbiDataTablePlus from "./components/pnbi-table-plus/PnbiTablePlus";
+import PnbiEmpty from "./components/pnbi-empty/PnbiEmpty";
+import bus, { LOADING } from "./event-bus";
+import helper from "./helper";
 
 // app wide styles, fonts
 import Vuetify from "vuetify";

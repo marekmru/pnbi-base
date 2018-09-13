@@ -1,7 +1,7 @@
 {
   "name": "pnbi-base",
   "main": "./dist/static/js/app.js",
-  "version": "0.9",
+  "version": "0.3.8",
   "description": "Base for PNBI Vue projects",
   "author": "Mrugalla, Markus <M.Mrugalla@plan-net.com>",
   "private": false,
@@ -15,18 +15,16 @@
     "build": "node build/build.js"
   },
   "dependencies": {},
-  "devDependencies": {
-
-  },
+  "devDependencies": {},
   "engines": {
     "node": ">= 6.0.0",
     "npm": ">= 3.0.0"
   },
   "postcss": {
     "plugins": {
-        "autoprefixer": {}
+      "autoprefixer": {}
     }
-},
+  },
   "browserslist": [
     "> 2%",
     "last 2 versions",
