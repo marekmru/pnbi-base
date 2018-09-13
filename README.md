@@ -11,10 +11,10 @@ yarn add pnbi-base
 ## Development Workflow
 
 1. cd into root directory
-2. use the command `npm link`
+2. use the command `yarn link`
 3. cd into pnbi-base/starter
 4. remove node_modules/yarn.lock
-5. use the command `npm link pnbi-base`
+5. use the command `npm yarn 'pnbi-base'`
 6. Run yarn then yarn run dev in starter
 7. Edit pnbi-base/src
 8. Live reload works
