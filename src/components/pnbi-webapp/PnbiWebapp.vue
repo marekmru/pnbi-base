@@ -1,6 +1,6 @@
 <template>
   <v-app class="pnbi-webapp">
-    <v-navigation-drawer v-if="isNavVisible" v-model="sidenavOpen" fixed clipped class="grey lighten-4" app>
+    <v-navigation-drawer v-if="isNavVisible" v-model="userSettings.sidenavOpen" fixed clipped class="grey lighten-4" app>
       <div class="pt-3">
         <slot name="navigation-slot"></slot>
       </div>
@@ -56,7 +56,7 @@
     </v-navigation-drawer>
     <transition name="slide">
       <v-toolbar v-if="isNavVisible" dense dark color="accent darken-1" app fixed clipped-left>
-        <v-toolbar-side-icon class="white--text" @click.native="sidenavOpen = !sidenavOpen"></v-toolbar-side-icon>
+        <v-toolbar-side-icon class="white--text" @click.native="toogleSideNav()"></v-toolbar-side-icon>
         <slot v-if="hasTitleSlot" name="title-slot"></slot>
         <h2 v-else class="app-title">{{title}}</h2>
         <v-spacer></v-spacer>
@@ -196,13 +196,15 @@ export default {
       title: null,
       alertMessage: null,
       loading: false,
-      sidenavOpen: null,
       alertOpen: false,
       showNavigation: false,
       clientWidth: 0,
       profile: {
         realname: null,
         short: null
+      },
+      userSettings: {
+        sidenavOpen: null
       }
     }
   },
@@ -237,10 +239,23 @@ export default {
     setTitle (title = '') {
       this.title = title.toUpperCase()
       document.title = this.title
+    },
+    // TODO save user setting in localstorage
+    checkUserSettings() {
+      // this.sidenavOpen = false
+      const temp = JSON.parse(window.localStorage.getItem('userSettings'))
+      if(temp != null) {
+        this.userSettings = temp
+      }
+    },
+    toogleSideNav(){
+      this.userSettings.sidenavOpen = !this.userSettings.sidenavOpen
+      window.localStorage.setItem('userSettings', JSON.stringify(this.userSettings))
     }
   },
   created () {
     this.setTitle(this.$config.TITLE)
+    this.checkUserSettings()
   },
   computed: {
     hasTitleSlot () {
