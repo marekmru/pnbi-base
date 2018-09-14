@@ -1,5 +1,5 @@
 <script>
-/* eslint-disable  */
+/* eslint-disable */
 import Auth from '../../Auth'
 
 export default {
@@ -8,6 +8,7 @@ export default {
   data () {
     return {
       message: [],
+      error: false,
       strength: 0,
       success: false,
       user: {
@@ -23,14 +24,17 @@ export default {
         passwordRules2: [
           v => !!v || 'Passwort ist ein Pflichtfeld',
           v => v.length >= 6 || 'Passwort muss mindestens 6 Zeichen lang sein',
-          v => this.isValid || 'Passwörter sind nicht identisch'
+          v => this.isValid || 'Passwörter sind nicht identisch',
+          v => !this.error || 'Der Resetlink ist abgelaufen. Bitte fordern Sie einen neuen Resetlink an. Klicken Sie dazu auf der Login Seite auf PASSWORT ZURÜCKSETZEN.'
         ]
       }
     }
   },
   methods: {
+    mounted(){
+      this.error = false
+    },
     focus () {
-      this.errorAuth = false
       this.$refs.form.validate()
     },
     goToLogin () {
@@ -45,7 +49,8 @@ export default {
         this.success = true
       })
         .catch(err => {
-          console.log(err)
+          this.error = true
+          this.$refs.form.validate()
         })
     },
     onChange (data) {
@@ -92,11 +97,6 @@ export default {
       } else if (this.strength >= 66) {
         return ['error', 'warning', 'success'][2]
       }
-      /* if (true){
-        return ["error", "warning", "success"][Math.floor(this.progress / 40)];
-      }else {
-        return ["error", "warning", "success"][2]
-      }; */
     }
   },
   created () {}
