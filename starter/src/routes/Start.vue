@@ -42,14 +42,6 @@
           <td>{{props.props.item.name}}</td>
           <td>{{props.props.item.age}}</td>
           <td>{{props.props.item.value}}</td>
-          <td>{{props.props.item.value1}}</td>
-          <td>{{props.props.item.value2}}</td>
-          <td>{{props.props.item.value3}}</td>
-          <td>{{props.props.item.value4}}</td>
-          <td>{{props.props.item.value5}}</td>
-          <td>{{props.props.item.value6}}</td>
-          <td>{{props.props.item.value7}}</td>
-          <td>{{props.props.item.value8}}</td>
         </tr>
       </pnbi-datatable-plus>
 
@@ -104,15 +96,7 @@ export default {
       headers: [
         { text: 'Name 2', value: 'name' },
         { text: 'Age', value: 'age' },
-        { text: 'Value', value: 'value' },
-        { text: 'Value1', value: 'value1' },
-        { text: 'Value2', value: 'value2' },
-        { text: 'Value3', value: 'value3' },
-        { text: 'Value4', value: 'value4' },
-        { text: 'Value5', value: 'value5' },
-        { text: 'Value6', value: 'value6' },
-        { text: 'Value7', value: 'value7' },
-        { text: 'Value8', value: 'value8' }
+        { text: 'Value', value: 'value4' }
       ]
     }
   },

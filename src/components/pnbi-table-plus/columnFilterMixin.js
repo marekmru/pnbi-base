@@ -1,6 +1,11 @@
 export default {
   created () {
-    this.localStorageName = this.tableIdentifier + '_tableheaders'
+    // create hash from headers
+    const headersStr = JSON.stringify(this.$attrs.headers)
+    console.log('headersStr', headersStr);
+    const headersHash = this.hashCode(headersStr)
+    this.localStorageName = `${this.tableIdentifier}${headersHash}`
+
     const data = window.localStorage.getItem(this.localStorageName)
     if (data == null) {
       window.localStorage.setItem(this.localStorageName, '{}')
@@ -16,7 +21,6 @@ export default {
   computed: {
     localAttrs: {
       get: function () {
-        console.log('update')
         let temp = JSON.parse(JSON.stringify(this.$attrs))
         temp.headers = this.localStorageHeaders.filter(val => val.selected)
         return temp
@@ -65,6 +69,14 @@ export default {
     updateHeaders () {
       this.saveToLocalStorage(this.localStorageHeaders)
       this.$updateHeaderDom(this.localStorageHeaders)
+    },
+    /*
+    * Create and return hashCode from string
+    * used here for creating id for table
+    */
+    hashCode (str) {
+      return str.split('').reduce((prevHash, currVal) =>
+        (((prevHash << 5) - prevHash) + currVal.charCodeAt(0)) | 0, 0)
     },
     $updateHeaderDom (headers) {
       const tbody = this.$el.querySelector('tbody')
