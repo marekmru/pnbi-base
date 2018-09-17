@@ -2,7 +2,6 @@ export default {
   created () {
     // create hash from headers
     const headersStr = JSON.stringify(this.$attrs.headers)
-    console.log('headersStr', headersStr);
     const headersHash = this.hashCode(headersStr)
     this.localStorageName = `${this.tableIdentifier}${headersHash}`
 
