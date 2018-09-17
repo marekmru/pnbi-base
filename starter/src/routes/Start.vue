@@ -63,7 +63,7 @@ export default {
         console.log('data-c', data)
         this.items = data.tableResponce.items
         this.headers = data.tableResponce.headers
-        this.totalItems = data.totalItems
+        this.totalItems = data.tableResponce.totalItems
       })
   },
   components: {
@@ -90,7 +90,7 @@ export default {
           console.log('data', data)
           this.items = data.tableResponce.items
           this.headers = data.tableResponce.headers
-          this.totalItems = data.totalItems
+          this.totalItems = data.tableResponce.totalItems
         })
     },
     getDataFromApi () {
@@ -113,13 +113,6 @@ export default {
             value8: 8
           })
         }
-
-        // set headers
-        tableResponce.headers = [
-          { text: 'Name 2', value: 'name' },
-          { text: 'Age', value: 'age' },
-          { text: 'Value', value: 'value4' }
-        ]
 
         const { sortBy, descending, page, rowsPerPage } = this.request.pagination
 
@@ -157,13 +150,19 @@ export default {
           items = items.slice((page - 1) * rowsPerPage, page * rowsPerPage)
         }
 
+        // collect data
         tableResponce.items = items
+        tableResponce.totalItems = totalItems
+        tableResponce.headers = [
+          { text: 'Name', value: 'name' },
+          { text: 'Age', value: 'age' },
+          { text: 'Value', value: 'value4' }
+        ]
 
         setTimeout(() => {
           this.loading = false
           resolve({
-            tableResponce,
-            totalItems
+            tableResponce
           })
         }, 1000)
       })
