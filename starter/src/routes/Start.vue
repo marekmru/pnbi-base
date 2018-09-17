@@ -10,25 +10,14 @@
 
     <pnbi-datatable headline="Datatable plus" @search="request.search = $event" :button-label="false" customize-label="Customize">
 
-      <!-- <div slot="primary-controls">
-        sds
-      </div> -->
+      <!-- primary controls-->
 
       <!-- secondary slot -->
-      <!-- <div slot="secondary-controls">
-        <v-toolbar flat color="white">
-          <v-text-field style="max-width:150px" class="pnbi-datatable__search" solo label="Filter 1"></v-text-field>
-          <v-text-field style="max-width:150px" class="pnbi-datatable__search" solo label="Filter 2"></v-text-field>
-          <v-btn small>Button 2</v-btn>
-          <v-btn small>Button 3</v-btn>
-          <v-btn small>Button 4</v-btn>
-          <v-btn small>Button 5</v-btn>
-        </v-toolbar>
-      </div> -->
 
       <!-- default slot -->
 
       <pnbi-datatable-plus
+        v-if="items.length > 2"
         :items="items" :headers="headers"
         tableIdentifier="123"
         :loading="loading"
@@ -71,7 +60,9 @@ export default {
   mounted () {
     this.getDataFromApi()
       .then(data => {
-        this.items = data.items
+        console.log('data-c', data)
+        this.items = data.tableResponce.items
+        this.headers = data.tableResponce.headers
         this.totalItems = data.totalItems
       })
   },
@@ -88,11 +79,7 @@ export default {
       },
       newBudget: null,
       projectName: null,
-      headers: [
-        { text: 'Name 2', value: 'name' },
-        { text: 'Age', value: 'age' },
-        { text: 'Value', value: 'value4' }
-      ]
+      headers: []
     }
   },
   methods: {
@@ -100,13 +87,16 @@ export default {
       this.request.pagination = data
       this.getDataFromApi()
         .then(data => {
-          this.items = data.items
+          console.log('data', data)
+          this.items = data.tableResponce.items
+          this.headers = data.tableResponce.headers
           this.totalItems = data.totalItems
         })
     },
     getDataFromApi () {
       this.loading = true
       return new Promise((resolve, reject) => {
+        let tableResponce = {}
         let items = []
         while (items.length < 300) {
           items.push({
@@ -123,6 +113,14 @@ export default {
             value8: 8
           })
         }
+
+        // set headers
+        tableResponce.headers = [
+          { text: 'Name 2', value: 'name' },
+          { text: 'Age', value: 'age' },
+          { text: 'Value', value: 'value4' }
+        ]
+
         const { sortBy, descending, page, rowsPerPage } = this.request.pagination
 
         // BE search
@@ -159,10 +157,12 @@ export default {
           items = items.slice((page - 1) * rowsPerPage, page * rowsPerPage)
         }
 
+        tableResponce.items = items
+
         setTimeout(() => {
           this.loading = false
           resolve({
-            items,
+            tableResponce,
             totalItems
           })
         }, 1000)
