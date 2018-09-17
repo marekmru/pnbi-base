@@ -240,13 +240,13 @@ export default {
       this.title = title.toUpperCase()
       document.title = this.title
     },
-    checkUserSettings() {
+    checkUserSettings () {
       const temp = JSON.parse(window.localStorage.getItem('userSettings'))
-      if(temp != null) {
+      if (temp != null) {
         this.userSettings = temp
       }
     },
-    toogleSideNav(){
+    toogleSideNav () {
       this.userSettings.sidenavOpen = !this.userSettings.sidenavOpen
       window.localStorage.setItem('userSettings', JSON.stringify(this.userSettings))
     }

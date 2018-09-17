@@ -26,7 +26,11 @@
 
     <v-data-table v-bind="localAttrs" :pagination.sync="pagination">
       <template slot="items" slot-scope="props">
-        <slot name="row" :props="props"></slot>
+        <tr>
+          <td v-for="(key, value, index) in localStorageHeaders" :key="index">
+            {{props.item[key.value]}}
+          </td>
+        </tr>
       </template>
     </v-data-table>
   </div>
