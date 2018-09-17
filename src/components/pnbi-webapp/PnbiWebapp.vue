@@ -240,9 +240,7 @@ export default {
       this.title = title.toUpperCase()
       document.title = this.title
     },
-    // TODO save user setting in localstorage
     checkUserSettings() {
-      // this.sidenavOpen = false
       const temp = JSON.parse(window.localStorage.getItem('userSettings'))
       if(temp != null) {
         this.userSettings = temp
