@@ -102,7 +102,7 @@ export default {
           items.push({
             name: 'abc' + Math.random(),
             age: Math.random() * Math.random(),
-            value: 56,
+            value: 1012349,
             value1: 1,
             value2: 2,
             value3: 3,
@@ -156,7 +156,7 @@ export default {
         tableResponce.headers = [
           { text: 'Name', value: 'name' },
           { text: 'Age', value: 'age' },
-          { text: 'Value', value: 'value4' }
+          { text: 'Value', value: 'value', format: '00000' }
         ]
 
         setTimeout(() => {

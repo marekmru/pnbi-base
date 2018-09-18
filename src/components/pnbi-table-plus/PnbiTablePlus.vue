@@ -28,7 +28,7 @@
       <template slot="items" slot-scope="props">
         <tr>
           <td v-for="(key, value, index) in localStorageHeaders" :key="index">
-            {{props.item[key.value]}}
+            {{props.item[key.value] | tablePlusFilter(key.format)}}
           </td>
         </tr>
       </template>
@@ -76,6 +76,7 @@ export default {
       default: 'Close'
     }
   },
+  created() {},
   data: function () {
     return {
       pagination: {}
