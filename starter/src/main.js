@@ -50,15 +50,15 @@ const messages = {
   }
 }
 
-Vue.filter('tablePlusFilter', function (value, format) {
-  if (!value) return ''
-  if (format) {
-    value = value.toLocaleString()
-    console.log('value', value, format)
-  }
-  // console.log(value, format)
-  return value
-})
+// Vue.filter('tablePlusFilter', function (value, format) {
+//   if (!value) return ''
+//   if (format) {
+//     value = value.toLocaleString()
+//     console.log('value', value, format)
+//   }
+//   // console.log(value, format)
+//   return value
+// })
 
 Vue.use(VeeValidate)
 var app = new Vue({
