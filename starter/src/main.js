@@ -53,8 +53,8 @@ const messages = {
 Vue.filter('tablePlusFilter', function (value, format) {
   if (!value) return ''
   if (format) {
-    value = numeral(value).format()
-    console.log('value', value)
+    value = value.toLocaleString()
+    console.log('value', value, format)
   }
   // console.log(value, format)
   return value

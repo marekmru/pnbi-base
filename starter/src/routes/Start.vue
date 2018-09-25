@@ -156,7 +156,11 @@ export default {
         tableResponce.headers = [
           { text: 'Name', value: 'name' },
           { text: 'Age', value: 'age' },
-          { text: 'Value', value: 'value', format: '00000' }
+          { text: 'Value 1', value: 'value1', format: '00000' },
+          { text: 'Value 2', value: 'value2', format: '00000' },
+          { text: 'Value 3', value: 'value3', format: '00000' },
+          { text: 'Value 4', value: 'value4', format: '00000' },
+          { text: 'Value 5', value: 'value5', format: '00000' }
         ]
 
         setTimeout(() => {
