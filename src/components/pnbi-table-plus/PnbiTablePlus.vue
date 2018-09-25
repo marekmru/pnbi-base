@@ -28,7 +28,10 @@
       <template slot="items" slot-scope="props">
         <tr>
           <td v-for="(key, value, index) in localStorageHeaders" :key="index">
-            {{props.item[key.value] | tablePlusFilter(key.format)}}
+            <!-- {{props.item[key.value] | tablePlusFilter(key.format)}} -->
+    
+           {{typeof(props.item[key.value]) === 'number' ? props.item[key.value].toLocaleString(undefined, transformedData(key.value)) : props.item[key.value]}}
+        
           </td>
         </tr>
       </template>
@@ -81,7 +84,23 @@ export default {
     return {
       pagination: {}
     }
-  }
+  },
+  methods: {
+    transformedData (format) {
+      let locale = {}
+      let result = this.localStorageHeaders.find(obj =>
+        obj.value === format
+      )
+      if (result['format'] === 'currency'){
+        locale.style = 'currency'
+        locale.currency = 'EUR'
+      } else if (result['format'] === 'percent') {
+        locale.style = 'percent'
+        locale.maximumSignificantDigits = 3
+      } 
+      return locale
+    }
+  },
 }
 
 </script>
