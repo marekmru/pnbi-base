@@ -87,7 +87,6 @@ export default {
       this.request.pagination = data
       this.getDataFromApi()
         .then(data => {
-          console.log('data', data)
           this.items = data.tableResponce.items
           this.headers = data.tableResponce.headers
           this.totalItems = data.tableResponce.totalItems
@@ -100,13 +99,13 @@ export default {
         let items = []
         while (items.length < 300) {
           items.push({
-            name: 'abc' + Math.random(),
-            age: Math.random() * Math.random(),
-            value: 1012349,
-            value1: 1,
-            value2: 2,
-            value3: 3,
-            value4: 4,
+            name: 'abc123 23123 111',
+            age: Math.floor(Math.random() * 10000) + 1,
+            price: 1212349.55,
+            value1: 0.33555,
+            value2: 'Lorem ipsum dolor sit amet',
+            value3: 445566555.778999553,
+            value4: Math.floor(Math.random() * 5000) + 1,
             value5: 5,
             value6: 6,
             value7: 7,
@@ -155,12 +154,13 @@ export default {
         tableResponce.totalItems = totalItems
         tableResponce.headers = [
           { text: 'Name', value: 'name' },
-          { text: 'Age', value: 'age' },
-          { text: 'Value 1', value: 'value1', format: '00000' },
-          { text: 'Value 2', value: 'value2', format: '00000' },
-          { text: 'Value 3', value: 'value3', format: '00000' },
-          { text: 'Value 4', value: 'value4', format: '00000' },
-          { text: 'Value 5', value: 'value5', format: '00000' }
+          { text: 'Age', value: 'age', format: '' },
+          { text: 'Price', value: 'price', format: '0,0.0', style: 'currency' },
+          { text: 'Value 1', value: 'value1', format: '0.0%' },
+          { text: 'Value 2', value: 'value2', format: '' },
+          { text: 'Value 3', value: 'value3', format: '6 a' },
+          { text: 'Value 4', value: 'value4', format: '' },
+          { text: 'Value 5', value: 'value5', format: '' }
         ]
 
         setTimeout(() => {

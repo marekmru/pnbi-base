@@ -29,7 +29,7 @@
         <tr>
           <td v-for="(key, value, index) in localStorageHeaders" :key="index">
 
-            {{props.item[key.value] | formatData(key.format)}}
+            {{props.item[key.value] | formatData(key)}}
 
             <!-- {{typeof(props.item[key.value]) === 'number' ? props.item[key.value].toLocaleString(undefined, transformedData(key.value)) : props.item[key.value]}} -->
 
@@ -42,28 +42,81 @@
 </template>
 
 <script>
-// import columns filterung feature
+import numbro from 'numbro'
 import ColumnFilterMixin from './columnFilterMixin.js'
 import FixedMixin from './FixedMixin.js'
+
+// define a language
+numbro.registerLanguage({
+  languageTag: "de-DE",
+  delimiters: {
+      thousands: ".",
+      decimal: ","
+  },
+  abbreviations: {
+      thousand: "k",
+      million: "m",
+      billion: "b",
+      trillion: "t"
+  },
+  ordinal: function() {
+      return ".";
+  },
+  spaceSeparated: true,
+  currency: {
+      symbol: " €",
+      position: "postfix",
+      code: "EUR"
+  },
+  currencyFormat: {
+      totalLength: 4,
+      thousandSeparated: true
+  },
+  formats: {
+      fourDigits: {
+          totalLength: 4,
+          spaceSeparated: true,
+          average: true
+      },
+      fullWithTwoDecimals: {
+          output: "currency",
+          mantissa: 2,
+          spaceSeparated: true,
+          thousandSeparated: true
+      },
+      fullWithTwoDecimalsNoCurrency: {
+          mantissa: 2,
+          thousandSeparated: true
+      },
+      fullWithNoDecimals: {
+          output: "currency",
+          spaceSeparated: true,
+          thousandSeparated: true,
+          mantissa: 0
+      }
+  }
+});
+numbro.setLanguage('de-DE');
+
 export default {
   name: 'pnbi-datatable-plus',
   mixins: [ColumnFilterMixin, FixedMixin],
   filters: {
-    formatData: function (value, format) {
+    formatData: function (value, key) {
       if (!value) return ''
-      // transform only numbers
+      // transform numbers
       if(typeof(value) === 'number') {
-        console.log('v', value, 'f', format);
         let locale = {}
-        switch(format) {
-          case 'currency':
-            locale.style = 'currency'
-            locale.currency = 'EUR'
-          break;
+        if(key.format) {
+          if(key.style) {
+            value = numbro(value).formatCurrency(key.format)
+          } else {
+            value = numbro(value).format(key.format)
+          }
+        } else {
+          value = numbro(value).format('0,0')
         }
-        value = value.toLocaleString(undefined, locale)
       }
-      // console.log(value);
       return value
     }
   },
