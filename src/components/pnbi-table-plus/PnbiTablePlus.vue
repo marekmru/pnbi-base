@@ -27,12 +27,8 @@
     <v-data-table v-bind="localAttrs" :pagination.sync="pagination">
       <template slot="items" slot-scope="props">
         <tr>
-          <td v-for="(key, value, index) in localStorageHeaders" :key="index">
-
+          <td v-for="(key, value, index) in localStorageHeaders" :key="index" nowrap class="tdcell" :title="props.item[key.value]">
             {{props.item[key.value] | formatData(key)}}
-
-            <!-- {{typeof(props.item[key.value]) === 'number' ? props.item[key.value].toLocaleString(undefined, transformedData(key.value)) : props.item[key.value]}} -->
-
           </td>
         </tr>
       </template>
@@ -48,55 +44,55 @@ import FixedMixin from './FixedMixin.js'
 
 // define a language
 numbro.registerLanguage({
-  languageTag: "de-DE",
+  languageTag: 'de-DE',
   delimiters: {
-      thousands: ".",
-      decimal: ","
+    thousands: '.',
+    decimal: ','
   },
   abbreviations: {
-      thousand: "k",
-      million: "m",
-      billion: "b",
-      trillion: "t"
+    thousand: 'k',
+    million: 'm',
+    billion: 'b',
+    trillion: 't'
   },
-  ordinal: function() {
-      return ".";
+  ordinal: function () {
+    return '.'
   },
   spaceSeparated: true,
   currency: {
-      symbol: " €",
-      position: "postfix",
-      code: "EUR"
+    symbol: '€',
+    position: 'postfix',
+    code: 'EUR'
   },
   currencyFormat: {
-      totalLength: 4,
-      thousandSeparated: true
+    totalLength: 4,
+    thousandSeparated: true
   },
   formats: {
-      fourDigits: {
-          totalLength: 4,
-          spaceSeparated: true,
-          average: true
-      },
-      fullWithTwoDecimals: {
-          output: "currency",
-          mantissa: 2,
-          spaceSeparated: true,
-          thousandSeparated: true
-      },
-      fullWithTwoDecimalsNoCurrency: {
-          mantissa: 2,
-          thousandSeparated: true
-      },
-      fullWithNoDecimals: {
-          output: "currency",
-          spaceSeparated: true,
-          thousandSeparated: true,
-          mantissa: 0
-      }
+    fourDigits: {
+      totalLength: 4,
+      spaceSeparated: true,
+      average: true
+    },
+    fullWithTwoDecimals: {
+      output: 'currency',
+      mantissa: 2,
+      spaceSeparated: true,
+      thousandSeparated: true
+    },
+    fullWithTwoDecimalsNoCurrency: {
+      mantissa: 2,
+      thousandSeparated: true
+    },
+    fullWithNoDecimals: {
+      output: 'currency',
+      spaceSeparated: true,
+      thousandSeparated: true,
+      mantissa: 0
+    }
   }
-});
-numbro.setLanguage('de-DE');
+})
+numbro.setLanguage('de-DE')
 
 export default {
   name: 'pnbi-datatable-plus',
@@ -105,10 +101,10 @@ export default {
     formatData: function (value, key) {
       if (!value) return ''
       // transform numbers
-      if(typeof(value) === 'number') {
+      if (typeof (value) === 'number') {
         let locale = {}
-        if(key.format) {
-          if(key.style) {
+        if (key.format) {
+          if (key.style) {
             value = numbro(value).formatCurrency(key.format)
           } else {
             value = numbro(value).format(key.format)
@@ -157,25 +153,14 @@ export default {
     return {
       pagination: {}
     }
-  },
-  methods: {
-  //   transformedData (format) {
-  //     let locale = {}
-  //     let result = this.localStorageHeaders.find(obj =>
-  //       obj.value === format
-  //     )
-  //     if (result['format'] === 'currency'){
-  //       locale.style = 'currency'
-  //       locale.currency = 'EUR'
-  //     } else if (result['format'] === 'percent') {
-  //       locale.style = 'percent'
-  //       locale.maximumSignificantDigits = 3
-  //     }
-  //     return locale
-  //   }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.tdcell {
+  max-width: 350px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 </style>
