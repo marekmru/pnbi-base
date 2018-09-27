@@ -171,16 +171,6 @@ export default {
   created () {},
   computed: {
     computedAttrs () {
-      // check if column is a number type, then alight header to right
-      // this.localAttrs.headers = this.localAttrs.headers.map((header, index) => {
-      //   console.log('+', header.text, this.localAttrs.items[0])
-      //   if (this.localAttrs.items[0]) {
-      //     if (is.number(this.localAttrs.items[0][header.value])) {
-      //       header.align = 'right'
-      //     }
-      //   }
-      //   return header
-      // })
       return this.localAttrs
     }
   },
