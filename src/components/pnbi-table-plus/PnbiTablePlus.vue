@@ -24,10 +24,13 @@
       </div>
     </pnbi-dialog>
 
-    <v-data-table v-bind="localAttrs" :pagination.sync="pagination">
+    <v-data-table v-bind="computedAttrs" :pagination.sync="pagination">
       <template slot="items" slot-scope="props">
         <tr>
-          <td v-for="(key, value, index) in localStorageHeaders" :key="index" nowrap class="tdcell" :title="props.item[key.value]">
+          <td v-for="(key, value, index) in localStorageHeaders"
+            :key="index" nowrap class="tdcell"
+            :title="props.item[key.value]"
+            :class="{'text-xs-right': isNumber(props.item[key.value], key.value)}">
             {{props.item[key.value] | formatData(key)}}
           </td>
         </tr>
@@ -41,6 +44,7 @@
 import numbro from 'numbro'
 import ColumnFilterMixin from './columnFilterMixin.js'
 import FixedMixin from './FixedMixin.js'
+import is from 'is'
 
 // define a language
 numbro.registerLanguage({
@@ -148,7 +152,38 @@ export default {
       default: 'Close'
     }
   },
+  methods: {
+    isNumber (val, key) {
+      const isNumber = is.number(val)
+      if (isNumber) {
+        this.localAttrs.headers = this.localAttrs.headers.map(header => {
+          if (header) {
+            if (header.value === key) {
+              header.align = 'right'
+            }
+            return header
+          }
+        })
+      }
+      return isNumber
+    }
+  },
   created () {},
+  computed: {
+    computedAttrs () {
+      // check if column is a number type, then alight header to right
+      // this.localAttrs.headers = this.localAttrs.headers.map((header, index) => {
+      //   console.log('+', header.text, this.localAttrs.items[0])
+      //   if (this.localAttrs.items[0]) {
+      //     if (is.number(this.localAttrs.items[0][header.value])) {
+      //       header.align = 'right'
+      //     }
+      //   }
+      //   return header
+      // })
+      return this.localAttrs
+    }
+  },
   data: function () {
     return {
       pagination: {}
