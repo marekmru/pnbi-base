@@ -155,7 +155,7 @@ export default {
         tableResponce.headers = [
           { text: 'Name', value: 'name' },
           { text: 'Age', value: 'age', format: '' },
-          { text: 'Price', value: 'price', format: '0,0.0', style: 'currency' },
+          { text: 'Price', value: 'price', format: '0,0', style: 'currency' },
           { text: 'Value 1', value: 'value1', format: '0.0%' },
           { text: 'Value 2', value: 'value2', format: '' },
           { text: 'Value 3', value: 'value3', format: '6 a' },
