@@ -1,12 +1,7 @@
-/*!
- * numbro.js language configuration
- * language : German
- * locale: Germany
- * author : Marco Krage : https://github.com/sinky
- *
- * Generally useful in Germany, Austria, Luxembourg, Belgium
- */
-
+/*
+* You can easily define your own language.
+* All templates for langualges are already defined in node_modules/numbro/languages
+*/
 module.exports = {
   de: {
     languageTag: 'de-DE',

@@ -48,10 +48,10 @@ import is from 'is'
 
 /*
 * Check for installed locale
-* all locales are inside of languages.js
+* compare if browser locale is defined in numbroLanguages.js
 * default: us
 */
-import languages from './languages.js'
+import languages from './numbroLanguages.js'
 Object.entries(languages).forEach(([key, value]) => {
   if (value.languageTag === navigator.language) {
     numbro.registerLanguage(languages[key])
