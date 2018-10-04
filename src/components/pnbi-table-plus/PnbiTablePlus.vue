@@ -59,7 +59,7 @@ import ColumnFilterMixin from './columnFilterMixin.js'
 import FixedMixin from './FixedMixin.js'
 import is from 'is'
 import draggable from 'vuedraggable'
-
+import moment from 'moment'
 /*
 * Check for installed locale
 * compare if browser locale is defined in numbroLanguages.js
@@ -82,17 +82,24 @@ export default {
   filters: {
     formatData: function (value, key) {
       if (!value) return ''
-      // transform numbers
-      if (typeof (value) === 'number') {
-        if (key.format) {
-          if (key.style) {
-            value = numbro(value).formatCurrency(key.format)
-          } else {
+
+      switch (key.style) {
+        case 'numbro.js':
+          if (key.format) {
             value = numbro(value).format(key.format)
+          } else {
+            value = numbro(value).format('0,0')
           }
-        } else {
-          value = numbro(value).format('0,0')
-        }
+          break
+        case 'moment.js':
+          if (key.format) {
+            value = moment(value).format(key.format)
+          } else {
+            value = moment(value).format('l')
+          }
+          break
+        default:
+          break
       }
       return value
     }

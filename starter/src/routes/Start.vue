@@ -99,15 +99,15 @@ export default {
         let items = []
         while (items.length < 300) {
           items.push({
-            name: 'abc123 23123 111',
+            name: 'abc123',
             age: Math.floor(Math.random() * 10000) + 1,
             price: 1212349.55,
             value1: 0.33555,
             value2: 'Lorem ipsum dolor sit amet',
             value3: 445566555.778999553,
             value4: Math.floor(Math.random() * 5000) + 1,
-            value5: 5,
-            value6: 6,
+            value5: '2018-10-04T00:00:00',
+            value6: '2018-10-04T00:00:00',
             value7: 7,
             value8: 8
           })
@@ -154,13 +154,14 @@ export default {
         tableResponce.totalItems = totalItems
         tableResponce.headers = [
           { text: 'Name', value: 'name' },
-          { text: 'Age', value: 'age', format: '' },
-          { text: 'Price', value: 'price', format: '0,0', style: 'currency' },
-          { text: 'Value 1 g', value: 'value1', format: '0.0%' },
-          { text: 'Value 2', value: 'value2', format: '' },
-          { text: 'Value 3', value: 'value3', format: '6 a' },
-          { text: 'Value 4', value: 'value4', format: '' },
-          { text: 'Value 5', value: 'value5', format: '' }
+          { text: 'no format & numbro', value: 'age', style: 'numbro.js' },
+          { text: 'currency €', value: 'price', format: '0,0.00', style: 'numbro.js' },
+          { text: 'Percent', value: 'value1', format: '0.0%', style: 'numbro.js' },
+          { text: 'String', value: 'value2' },
+          { text: 'Value 3', value: 'value3', format: '6 a', style: 'numbro.js' },
+          { text: 'just number', value: 'value4' },
+          { text: 'no format & moment', value: 'value5', style: 'moment.js' },
+          { text: 'format  & moment', value: 'value6', format: 'DD/MM/YYYY', style: 'moment.js' }
         ]
 
         setTimeout(() => {
