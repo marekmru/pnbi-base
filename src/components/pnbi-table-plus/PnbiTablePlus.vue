@@ -63,7 +63,7 @@ import moment from 'moment'
 import languages from './numbroLanguages.js'
 
 export default {
-  name: 'pnbi-datatable-plus',
+  name: 'PnbiDatatablePlus',
   components: {
     draggable
   },
