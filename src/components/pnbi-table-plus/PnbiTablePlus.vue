@@ -60,18 +60,7 @@ import FixedMixin from './FixedMixin.js'
 import is from 'is'
 import draggable from 'vuedraggable'
 import moment from 'moment'
-/*
-* Check for installed locale
-* compare if browser locale is defined in numbroLanguages.js
-* default: us
-*/
 import languages from './numbroLanguages.js'
-Object.entries(languages).forEach(([key, value]) => {
-  if (value.languageTag === navigator.language) {
-    numbro.registerLanguage(languages[key])
-    numbro.setLanguage(value.languageTag)
-  }
-})
 
 export default {
   name: 'pnbi-datatable-plus',
@@ -97,8 +86,6 @@ export default {
           } else {
             value = moment(value).format('l')
           }
-          break
-        default:
           break
       }
       return value
@@ -136,6 +123,19 @@ export default {
       default: 'Close'
     }
   },
+  created () {
+    /*
+    * Check for installed locale
+    * compare if browser locale is defined in numbroLanguages.js
+    * default: us
+    */
+    Object.entries(languages).forEach(([key, value]) => {
+      if (value.languageTag === navigator.language) {
+        numbro.registerLanguage(languages[key])
+        numbro.setLanguage(value.languageTag)
+      }
+    })
+  },
   methods: {
     isNumber (val, key) {
       const isNumber = is.number(val)
@@ -156,7 +156,6 @@ export default {
     },
     doNothing () {}
   },
-  created () {},
   computed: {
     computedAttrs () {
       return this.localAttrs
