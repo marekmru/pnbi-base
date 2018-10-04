@@ -10,11 +10,24 @@
           <v-subheader>
             {{dialogSubtitle}}
           </v-subheader>
-          <v-list-tile v-for="header in localStorageHeaders" :key="header.text">
-            <v-list-tile-title>
-              <v-checkbox :label="header.text" @change="updateHeaders()" v-model="header.selected" :value="header.selected"></v-checkbox>
-            </v-list-tile-title>
-          </v-list-tile>
+          <draggable :list="localStorageHeaders" @start="drag=true" @end="onDraggableEndEvent($event)">
+            <v-list-tile v-for="header in localStorageHeaders" :key="header.text" @click="">
+
+              <v-list-tile-content>
+                  <v-checkbox :label="header.text"
+                    @change="updateHeaders()"
+                    v-model="header.selected"
+                    :value="header.selected"
+                    style="align-items:center">
+                  </v-checkbox>
+              </v-list-tile-content>
+
+              <v-list-tile-action class="text-sm-right">
+                  <v-icon color="grey lighten-1">drag_indicator</v-icon>
+              </v-list-tile-action>
+
+            </v-list-tile>
+        </draggable>
         </v-list>
       </div>
       <div slot="dialog-actions">
@@ -45,6 +58,7 @@ import numbro from 'numbro'
 import ColumnFilterMixin from './columnFilterMixin.js'
 import FixedMixin from './FixedMixin.js'
 import is from 'is'
+import draggable from 'vuedraggable'
 
 /*
 * Check for installed locale
@@ -61,6 +75,9 @@ Object.entries(languages).forEach(([key, value]) => {
 
 export default {
   name: 'pnbi-datatable-plus',
+  components: {
+    draggable
+  },
   mixins: [ColumnFilterMixin, FixedMixin],
   filters: {
     formatData: function (value, key) {
@@ -126,6 +143,9 @@ export default {
         })
       }
       return isNumber
+    },
+    onDraggableEndEvent (evt) {
+      this.updateHeaders()
     }
   },
   created () {},
@@ -136,7 +156,9 @@ export default {
   },
   data: function () {
     return {
-      pagination: {}
+      pagination: {},
+      myArray: null,
+      drag: null
     }
   }
 }
