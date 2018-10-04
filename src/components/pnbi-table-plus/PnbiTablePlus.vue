@@ -11,7 +11,7 @@
             {{dialogSubtitle}}
           </v-subheader>
           <draggable :list="localStorageHeaders" @start="drag=true" @end="onDraggableEndEvent($event)">
-            <v-list-tile v-for="header in localStorageHeaders" :key="header.text" @click="">
+            <v-list-tile v-for="header in localStorageHeaders" :key="header.text" @click="doNothing()">
 
               <v-list-tile-content>
                   <v-checkbox :label="header.text"
@@ -146,7 +146,8 @@ export default {
     },
     onDraggableEndEvent (evt) {
       this.updateHeaders()
-    }
+    },
+    doNothing () {}
   },
   created () {},
   computed: {
