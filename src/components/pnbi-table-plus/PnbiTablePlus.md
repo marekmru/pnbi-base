@@ -34,8 +34,6 @@ This is a wrapper for v-data-table and acceps all attributes and slots from
             pagination: {},
             search: null
           },
-          newBudget: null,
-          projectName: null,
           headers: []
         };
       },
@@ -163,59 +161,6 @@ onPaginationEvent (data, event) {
 }
 ```
 
-Your data object:
-```javascript
-  data: () => {
-    return {
-      items: [],
-      totalItems: 0,
-      loading: true,
-      request: {
-        pagination: {},
-        search: null
-      },
-      headers: [
-        {text: 'Name 2', value: 'name'},
-        {text: 'Age', value: 'age'},
-        {text: 'Value', value: 'value'}
-      ]
-    }
-  }
-```
-
 #### Backend API definition
 
-Wrap API endpoint request params in request object and send to Backend:
-1. `page` -  page number (int)
-2. `rowsPerPage` -  rows count per page (int)
-3. `sortBy` - column to sort by (string)
-4. `descending` - flag for sorting (boolean)
-
-Request Example:
-```javascript
-{
-  "request": {
-    "pagination": {
-      "descending":false,
-      "page":1,
-      "rowsPerPage":5,
-      "sortBy":"name"
-      },
-    "search": null
-  }
-}
-```
-
-Response should include:
-1. `totalItems` - length of found items list
-2. `items` - plain list of items
-
-Response example:
-```jsx
-{
-  "responce": {
-      "items": [],
-      "totalItems": 100
-  }
-}
-```
+TODO
