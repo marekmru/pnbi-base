@@ -161,6 +161,36 @@ onPaginationEvent (data, event) {
 }
 ```
 
-#### Backend API definition
+### Backend API definition
 
-TODO
+Datatables+ uses numbro.js and moment.js librarys for formatting the values. API developer is responsible for the right number format. All formats are defined in the headers mapping array:
+
+```js static
+headers = [
+  { text: 'String', value: 'name' },
+  { text: 'no format & numbro', value: 'age', style: 'numbro.js' },
+  { text: 'currency €', value: 'price', format: '0,0.00', style: 'numbro.js' },
+  { text: 'Percent', value: 'value1', format: '0.0%', style: 'numbro.js' },
+  { text: 'String', value: 'value2' },
+  { text: 'Value 3', value: 'value3', format: '6 a', style: 'numbro.js' },
+  { text: 'just number', value: 'value4' },
+  { text: 'no format & moment', value: 'value5', style: 'moment.js' },
+  { text: 'format  & moment', value: 'value6', format: 'DD/MM/YYYY', style: 'moment.js' }
+]
+```
+
+Always define "style" attribute for numbers. With no style numbro.js number is formated as default number defined by current locale.
+
+#### Locales & Languages
+
+For numbro it is two locales by default included: de_DE and en_En. If the browser locale from navigator.language is included in installed locales it would be used. English is default.
+
+Check/Add locales in `numbroLanguages.js`
+
+#### Supported formats:
+
+Check the numbro.js website (we use old format)  http://numbrojs.com/old-format.html
+
+Check the momnet.js website
+https://momentjs.com/
+
