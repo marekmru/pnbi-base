@@ -39,7 +39,7 @@
 
     <v-data-table v-bind="computedAttrs" :pagination.sync="pagination">
       <template slot="items" slot-scope="props">
-        <tr @click="$emit('openRow')">
+        <tr @click="$emit('openRow', props.item)">
           <td v-for="(key, value, index) in localStorageHeaders"
             :key="index" nowrap class="tdcell"
             :title="props.item[key.value]"
