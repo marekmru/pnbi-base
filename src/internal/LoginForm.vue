@@ -1,78 +1,15 @@
-<script>
-  import Auth from '../Auth'
-  import router from '@/router'
-
-  import BI_BASE_CONFIG from '@/pnbi.base.config.js'
-  export default {
-    props: {
-      state: String
-    },
-    mounted() {},
-    data() {
-      return {
-        title: BI_BASE_CONFIG.TITLE,
-        rules: {
-          valid: false,
-          nameRules: [
-            v => !!v || 'Pflichtfeld',
-            v =>
-            v.length >= 3 || 'Mindestens 3 Zeichen eingeben.',
-            v =>
-            !this.errorAuth ||
-            'Bitte überprüfen Sie ihren Namen und das Passwort.'
-          ]
-        },
-        passwordVisible: false,
-        user: {
-          username: '',
-          password: ''
-        },
-        errorAuth: false
-      }
-    },
-
-    methods: {
-      focus() {
-        this.errorAuth = false
-        this.$refs.form.validate()
-      },
-      onSubmit($event) {
-        $event.preventDefault()
-        if (!this.rules.valid) {
-          return
-        }
-        this.errorAuth = false
-        Auth.login(this.user).then(
-          () => {
-            this.$emit('login-success')
-          },
-          error => {
-            if (error.status === 401) {
-              this.errorAuth = true
-              this.$refs.form.validate()
-            }
-          }
-        )
-      }
-    },
-    computed: {}
-  }
-
-</script>
 <template>
   <v-container fill-height>
     <v-layout align-center>
       <v-flex class="text-center">
-        <!-- <h1 class="bi-powered">POWERED BY CORE</h1> -->
         <v-form v-model="rules.valid" ref="form" lazy-validation>
           <v-card>
             <v-card-title class="justify-center">
               <h1 class="bi-headline">{{title}}</h1>
             </v-card-title>
-            <v-card-text class="">
+            <v-card-text>
               <v-text-field @focus="focus" label="Nutzername" v-model="user.username" :rules="rules.nameRules" required></v-text-field>
-              <v-text-field @focus="focus" label="Passwort" v-model="user.password" :rules="rules.nameRules" required :append-icon="passwordVisible ? 'visibility' : 'visibility_off'"
-                :append-icon-cb="() => (passwordVisible = !passwordVisible)" :type="passwordVisible ? 'text' : 'password'"></v-text-field>
+              <v-text-field @focus="focus" label="Passwort" v-model="user.password" :rules="rules.nameRules" required :append-icon="passwordVisible ? 'visibility' : 'visibility_off'" @click:append="passwordVisible = !passwordVisible" :type="passwordVisible ? 'text' : 'password'"></v-text-field>
             </v-card-text>
             <v-card-actions>
               <v-layout column>
@@ -91,7 +28,65 @@
   </v-container>
 
 </template>
+<script>
+import Auth from '../Auth'
+
+export default {
+  props: {
+    state: String
+  },
+  mounted () {},
+  data () {
+    return {
+      title: this.$config.TITLE,
+      rules: {
+        valid: false,
+        nameRules: [
+          v => !!v || 'Pflichtfeld',
+          v =>
+            v.length >= 3 || 'Mindestens 3 Zeichen eingeben.',
+          v =>
+            !this.errorAuth ||
+            'Bitte überprüfen Sie ihren Namen und das Passwort.'
+        ]
+      },
+      passwordVisible: false,
+      user: {
+        username: '',
+        password: ''
+      },
+      errorAuth: false
+    }
+  },
+
+  methods: {
+    focus () {
+      this.errorAuth = false
+      this.$refs.form.validate()
+    },
+    onSubmit ($event) {
+      $event.preventDefault()
+      if (!this.rules.valid) {
+        return
+      }
+      this.errorAuth = false
+      Auth.login(this.user).then(
+        () => {
+          this.$emit('login-success')
+        },
+        error => {
+          if (error.status === 401) {
+            this.errorAuth = true
+            this.$refs.form.validate()
+          }
+        }
+      )
+    }
+  },
+  computed: {}
+}
+
+</script>
+
 <style scoped lang="scss">
-
-
 </style>

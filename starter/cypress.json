@@ -1,0 +1,11 @@
+{
+  "pluginsFile": "tests/e2e/plugins/index.js",
+  "baseUrl": "http://localhost:8080/#/bmw/",
+  "env": {
+    "proId": "5b20da02330f496d6507564d",
+    "proName": "cypress---custom",
+    "projectStepCount": 6
+  },
+  "viewportWidth": 1000,
+  "viewportHeight": 1000
+}

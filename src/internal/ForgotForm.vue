@@ -1,55 +1,55 @@
 <script>
-  import Auth from '../Auth'
-  export default {
-    props: {
-      state: String
-    },
-    mounted() {},
-    data() {
-      return {
-        errorEmail400: undefined,
-        user: {
-          email: ''
-        },
-        rules: {
-          valid: false,
-          emailRules: [
-            v => !!v || 'Pflichtfeld',
-            v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'Die E-Mail Adresse muss valide sein',
-            v => !this.errorEmail400 || 'Die E-Mail Adresse wurde nicht gefunden.'
-          ]
-        },
-        message: undefined
-      }
-    },
-
-    methods: {
-      focus() {
-        this.errorEmail400 = false
-        this.$refs.form.validate()
+import Auth from '../Auth'
+export default {
+  props: {
+    state: String
+  },
+  mounted () {},
+  data () {
+    return {
+      errorEmail400: undefined,
+      user: {
+        email: ''
       },
-      onSubmit($event) {
-        $event.preventDefault()
-        if (!this.rules.valid) {
-          return
-        }
-        this.message = undefined
-        this.errorEmail400 = false
-        Auth.reset(this.user)
-          .then(response => {
-            this.message = {
-              success: true,
-              text: 'Eine Email mit einem Link zum Zurücksetzen ihres Passwortes wurde an folgende Adresse geschickt:'
-            }
-          })
-          .catch(() => {
-            this.errorEmail400 = true
-            this.$refs.form.validate()
-          })
-      }
+      rules: {
+        valid: false,
+        emailRules: [
+          v => !!v || 'Pflichtfeld',
+          v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'Die E-Mail Adresse muss valide sein',
+          v => !this.errorEmail400 || 'Die E-Mail Adresse wurde nicht gefunden.'
+        ]
+      },
+      message: undefined
+    }
+  },
+
+  methods: {
+    focus () {
+      this.errorEmail400 = false
+      this.$refs.form.validate()
     },
-    computed: {}
-  }
+    onSubmit ($event) {
+      $event.preventDefault()
+      if (!this.rules.valid) {
+        return
+      }
+      this.message = undefined
+      this.errorEmail400 = false
+      Auth.reset(this.user)
+        .then(response => {
+          this.message = {
+            success: true,
+            text: 'Eine Email mit einem Link zum Zurücksetzen ihres Passwortes wurde an folgende Adresse geschickt:'
+          }
+        })
+        .catch(() => {
+          this.errorEmail400 = true
+          this.$refs.form.validate()
+        })
+    }
+  },
+  computed: {}
+}
 
 </script>
 
@@ -86,8 +86,7 @@
 </template>
 
 <style lang="css" scoped>
-  .card {
+  .v-card {
     padding-bottom: 12px;
   }
-
 </style>
