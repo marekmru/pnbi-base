@@ -4,6 +4,7 @@ Starter Element for Dialogs with convenience functions
 <br><br>
 
 ##### Example: Default dialog with two action buttons
+##### TODO: DialogMixin props @close etc.
 
 ```jsx
 <pnbi-dialog title="Dialog Header">

@@ -10,12 +10,12 @@ This is a wrapper for v-data-table and acceps all attributes and slots from
       <pnbi-datatable-plus
         v-if="items.length > 2"
         :items="items" :headers="headers"
-        tableIdentifier="123"
+        table-identifier="123"
         :loading="loading"
         :total-items="totalItems"
         :search="request.search"
-        @paginationEvent="onPaginationEvent"
-        dialog-title="Tabele anpassen"
+        @pagination-event="onPaginationEvent"
+        dialog-title="Tabelle anpassen"
         dialog-subtitle="Wähle Spalten, die angezeigt werden sollen"
         dialog-closelabel="Schließen">
       </pnbi-datatable-plus>
@@ -40,7 +40,6 @@ This is a wrapper for v-data-table and acceps all attributes and slots from
        mounted () {
         this.getDataFromApi()
           .then(data => {
-            console.log('data-mounted', data)
             this.items = data.tableResponce.items
             this.headers = data.tableResponce.headers
             this.totalItems = data.tableResponce.totalItems

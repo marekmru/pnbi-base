@@ -213,14 +213,8 @@ export default {
     _updateDimensions () {
       this.clientWidth = Math.max(document.documentElement.clientWidth,
         window.innerWidth || 0)
-      /*       this.clientHeight = Math.max(document.documentElement.clientHeight,
-                                   window.innerHeight || 0); */
     },
-    /*     goto (name) {
-      this.$router.push({
-        name
-      })
-    }, */
+
     showError (alert) {
       this.alertMessage = alert
       this.alertOpen = true
@@ -240,20 +234,20 @@ export default {
       this.title = title.toUpperCase()
       document.title = this.title
     },
-    checkUserSettings () {
+/*     checkUserSettings () {
       const temp = JSON.parse(window.localStorage.getItem('userSettings'))
       if (temp != null) {
         this.userSettings = temp
       }
-    },
+    }, */
     toogleSideNav () {
       this.userSettings.sidenavOpen = !this.userSettings.sidenavOpen
-      window.localStorage.setItem('userSettings', JSON.stringify(this.userSettings))
+/*       window.localStorage.setItem('userSettings', JSON.stringify(this.userSettings)) */
     }
   },
   created () {
     this.setTitle(this.$config.TITLE)
-    this.checkUserSettings()
+    //this.checkUserSettings()
   },
   computed: {
     hasTitleSlot () {

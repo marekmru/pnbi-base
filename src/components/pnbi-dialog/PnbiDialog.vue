@@ -9,8 +9,9 @@
         </v-toolbar-title>
       </v-toolbar>
       <v-card-text class="px-3 py-3">
+        <slot v-if="!$slots['dialog-content']"></slot>
         <!-- @slot default dialog content -->
-        <slot name="dialog-content"></slot>
+        <slot v-else name="dialog-content"></slot>
       </v-card-text>
       <v-card-actions class="pl-3 pr-3 py-3" style="background-color: rgba(100,100,100, .025)">
         <v-spacer></v-spacer>

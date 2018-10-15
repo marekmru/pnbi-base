@@ -25,7 +25,7 @@ export default {
         return temp
       },
       set: function (newVal) {
-        console.log('newVal', newVal)
+        //console.log('newVal', newVal)
       }
     }
   },
@@ -37,15 +37,6 @@ export default {
     }
   },
   watch: {
-    pagination: function () {
-      // pagination event used by tableplus for triggering request.
-      this.$emit('paginationEvent', this.pagination)
-      this.$updateHeaderDom(this.localStorageHeaders)
-    },
-    localAttrs: function () {
-      // watch for changes in localAttrs
-      this.$updateHeaderDom(this.localStorageHeaders)
-    }
   },
   methods: {
     showDialog () {
