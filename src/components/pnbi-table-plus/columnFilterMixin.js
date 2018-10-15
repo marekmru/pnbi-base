@@ -36,6 +36,9 @@ export default {
       customiseDialog: false
     }
   },
+  beforeDestroy(){
+    this.$bus.$off('customizeEvent', this.showDialog)
+  },
   watch: {
   },
   methods: {
