@@ -1,6 +1,6 @@
 <template>
   <div class="fn-input">
-    <v-text-field :disabled="disabled" :label="label" autocomplete="off" v-model="internalValue" @keydown.native.stop="onKeyDown" :error-messages="errorMessages" :error="error"
+    <v-text-field :disabled="disabled" :label="label" autocomplete="off" v-model="internalValue" @keydown.native.stop="onKeyDown" :error-messages="errorMessages" :error="error" :clearable="clearable"
       :suffix="internalSuffix"></v-text-field>
   </div>
 </template>
@@ -24,6 +24,11 @@ export default {
     },
     label: {
       type: String
+    },
+    clearable: {
+      type: Boolean,
+      default: false,
+      required: false
     },
     error: {
       type: Boolean,
