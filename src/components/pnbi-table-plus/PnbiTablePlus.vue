@@ -2,7 +2,7 @@
 
   <div class="pnbi-datatable">
 
-    <pnbi-dialog :title="dialogTitle" :open="customiseDialog" width="500">
+    <pnbi-dialog :title="dialogTitle" :open="customiseDialog" @close="customiseDialog=false" width="500">
       <div slot="dialog-content">
         <v-list>
           <v-subheader>
@@ -152,7 +152,6 @@
       doNothing () {} */
     },
     computed: {
-
       compPagination: {
         get: function () {
           return this.localAttrs.pagination
