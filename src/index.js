@@ -60,7 +60,14 @@ const install = (Vue, options) => {
   Vue.component('pnbi-datatable-plus', PnbiDataTablePlus)
   Vue.component('pnbi-webapp', PnbiWebapp)
   Vue.component('pnbi-empty', PnbiEmpty)
-
+  /*
+  * Use this filter for custom formating includes local settings:
+  * numbers – with numbro.js 
+  * datetime – with moment.js
+  * 
+  * FORMAT
+  * @param key = {style:'numbro.js', format:'0,0.00'}
+  */
   Vue.filter('customFormatter', function (value, key) {
     if (!value) return ''
     switch (key.style) {
