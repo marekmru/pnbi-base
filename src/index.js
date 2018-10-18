@@ -19,10 +19,29 @@ import 'vuetify/dist/vuetify.min.css'
 import './styles/index.scss'
 import './styles/typography.scss'
 
+// app wide locales
+import numbro from 'numbro'
+import moment from 'moment'
+import languages from './internal/locals/numbroLanguages.js'
+
+/*
+ * Check for installed locale
+ * compare if browser locale is defined in numbroLanguages.js
+ * default: us
+ * TODO: global solution, not only for datatable plus
+ */
+Object.entries(languages).forEach(([key, value]) => {
+  if (value.languageTag === navigator.language) {
+    numbro.registerLanguage(languages[key])
+    numbro.setLanguage(value.languageTag)
+  }
+})
+
 const install = (Vue, options) => {
   Vue.prototype.$bus = bus
   Vue.prototype.$helper = helper
   Vue.prototype.$config = options.config
+  Vue.prototype.$numbro = numbro
   Vue.prototype.$loader = function (status) {
     bus.$emit(LOADING, status => {
       this.loading = status
@@ -41,6 +60,27 @@ const install = (Vue, options) => {
   Vue.component('pnbi-datatable-plus', PnbiDataTablePlus)
   Vue.component('pnbi-webapp', PnbiWebapp)
   Vue.component('pnbi-empty', PnbiEmpty)
+
+  Vue.filter('customFormatter', function (value, key) {
+    if (!value) return ''
+    switch (key.style) {
+      case 'numbro.js':
+        if (key.format) {
+          value = numbro(value).format(key.format)
+        } else {
+          value = numbro(value).format('0,0')
+        }
+        break
+      case 'moment.js':
+        if (key.format) {
+          value = moment(value).format(key.format)
+        } else {
+          value = moment(value).format('l')
+        }
+        break
+    }
+    return value
+  })
 
   Vue.use(Vuetify, {
     theme: {

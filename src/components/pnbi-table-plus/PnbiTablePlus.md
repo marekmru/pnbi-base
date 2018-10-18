@@ -117,7 +117,7 @@ This is a wrapper for v-data-table and acceps all attributes and slots from
             tableResponce.totalItems = totalItems
             tableResponce.headers = [
               { text: 'Name', value: 'name' },
-              { text: 'no format & numbro', value: 'age', style: 'numbro.js' },
+              { text: 'numbro', value: 'age', style: 'numbro.js' },
               { text: 'currency €', value: 'price', format: '0,0.00', style: 'numbro.js' },
               { text: 'Percent', value: 'value1', format: '0.0%', style: 'numbro.js' },
               { text: 'String', value: 'value2' },

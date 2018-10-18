@@ -4,11 +4,11 @@
       <h2 class="headline white--text">Information about current item</h2>
       <ul class="white--text">
         <li>KPI 1</li>
-        <li>KPI 2</li>
+        <li>KPI 2 2</li>
       </ul>
     </div>
 
-    <pnbi-datatable headline="Datatable plus" @search="request.search = $event" :button-label="false" customize-label="Customize">
+    <pnbi-datatable headline="Datatable plus" @search="search = $event" :button-label="false" customize-label="Customize">
 
       <!-- primary controls-->
 
@@ -22,8 +22,8 @@
         tableIdentifier="123"
         :loading="loading"
         :total-items="totalItems"
-        :search="request.search"
-        @paginationEvent="onPaginationEvent"
+        :search="search"
+        :pagination.sync="pagination"
         dialog-title="Tabele anpassen"
         dialog-subtitle="Wähle Spalten, die angezeigt werden sollen"
         dialog-closelabel="Schließen">
@@ -73,18 +73,25 @@ export default {
       items: [],
       totalItems: 0,
       loading: true,
-      request: {
-        pagination: {},
-        search: null
+      pagination: {
+        page: 1,
+        rowsPerPage: 10,
+        descending: false,
+        sortBy: ''
       },
+      search: null,
       newBudget: null,
       projectName: null,
       headers: []
     }
   },
+  watch: {
+    pagination: function () {
+      this.onPaginationEvent()
+    }
+  },
   methods: {
     onPaginationEvent (data, event) {
-      this.request.pagination = data
       this.getDataFromApi()
         .then(data => {
           this.items = data.tableResponce.items
@@ -113,21 +120,12 @@ export default {
           })
         }
 
-        const { sortBy, descending, page, rowsPerPage } = this.request.pagination
-
-        // BE search
-        if (this.request.search) {
-          items = items.filter(i => {
-            return i.age === parseInt(this.request.search)
-          })
-        } else {
-          this.request.search = null
-        }
+        const { sortBy, descending, page, rowsPerPage } = this.pagination
 
         const totalItems = items.length
 
         // BE sorting
-        if (this.request.pagination.sortBy && items.length > 1) {
+        if (this.pagination.sortBy && items.length > 1) {
           items = items.sort((a, b) => {
             const sortA = a[sortBy]
             const sortB = b[sortBy]
@@ -154,7 +152,7 @@ export default {
         tableResponce.totalItems = totalItems
         tableResponce.headers = [
           { text: 'Name', value: 'name' },
-          { text: 'no format & numbro', value: 'age', style: 'numbro.js' },
+          { text: 'numbro 2', value: 'age', style: 'numbro.js', format: '0,0' },
           { text: 'currency €', value: 'price', format: '0,0.00', style: 'numbro.js' },
           { text: 'Percent', value: 'value1', format: '0.0%', style: 'numbro.js' },
           { text: 'String', value: 'value2' },
