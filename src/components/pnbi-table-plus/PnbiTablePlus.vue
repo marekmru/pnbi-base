@@ -8,9 +8,18 @@
           <v-subheader>
             {{dialogSubtitle}}
           </v-subheader>
+          
+          <!-- select all -->
+          <v-list-tile>
+            <v-list-tile-content>
+                <v-checkbox label="Select all" @change="selectAllHeaders()" v-model="selectAll"
+                  style="align-items:center">
+                </v-checkbox>
+              </v-list-tile-content>
+          </v-list-tile>
+          
           <draggable :list="localStorageHeaders" @start="drag=true" @end="updateHeaders($event)">
             <v-list-tile v-for="header in localStorageHeaders" :key="header.text">
-              <!-- @click="doNothing()" -->
               <v-list-tile-content>
                 <v-checkbox :label="header.text" @change="updateHeaders()" v-model="header.selected" :value="header.selected"
                   style="align-items:center">
@@ -91,6 +100,17 @@
       }
     },
     methods: {
+      /*
+      * Toogle all headers on/off
+      */
+      selectAllHeaders() {
+        console.log('dada', this.selectAll);
+        this.localStorageHeaders = this.localStorageHeaders.map(header => {
+          header.selected = this.selectAll
+          return header
+        })
+        this.updateHeaders()
+      },
       isNumber(val, key) {
         const isNumber = is.number(val)
         if (isNumber) {
@@ -130,7 +150,8 @@
     },
     data: function () {
       return {
-        drag: null
+        drag: null,
+        selectAll: null
       }
     }
   }
