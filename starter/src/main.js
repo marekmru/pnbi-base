@@ -8,35 +8,10 @@ import '@/config/filters.js'
 // import '@/config/highcharts.js'
 import '@/config/packages.js'
 import PnbiBase from 'pnbi-base/src'
-import numeral from 'numeral'
-
-// load a locale
-numeral.register('locale', 'fr', {
-  delimiters: {
-    thousands: ' ',
-    decimal: ','
-  },
-  abbreviations: {
-    thousand: 'k',
-    million: 'm',
-    billion: 'b',
-    trillion: 't'
-  },
-  ordinal: function (number) {
-    return number === 1 ? 'er' : 'ème'
-  },
-  currency: {
-    symbol: '€'
-  }
-})
-
-// switch between locales
-numeral.locale('de')
 
 Vue.use(PnbiBase, {
   router,
-  config,
-  numeral
+  config
 })
 
 const messages = {
@@ -49,16 +24,6 @@ const messages = {
     }
   }
 }
-
-// Vue.filter('tablePlusFilter', function (value, format) {
-//   if (!value) return ''
-//   if (format) {
-//     value = value.toLocaleString()
-//     console.log('value', value, format)
-//   }
-//   // console.log(value, format)
-//   return value
-// })
 
 Vue.use(VeeValidate)
 var app = new Vue({
