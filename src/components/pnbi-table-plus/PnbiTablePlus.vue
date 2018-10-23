@@ -12,12 +12,14 @@
           <!-- select all -->
           <v-list-tile>
             <v-list-tile-content>
-                <v-checkbox label="Select all" @change="selectAllHeaders()" v-model="selectAll"
+                <v-checkbox :label="selectAllLabel" @change="selectAllHeaders()" v-model="selectAll"
                   style="align-items:center">
                 </v-checkbox>
               </v-list-tile-content>
           </v-list-tile>
           
+          <v-divider></v-divider>
+
           <draggable :list="localStorageHeaders" @start="drag=true" @end="updateHeaders($event)">
             <v-list-tile v-for="header in localStorageHeaders" :key="header.text">
               <v-list-tile-content>
@@ -49,6 +51,9 @@
             {{props.item[key.value] | customFormatter(key)}}
           </td>
         </tr>
+      </template>
+      <template slot="no-results">
+        <pnbi-empty text="No data to display"></pnbi-empty>
       </template>
     </v-data-table>
   </div>
@@ -97,6 +102,13 @@
       dialogCloselabel: {
         type: String,
         default: 'Close'
+      },
+      /**
+       * Defined the label for selecting all headers in dialog
+       */
+      selectAllLabel: {
+        type: String,
+        default: 'Select all'
       }
     },
     methods: {
@@ -104,7 +116,6 @@
       * Toogle all headers on/off
       */
       selectAllHeaders() {
-        console.log('dada', this.selectAll);
         this.localStorageHeaders = this.localStorageHeaders.map(header => {
           header.selected = this.selectAll
           return header

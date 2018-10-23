@@ -18,7 +18,7 @@
 
       <pnbi-datatable-plus
         v-if="items.length > 2"
-        :items="items" :headers="headers"
+        :items="[]" :headers="headers"
         tableIdentifier="123"
         :loading="loading"
         :total-items="totalItems"
@@ -26,7 +26,8 @@
         :pagination.sync="pagination"
         dialog-title="Tabele anpassen"
         dialog-subtitle="Wähle Spalten, die angezeigt werden sollen"
-        dialog-closelabel="Schließen">
+        dialog-closelabel="Schließen"
+        select-all-label="Alle auswählen">
       </pnbi-datatable-plus>
 
     </pnbi-datatable>
