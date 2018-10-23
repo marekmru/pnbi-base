@@ -12,16 +12,28 @@
           <!-- select all -->
           <v-list-tile>
             <v-list-tile-content>
-                <v-checkbox :label="selectAllLabel" @change="selectAllHeaders()" v-model="selectAll"
-                  style="align-items:center">
-                </v-checkbox>
+              <v-layout justify-space-around row>
+                  <v-flex sm6>
+                  <v-checkbox :label="selectAllLabel" @change="selectAllHeaders()" v-model="selectAll"
+                    style="align-items:center">
+                  </v-checkbox>
+                </v-flex>
+
+                <v-flex sm6>
+                  <v-text-field style="padding:0" full-width label="Search" v-model="searchStr"></v-text-field>
+                </v-flex>
+              </v-layout>
               </v-list-tile-content>
           </v-list-tile>
           
           <v-divider></v-divider>
 
+          <!-- <v-flex xs12 sm6 md3>
+            <v-text-field label="Solo" solo v-model="searchStr"></v-text-field>
+          </v-flex> -->
+
           <draggable :list="localStorageHeaders" @start="drag=true" @end="updateHeaders($event)">
-            <v-list-tile v-for="header in localStorageHeaders" :key="header.text">
+            <v-list-tile v-for="header in localStorageHeaders" :key="header.text" :class="{found: header.found}">
               <v-list-tile-content>
                 <v-checkbox :label="header.text" @change="updateHeaders()" v-model="header.selected" :value="header.selected"
                   style="align-items:center">
@@ -163,7 +175,8 @@
     data: function () {
       return {
         drag: null,
-        selectAll: null
+        selectAll: null,
+        searchStr: null
       }
     }
   }
@@ -174,5 +187,10 @@
     max-width: 350px;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+  .dialog-content {
+    .v-input__control {
+      padding: 0 !important;
+    }
   }
 </style>
