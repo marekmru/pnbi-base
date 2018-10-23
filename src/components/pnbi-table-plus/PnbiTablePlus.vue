@@ -52,9 +52,10 @@
           </td>
         </tr>
       </template>
+      <!-- TODO enable custom empty state
       <template slot="no-results">
         <pnbi-empty text="No data to display"></pnbi-empty>
-      </template>
+      </template> -->
     </v-data-table>
   </div>
 
