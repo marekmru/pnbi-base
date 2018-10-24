@@ -17,14 +17,14 @@
                 </v-checkbox>
               </v-list-tile-content>
               <v-list-tile-action>
-                <v-text-field class="pnbi-search" append-icon="search" flat solo-inverted full-width label="Search" v-model="searchStr"></v-text-field>
+                <v-text-field clearable class="pnbi-search" append-icon="search" flat solo-inverted full-width label="Search" v-model="searchStr"></v-text-field>
             </v-list-tile-action>
           </v-list-tile>
 
           <v-divider></v-divider>
 
           <draggable :list="localStorageHeaders" @start="drag=true" @end="updateHeaders($event)">
-            <v-list-tile v-for="header in localStorageHeaders" :key="header.text" :class="{found: header.found}">
+            <v-list-tile v-for="header in localStorageHeaders" :key="header.text" :class="{'highlighted': header.highlight}">
               <v-list-tile-content>
                 <v-checkbox :label="header.text" @change="updateHeaders()" v-model="header.selected" :value="header.selected"
                   style="align-items:center">
@@ -138,6 +138,20 @@ export default {
         })
       }
       return isNumber
+    },
+    /**
+     * Filter localStorageHeaders
+     * set header.found true|false for specific display
+     */
+    filterlocalStorageHeadersBySearchStr () {
+      this.localStorageHeaders = this.localStorageHeaders.map(header => {
+        if (this.searchStr === '' || this.searchStr === null) {
+          header.highlight = false
+        } else {
+          header.highlight = !header.text.toLowerCase().includes(this.searchStr)
+        }
+        return header
+      })
     }
   },
   computed: {
@@ -155,6 +169,11 @@ export default {
           this.$updateHeaderDom(this.localStorageHeaders)
         })
       }
+    }
+  },
+  watch: {
+    searchStr: function () {
+      this.filterlocalStorageHeadersBySearchStr()
     }
   },
   data: function () {
@@ -184,5 +203,8 @@ export default {
   }
   /deep/ .v-text-field__details {
     margin-bottom: 0 !important;
+  }
+  .highlighted {
+    opacity: 0.3;
   }
 </style>
