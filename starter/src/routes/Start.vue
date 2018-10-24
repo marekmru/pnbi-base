@@ -10,8 +10,7 @@
 
     <pnbi-datatable headline="Datatable plus"
       @search="search = $event" :button-label="false"
-      customize-label="Customize"
-      :uppercase-labels="true">
+      customize-label="Customize">
 
       <!-- primary controls-->
 
@@ -65,7 +64,6 @@ export default {
   mounted () {
     this.getDataFromApi()
       .then(data => {
-        console.log('data-c', data)
         this.items = data.tableResponce.items
         this.headers = data.tableResponce.headers
         this.totalItems = data.tableResponce.totalItems

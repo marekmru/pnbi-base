@@ -132,7 +132,7 @@ div >>> .v-input.pnbi-datatable__search .v-input__control {
 .pnbi-datatable >>> thead tr th {
   font-weight: 600;
 }
-.pnbi-datatable >>> thead tr th::first-letter {
+.pnbi-datatable >>> thead tr th:first-letter {
   text-transform: capitalize;
 }
 .pnbi-datatable.text-uppercase >>> thead tr th {
