@@ -186,7 +186,7 @@ export default {
   data: function () {
     return {
       drag: null,
-      selectAll: null,
+      selectAll: true,
       searchStr: null
     }
   }
