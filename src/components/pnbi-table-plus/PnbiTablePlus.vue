@@ -8,24 +8,27 @@
           <v-subheader>
             {{dialogSubtitle}}
           </v-subheader>
-          
+
           <!-- select all -->
           <v-list-tile>
             <v-list-tile-content>
-              <v-layout justify-space-around row>
-                  <v-flex sm6>
+              <!-- <v-layout justify-space-around row> -->
+                  <!-- <v-flex sm6> -->
                   <v-checkbox :label="selectAllLabel" @change="selectAllHeaders()" v-model="selectAll"
                     style="align-items:center">
                   </v-checkbox>
-                </v-flex>
+                <!-- </v-flex> -->
 
-                <v-flex sm6>
-                  <v-text-field style="padding:0" full-width label="Search" v-model="searchStr"></v-text-field>
-                </v-flex>
-              </v-layout>
+                <!-- <v-flex sm6>
+                  <v-text-field class="pnbi-search" append-icon="search" flat solo-inverted full-width label="Search" v-model="searchStr"></v-text-field>
+                </v-flex> -->
+              <!-- </v-layout> -->
               </v-list-tile-content>
+              <v-list-tile-action>
+                <v-text-field class="pnbi-search" append-icon="search" flat solo-inverted full-width label="Search" v-model="searchStr"></v-text-field>
+            </v-list-tile-action>
           </v-list-tile>
-          
+
           <v-divider></v-divider>
 
           <!-- <v-flex xs12 sm6 md3>
@@ -74,112 +77,106 @@
 </template>
 
 <script>
-  import numbro from 'numbro'
-  import ColumnFilterMixin from './columnFilterMixin.js'
-  import is from 'is'
-  import draggable from 'vuedraggable'
+import ColumnFilterMixin from './columnFilterMixin.js'
+import is from 'is'
+import draggable from 'vuedraggable'
 
-  export default {
-    name: 'PnbiDatatablePlus',
-    components: {
-      draggable
+export default {
+  name: 'PnbiDatatablePlus',
+  components: {
+    draggable
+  },
+  mixins: [ColumnFilterMixin],
+  props: {
+    /**
+     * Uniq identifier for table.
+     * used for saving the customised settings in localstorage
+     */
+    tableIdentifier: {
+      type: String,
+      required: true,
+      default: 'default'
     },
-    mixins: [ColumnFilterMixin],
-    props: {
-      /**
-       * Uniq identifier for table.
-       * used for saving the customised settings in localstorage
-       */
-      tableIdentifier: {
-        type: String,
-        required: true,
-        default: 'default'
-      },
-      /**
-       * Defined the dialog title for customised dialog.
-       */
-      dialogTitle: {
-        type: String,
-        default: 'Customise table'
-      },
-      /**
-       * Defined the dialog subtitle for customised dialog.
-       */
-      dialogSubtitle: {
-        type: String,
-        default: 'Select visible columns'
-      },
-      /**
-       * Defined label for dialog close button
-       */
-      dialogCloselabel: {
-        type: String,
-        default: 'Close'
-      },
-      /**
-       * Defined the label for selecting all headers in dialog
-       */
-      selectAllLabel: {
-        type: String,
-        default: 'Select all'
-      }
+    /**
+     * Defined the dialog title for customised dialog.
+     */
+    dialogTitle: {
+      type: String,
+      default: 'Customise table'
     },
-    methods: {
-      /*
-      * Toogle all headers on/off
-      */
-      selectAllHeaders() {
-        this.localStorageHeaders = this.localStorageHeaders.map(header => {
-          header.selected = this.selectAll
-          return header
-        })
-        this.updateHeaders()
-      },
-      isNumber(val, key) {
-        const isNumber = is.number(val)
-        if (isNumber) {
-          this.localAttrs.headers = this.localAttrs.headers.map(header => {
-            if (header) {
-              if (header.value === key) {
-                header.align = 'right'
-              }
-              return header
+    /**
+     * Defined the dialog subtitle for customised dialog.
+     */
+    dialogSubtitle: {
+      type: String,
+      default: 'Select visible columns'
+    },
+    /**
+     * Defined label for dialog close button
+     */
+    dialogCloselabel: {
+      type: String,
+      default: 'Close'
+    },
+    /**
+     * Defined the label for selecting all headers in dialog
+     */
+    selectAllLabel: {
+      type: String,
+      default: 'Select all'
+    }
+  },
+  methods: {
+    /*
+    * Toogle all headers on/off
+    */
+    selectAllHeaders () {
+      this.localStorageHeaders = this.localStorageHeaders.map(header => {
+        header.selected = this.selectAll
+        return header
+      })
+      this.updateHeaders()
+    },
+    isNumber (val, key) {
+      const isNumber = is.number(val)
+      if (isNumber) {
+        this.localAttrs.headers = this.localAttrs.headers.map(header => {
+          if (header) {
+            if (header.value === key) {
+              header.align = 'right'
             }
-          })
-        }
-        return isNumber
-      },
-      /*onDraggableEndEvent (evt) {
-        this.updateHeaders()
-      } ,
-      //????????
-      doNothing () {} */
-    },
-    computed: {
-      compPagination: {
-        get: function () {
-          return this.localAttrs.pagination
-        },
-        set: function (pagination) {
-          //https://vuejs.org/v2/guide/components-custom-events.html#Event-Names
-          //For these reasons, we recommend you always use kebab-case for event names.
-          //this.$emit('pagination-event', pagination)
-          //https://vuejs.org/v2/guide/components-custom-events.html#sync-Modifier
-          this.$emit('update:pagination', pagination)
-          this.$nextTick(function () {
-            this.$updateHeaderDom(this.localStorageHeaders)
-          })
-        }
+            return header
+          }
+        })
       }
-    },
-    data: function () {
-      return {
-        drag: null,
-        selectAll: null,
-        searchStr: null
+      return isNumber
+    }
+  },
+  computed: {
+    compPagination: {
+      get: function () {
+        return this.localAttrs.pagination
+      },
+      set: function (pagination) {
+        // https://vuejs.org/v2/guide/components-custom-events.html#Event-Names
+        // For these reasons, we recommend you always use kebab-case for event names.
+        // this.$emit('pagination-event', pagination)
+        // https://vuejs.org/v2/guide/components-custom-events.html#sync-Modifier
+        this.$emit('update:pagination', pagination)
+        this.$nextTick(function () {
+          this.$updateHeaderDom(this.localStorageHeaders)
+        })
       }
     }
+  },
+  data: function () {
+    return {
+      drag: null,
+      selectAll: null,
+      searchStr: null
+    }
   }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -188,9 +185,16 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .dialog-content {
-    .v-input__control {
-      padding: 0 !important;
-    }
+
+  /deep/ .v-input__control {
+    padding: 0 !important;
+    min-height: 32px !important;
+  }
+  /deep/ .pnbi-search .v-input__slot {
+    background: rgba(0,0,0,.1);
+    margin: 0 !important;
+  }
+  /deep/ .v-text-field__details {
+    margin-bottom: 0;
   }
 </style>

@@ -18,7 +18,7 @@
 
       <pnbi-datatable-plus
         v-if="items.length > 2"
-        :items="[]" :headers="headers"
+        :items="items" :headers="headers"
         tableIdentifier="123"
         :loading="loading"
         :total-items="totalItems"
