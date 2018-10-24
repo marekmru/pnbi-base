@@ -12,17 +12,9 @@
           <!-- select all -->
           <v-list-tile>
             <v-list-tile-content>
-              <!-- <v-layout justify-space-around row> -->
-                  <!-- <v-flex sm6> -->
-                  <v-checkbox :label="selectAllLabel" @change="selectAllHeaders()" v-model="selectAll"
-                    style="align-items:center">
-                  </v-checkbox>
-                <!-- </v-flex> -->
-
-                <!-- <v-flex sm6>
-                  <v-text-field class="pnbi-search" append-icon="search" flat solo-inverted full-width label="Search" v-model="searchStr"></v-text-field>
-                </v-flex> -->
-              <!-- </v-layout> -->
+                <v-checkbox :label="selectAllLabel" @change="selectAllHeaders()" v-model="selectAll"
+                  style="align-items:center">
+                </v-checkbox>
               </v-list-tile-content>
               <v-list-tile-action>
                 <v-text-field class="pnbi-search" append-icon="search" flat solo-inverted full-width label="Search" v-model="searchStr"></v-text-field>
@@ -30,10 +22,6 @@
           </v-list-tile>
 
           <v-divider></v-divider>
-
-          <!-- <v-flex xs12 sm6 md3>
-            <v-text-field label="Solo" solo v-model="searchStr"></v-text-field>
-          </v-flex> -->
 
           <draggable :list="localStorageHeaders" @start="drag=true" @end="updateHeaders($event)">
             <v-list-tile v-for="header in localStorageHeaders" :key="header.text" :class="{found: header.found}">
@@ -195,6 +183,6 @@ export default {
     margin: 0 !important;
   }
   /deep/ .v-text-field__details {
-    margin-bottom: 0;
+    margin-bottom: 0 !important;
   }
 </style>
