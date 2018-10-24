@@ -7,18 +7,25 @@ This is a wrapper for v-data-table and acceps all attributes and slots from
 <template>
   <pnbi-datatable headline="Datatable plus" @search="request.search = $event" :button-label="false" customize-label="Customize">
 
-      <pnbi-datatable-plus
-        v-if="items.length > 2"
-        :items="items" :headers="headers"
-        table-identifier="123"
-        :loading="loading"
-        :total-items="totalItems"
-        :search="request.search"
-        @pagination-event="onPaginationEvent"
-        dialog-title="Tabelle anpassen"
-        dialog-subtitle="Wähle Spalten, die angezeigt werden sollen"
-        dialog-closelabel="Schließen">
-      </pnbi-datatable-plus>
+  <pnbi-datatable headline="Datatable plus"
+    @search="search = $event" :button-label="false"
+    customize-label="Customize"
+    :uppercase-labels="true">
+
+    <pnbi-datatable-plus
+      v-if="items.length > 2"
+      :items="items" :headers="headers"
+      tableIdentifier="123"
+      :loading="loading"
+      :total-items="totalItems"
+      :search="search"
+      :pagination.sync="pagination"
+      dialog-title="Tabele anpassen"
+      dialog-subtitle="Wähle Spalten, die angezeigt werden sollen"
+      dialog-closelabel="Schließen"
+      dialog-selectalllabel="Alle auswählen"
+      dialog-searchlabel="Suche">
+    </pnbi-datatable-plus>
 
     </pnbi-datatable>
   </template>
@@ -30,10 +37,13 @@ This is a wrapper for v-data-table and acceps all attributes and slots from
           items: [],
           totalItems: 0,
           loading: true,
-          request: {
-            pagination: {},
-            search: null
+          pagination: {
+            page: 1,
+            rowsPerPage: 10,
+            descending: false,
+            sortBy: ''
           },
+          search: null,
           headers: []
         };
       },
@@ -192,4 +202,3 @@ Check the numbro.js website (we use old format)  http://numbrojs.com/old-format.
 
 Check the momnet.js website
 https://momentjs.com/
-
