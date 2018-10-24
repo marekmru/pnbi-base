@@ -1,5 +1,5 @@
 <template>
-  <div class="pnbi-datatable dark elevation-1">
+  <div class="pnbi-datatable dark elevation-1" :class="{'text-uppercase': this.uppercaseLabels}">
     <!--  flat" :class="{'elevation-1': !flat}" -->
     <v-toolbar flat color="white" class="pnbi-datatable__toolbar pb-3 pt-3">
       <h3 class="accent--text card-headline">{{label}}</h3>
@@ -57,6 +57,13 @@ export default {
       typ: String | Boolean,
       default: false
     },
+    /**
+     * Should the labels be uppercase? Dafault: false
+     */
+    uppercaseLabels: {
+      type: Boolean,
+      default: false
+    },
     flat: {
       type: Boolean | null,
       default: false
@@ -91,10 +98,10 @@ export default {
 .pnbi-webapp table.v-table thead tr {
   height: 36px;
 }
-.application.pnbi-webapp table.v-table thead tr th {
+/* .application.pnbi-webapp table.v-table thead tr th {
   font-weight: 600;
   text-transform: uppercase;
-}
+} */
 .application.pnbi-webapp .v-icon.pnbi-icon {
   color: rgb(158, 158, 158);
   font-size: 16px;
@@ -124,19 +131,21 @@ div >>> .v-input.pnbi-datatable__search .v-input__control {
 }
 .pnbi-datatable >>> thead tr th {
   font-weight: 600;
+}
+.pnbi-datatable >>> thead tr th::first-letter {
+  text-transform: capitalize;
+}
+.pnbi-datatable.text-uppercase >>> thead tr th {
   text-transform: uppercase;
 }
-
 .pnbi-datatable .v-alert.warning {
   margin-top: 0px;
   margin-left: -24px;
   margin-right: -24px;
 }
-
 .pnbi-datatable.dark >>> thead tr th {
   color: #3f515d;
 }
-
 .pnbi-datatable.dark tbody tr:hover {
   /*background: #ccd4da !important;*/
   background: rgba(204, 212, 218, 0.5) !important;

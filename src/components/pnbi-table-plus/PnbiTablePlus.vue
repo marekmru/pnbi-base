@@ -12,12 +12,12 @@
           <!-- select all -->
           <v-list-tile>
             <v-list-tile-content>
-                <v-checkbox :label="selectAllLabel" @change="selectAllHeaders()" v-model="selectAll"
+                <v-checkbox :label="dialogSelectalllabel" @change="selectAllHeaders()" v-model="selectAll"
                   style="align-items:center">
                 </v-checkbox>
               </v-list-tile-content>
               <v-list-tile-action>
-                <v-text-field clearable class="pnbi-search" append-icon="search" flat solo-inverted full-width label="Search" v-model="searchStr"></v-text-field>
+                <v-text-field clearable class="pnbi-search" append-icon="search" flat solo-inverted full-width :label="dialogSearchlabel" v-model="searchStr"></v-text-field>
             </v-list-tile-action>
           </v-list-tile>
 
@@ -109,9 +109,16 @@ export default {
     /**
      * Defined the label for selecting all headers in dialog
      */
-    selectAllLabel: {
+    dialogSelectalllabel: {
       type: String,
       default: 'Select all'
+    },
+    /**
+     * Label for search placeholder inside of dialog
+     */
+    dialogSearchlabel: {
+      type: String,
+      default: 'Search'
     }
   },
   methods: {

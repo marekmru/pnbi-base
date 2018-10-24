@@ -8,7 +8,10 @@
       </ul>
     </div>
 
-    <pnbi-datatable headline="Datatable plus" @search="search = $event" :button-label="false" customize-label="Customize">
+    <pnbi-datatable headline="Datatable plus"
+      @search="search = $event" :button-label="false"
+      customize-label="Customize"
+      :uppercase-labels="true">
 
       <!-- primary controls-->
 
@@ -27,7 +30,8 @@
         dialog-title="Tabele anpassen"
         dialog-subtitle="Wähle Spalten, die angezeigt werden sollen"
         dialog-closelabel="Schließen"
-        select-all-label="Alle auswählen">
+        dialog-selectalllabel="Alle auswählen"
+        dialog-searchlabel="Suche">
       </pnbi-datatable-plus>
 
     </pnbi-datatable>
