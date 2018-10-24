@@ -23,7 +23,7 @@
 
           <v-divider></v-divider>
 
-          <draggable :list="localStorageHeaders" @start="drag=true" @end="updateHeaders($event)">
+          <draggable class="list-scrolWrapper" :list="localStorageHeaders" @start="drag=true" @end="updateHeaders($event)">
             <v-list-tile v-for="header in localStorageHeaders" :key="header.text" :class="{'highlighted': header.highlight}">
               <v-list-tile-content>
                 <v-checkbox :label="header.text" @change="updateHeaders()" v-model="header.selected" :value="header.selected"
@@ -206,5 +206,9 @@ export default {
   }
   .highlighted {
     opacity: 0.3;
+  }
+  .list-scrolWrapper {
+    max-height: 350px;
+    overflow-x: scroll;
   }
 </style>
