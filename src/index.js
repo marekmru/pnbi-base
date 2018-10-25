@@ -18,24 +18,18 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import './styles/index.scss'
 import './styles/typography.scss'
-
 // app wide locales
 import numbro from 'numbro'
+import deDE from 'numbro/languages/de-DE.js'
 import moment from 'moment'
-import languages from './internal/locals/numbroLanguages.js'
-
 /*
  * Check for installed locale
  * compare if browser locale is defined in numbroLanguages.js
  * default: us
  * TODO: global solution, not only for datatable plus
  */
-Object.entries(languages).forEach(([key, value]) => {
-  if (value.languageTag === navigator.language) {
-    numbro.registerLanguage(languages[key])
-    numbro.setLanguage(value.languageTag)
-  }
-})
+numbro.registerLanguage(deDE)
+numbro.setLanguage(deDE.languageTag)
 
 const install = (Vue, options) => {
   Vue.prototype.$bus = bus
@@ -62,9 +56,9 @@ const install = (Vue, options) => {
   Vue.component('pnbi-empty', PnbiEmpty)
   /*
   * Use this filter for custom formating includes local settings:
-  * numbers – with numbro.js 
+  * numbers – with numbro.js
   * datetime – with moment.js
-  * 
+  *
   * FORMAT
   * @param key = {style:'numbro.js', format:'0,0.00'}
   */
