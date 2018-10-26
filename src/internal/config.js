@@ -26,7 +26,7 @@ export function setAjaxConfig (options) {
       if (error.response == null) {
         EventBus.$emit(ERROR, {
           status_code: 500,
-          message: 'Unknown error'
+          html: 'Ein Server Fehler ist aufgetreten.<br>Bitte kontaktieren sie uns unter: <a href="mailto:bi-ops@plan-net.com">bi-ops@plan-net.com</a>'
         })
         return Promise.reject(error)
       }
@@ -45,7 +45,7 @@ export function setAjaxConfig (options) {
             data.html = 'Bitte loggen sie sich ein.'
           } else if (data.status_code === 403) {
             data.html =
-              'Sie sind nicht authorisiert, diese Ressource aufzurufen.<br>Bitte kontaktieren sie uns unter: <a href="mailto:bi-ops@plan-net.com">bi-ops@plan-net.com</a> '
+              'Sie sind nicht authorisiert, diese Ressource aufzurufen.<br>Bitte kontaktieren sie uns unter: <a href="mailto:bi-ops@plan-net.com">bi-ops@plan-net.com</a>'
           } else {
             data.json = error.response.data || error.response
           }

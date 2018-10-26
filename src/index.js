@@ -18,16 +18,10 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import './styles/index.scss'
 import './styles/typography.scss'
-// app wide locales
 import numbro from 'numbro'
 import deDE from 'numbro/languages/de-DE.js'
 import moment from 'moment'
-/*
- * Check for installed locale
- * compare if browser locale is defined in numbroLanguages.js
- * default: us
- * TODO: global solution, not only for datatable plus
- */
+
 numbro.registerLanguage(deDE)
 numbro.setLanguage(deDE.languageTag)
 
@@ -62,6 +56,9 @@ const install = (Vue, options) => {
   * FORMAT
   * @param key = {style:'numbro.js', format:'0,0.00'}
   */
+  /* #####################
+  * mmr: Please choose a meaningful name : FE datatablePlusXYZ Fromatter
+  ##################### */
   Vue.filter('customFormatter', function (value, key) {
     if (!value) return ''
     switch (key.style) {
@@ -82,7 +79,7 @@ const install = (Vue, options) => {
     }
     return value
   })
-
+  /* TODO: possibility to pass a skin */
   Vue.use(Vuetify, {
     theme: {
       primary: '#d70F14',
