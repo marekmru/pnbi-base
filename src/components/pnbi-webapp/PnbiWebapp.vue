@@ -78,7 +78,7 @@
       </v-toolbar>
     </transition>
     <v-content v-if="isNavVisible" class="pt-0">
-      <v-container :fluid="clientWidth < 1260" class="grey lighten-4">
+      <v-container :fluid="isFluid" class="grey lighten-4">
         <slot name="router"></slot>
         <pnbi-snackbar></pnbi-snackbar>
       </v-container>
@@ -143,9 +143,11 @@ export default {
   },
   mounted () {
     this.$nextTick(() => {
-      this._updateDimensions()
-      window.addEventListener('resize', this._updateDimensions,
-        { 'passive': true })
+      if (!this.fullWidth) {
+        this._updateDimensions()
+        window.addEventListener('resize', this._updateDimensions,
+          { 'passive': true })
+      }
       this.$bus.$on(PROFILE_UPDATED, profile => {
         if (typeof profile !== 'undefined') {
           this.profile = Object.assign({}, profile)
@@ -245,6 +247,13 @@ export default {
 /*       window.localStorage.setItem('userSettings', JSON.stringify(this.userSettings)) */
     }
   },
+  props: {
+    fullWidth: {
+      type: Boolean,
+      default: false,
+      required: false
+    },
+  },
   created () {
     this.setTitle(this.$config.TITLE)
     //this.checkUserSettings()
@@ -256,6 +265,9 @@ export default {
     isNavVisible () {
       const isVis = ['login', 'reset'].indexOf(this.$route.name) === -1
       return isVis
+    }, 
+    isFluid() {
+      return (this.clientWidth < 1260) || (this.fullWidth)
     }
   }
 }
