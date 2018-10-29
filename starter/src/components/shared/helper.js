@@ -18,6 +18,6 @@ export function getWeekNumber (d) {
   return [d.getFullYear(), weekNo]
 }
 export default {
-  getWeekUnix,
+      getWeekUnix,
   getWeekNumber
 }

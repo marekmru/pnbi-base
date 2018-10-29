@@ -73,8 +73,9 @@ export default {
       }
       this.errorAuth = false
       Auth.login(this.user).then(
-        () => {
-          this.$emit('login-success')
+        (login) => {
+          console.log(login, '########')
+          // this.$emit('login-success')
         },
         error => {
           if (error.status === 401) {

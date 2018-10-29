@@ -52,7 +52,6 @@ export default {
 }
 
 </script>
-
 <template>
   <v-container fill-height class="auth-form">
     <v-layout align-center>

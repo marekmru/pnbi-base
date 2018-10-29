@@ -57,9 +57,15 @@ export function setAjaxConfig (options) {
   )
   axios.interceptors.request.use(
     request => {
-      request.headers['Accept'] = 'application/json'
-      request.withCredentials = true
       return request
+      // console.log(request, '----------')
+      /*       const user = JSON.parse(window.localStorage.getItem('user'))
+      if (user != null) {
+        request.headers.common.Authorization = `Bearer ${user.token}`
+      } */
+      /*       request.headers['Accept'] = 'application/json'
+      request.withCredentials = true
+      return request */
     },
     error => {
       return Promise.reject(error)

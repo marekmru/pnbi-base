@@ -127,13 +127,13 @@
   </v-app>
 </template>
 <script>
-import {
+/* import {
   LOADING,
   TRACK,
   PROFILE_UPDATED,
   CONFIG_UPDATED,
   ERROR
-} from '../../event-bus'
+} from '../../event-bus' */
 import Auth from '../../Auth'
 import PnbiSnackbar from '../pnbi-snackbar/PnbiSnackbar'
 
@@ -148,7 +148,7 @@ export default {
         window.addEventListener('resize', this._updateDimensions,
           { 'passive': true })
       }
-      this.$bus.$on(PROFILE_UPDATED, profile => {
+      /* this.$bus.$on(PROFILE_UPDATED, profile => {
         if (typeof profile !== 'undefined') {
           this.profile = Object.assign({}, profile)
         } else {
@@ -178,10 +178,11 @@ export default {
         }
       })
 
-      this.$bus.$on(ERROR, this.showError)
-      Auth.profile().then(
-        profile => {
-          this.profile = Object.assign({}, profile)
+      this.$bus.$on(ERROR, this.showError) */
+      Auth.login({ username: 'admin', password: 'hans' }).then(
+        login => {
+          console.log(login, '----------------')
+          // this.profile = Object.assign({}, profile)
         },
         () => {
         // console.info(error);
@@ -236,7 +237,7 @@ export default {
       this.title = title.toUpperCase()
       document.title = this.title
     },
-/*     checkUserSettings () {
+    /*     checkUserSettings () {
       const temp = JSON.parse(window.localStorage.getItem('userSettings'))
       if (temp != null) {
         this.userSettings = temp
@@ -244,7 +245,7 @@ export default {
     }, */
     toogleSideNav () {
       this.userSettings.sidenavOpen = !this.userSettings.sidenavOpen
-/*       window.localStorage.setItem('userSettings', JSON.stringify(this.userSettings)) */
+      /*       window.localStorage.setItem('userSettings', JSON.stringify(this.userSettings)) */
     }
   },
   props: {
@@ -252,11 +253,11 @@ export default {
       type: Boolean,
       default: false,
       required: false
-    },
+    }
   },
   created () {
     this.setTitle(this.$config.TITLE)
-    //this.checkUserSettings()
+    // this.checkUserSettings()
   },
   computed: {
     hasTitleSlot () {
@@ -265,8 +266,8 @@ export default {
     isNavVisible () {
       const isVis = ['login', 'reset'].indexOf(this.$route.name) === -1
       return isVis
-    }, 
-    isFluid() {
+    },
+    isFluid () {
       return (this.clientWidth < 1260) || (this.fullWidth)
     }
   }

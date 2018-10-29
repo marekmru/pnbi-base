@@ -14,7 +14,7 @@ Vue.use(PnbiBase, {
   config
 })
 
-const messages = {
+/* const messages = {
   en: {
     confirmed: function () {
       return 'Your password is not confirmed'
@@ -23,10 +23,10 @@ const messages = {
       return 'I really dont like your email'
     }
   }
-}
-
+} */
 Vue.use(VeeValidate)
-var app = new Vue({
+
+/* new Vue({
   el: '#app',
   router,
   store,
@@ -34,14 +34,14 @@ var app = new Vue({
     App
   },
   template: '<App/>'
-})
+}) */
 
 // Override and merge the dictionaries
 // VeeValidate.localize(dictionary)
 
 Vue.config.productionTip = false
 /* eslint-disable no-new */
-/*
+
 new Vue({
   el: '#app',
   router,
@@ -51,5 +51,5 @@ new Vue({
   },
   template: '<App/>'
 })
-*/
-app.$VeeValidate.updateDictionary(messages)
+
+// app.$VeeValidate.updateDictionary(messages)

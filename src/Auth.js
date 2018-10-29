@@ -14,15 +14,17 @@ export function setApiConfig (cnf) {
 }
 export default {
   login (user) {
-    const login = axios
-      .post(`${config.API}/login2`, user)
+    return axios
+      .post(`${config.API}/login`, user)
       .then(result => {
+        console.log(result.data)
+        window.localStorage.setItem('user', JSON.stringify(result.data.data))
         return result.data.result
       })
       .catch(error => Promise.reject(error.response))
-    return Promise.all([login]).then(() => {
+    /*     return Promise.all([login]).then(() => {
       return this.profile()
-    })
+    }) */
   },
   logout () {
     EventBus.$emit(PROFILE_UPDATED, undefined)
