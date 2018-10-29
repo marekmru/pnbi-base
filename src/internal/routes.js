@@ -39,8 +39,7 @@ export function setRoutes (router) {
       component: PageNotFound
     }
   ])
-  const tealiumEnabler = (a, b, c, d) => {
-    a = '//tags.tiqcdn.com/utag/plan-net-training/b.zimmermann/dev/utag.js'
+  const enabler = (a, b, c, d) => {
     b = document
     c = 'script'
     d = b.createElement(c)
@@ -50,11 +49,21 @@ export function setRoutes (router) {
     a = b.getElementsByTagName(c)[0]
     a.parentNode.insertBefore(d, a)
   }
+
   if (window.location.href.includes('localhost') === false) {
+    // tealium
     window.utag_cfg_ovrd = window.utag_cfg_ovrd || {}
     window.utag_cfg_ovrd.noview = true
     window.utag_data = window.utag_data || {}
-    tealiumEnabler()
+    enabler('//tags.tiqcdn.com/utag/plan-net-training/b.zimmermann/dev/utag.js')
+    // ganalytics
+    window.dataLayer = window.dataLayer || []
+    window.gtag = function () {
+      window.dataLayer.push(arguments)
+    }
+    window.gtag('js', new Date())
+    window.gtag('config', 'UA-122079364-1')
+    enabler('//www.googletagmanager.com/gtag/js?id=UA-122079364-1')
 
     const resolve = () => {
       let int = null
