@@ -98,10 +98,11 @@ export default {
 .pnbi-webapp table.v-table thead tr {
   height: 36px;
 }
-/* .application.pnbi-webapp table.v-table thead tr th {
+/* TODO: prop for header style */
+.application.pnbi-webapp table.v-table thead tr th {
   font-weight: 600;
   text-transform: uppercase;
-} */
+}
 .application.pnbi-webapp .v-icon.pnbi-icon {
   color: rgb(158, 158, 158);
   font-size: 16px;
