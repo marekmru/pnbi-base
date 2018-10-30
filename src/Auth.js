@@ -17,7 +17,6 @@ export default {
     return axios
       .post(`${config.API}/login`, user)
       .then(result => {
-        console.log(result.data)
         window.localStorage.setItem('user', JSON.stringify(result.data.data))
         return result.data.result
       })
@@ -25,16 +24,6 @@ export default {
     /*     return Promise.all([login]).then(() => {
       return this.profile()
     }) */
-  },
-  logout () {
-    EventBus.$emit(PROFILE_UPDATED, undefined)
-    this._profile = undefined
-    return axios
-      .get(`${config.API}/logout`)
-      .then(result => {
-        return result.data.result
-      })
-      .catch(error => Promise.reject(error.response))
   },
   profile () {
     if (this._profile != null) {
@@ -55,6 +44,16 @@ export default {
         })
         EventBus.$emit(PROFILE_UPDATED, this._profile)
         return this._profile
+      })
+      .catch(error => Promise.reject(error.response))
+  },
+  logout () {
+    EventBus.$emit(PROFILE_UPDATED, undefined)
+    this._profile = undefined
+    return axios
+      .get(`${config.API}/logout`)
+      .then(result => {
+        return result.data.result
       })
       .catch(error => Promise.reject(error.response))
   },

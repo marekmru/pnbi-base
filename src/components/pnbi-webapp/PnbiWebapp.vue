@@ -179,16 +179,13 @@ export default {
       })
 
       this.$bus.$on(ERROR, this.showError) */
-      Auth.login({ username: 'admin', password: 'hans' }).then(
+      /*       Auth.login({ username: 'admin', password: 'hans' }).then(
         login => {
           console.log(login, '----------------')
-          // this.profile = Object.assign({}, profile)
         },
         () => {
-        // console.info(error);
         }
-
-      )
+      ) */
     })
   },
   destroyed () {
@@ -237,15 +234,9 @@ export default {
       this.title = title.toUpperCase()
       document.title = this.title
     },
-    /*     checkUserSettings () {
-      const temp = JSON.parse(window.localStorage.getItem('userSettings'))
-      if (temp != null) {
-        this.userSettings = temp
-      }
-    }, */
+
     toogleSideNav () {
       this.userSettings.sidenavOpen = !this.userSettings.sidenavOpen
-      /*       window.localStorage.setItem('userSettings', JSON.stringify(this.userSettings)) */
     }
   },
   props: {
@@ -257,7 +248,6 @@ export default {
   },
   created () {
     this.setTitle(this.$config.TITLE)
-    // this.checkUserSettings()
   },
   computed: {
     hasTitleSlot () {

@@ -1,6 +1,11 @@
 import axios from 'axios'
 import EventBus, { LOADING, ERROR } from '../event-bus'
 
+/* var instance = axios.create({
+  baseURL: 'http://exampleapi.com/',
+  headers: {'Authorization': 'Bearer ksdjfglksgflksgsjdhglaslfkhgasf'}
+}) */
+
 export function setAjaxConfig (options) {
   const router = options.router
   const biBaseConfig = options.config
@@ -57,15 +62,14 @@ export function setAjaxConfig (options) {
   )
   axios.interceptors.request.use(
     request => {
-      return request
-      // console.log(request, '----------')
-      /*       const user = JSON.parse(window.localStorage.getItem('user'))
+      const user = JSON.parse(window.localStorage.getItem('user'))
       if (user != null) {
-        request.headers.common.Authorization = `Bearer ${user.token}`
-      } */
-      /*       request.headers['Accept'] = 'application/json'
-      request.withCredentials = true
-      return request */
+        request.headers.Authorization = `Bearer ${user.token}`
+      }
+      console.log(request.headers)
+      request.headers['Accept'] = 'application/json'
+      // request.withCredentials = true
+      return request
     },
     error => {
       return Promise.reject(error)
