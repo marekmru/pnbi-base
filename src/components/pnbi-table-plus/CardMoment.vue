@@ -9,9 +9,9 @@
             </v-radio>
           </v-list-tile-content>
           <v-list-tile-action class="list_action">
-            <v-menu ref="startMenu" :close-on-content-click="false" v-model="startMenu" :return-value.sync="startDate" lazy transition="scale-transition" offset-y full-width min-width="290px">
-              <v-text-field single-line slot="activator" v-model="startDate" label="Start" prepend-icon="event" readonly></v-text-field>
-              <v-date-picker no-title v-model="startDate" @input="$refs.startMenu.save(startDate)" show-current="false"></v-date-picker>
+            <v-menu ref="lower" :close-on-content-click="false" v-model="lower" :return-value.sync="lower" lazy transition="scale-transition" offset-y full-width min-width="290px">
+              <v-text-field single-line slot="activator" v-model="lowerDate" label="Start" prepend-icon="event" readonly></v-text-field>
+              <v-date-picker no-title v-model="lowerDate" @input="$refs.lower.save(lowerDate)" show-current="false"></v-date-picker>
             </v-menu>
         </v-list-tile-action>
       </v-list-tile>
@@ -23,9 +23,9 @@
           </v-radio>
         </v-list-tile-content>
         <v-list-tile-action class="list_action">
-          <v-menu ref="startMenu" :close-on-content-click="false" v-model="startMenu" :return-value.sync="startDate" lazy transition="scale-transition" offset-y full-width min-width="290px">
-            <v-text-field single-line slot="activator" v-model="startDate" label="Start" prepend-icon="event" readonly></v-text-field>
-            <v-date-picker no-title v-model="startDate" @input="$refs.startMenu.save(startDate)" show-current="false"></v-date-picker>
+          <v-menu ref="bigger" :close-on-content-click="false" v-model="bigger" :return-value.sync="lower" lazy transition="scale-transition" offset-y full-width min-width="290px">
+            <v-text-field single-line slot="activator" v-model="biggerDate" label="Start" prepend-icon="event" readonly></v-text-field>
+            <v-date-picker no-title v-model="biggerDate" @input="$refs.bigger.save(biggerDate)" show-current="false"></v-date-picker>
           </v-menu>
         </v-list-tile-action>
       </v-list-tile>
@@ -62,8 +62,10 @@ export default {
     return {
       date: null,
       selected: null,
-      startMenu: false,
-      startDate: null
+      lower: null,
+      bigger: null,
+      lowerDate: "",
+      biggerDate: ""
     }
   }
 }
