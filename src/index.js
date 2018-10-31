@@ -31,9 +31,7 @@ const install = (Vue, options) => {
   Vue.prototype.$config = options.config
   Vue.prototype.$numbro = numbro
   Vue.prototype.$loader = function (status) {
-    bus.$emit(LOADING, status => {
-      this.loading = status
-    })
+    bus.$emit(LOADING, true)
   }
   setRoutes(options.router)
   setApiConfig(options.config)

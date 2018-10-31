@@ -1,6 +1,7 @@
 <template>
   <v-app class="pnbi-webapp">
-    <v-navigation-drawer v-if="isNavVisible" v-model="userSettings.sidenavOpen" fixed clipped class="grey lighten-4" app>
+    <v-navigation-drawer v-if="isNavVisible" v-model="userSettings.sidenavOpen" fixed clipped class="grey lighten-4"
+      app>
       <div class="pt-3">
         <slot name="navigation-slot"></slot>
       </div>
@@ -43,7 +44,8 @@
 
         <v-list-tile @click="logout()">
           <v-list-tile-action>
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjOTA5MDkwIiBkPSJNMTkyIDI3Ny40aDE4OS43bC00My42IDQ0LjdMMzY4IDM1Mmw5Ni05Ni05Ni05Ni0zMSAyOS45IDQ0LjcgNDQuN0gxOTJ2NDIuOHoiLz48cGF0aCBmaWxsPSIjOTA5MDkwIiBkPSJNMjU1LjcgNDIxLjNjLTQ0LjEgMC04NS41LTE3LjItMTE2LjctNDguNC0zMS4yLTMxLjItNDguMy03Mi43LTQ4LjMtMTE2LjkgMC00NC4xIDE3LjItODUuNyA0OC4zLTExNi45IDMxLjItMzEuMiA3Mi42LTQ4LjQgMTE2LjctNDguNCA0NCAwIDg1LjMgMTcuMSAxMTYuNSA0OC4ybDMwLjMtMzAuM2MtOC41LTguNC0xNy44LTE2LjItMjcuNy0yMy4yQzMzOS43IDYxIDI5OC42IDQ4IDI1NS43IDQ4IDE0MS4yIDQ4IDQ4IDE0MS4zIDQ4IDI1NnM5My4yIDIwOCAyMDcuNyAyMDhjNDIuOSAwIDg0LTEzIDExOS0zNy41IDEwLTcgMTkuMi0xNC43IDI3LjctMjMuMmwtMzAuMi0zMC4yYy0zMS4xIDMxLjEtNzIuNSA0OC4yLTExNi41IDQ4LjJ6TTQ0OC4wMDQgMjU2Ljg0N2wtLjg0OS0uODQ4Ljg0OS0uODQ5Ljg0OC44NDl6Ii8+PC9zdmc+" width="22px" height="22px" title="logout" />
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjOTA5MDkwIiBkPSJNMTkyIDI3Ny40aDE4OS43bC00My42IDQ0LjdMMzY4IDM1Mmw5Ni05Ni05Ni05Ni0zMSAyOS45IDQ0LjcgNDQuN0gxOTJ2NDIuOHoiLz48cGF0aCBmaWxsPSIjOTA5MDkwIiBkPSJNMjU1LjcgNDIxLjNjLTQ0LjEgMC04NS41LTE3LjItMTE2LjctNDguNC0zMS4yLTMxLjItNDguMy03Mi43LTQ4LjMtMTE2LjkgMC00NC4xIDE3LjItODUuNyA0OC4zLTExNi45IDMxLjItMzEuMiA3Mi42LTQ4LjQgMTE2LjctNDguNCA0NCAwIDg1LjMgMTcuMSAxMTYuNSA0OC4ybDMwLjMtMzAuM2MtOC41LTguNC0xNy44LTE2LjItMjcuNy0yMy4yQzMzOS43IDYxIDI5OC42IDQ4IDI1NS43IDQ4IDE0MS4yIDQ4IDQ4IDE0MS4zIDQ4IDI1NnM5My4yIDIwOCAyMDcuNyAyMDhjNDIuOSAwIDg0LTEzIDExOS0zNy41IDEwLTcgMTkuMi0xNC43IDI3LjctMjMuMmwtMzAuMi0zMC4yYy0zMS4xIDMxLjEtNzIuNSA0OC4yLTExNi41IDQ4LjJ6TTQ0OC4wMDQgMjU2Ljg0N2wtLjg0OS0uODQ4Ljg0OS0uODQ5Ljg0OC44NDl6Ii8+PC9zdmc+"
+              width="22px" height="22px" title="logout" />
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>
@@ -71,7 +73,8 @@
         </v-tooltip>
         <v-tooltip bottom>
           <v-btn slot="activator" class="pr-0 mr-0" flat icon @click="logout()">
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMTkyIDI3Ny40aDE4OS43bC00My42IDQ0LjdMMzY4IDM1Mmw5Ni05Ni05Ni05Ni0zMSAyOS45IDQ0LjcgNDQuN0gxOTJ2NDIuOHoiLz48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMjU1LjcgNDIxLjNjLTQ0LjEgMC04NS41LTE3LjItMTE2LjctNDguNC0zMS4yLTMxLjItNDguMy03Mi43LTQ4LjMtMTE2LjkgMC00NC4xIDE3LjItODUuNyA0OC4zLTExNi45IDMxLjItMzEuMiA3Mi42LTQ4LjQgMTE2LjctNDguNCA0NCAwIDg1LjMgMTcuMSAxMTYuNSA0OC4ybDMwLjMtMzAuM2MtOC41LTguNC0xNy44LTE2LjItMjcuNy0yMy4yQzMzOS43IDYxIDI5OC42IDQ4IDI1NS43IDQ4IDE0MS4yIDQ4IDQ4IDE0MS4zIDQ4IDI1NnM5My4yIDIwOCAyMDcuNyAyMDhjNDIuOSAwIDg0LTEzIDExOS0zNy41IDEwLTcgMTkuMi0xNC43IDI3LjctMjMuMmwtMzAuMi0zMC4yYy0zMS4xIDMxLjEtNzIuNSA0OC4yLTExNi41IDQ4LjJ6TTQ0OC4wMDQgMjU2Ljg0N2wtLjg0OS0uODQ4Ljg0OS0uODQ5Ljg0OC44NDl6Ii8+PC9zdmc+" width="22px" height="22px" title="logout" />
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMTkyIDI3Ny40aDE4OS43bC00My42IDQ0LjdMMzY4IDM1Mmw5Ni05Ni05Ni05Ni0zMSAyOS45IDQ0LjcgNDQuN0gxOTJ2NDIuOHoiLz48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMjU1LjcgNDIxLjNjLTQ0LjEgMC04NS41LTE3LjItMTE2LjctNDguNC0zMS4yLTMxLjItNDguMy03Mi43LTQ4LjMtMTE2LjkgMC00NC4xIDE3LjItODUuNyA0OC4zLTExNi45IDMxLjItMzEuMiA3Mi42LTQ4LjQgMTE2LjctNDguNCA0NCAwIDg1LjMgMTcuMSAxMTYuNSA0OC4ybDMwLjMtMzAuM2MtOC41LTguNC0xNy44LTE2LjItMjcuNy0yMy4yQzMzOS43IDYxIDI5OC42IDQ4IDI1NS43IDQ4IDE0MS4yIDQ4IDQ4IDE0MS4zIDQ4IDI1NnM5My4yIDIwOCAyMDcuNyAyMDhjNDIuOSAwIDg0LTEzIDExOS0zNy41IDEwLTcgMTkuMi0xNC43IDI3LjctMjMuMmwtMzAuMi0zMC4yYy0zMS4xIDMxLjEtNzIuNSA0OC4yLTExNi41IDQ4LjJ6TTQ0OC4wMDQgMjU2Ljg0N2wtLjg0OS0uODQ4Ljg0OS0uODQ5Ljg0OC44NDl6Ii8+PC9zdmc+"
+              width="22px" height="22px" title="logout" />
           </v-btn>
           <span>Logout</span>
         </v-tooltip>
@@ -87,7 +90,7 @@
       <v-container fluid fill-height class="grey lighten-4">
         <v-layout class="pa-0  ma-0">
           <v-flex class="pa-0  ma-0">
-            <router-view/>
+            <router-view />
           </v-flex>
         </v-layout>
       </v-container>
@@ -118,7 +121,8 @@
           <v-btn type="button" @click="logout()" flat color="secondary">
             Zum Login
           </v-btn>
-          <v-btn type="button" v-if="(alertMessage.status_code || alertMessage.data.status_code) != 401 && (alertMessage.status_code || alertMessage.data.status_code) != 403" flat @click="alertOpen = false" color="primary">
+          <v-btn type="button" v-if="(alertMessage.status_code || alertMessage.data.status_code) != 401 && (alertMessage.status_code || alertMessage.data.status_code) != 403"
+            flat @click="alertOpen = false" color="primary">
             OK
           </v-btn>
         </v-card-actions>
@@ -127,7 +131,7 @@
   </v-app>
 </template>
 <script>
-import {
+import bus, {
   LOADING,
   TRACK,
   PROFILE_UPDATED,
@@ -145,46 +149,16 @@ export default {
     this.$nextTick(() => {
       if (!this.fullWidth) {
         this._updateDimensions()
-        window.addEventListener('resize', this._updateDimensions,
-          { 'passive': true })
+        window.addEventListener('resize', this._updateDimensions, {
+          'passive': true
+        })
       }
-      this.$bus.$on(PROFILE_UPDATED, profile => {
-        if (typeof profile !== 'undefined') {
-          this.profile = Object.assign({}, profile)
-        } else {
-          this.profile.realname = null
-          this.profile.short = null
-        }
-      })
-      this.$bus.$on(LOADING, status => {
-        this.loading = status
-      })
-      this.$bus.$on(CONFIG_UPDATED, payload => {
-        this.setTitle(payload)
-      })
-      this.$bus.$on(TRACK, payload => {
-        if (window.utag != null) {
-          const dto = Object.assign({
-            customer_id: this.profile._id,
-            customer_email: this.profile.email,
-            realname: this.profile.realname,
-            webapp: this.$config.APP_IDENTIFIER || this.title.toLowerCase()
-          }, payload)
-          if (payload.tealium_event === 'page_view') {
-            window.utag.view(dto)
-          } else {
-            window.utag.link(dto)
-          }
-        }
-      })
-
-      this.$bus.$on(ERROR, this.showError)
       Auth.profile().then(
         profile => {
           this.profile = Object.assign({}, profile)
         },
         () => {
-        // console.info(error);
+          // console.info(error);
         }
 
       )
@@ -236,15 +210,15 @@ export default {
       this.title = title.toUpperCase()
       document.title = this.title
     },
-/*     checkUserSettings () {
-      const temp = JSON.parse(window.localStorage.getItem('userSettings'))
-      if (temp != null) {
-        this.userSettings = temp
-      }
-    }, */
+    /*     checkUserSettings () {
+            const temp = JSON.parse(window.localStorage.getItem('userSettings'))
+            if (temp != null) {
+              this.userSettings = temp
+            }
+          }, */
     toogleSideNav () {
       this.userSettings.sidenavOpen = !this.userSettings.sidenavOpen
-/*       window.localStorage.setItem('userSettings', JSON.stringify(this.userSettings)) */
+      /*       window.localStorage.setItem('userSettings', JSON.stringify(this.userSettings)) */
     }
   },
   props: {
@@ -252,11 +226,48 @@ export default {
       type: Boolean,
       default: false,
       required: false
-    },
+    }
   },
   created () {
     this.setTitle(this.$config.TITLE)
-    //this.checkUserSettings()
+    bus.$on(PROFILE_UPDATED, profile => {
+      if (typeof profile !== 'undefined') {
+        this.profile = Object.assign({}, profile)
+      } else {
+        this.profile.realname = null
+        this.profile.short = null
+      }
+    })
+    bus.$on(LOADING, status => {
+      if (status) {
+        this.loading = true
+      } else {
+        window.setTimeout(function () {
+          this.loading = false
+        }.bind(this), 333)
+      }
+    })
+    bus.$on(CONFIG_UPDATED, payload => {
+      this.setTitle(payload)
+    })
+    bus.$on(TRACK, payload => {
+      if (window.utag != null) {
+        const dto = Object.assign({
+          customer_id: this.profile._id,
+          customer_email: this.profile.email,
+          realname: this.profile.realname,
+          webapp: this.$config.APP_IDENTIFIER || this.title.toLowerCase()
+        }, payload)
+        if (payload.tealium_event === 'page_view') {
+          window.utag.view(dto)
+        } else {
+          window.utag.link(dto)
+        }
+      }
+    })
+
+    bus.$on(ERROR, this.showError)
+    // this.checkUserSettings()
   },
   computed: {
     hasTitleSlot () {
@@ -265,97 +276,96 @@ export default {
     isNavVisible () {
       const isVis = ['login', 'reset'].indexOf(this.$route.name) === -1
       return isVis
-    }, 
-    isFluid() {
+    },
+    isFluid () {
       return (this.clientWidth < 1260) || (this.fullWidth)
     }
   }
 }
-
 </script>
 
 <style lang="css">
-.impressum {
-  width: 22px;
-  margin-top: -7px;
-  text-align: center;
-  font-weight: 700;
-}
+  .impressum {
+    width: 22px;
+    margin-top: -7px;
+    text-align: center;
+    font-weight: 700;
+  }
 
-.v-navigation-drawer__border {
-  opacity: 0.15;
-}
+  .v-navigation-drawer__border {
+    opacity: 0.15;
+  }
 </style>
 
 <style scoped lang="css">
-.slide-enter-active,
-.slide-leave-active {
-  top: 0;
-}
+  .slide-enter-active,
+  .slide-leave-active {
+    top: 0;
+  }
 
-.slide-enter,
-.slide-leave-to {
-  top: -48px;
-}
+  .slide-enter,
+  .slide-leave-to {
+    top: -48px;
+  }
 
-.v-list__tile .v-avatar span,
-.profile-button .v-avatar span {
-  font-weight: 700 !important;
-  letter-spacing: -0.1em !important;
-  font-size: 11px !important;
-  line-height: 12px !important;
-  margin-left: -1px;
-}
+  .v-list__tile .v-avatar span,
+  .profile-button .v-avatar span {
+    font-weight: 700 !important;
+    letter-spacing: -0.1em !important;
+    font-size: 11px !important;
+    line-height: 12px !important;
+    margin-left: -1px;
+  }
 
-.default-routes .v-list__tile .v-avatar {
-  background-color: rgba(0, 0, 0, 0.5) !important;
-  height: 24px !important;
-  width: 24px !important;
-}
+  .default-routes .v-list__tile .v-avatar {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    height: 24px !important;
+    width: 24px !important;
+  }
 
-.default-routes .v-list__tile__title,
-.default-routes .v-list__tile__action .material-icons {
-  color: rgba(0, 0, 0, 0.5) !important;
-}
+  .default-routes .v-list__tile__title,
+  .default-routes .v-list__tile__action .material-icons {
+    color: rgba(0, 0, 0, 0.5) !important;
+  }
 
-.default-routes .v-list__tile--active .v-list__tile__title,
-.default-routes .v-list__tile--active .v-list__tile__action .material-icons {
-  color: #d70f14 !important;
-}
+  .default-routes .v-list__tile--active .v-list__tile__title,
+  .default-routes .v-list__tile--active .v-list__tile__action .material-icons {
+    color: #d70f14 !important;
+  }
 
-.default-routes .v-list__tile--active .v-avatar {
-  background-color: #d70f14 !important;
-}
+  .default-routes .v-list__tile--active .v-avatar {
+    background-color: #d70f14 !important;
+  }
 
-.profile-button .v-avatar {
-  background-color: white;
-  height: 22px !important;
-  width: 22px !important;
-}
+  .profile-button .v-avatar {
+    background-color: white;
+    height: 22px !important;
+    width: 22px !important;
+  }
 
-.profile-button .v-avatar span {
-  margin-top: -1px;
-  color: #3f515d;
-}
+  .profile-button .v-avatar span {
+    margin-top: -1px;
+    color: #3f515d;
+  }
 
-.auth-routes >>> .container {
-  padding: 0;
-}
+  .auth-routes>>>.container {
+    padding: 0;
+  }
 
-.auth-routes >>> .v-content__wrap {
-  padding-top: 0;
-}
+  .auth-routes>>>.v-content__wrap {
+    padding-top: 0;
+  }
 
-pre {
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  border: 1px solid rgba(100, 100, 100, 0.2);
-}
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    border: 1px solid rgba(100, 100, 100, 0.2);
+  }
 
-.v-progress-linear {
-  position: absolute;
-  z-index: 10;
-  top: 48px;
-  margin: 0;
-}
+  .v-progress-linear {
+    position: absolute;
+    z-index: 10;
+    top: 48px;
+    margin: 0;
+  }
 </style>
