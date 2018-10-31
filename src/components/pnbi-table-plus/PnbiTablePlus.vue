@@ -2,6 +2,7 @@
 
   <div class="pnbi-datatable">
 
+    <!-- Customise Dialog -->
     <pnbi-dialog :title="dialogTitle" :open="customiseDialog" @close="customiseDialog=false" width="500">
       <div slot="dialog-content">
         <v-list>
@@ -46,6 +47,44 @@
       </div>
     </pnbi-dialog>
 
+    <!-- Advanced search -->
+    <pnbi-dialog title="Advanced search" :open="searchPlusDialogVisible" @close="searchPlusDialogVisible=false">
+      <div slat="dialog-content">
+        <v-list>
+          <v-list-tile v-for="header in localStorageHeaders" :key="header.text" :class="{'highlighted': header.highlight}">
+            <v-list-tile-content>
+              <v-checkbox :label="header.text" @change="searchPlusDialogVisible=false" v-model="header.selectedForSearch" :value="header.selectedForSearch"
+                style="align-items:center">
+              </v-checkbox>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list>
+      </div>
+    </pnbi-dialog>
+
+    <v-toolbar dense flat v-show="itemsForAdvancedSearch.length>0">
+      <v-menu v-for="item in itemsForAdvancedSearch" :key="item.value" offset-y :close-on-content-click="false" light>
+        <v-chip close slot="activator" @click="openChipDialog(item)" @input="onChipClose(item)">
+          {{item.text}} <span v-for="(value, key) in item.advancedSearchItem" :key="key" style="padding-left: 4px">"{{value}}"</span>
+        </v-chip>
+        <card-numbro v-if="item.style === 'numbro.js'" :item="item"></card-numbro>
+        <card-moment v-if="item.style === 'moment.js'" :item="item"></card-moment>
+        <card-default v-if="item.style !== 'numbro.js' && item.style !== 'moment.js'" :item="item"></card-default>
+        <!-- <v-list>
+          <v-list-tile>
+            <v-list-tile-content>
+              <v-text-field autofocus ref="focus" label="search for ..." v-model="item.avancedSearchTerm"></v-text-field>
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-list-tile>
+            <v-list-tile-content>
+              <p class="caption">Verknüpfe die Suche in der Spalte "{{item.text}}" mit Suchen aus anderen Spalten.</p>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list> -->
+      </v-menu>
+    </v-toolbar>
+
     <v-data-table v-bind="localAttrs" :pagination.sync="compPagination">
       <template slot="items" slot-scope="props">
         <tr @click="$emit('open-row', props.item)">
@@ -55,10 +94,12 @@
           </td>
         </tr>
       </template>
+
       <!-- TODO enable custom empty state
       <template slot="no-results">
         <pnbi-empty text="No data to display"></pnbi-empty>
       </template> -->
+
     </v-data-table>
   </div>
 
@@ -66,15 +107,22 @@
 
 <script>
 import ColumnFilterMixin from './columnFilterMixin.js'
+import ExtendsSearchMixin from './extendsSearchMixin.js'
 import is from 'is'
 import draggable from 'vuedraggable'
+import CardNumbro from './CardNumbro'
+import CardMoment from './CardMoment'
+import CardDefault from './CardDefault'
 
 export default {
   name: 'PnbiDatatablePlus',
   components: {
-    draggable
+    draggable,
+    CardNumbro,
+    CardMoment,
+    CardDefault
   },
-  mixins: [ColumnFilterMixin],
+  mixins: [ColumnFilterMixin, ExtendsSearchMixin],
   props: {
     /**
      * Uniq identifier for table.
@@ -119,6 +167,13 @@ export default {
     dialogSearchlabel: {
       type: String,
       default: 'Search'
+    },
+    /**
+     * Default columns that are enabled for advanced search
+     */
+    advancedDefault: {
+      type: Array,
+      default: null
     }
   },
   methods: {
@@ -187,7 +242,9 @@ export default {
     return {
       drag: null,
       selectAll: true,
-      searchStr: null
+      searchStr: null,
+      searchPlusToolbarVisible: false,
+      searchPlusDialogVisible: false
     }
   }
 }
@@ -216,6 +273,11 @@ export default {
   }
   .list-scrolWrapper {
     max-height: 350px;
-    overflow-x: scroll;
+    overflow-y: scroll;
+  }
+  .caption {
+    max-width: 15em;
+    margin-bottom: 0;
+    color: #7a869a;
   }
 </style>

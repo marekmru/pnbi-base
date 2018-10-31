@@ -10,7 +10,8 @@
 
     <pnbi-datatable headline="Datatable plus"
       @search="search = $event" :button-label="false"
-      customize-label="Customize">
+      customize-label="Columns"
+      extend-search="Advanced">
 
       <!-- primary controls-->
 
@@ -30,7 +31,8 @@
         dialog-subtitle="Wähle Spalten, die angezeigt werden sollen"
         dialog-closelabel="Schließen"
         dialog-selectalllabel="Alle auswählen"
-        dialog-searchlabel="Suche">
+        dialog-searchlabel="Nach Spalten suchen"
+        :advanced-default="advancedDefault">
       </pnbi-datatable-plus>
 
     </pnbi-datatable>
@@ -39,7 +41,7 @@
 </template>
 <script>
 import { Validator } from 'vee-validate'
-
+import moment from 'moment'
 const dictionary = {
   en: {
     messages: {
@@ -55,9 +57,7 @@ const dictionary = {
 
 // Override and merge the dictionaries
 Validator.localize(dictionary)
-
 const validator = new Validator({ first_name: 'alpha' })
-
 validator.localize('ar') // now this validator will generate messages in Arabic.
 
 export default {
@@ -85,7 +85,12 @@ export default {
       search: null,
       newBudget: null,
       projectName: null,
-      headers: []
+      headers: [],
+      advancedDefault: [
+        { name: { '$in': 'alex' } },
+        { age: { '$eq': moment().format('DD/MM/YYYY') } },
+        { value2: { '$eq': moment().add(7, 'days').format('DD/MM/YYYY') } }
+      ]
     }
   },
   watch: {
@@ -158,7 +163,7 @@ export default {
           { text: 'numbro 2', value: 'age', style: 'numbro.js', format: '0,0' },
           { text: 'currency €', value: 'price', format: '0,0.00', style: 'numbro.js' },
           { text: 'Percent', value: 'value1', format: '0.0%', style: 'numbro.js' },
-          { text: 'String', value: 'value2' },
+          { text: 'String', value: 'value2', format: 'DD/MM/YYYY', style: 'moment.js' },
           { text: 'Value 3', value: 'value3', format: '6 a', style: 'numbro.js' },
           { text: 'just number', value: 'value4' },
           { text: 'no format & moment', value: 'value5', style: 'moment.js' },

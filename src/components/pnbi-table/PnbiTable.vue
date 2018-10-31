@@ -14,6 +14,11 @@
         <v-btn small color="accent"
           @click.stop="$bus.$emit('customizeEvent')">{{customizeLabel}}</v-btn>
       </div>
+      <div v-if="extendSearch">
+        <v-btn small color="accent"
+          @click.stop="$bus.$emit('extendSearchEvent')">{{extendSearch}}</v-btn>
+      </div>
+
       <v-flex xs3>
         <v-text-field clearable class="pnbi-datatable__search" solo-inverted flat v-model="search" append-icon="search"></v-text-field>
       </v-flex>
@@ -63,6 +68,13 @@ export default {
     uppercaseLabels: {
       type: Boolean,
       default: false
+    },
+    /**
+     * If defined, enables extended search inside of table
+     */
+    extendSearch: {
+      type: String,
+      default: "Extends"
     },
     flat: {
       type: Boolean | null,
