@@ -62,26 +62,24 @@
       </div>
     </pnbi-dialog>
 
+    <!-- Toolbar with chips -->
     <v-toolbar dense flat v-show="itemsForAdvancedSearch.length>0">
       <v-menu v-for="item in itemsForAdvancedSearch" :key="item.value" offset-y :close-on-content-click="false" light>
         <v-chip close slot="activator" @click="openChipDialog(item)" @input="onChipClose(item)">
-          {{item.text}} <span v-for="(value, key) in item.advancedSearchItem" :key="key" style="padding-left: 4px">"{{value}}"</span>
+          {{item.text}} <span v-for="(value, key) in item.advancedSearchItem" :key="key" style="padding-left: 4px">
+            "<span class="chip-text">{{item.chipText}}</span>
+            <span class="chip-value">{{value}}</span>"
+          </span>
         </v-chip>
-        <card-numbro v-if="item.style === 'numbro.js'" :item="item"></card-numbro>
-        <card-moment v-if="item.style === 'moment.js'" :item="item"></card-moment>
-        <card-default v-if="item.style !== 'numbro.js' && item.style !== 'moment.js'" :item="item"></card-default>
-        <!-- <v-list>
-          <v-list-tile>
-            <v-list-tile-content>
-              <v-text-field autofocus ref="focus" label="search for ..." v-model="item.avancedSearchTerm"></v-text-field>
-            </v-list-tile-content>
-          </v-list-tile>
-          <v-list-tile>
-            <v-list-tile-content>
-              <p class="caption">Verknüpfe die Suche in der Spalte "{{item.text}}" mit Suchen aus anderen Spalten.</p>
-            </v-list-tile-content>
-          </v-list-tile>
-        </v-list> -->
+        <!-- numbro.js menu -->
+        <!-- <card-numbro v-if="item.style === 'numbro.js'"
+          :originItem="item" class="card-wrapper"></card-numbro> -->
+        <!-- moment.js menu -->
+        <card-moment v-if="item.style === 'moment.js'"
+          :originItem="item" class="card-wrapper"></card-moment>
+        <!-- default menu -->
+        <!-- <card-default v-if="item.style !== 'numbro.js' && item.style !== 'moment.js'"
+          :originItem="item" class="card-wrapper"></card-default> -->
       </v-menu>
     </v-toolbar>
 
@@ -240,6 +238,7 @@ export default {
   },
   data: function () {
     return {
+      chipText: null,
       drag: null,
       selectAll: true,
       searchStr: null,
@@ -274,6 +273,9 @@ export default {
   .list-scrolWrapper {
     max-height: 350px;
     overflow-y: scroll;
+  }
+  .card-wrapper {
+    padding: 8px;
   }
   .caption {
     max-width: 15em;
