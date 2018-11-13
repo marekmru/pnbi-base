@@ -3,17 +3,20 @@ import PnbiPage from './components/pnbi-page/PnbiPage'
 import PnbiCard from './components/pnbi-card/PnbiCard'
 import PnbiDialog from './components/pnbi-dialog/PnbiDialog'
 import PnbiNumbers from './components/pnbi-numbers/PnbiNumbers'
-import { setRoutes } from './internal/routes.js'
-import { setAjaxConfig } from './internal/config.js'
-import { setApiConfig } from './Auth.js'
+import { setRoutes } from './internal/routes/index.js'
+import { setAjaxConfig } from './internal/axios.config.js'
+// import { setApiConfig } from './Auth.js'
 import { setCookieConfig } from './internal/cookie.service.js'
+import { setStore } from './store'
 import PnbiDataTable from './components/pnbi-table/PnbiTable'
 import PnbiDataTablePlus from './components/pnbi-table-plus/PnbiTablePlus'
 import PnbiEmpty from './components/pnbi-empty/PnbiEmpty'
-import bus, { LOADING } from './event-bus'
+import bus from './event-bus'
 import helper from './helper'
+import './plugins/vee-validate'
 
 // app wide styles, fonts
+
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import './styles/index.scss'
@@ -28,16 +31,18 @@ numbro.setLanguage(deDE.languageTag)
 const install = (Vue, options) => {
   Vue.prototype.$bus = bus
   Vue.prototype.$helper = helper
-  Vue.prototype.$config = options.config
+  Vue.prototype.$store = options.store
   Vue.prototype.$numbro = numbro
-  Vue.prototype.$loader = function (status) {
-    bus.$emit(LOADING, status => {
-      this.loading = status
-    })
-  }
+  // Vue.prototype.$config = options.config
+
+  // 1. setup store (holds all informations)
+  setStore(options.store) // TODO oder new store
+  options.store.dispatch('initializeApp', options.config)
+  /// ///////////////////////////////
+  // 2.
   setRoutes(options.router)
-  setApiConfig(options.config)
-  setAjaxConfig(options)
+  // setApiConfig(options.config)
+  setAjaxConfig(options.config)
   setCookieConfig(options.config.API)
 
   Vue.component('pnbi-dialog', PnbiDialog)
@@ -57,8 +62,8 @@ const install = (Vue, options) => {
   * @param key = {style:'numbro.js', format:'0,0.00'}
   */
   /* #####################
-  * mmr: Please choose a meaningful name : FE datatablePlusXYZ Fromatter
-  ##################### */
+ * mmr: Please choose a meaningful name : FE datatablePlusXYZ Fromatter
+ ##################### */
   Vue.filter('customFormatter', function (value, key) {
     if (!value) return ''
     switch (key.style) {
@@ -79,6 +84,7 @@ const install = (Vue, options) => {
     }
     return value
   })
+
   /* TODO: possibility to pass a skin */
   Vue.use(Vuetify, {
     theme: {

@@ -44,7 +44,6 @@ export function deepFreeze (o) {
       deepFreeze(o[prop])
     }
   })
-
   return o
 }
 export default {

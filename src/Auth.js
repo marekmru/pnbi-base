@@ -1,78 +1,74 @@
 import axios from 'axios'
-import EventBus, {
-  PROFILE_UPDATED
-} from './event-bus'
-export function unwrap (object) {
-  if (object.data.result.message != null) {
-    return object.data.result.message
-  }
-  return object.data
-}
-let config = null
-export function setApiConfig (cnf) {
-  config = cnf
-}
+import debug from './$debug'
+import iHelper from './internal/$internal'
+/* const api = () => {
+  return Vue.prototype.$store.getters.api
+} */
 export default {
   login (user) {
     return axios
-      .post(`${config.API}/login`, user)
+      .post('/login', user)
       .then(result => {
-        window.localStorage.setItem('user', JSON.stringify(result.data.data))
-        return result.data.result
+        window.localStorage.setItem('user', JSON.stringify(result.data))
+        return result.data
       })
-      .catch(error => Promise.reject(error.response))
+      .catch(error => Promise.reject(error))
     /*     return Promise.all([login]).then(() => {
       return this.profile()
     }) */
   },
   profile () {
-    if (this._profile != null) {
-      return Promise.resolve(this._profile)
+    if (this.$profile != null) {
+      return Promise.resolve(this.$profile)
     }
     return axios
-      .get(`${config.API}/profile`)
+      .get(`/profile`)
       .then(result => {
-        const rn = result.data.result.realname
+        /*         const rn = result.data.result.realname
         let short = null
         if (rn.includes(' ')) {
           short = rn.split(' ').map(val => val.charAt(0).toUpperCase()).join('')
         } else {
           short = rn.substring(0, 1)
-        }
-        this._profile = Object.assign(result.data.result, {
-          short
+        } */
+        this.$profile = Object.assign(result.data, {
+          short: iHelper.shortName(result.data.realname)
         })
-        EventBus.$emit(PROFILE_UPDATED, this._profile)
-        return this._profile
+        // EventBus.$emit(PROFILE_UPDATED, this.$profile)
+        return this.$profile
       })
-      .catch(error => Promise.reject(error.response))
+      .catch(error => Promise.reject(error))
   },
   logout () {
-    EventBus.$emit(PROFILE_UPDATED, undefined)
-    this._profile = undefined
+    /*     EventBus.$emit(PROFILE_UPDATED, undefined)
+    this.$profile = undefined */
     return axios
-      .get(`${config.API}/logout`)
+      .get(`/logout`)
       .then(result => {
-        return result.data.result
+        return result.data
       })
-      .catch(error => Promise.reject(error.response))
+      .catch(error => Promise.reject(error))
   },
   password (password) {
-    return axios
+    return debug.notImplemented('password')
+    /*     return axios
       .post(`https://bi.plan-net.com/api/v2/password`, password)
       .then(result => result.data.result)
-      .catch(error => Promise.reject(error.response))
+      .catch(error => Promise.reject(error)) */
   },
   reset (data) {
-    if (data.password_code) {
+    // resetten mit token und neuem passwort
+    if (data.token != null) {
       return axios
-        .post(`${config.API}/reset`, data)
-        .then(result => result)
-        .catch(error => Promise.reject(error.response))
+        .post(`/login`, data)
+        .then(result => result.data)
+        .catch(error => Promise.reject(error))
     }
+    // anfordern mit email
     return axios
-      .get(`${config.API}/reset?email=${data.email}`)
+      .put(`/login`, data)
+      // .put(`/login?email=${data.email}`)
       .then(result => result)
-      .catch(error => Promise.reject(error.response))
+      .catch(error => Promise.reject(error))
   }
 }

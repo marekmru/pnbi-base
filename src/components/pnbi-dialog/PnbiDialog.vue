@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import DialogMixin from '../../DialogMixin'
+import DialogMixin from '../../internal/DialogMixin'
 
 export default {
   props: {

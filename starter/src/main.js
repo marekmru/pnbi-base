@@ -1,7 +1,5 @@
 import Vue from 'vue'
-import VeeValidate from 'vee-validate'
 import App from './App'
-import config from './pnbi.base.config'
 import router from './routes'
 import store from './store'
 import '@/config/filters.js'
@@ -11,33 +9,13 @@ import PnbiBase from 'pnbi-base/src'
 
 Vue.use(PnbiBase, {
   router,
-  config
-})
-
-/* const messages = {
-  en: {
-    confirmed: function () {
-      return 'Your password is not confirmed'
-    },
-    numbers: function () {
-      return 'I really dont like your email'
-    }
-  }
-} */
-Vue.use(VeeValidate)
-
-/* new Vue({
-  el: '#app',
-  router,
-  store,
-  components: {
-    App
+  config: {
+    FALLBACK: '5001/core4/api/v1',
+    TITLE: 'CORE 4 Tester',
+    IGNORED_ERRORS: []
   },
-  template: '<App/>'
-}) */
-
-// Override and merge the dictionaries
-// VeeValidate.localize(dictionary)
+  store
+})
 
 Vue.config.productionTip = false
 /* eslint-disable no-new */
@@ -51,5 +29,3 @@ new Vue({
   },
   template: '<App/>'
 })
-
-// app.$VeeValidate.updateDictionary(messages)
