@@ -317,6 +317,12 @@ export default {
     margin-left: -1px;
   }
 
+  .default-routes {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+
   .default-routes .v-list__tile .v-avatar {
     background-color: rgba(0, 0, 0, 0.5) !important;
     height: 24px !important;
