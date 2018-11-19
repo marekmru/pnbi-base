@@ -48,10 +48,12 @@
         </v-list-tile-action>
       </v-list-tile>
 
-      <v-list-tile>
-        <v-btn flat small primary>Aktualisieren</v-btn>
-        <v-btn flat small>Schließen</v-btn>
-      </v-list-tile>
+      <v-layout>
+        <v-flex>
+          <v-btn flat small primary @click="applyFilter()">Aktualisieren</v-btn>
+          <!-- <v-btn flat small>Schließen</v-btn> -->
+        </v-flex>
+      </v-layout>
 
     </v-radio-group>
   </v-list>
@@ -61,10 +63,10 @@
 <script>
 export default {
   // current item is the advancedSearchItem
-  props: ['originItem'],
+  props: ['item'],
   data: function () {
     return {
-      item: this.originItem,
+      localItem: this.item,
       date: null,
       selected: null,
       norm: null,
@@ -80,39 +82,41 @@ export default {
   },
   watch: {
     selected (newValue) {
-      console.log('watch', newValue);
       this.defineChipText(newValue)
     }
   },
   methods: {
+    applyFilter () {
+      this.$emit('itemUpdate', this.localItem)
+    },
     /**
      * updated item object with some Information from the chipmenu
      * returned item to the parrent
+     * @param selectedKey string
      */
     defineChipText (selectedKey) {
-      console.log('item', this.item);
-      console.log('selected', this.selected, selectedKey);
-      let key = Object.keys(this.item.advancedSearchItem)[0]
-      let value = this.item.advancedSearchItem[key]
+      let key = Object.keys(this.localItem.advancedSearchItem)[0]
+      let value = this.localItem.advancedSearchItem[key]
       if (selectedKey) {
         key = selectedKey
       } else {
         this.selected = key
       }
+      this.normDate = null
+      this.lowerDate = null
+      this.greaterDate = null
       switch (key) {
         case '$eq':
+          this.localItem.chipText = ''
           this.normDate = value
-          this.$emit('update', this.item)
           break
         case '$lt':
-          this.item.chipText = 'kleiner als'
+          this.localItem.chipText = 'kleiner als'
           this.lowerDate = value
-          this.$emit('update', this.item)
           break
         case '$gt':
-          this.item.chipText = 'größer als'
+          this.localItem.chipText = 'größer als'
           this.greaterDate = value
-          this.$emit('update', this.item)
           break
       }
     }

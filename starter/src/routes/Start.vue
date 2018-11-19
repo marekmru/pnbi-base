@@ -88,7 +88,7 @@ export default {
       headers: [],
       advancedDefault: [
         { name: { '$in': 'alex' } },
-        { value2: { '$gt': moment().add(7, 'days').format('DD/MM/YYYY') } }
+        { value2: { '$lt': moment().add(7, 'days').format('DD/MM/YYYY') } }
       ]
     }
   },

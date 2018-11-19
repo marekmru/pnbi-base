@@ -5,8 +5,18 @@ export default {
     this.enableDefaultItemsInAdvancedSearch()
   },
   computed: {
-    itemsForAdvancedSearch () {
-      return this.localStorageHeaders.filter(header => header.selectedForSearch)
+    itemsForAdvancedSearch: {
+      get () {
+        return this.localStorageHeaders.filter(header => header.selectedForSearch)
+      },
+      set (item) {
+        this.localStorageHeaders = this.localStorageHeaders.map(val => {
+          if (val.value === item.value) {
+            val = item
+          }
+          return val
+        })
+      }
     }
   },
   watch: {
@@ -24,14 +34,13 @@ export default {
      */
     openChipDialog (item) {
       item.editDialog = !item.editDialog
-      console.log('clicked', item)
     },
     /**
      * Remove chip
      * @param item that should be removed
      */
     onChipClose (item) {
-      this.localStorageHeaders.filter(header => {
+      this.itemsForAdvancedSearch = this.itemsForAdvancedSearch.filter(header => {
         if (header.value === item.value) {
           header.selectedForSearch = false
         }

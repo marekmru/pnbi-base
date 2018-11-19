@@ -1,6 +1,6 @@
 <template>
 
-  <div class="pnbi-datatable">
+  <div class="pnbi-datatable" ref="toolbar">
 
     <!-- Customise Dialog -->
     <pnbi-dialog :title="dialogTitle" :open="customiseDialog" @close="customiseDialog=false" width="500">
@@ -64,7 +64,7 @@
 
     <!-- Toolbar with chips -->
     <v-toolbar dense flat v-show="itemsForAdvancedSearch.length>0">
-      <v-menu v-for="item in itemsForAdvancedSearch" :key="item.value" offset-y :close-on-content-click="false" light>
+      <v-menu v-if="item.selectedForSearch" v-for="item in itemsForAdvancedSearch" :key="item.value" offset-y :close-on-content-click="false" light>
         <v-chip close slot="activator" @click="openChipDialog(item)" @input="onChipClose(item)">
           {{item.text}} <span v-for="(value, key) in item.advancedSearchItem" :key="key" style="padding-left: 4px">
             "<span class="chip-text">{{item.chipText}}</span>
@@ -76,10 +76,10 @@
           :originItem="item" class="card-wrapper"></card-numbro> -->
         <!-- moment.js menu -->
         <card-moment v-if="item.style === 'moment.js'"
-          :originItem="item" class="card-wrapper"></card-moment>
+          :item="item" @itemUpdate="onItemUpdate" class="card-wrapper"></card-moment>
         <!-- default menu -->
-        <!-- <card-default v-if="item.style !== 'numbro.js' && item.style !== 'moment.js'"
-          :originItem="item" class="card-wrapper"></card-default> -->
+        <card-default v-if="item.style !== 'numbro.js' && item.style !== 'moment.js'"
+          :item="item" @itemUpdate="onItemUpdate" class="card-wrapper"></card-default>
       </v-menu>
     </v-toolbar>
 
@@ -108,7 +108,7 @@ import ColumnFilterMixin from './columnFilterMixin.js'
 import ExtendsSearchMixin from './extendsSearchMixin.js'
 import is from 'is'
 import draggable from 'vuedraggable'
-import CardNumbro from './CardNumbro'
+// import CardNumbro from './CardNumbro'
 import CardMoment from './CardMoment'
 import CardDefault from './CardDefault'
 
@@ -116,7 +116,7 @@ export default {
   name: 'PnbiDatatablePlus',
   components: {
     draggable,
-    CardNumbro,
+    // CardNumbro,
     CardMoment,
     CardDefault
   },
@@ -175,6 +175,15 @@ export default {
     }
   },
   methods: {
+    onItemUpdate (item) {
+      this.itemsForAdvancedSearch = this.itemsForAdvancedSearch.map(val => {
+        if (val.value === item.value) {
+          val = item
+        }
+        return val
+      })
+      // TODO close current menu .headline
+    },
     /*
     * Toogle all headers on/off
     */
