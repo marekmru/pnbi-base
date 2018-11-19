@@ -63,7 +63,7 @@
     </pnbi-dialog>
 
     <!-- Toolbar with chips -->
-    <v-toolbar dense flat v-show="itemsForAdvancedSearch.length>0">
+    <v-toolbar dense flat v-show="itemsForAdvancedSearch.length > 0">
       <v-menu v-if="item.selectedForSearch" v-for="item in itemsForAdvancedSearch" :key="item.value" offset-y :close-on-content-click="false" light>
         <v-chip close slot="activator" @click="openChipDialog(item)" @input="onChipClose(item)">
           {{item.text}} <span v-for="(value, key) in item.advancedSearchItem" :key="key" style="padding-left: 4px">
