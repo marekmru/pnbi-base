@@ -1,7 +1,7 @@
 <template lang="html">
   <v-card>
     <v-card-text>
-      <v-text-field autofocus ref="focus" label="Enthält ..." v-model="localItem.text"></v-text-field>
+      <v-text-field autofocus ref="focus" label="Enthält ..." v-model="localItem.value"></v-text-field>
       <!-- <p class="caption">Verknüpfe die Suche in der Spalte "{{item.text}}" mit Suchen aus anderen Spalten.</p> -->
     </v-card-text>
     <v-card-actions>
@@ -22,6 +22,7 @@ export default {
   },
   mounted () {
     console.log(this.localItem);
+    this.localItem.chipText = this.localItem.value
   },
   methods: {
     applyFilter () {
