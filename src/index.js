@@ -14,6 +14,14 @@ import PnbiEmpty from './components/pnbi-empty/PnbiEmpty'
 import bus from './event-bus'
 import helper from './helper'
 import './plugins/vee-validate'
+import VeeValidate, { Validator } from 'vee-validate'
+import de from 'vee-validate/dist/locale/de'
+// Vee-Validator
+
+// import Auth from './Auth'
+// import de from 'vee-validate/dist/locale/de'
+
+
 
 // app wide styles, fonts
 
@@ -33,8 +41,33 @@ const install = (Vue, options) => {
   Vue.prototype.$helper = helper
   Vue.prototype.$store = options.store
   Vue.prototype.$numbro = numbro
-  // Vue.prototype.$config = options.config
-
+  ////////////////////
+  const dictionary = {
+    de: {
+      messages: {
+        auth: `Bitte überprüfen Sie ihren Namen und das Passwort.`,
+        emailreset: `Die E-Mail Adresse wurde nicht gefunden.`,
+        passwordscore: `Das gewählte Passwort ist nicht sicher genug.`,
+        confirmspecial: `Die Passwörter stimmen nicht überein.`
+      }
+    },
+    en: {
+      messages: {
+        auth: `Please translate me`,
+        emailreset: `Please translate me`,
+        passwordscore: `Please translate me`,
+        confirmspecial: `Please translate me`
+      }
+    }
+  }
+  Vue.use(VeeValidate, {
+    aria: false,
+    locale: 'de'
+  })
+  Validator.localize('de', de)
+  Validator.localize(dictionary)
+  //Validator.localize('de', dictionary.de)
+  ////////////////////
   // 1. setup store (holds all informations)
   setStore(options.store) // TODO oder new store
   options.store.dispatch('initializeApp', options.config)

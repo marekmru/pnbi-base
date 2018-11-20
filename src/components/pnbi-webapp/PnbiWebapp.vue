@@ -99,38 +99,6 @@
 
     <v-progress-linear indeterminate v-if="loading"></v-progress-linear>
     <error-dialog></error-dialog>
-    <!-- TODO Component -->
-<!--     <v-dialog scrollable persistent v-model="alertOpen" max-width="720">
-      <v-card tile v-if="alertOpen && alertMessage">
-        <v-toolbar dense card dark color="error">
-          <v-toolbar-title>
-            ERROR {{alertMessage.status_code || alertMessage.data.status_code }}
-          </v-toolbar-title>
-          <v-spacer></v-spacer>
-        </v-toolbar>
-        <v-card-text class="px-3 py-3">
-          <div v-if="alertMessage.html || alertMessage.json">
-            <p v-if="alertMessage.html" v-html="alertMessage.html"></p>
-            <div v-if="alertMessage.json">
-              <pre class="mt-2 pa-1">{{alertMessage.json}}</pre>
-            </div>
-          </div>
-          <div v-else>
-            <pre class="mt-2 pa-1">{{alertMessage.data}}</pre>
-          </div>
-        </v-card-text>
-        <v-card-actions class="pl-3 pr-3 pb-3 pt-0">
-          <v-spacer></v-spacer>
-          <v-btn type="button" @click="logout()" flat color="secondary">
-            Zum Login
-          </v-btn>
-          <v-btn type="button" v-if="(alertMessage.status_code || alertMessage.data.status_code) != 401 && (alertMessage.status_code || alertMessage.data.status_code) != 403"
-            flat @click="alertOpen = false" color="primary">
-            OK
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog> -->
   </v-app>
 </template>
 <script>

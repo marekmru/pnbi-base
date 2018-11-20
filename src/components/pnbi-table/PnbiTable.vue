@@ -58,11 +58,11 @@ export default {
       default: false
     },
     /**
-     * Should the labels be uppercase? Dafault: false
+     * Should the labels be uppercase? Dafault: true
      */
     uppercaseLabels: {
       type: Boolean,
-      default: false
+      default: true
     },
     flat: {
       type: Boolean | null,
@@ -89,7 +89,22 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+.pnbi-button-bar {
+  .v-btn {
+    margin-right: -1px;
+    margin-left: -1px;
+  }
+}
+</style>
 <style lang="scss" scoped>
+div >>> .pnbi-button-bar {
+  border: 1px solid red;
+  >>> .v-btn {
+    margin-right: -1px;
+    margin-left: -1px;
+  }
+}
 .pnbi-secondary-controls {
   background-color: #fff;
 }

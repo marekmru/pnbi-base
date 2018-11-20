@@ -1,11 +1,12 @@
 import axios from 'axios'
-import EventBus, { ERROR } from '../event-bus'
+// import EventBus, { ERROR } from '../event-bus'
 import router from './routes/index.js'
 import Vue from 'vue'
 
 export function setAjaxConfig (config) {
-  const isApiBaseDefined = (window.BIAPIBASE != null) && !window.BIAPIBASE.includes('echo var')
-  const api = isApiBaseDefined ? window.BIAPIBASE : `http://localhost:${config.FALLBACK}`
+  const isApiBaseDefined = window.location.href.includes('localhost') === false
+  // (window.BIAPIBASE != null) && !window.BIAPIBASE.includes('echo var')
+  const api = isApiBaseDefined ? './' : `http://localhost:${config.FALLBACK}`
 
   axios.defaults.baseURL = api
   axios.defaults.headers.common['Accept'] = 'application/json'

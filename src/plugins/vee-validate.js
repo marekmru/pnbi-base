@@ -1,31 +1,10 @@
-import Vue from 'vue'
-import VeeValidate, { Validator } from 'vee-validate'
+
 // import Auth from './Auth'
 // import de from 'vee-validate/dist/locale/de'
 
-Vue.use(VeeValidate, {
-  aria: false
-})
 
-const dictionary = {
-  de: {
-    messages: {
-      auth: `Bitte überprüfen Sie ihren Namen und das Passwort.`,
-      emailreset: `Die E-Mail Adresse wurde nicht gefunden.`,
-      passwordscore: `Das gewählte Passwort ist nicht sicher genug.`,
-      confirmspecial: `Die Passwörter stimmen nicht überein.`
-    }
-  },
-  en: {
-    messages: {
-      auth: `Please translate me`,
-      emailreset: `Please translate me`,
-      passwordscore: `Please translate me`,
-      confirmspecial: `Please translate me`
-    }
-  }
-}
-Validator.localize('de', dictionary.de)
+
+
 
 /* Validator.extend('caps', {
   validate (value) {

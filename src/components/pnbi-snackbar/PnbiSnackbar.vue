@@ -8,12 +8,20 @@
 </template>
 
 <script>
+import {
+  mapGetters
+} from 'vuex'
 export default {
-  mounted () {
+  mounted(){
     this.$bus.$on('SHOW_NOTIFICATION', (dto) => {
-      this.snack = Object.assign(this.snack, dto)
+      this.snack = Object.assign({}, this.snack, dto)
       this.show = true
     })
+  },
+  watch: {
+  },
+  computed: {
+
   },
   data () {
     return {

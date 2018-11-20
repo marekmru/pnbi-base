@@ -1,10 +1,12 @@
 import Auth from '../Auth'
+import bus from '../event-bus.js'
 import CookieService from '../internal/cookie.service.js'
 import router from '../internal/routes/index.js'
 
 const state = {
   loading: false,
   title: 'CORE',
+  notification: null,
   profile: {
     cookie: CookieService.isPriPolCookieSet(),
     authenticated: false,
@@ -13,6 +15,9 @@ const state = {
 }
 
 const actions = {
+  showNotification({ commit }, payload){
+    bus.$emit('SHOW_NOTIFICATION', payload)
+  },
   fetchProfile ({ commit }, payload) {
     Auth.profile().then(profile => {
       const dto = {
@@ -84,6 +89,9 @@ const actions = {
 }
 
 const mutations = {
+  set_notification (payload) {
+    state.notification = payload
+  },
   clear_auth_error () {
     delete state.profile.error
   },
