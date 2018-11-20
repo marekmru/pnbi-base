@@ -10,7 +10,8 @@ const state = {
   profile: {
     cookie: CookieService.isPriPolCookieSet(),
     authenticated: false,
-    name: null
+    name: null,
+    short: 'PR'
   }
 }
 
