@@ -9,21 +9,14 @@
         <v-divider dark class="my-3"></v-divider>
 
         <v-list-tile :to="{name: 'profile'}">
-          <v-list-tile-action>
-            <v-avatar>
-              <span class="white--text">{{profile.short}}</span>
-            </v-avatar>
-          </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>
               Profile
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+
         <v-list-tile :to="{name: 'privacy'}">
-          <v-list-tile-action>
-            <v-icon>visibility_off</v-icon>
-          </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>
               Privacy Policy
@@ -32,9 +25,6 @@
         </v-list-tile>
 
         <v-list-tile :to="{name: 'imprint'}">
-          <v-list-tile-action>
-            <v-icon class="impressum">§</v-icon>
-          </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>
               Imprint
@@ -43,10 +33,6 @@
         </v-list-tile>
 
         <v-list-tile @click="logout()">
-          <v-list-tile-action>
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjOTA5MDkwIiBkPSJNMTkyIDI3Ny40aDE4OS43bC00My42IDQ0LjdMMzY4IDM1Mmw5Ni05Ni05Ni05Ni0zMSAyOS45IDQ0LjcgNDQuN0gxOTJ2NDIuOHoiLz48cGF0aCBmaWxsPSIjOTA5MDkwIiBkPSJNMjU1LjcgNDIxLjNjLTQ0LjEgMC04NS41LTE3LjItMTE2LjctNDguNC0zMS4yLTMxLjItNDguMy03Mi43LTQ4LjMtMTE2LjkgMC00NC4xIDE3LjItODUuNyA0OC4zLTExNi45IDMxLjItMzEuMiA3Mi42LTQ4LjQgMTE2LjctNDguNCA0NCAwIDg1LjMgMTcuMSAxMTYuNSA0OC4ybDMwLjMtMzAuM2MtOC41LTguNC0xNy44LTE2LjItMjcuNy0yMy4yQzMzOS43IDYxIDI5OC42IDQ4IDI1NS43IDQ4IDE0MS4yIDQ4IDQ4IDE0MS4zIDQ4IDI1NnM5My4yIDIwOCAyMDcuNyAyMDhjNDIuOSAwIDg0LTEzIDExOS0zNy41IDEwLTcgMTkuMi0xNC43IDI3LjctMjMuMmwtMzAuMi0zMC4yYy0zMS4xIDMxLjEtNzIuNSA0OC4yLTExNi41IDQ4LjJ6TTQ0OC4wMDQgMjU2Ljg0N2wtLjg0OS0uODQ4Ljg0OS0uODQ5Ljg0OC44NDl6Ii8+PC9zdmc+"
-              width="22px" height="22px" title="logout" />
-          </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>
               Logout
@@ -373,5 +359,9 @@ export default {
     z-index: 10;
     top: 48px;
     margin: 0;
+  }
+
+  .v-divider {
+    opacity: 0.15;
   }
 </style>
