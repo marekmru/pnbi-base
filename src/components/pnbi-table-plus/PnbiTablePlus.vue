@@ -2,10 +2,15 @@
 
   <div class="pnbi-datatable" ref="toolbar">
 
-
+    <!-- customise dialog here -->
+    <customise-dialog
+      :localStorageHeaders="localStorageHeaders"
+      @saveHeaders="updateHeaders()"
+      @filterHeadersBySearch="filterHeadersBySearch($event)"
+      @selectAllHeaders="selectAllHeaders($event)"></customise-dialog>
 
     <!-- Advanced search -->
-    <pnbi-dialog title="Advanced search" :open="searchPlusDialogVisible" @close="searchPlusDialogVisible=false">
+    <!-- <pnbi-dialog title="Advanced search" :open="searchPlusDialogVisible" @close="searchPlusDialogVisible=false">
       <div slat="dialog-content">
         <v-list>
           <v-list-tile v-for="header in localStorageHeaders" :key="header.text" :class="{'highlighted': header.highlight}">
@@ -17,7 +22,7 @@
           </v-list-tile>
         </v-list>
       </div>
-    </pnbi-dialog>
+    </pnbi-dialog> -->
 
     <!-- Toolbar with chips -->
     <v-toolbar dense flat v-show="itemsForAdvancedSearch.length > 0">
@@ -61,23 +66,23 @@
 </template>
 
 <script>
-import ColumnFilterMixin from './columnFilterMixin.js'
 import ExtendsSearchMixin from './extendsSearchMixin.js'
+import UpdateAndSaveMixin from './updateAndSaveMixin.js'
 import is from 'is'
-import draggable from 'vuedraggable'
 // import CardNumbro from './CardNumbro'
 import CardMoment from './CardMoment'
 import CardDefault from './CardDefault'
+import CustomiseDialog from './CustomiseDialog'
 
 export default {
   name: 'PnbiDatatablePlus',
   components: {
-    draggable,
     // CardNumbro,
     CardMoment,
-    CardDefault
+    CardDefault,
+    CustomiseDialog
   },
-  mixins: [ColumnFilterMixin, ExtendsSearchMixin],
+  mixins: [ExtendsSearchMixin, UpdateAndSaveMixin],
   props: {
     /**
      * Uniq identifier for table.
@@ -87,34 +92,6 @@ export default {
       type: String,
       required: true,
       default: 'default'
-    },
-    /**
-     * Defined the dialog subtitle for customised dialog.
-     */
-    dialogSubtitle: {
-      type: String,
-      default: 'Select visible columns'
-    },
-    /**
-     * Defined label for dialog close button
-     */
-    dialogCloselabel: {
-      type: String,
-      default: 'Close'
-    },
-    /**
-     * Defined the label for selecting all headers in dialog
-     */
-    dialogSelectalllabel: {
-      type: String,
-      default: 'Select all'
-    },
-    /**
-     * Label for search placeholder inside of dialog
-     */
-    dialogSearchlabel: {
-      type: String,
-      default: 'Search'
     },
     /**
      * Default columns that are enabled for advanced search
@@ -134,16 +111,6 @@ export default {
       })
       // TODO close current menu .headline
     },
-    /*
-    * Toogle all headers on/off
-    */
-    selectAllHeaders () {
-      this.localStorageHeaders = this.localStorageHeaders.map(header => {
-        header.selected = this.selectAll
-        return header
-      })
-      this.updateHeaders()
-    },
     isNumber (val, key) {
       const isNumber = is.number(val)
       if (isNumber) {
@@ -158,20 +125,7 @@ export default {
       }
       return isNumber
     },
-    /**
-     * Filter localStorageHeaders
-     * set header.found true|false for specific display
-     */
-    filterlocalStorageHeadersBySearchStr () {
-      this.localStorageHeaders = this.localStorageHeaders.map(header => {
-        if (this.searchStr === '' || this.searchStr === null) {
-          header.highlight = false
-        } else {
-          header.highlight = !header.text.toLowerCase().includes(this.searchStr)
-        }
-        return header
-      })
-    }
+
   },
   computed: {
     compPagination: {
@@ -190,17 +144,11 @@ export default {
       }
     }
   },
-  watch: {
-    searchStr: function () {
-      this.filterlocalStorageHeadersBySearchStr()
-    }
-  },
   data: function () {
     return {
+      localStorageHeaders: [],
       chipText: null,
       drag: null,
-      selectAll: true,
-      searchStr: null,
       searchPlusToolbarVisible: false,
       searchPlusDialogVisible: false
     }
@@ -225,13 +173,6 @@ export default {
   }
   /deep/ .v-text-field__details {
     margin-bottom: 0 !important;
-  }
-  .highlighted {
-    opacity: 0.3;
-  }
-  .list-scrolWrapper {
-    max-height: 350px;
-    overflow-y: scroll;
   }
   .card-wrapper {
     padding: 8px;

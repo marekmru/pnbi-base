@@ -12,7 +12,7 @@
       <!-- customise button for pnbi-datatable-plus -->
       <div v-if="customizeLabel">
         <v-btn small color="accent"
-          @click.stop="$bus.$emit('customizeEvent')">{{customizeLabel}}</v-btn>
+          @click.stop="$bus.$emit('openCustomizeDialog')">{{customizeLabel}}</v-btn>
       </div>
       <div v-if="extendSearch">
         <v-btn small color="accent"
