@@ -59,6 +59,9 @@ export default {
     draggable
   },
   props: {
+    /**
+     * Items for displaying in an list
+     */
     localStorageHeaders: {
       type: Array,
       default: null

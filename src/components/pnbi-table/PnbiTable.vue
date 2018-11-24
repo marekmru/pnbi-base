@@ -16,7 +16,7 @@
       </div>
       <div v-if="extendSearch">
         <v-btn small color="accent"
-          @click.stop="$bus.$emit('extendSearchEvent')">{{extendSearch}}</v-btn>
+          @click.stop="$bus.$emit('openExtendSearchDialog')">{{extendSearch}}</v-btn>
       </div>
 
       <v-flex xs3>

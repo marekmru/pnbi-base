@@ -10,19 +10,8 @@
       @selectAllHeaders="selectAllHeaders($event)"></customise-dialog>
 
     <!-- Advanced search -->
-    <!-- <pnbi-dialog title="Advanced search" :open="searchPlusDialogVisible" @close="searchPlusDialogVisible=false">
-      <div slat="dialog-content">
-        <v-list>
-          <v-list-tile v-for="header in localStorageHeaders" :key="header.text" :class="{'highlighted': header.highlight}">
-            <v-list-tile-content>
-              <v-checkbox :label="header.text" @change="searchPlusDialogVisible=false" v-model="header.selectedForSearch" :value="header.selectedForSearch"
-                style="align-items:center">
-              </v-checkbox>
-            </v-list-tile-content>
-          </v-list-tile>
-        </v-list>
-      </div>
-    </pnbi-dialog> -->
+    <extend-search-dialog
+      :localStorageHeaders="localStorageHeaders"></extend-search-dialog>
 
     <!-- Toolbar with chips -->
     <v-toolbar dense flat v-show="itemsForAdvancedSearch.length > 0">
@@ -72,7 +61,8 @@ import is from 'is'
 // import CardNumbro from './CardNumbro'
 import CardMoment from './CardMoment'
 import CardDefault from './CardDefault'
-import CustomiseDialog from './CustomiseDialog'
+import CustomiseDialog from './dialogs/CustomiseDialog'
+import ExtendSearchDialog from './dialogs/ExtendSearchDialog'
 
 export default {
   name: 'PnbiDatatablePlus',
@@ -80,7 +70,8 @@ export default {
     // CardNumbro,
     CardMoment,
     CardDefault,
-    CustomiseDialog
+    CustomiseDialog,
+    ExtendSearchDialog
   },
   mixins: [ExtendsSearchMixin, UpdateAndSaveMixin],
   props: {
