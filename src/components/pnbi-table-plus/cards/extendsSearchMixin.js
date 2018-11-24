@@ -2,15 +2,16 @@ export default {
   mounted () {
     // register event listener
     this.$bus.$on('extendSearchEvent', this.onExtendSearchEvent)
+    this.$bus.$on('updateChip', this.onUpdateChipEvent)
     this.enableDefaultItemsInAdvancedSearch()
   },
   computed: {
     itemsForAdvancedSearch: {
       get () {
-        return this.localStorageHeaders.filter(header => header.selectedForSearch)
+        return this.items.filter(header => header.selectedForSearch)
       },
       set (item) {
-        this.localStorageHeaders = this.localStorageHeaders.map(val => {
+        this.items = this.items.map(val => {
           if (val.value === item.value) {
             val = item
           }
@@ -28,6 +29,15 @@ export default {
     }
   },
   methods: {
+    onUpdateChipEvent (item) {
+      this.itemsForAdvancedSearch = this.itemsForAdvancedSearch.map(val => {
+        if (val.value === item.value) {
+          val = item
+        }
+        return val
+      })
+      // TODO close current menu .headline
+    },
     /**
      * Open menu for edit the avancedSearchTerm
      * @param item that should be changed
@@ -61,7 +71,7 @@ export default {
         return true
       }
       this.advancedDefault.filter(item => {
-        this.localStorageHeaders = this.localStorageHeaders.filter(header => {
+        this.items = this.items.filter(header => {
           let key = Object.keys(item)[0]
           if (header.value === key) {
             header.selectedForSearch = true
@@ -70,7 +80,7 @@ export default {
           return header
         })
       })
-      this.$updateHeaderDom(this.localStorageHeaders)
+      this.$updateHeaderDom(this.items)
     }
   }
 }

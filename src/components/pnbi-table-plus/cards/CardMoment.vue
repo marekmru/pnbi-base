@@ -11,9 +11,23 @@
           </v-radio>
         </v-list-tile-content>
         <v-list-tile-action class="list_action">
-          <v-menu ref="norm" :close-on-content-click="false" v-model="norm" :return-value.sync="norm" lazy transition="scale-transition" offset-y full-width min-width="290px">
-            <v-text-field single-line slot="activator" v-model="normDate" label="Default" prepend-icon="event" readonly></v-text-field>
-            <v-date-picker no-title v-model="normDate" @input="$refs.lower.save(normDate)" show-current="false"></v-date-picker>
+          <v-menu ref="normMenuVisible"
+            :close-on-content-click="false"
+            v-model="normMenuVisible"
+            :return-value.sync="normMenuVisible"
+            lazy transition="scale-transition"
+            offset-y
+            full-width
+            min-width="290px">
+            <!-- <v-text-field single-line slot="activator" v-model="normDate" label="Default" prepend-icon="event" readonly></v-text-field>
+            <v-date-picker no-title v-model="normDate" @input="$refs.lower.save(normDate)" show-current="false"></v-date-picker> -->
+            <v-text-field
+              slot="activator"
+              :value="normDate"
+              clearable
+              label="Formatted with datefns"
+              readonly></v-text-field>
+              <v-date-picker no-title v-model="normDate" @input="$refs.lower.save(normDate)" show-current="false"></v-date-picker>
           </v-menu>
         </v-list-tile-action>
       </v-list-tile>
@@ -69,7 +83,7 @@ export default {
       localItem: this.item,
       date: null,
       selected: null,
-      norm: null,
+      normMenuVisible: null,
       lower: null,
       greater: null,
       normDate: '',

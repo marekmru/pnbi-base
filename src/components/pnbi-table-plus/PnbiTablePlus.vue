@@ -14,25 +14,9 @@
       :localStorageHeaders="localStorageHeaders"></extend-search-dialog>
 
     <!-- Toolbar with chips -->
-    <v-toolbar dense flat v-show="itemsForAdvancedSearch.length > 0">
-      <v-menu v-if="item.selectedForSearch" v-for="item in itemsForAdvancedSearch" :key="item.value" offset-y :close-on-content-click="false" light>
-        <v-chip close slot="activator" @click="openChipDialog(item)" @input="onChipClose(item)">
-          {{item.text}} <span v-for="(value, key) in item.advancedSearchItem" :key="key" style="padding-left: 4px">
-            "<span class="chip-text">{{item.chipText}}</span>
-            <span class="chip-value">{{value}}</span>"
-          </span>
-        </v-chip>
-        <!-- numbro.js menu -->
-        <!-- <card-numbro v-if="item.style === 'numbro.js'"
-          :originItem="item" class="card-wrapper"></card-numbro> -->
-        <!-- moment.js menu -->
-        <card-moment v-if="item.style === 'moment.js'"
-          :item="item" @itemUpdate="onItemUpdate" class="card-wrapper"></card-moment>
-        <!-- default menu -->
-        <card-default v-if="item.style !== 'numbro.js' && item.style !== 'moment.js'"
-          :item="item" @itemUpdate="onItemUpdate" class="card-wrapper"></card-default>
-      </v-menu>
-    </v-toolbar>
+    <chips
+      :items="localStorageHeaders"
+      :advancedDefault="advancedDefault"></chips>
 
     <v-data-table v-bind="localAttrs" :pagination.sync="compPagination">
       <template slot="items" slot-scope="props">
@@ -55,25 +39,20 @@
 </template>
 
 <script>
-import ExtendsSearchMixin from './extendsSearchMixin.js'
 import UpdateAndSaveMixin from './updateAndSaveMixin.js'
 import is from 'is'
-// import CardNumbro from './cards/CardNumbro'
-import CardMoment from './cards/CardMoment'
-import CardDefault from './cards/CardDefault'
+import Chips from './cards/Chips'
 import CustomiseDialog from './dialogs/CustomiseDialog'
 import ExtendSearchDialog from './dialogs/ExtendSearchDialog'
 
 export default {
   name: 'PnbiDatatablePlus',
   components: {
-    // CardNumbro,
-    CardMoment,
-    CardDefault,
+    Chips,
     CustomiseDialog,
     ExtendSearchDialog
   },
-  mixins: [ExtendsSearchMixin, UpdateAndSaveMixin],
+  mixins: [UpdateAndSaveMixin],
   props: {
     /**
      * Uniq identifier for table.
@@ -93,15 +72,6 @@ export default {
     }
   },
   methods: {
-    onItemUpdate (item) {
-      this.itemsForAdvancedSearch = this.itemsForAdvancedSearch.map(val => {
-        if (val.value === item.value) {
-          val = item
-        }
-        return val
-      })
-      // TODO close current menu .headline
-    },
     isNumber (val, key) {
       const isNumber = is.number(val)
       if (isNumber) {
