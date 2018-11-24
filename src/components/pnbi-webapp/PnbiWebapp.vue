@@ -265,7 +265,7 @@ export default {
     isNavVisible () {
       const isVis = ['login', 'reset'].indexOf(this.$route.name) === -1
       return isVis
-    }, 
+    },
     isFluid() {
       return (this.clientWidth < 1260) || (this.fullWidth)
     }

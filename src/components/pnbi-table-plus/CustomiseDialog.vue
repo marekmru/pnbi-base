@@ -102,7 +102,6 @@ export default {
   data: function () {
     return {
       dialogVisible: false,
-      selectAll: true,
       searchStr: null,
       allHeadersSelected: true
     }
