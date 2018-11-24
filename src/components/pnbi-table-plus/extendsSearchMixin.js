@@ -63,11 +63,8 @@ export default {
       this.advancedDefault.filter(item => {
         this.localStorageHeaders = this.localStorageHeaders.filter(header => {
           let key = Object.keys(item)[0]
-          // TEMP parsed key and values
-          // let querySelector = Object.keys(item[key])[0]
-          // let queryValue = item[key][querySelector]
           if (header.value === key) {
-            header.selectedForSearch = true // enable
+            header.selectedForSearch = true
             header.advancedSearchItem = item[key]
           }
           return header
