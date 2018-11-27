@@ -18,7 +18,18 @@ export default {
           return val
         })
       }
-    }
+    },
+    // _items: {
+    //   get () { return this.items },
+    //   set (item) {
+    //     this._items = this._items.map(val => {
+    //       if (val.value === item.value) {
+    //         val = item
+    //       }
+    //       return val
+    //     })
+    //   }
+    // }
   },
   watch: {
     dialog (val) {
@@ -67,20 +78,22 @@ export default {
      * Enable defaults that are delivered over advanced-defaults prop
      */
     enableDefaultItemsInAdvancedSearch () {
-      if (this.advancedDefault === null) {
+      if (this.itemsDefault === null) {
         return true
       }
-      this.advancedDefault.filter(item => {
-        this.items = this.items.filter(header => {
-          let key = Object.keys(item)[0]
-          if (header.value === key) {
-            header.selectedForSearch = true
-            header.advancedSearchItem = item[key]
-          }
-          return header
-        })
+      this.itemsDefault.filter(defaultItem => {
+        console.log(defaultItem);
+        // this._items = this.items.filter(headerItem => {
+        //   let key = Object.keys(headerItem)[0]
+        //   if (header.value === key) {
+        //     header.selectedForSearch = true
+        //     header.advancedSearchItem = item[key]
+        //   }
+        //   return headerItem
+        // })
+        // return defaultItem
       })
-      this.$updateHeaderDom(this.items)
+      // this.$emit('update:items', this._items)
     }
   }
 }

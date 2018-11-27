@@ -32,7 +32,7 @@
         dialog-closelabel="Schließen"
         dialog-selectalllabel="Alle auswählen"
         dialog-searchlabel="Nach Spalten suchen"
-        :advanced-default="advancedDefault">
+        :items-default="itemsDefault">
       </pnbi-datatable-plus>
 
     </pnbi-datatable>
@@ -86,7 +86,7 @@ export default {
       newBudget: null,
       projectName: null,
       headers: [],
-      advancedDefault: [
+      itemsDefault: [
         { name: { '$in': 'alex' } },
         { value2: { '$lt': moment().add(7, 'days').format('DD/MM/YYYY') } }
       ]

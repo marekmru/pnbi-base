@@ -15,8 +15,8 @@
 
     <!-- Toolbar with chips -->
     <chips
-      :items="localStorageHeaders"
-      :advancedDefault="advancedDefault"></chips>
+      :items.sync="localStorageHeaders"
+      :items-default="itemsDefault"></chips>
 
     <v-data-table v-bind="localAttrs" :pagination.sync="compPagination">
       <template slot="items" slot-scope="props">
@@ -66,7 +66,7 @@ export default {
     /**
      * Default columns that are enabled for advanced search
      */
-    advancedDefault: {
+    itemsDefault: {
       type: Array,
       default: null
     }
@@ -108,7 +108,6 @@ export default {
   data: function () {
     return {
       localStorageHeaders: [],
-      chipText: null,
       drag: null,
       searchPlusToolbarVisible: false,
       searchPlusDialogVisible: false

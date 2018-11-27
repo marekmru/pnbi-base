@@ -13,6 +13,7 @@ export default {
     this.localStorageHeaders = this.loadFromLocalStorage().headers
   },
   mounted () {
+    // this.$on('updateHeaders', this.$updateHeaderDom)
     this.$updateHeaderDom(this.localStorageHeaders)
   },
   computed: {
