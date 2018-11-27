@@ -47,7 +47,14 @@ export function setAjaxConfig (options) {
             data.html =
               'Sie sind nicht authorisiert, diese Ressource aufzurufen.<br>Bitte kontaktieren sie uns unter: <a href="mailto:bi-ops@plan-net.com">bi-ops@plan-net.com</a>'
           } else {
-            data.json = error.response.data || error.response
+            try{
+              if(error.response.data.result.data.message.includes('<')){
+                data.html = error.response.data.result.data.message
+              }
+            }
+            catch(e){
+              data.json = error.response.data || error.response
+            }
           }
           EventBus.$emit(ERROR, data)
         }
