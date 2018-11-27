@@ -18,7 +18,7 @@
         <v-text-field clearable class="pnbi-datatable__search" solo-inverted flat v-model="search" append-icon="search"></v-text-field>
       </v-flex>
       <v-btn v-if="buttonLabel !== false" small color="primary" dark @click="$emit('new')">
-        <v-icon class="mr-1" dark left>add</v-icon>
+        <v-icon class="mr-1" dark left>{{icon}}</v-icon>
         {{buttonLabel}}
       </v-btn>
     </v-toolbar>
@@ -48,6 +48,14 @@ export default {
       type: String | Boolean,
       default: 'Neu',
       required: true
+    },
+    /**
+    * Use for icon in creation button.
+    * set is to false if button should be hidden
+    */
+    icon: {
+      type: String | Boolean,
+      default: 'add'
     },
     /**
     * If defined customise button is visible.
