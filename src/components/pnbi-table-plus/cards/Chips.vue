@@ -12,7 +12,7 @@
         @click="openChipDialog(item)"
         @input="onChipClose(item)">
           {{item.text}}
-          <span v-for="(value, key) in item.items" :key="key" style="padding-left: 4px">
+          <span v-for="(value, key) in item.searchValue" :key="key" style="padding-left: 4px">
           "<span class="chip-text">{{item.chipText}}</span>
           <span class="chip-value">{{value}}</span>"
         </span>
@@ -76,6 +76,8 @@ export default {
           temp.filter(item => {
             if(item.value === key) {
               item.selectedForSearch = true
+              item.searchValue = dItem[key]
+              console.log(item);
               return item
             }
           })
