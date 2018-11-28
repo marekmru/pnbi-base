@@ -16,7 +16,8 @@
     <!-- Toolbar with chips -->
     <chips
       :items.sync="localStorageHeaders"
-      :items-default="itemsDefault"></chips>
+      :items-default="itemsDefault"
+      @searchQuery="onSearchQueryEvent($event)"></chips>
 
     <v-data-table v-bind="localAttrs" :pagination.sync="compPagination">
       <template slot="items" slot-scope="props">
@@ -86,7 +87,10 @@ export default {
       }
       return isNumber
     },
-
+    onSearchQueryEvent (query) {
+      console.log('search', query);
+      this.$emit('updateSearchQuery', query)
+    }
   },
   computed: {
     compPagination: {

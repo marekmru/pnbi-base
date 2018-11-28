@@ -32,7 +32,8 @@
         dialog-closelabel="Schließen"
         dialog-selectalllabel="Alle auswählen"
         dialog-searchlabel="Nach Spalten suchen"
-        :items-default="itemsDefault">
+        :items-default="itemsDefault"
+        @updateSearchQuery="onSeachQueryUpdate">
       </pnbi-datatable-plus>
 
     </pnbi-datatable>
@@ -82,13 +83,14 @@ export default {
         descending: false,
         sortBy: ''
       },
+      filter: null,
       search: null,
       newBudget: null,
       projectName: null,
       headers: [],
       itemsDefault: [
         { name: { '$in': 'alex' } },
-        { value2: { '$lt': moment().add(7, 'days').format('DD/MM/YYYY') } }
+        { value2: { '$lt': moment().add(7, 'days').format('DD-MM-YYYY') } }
       ]
     }
   },
@@ -98,6 +100,12 @@ export default {
     }
   },
   methods: {
+    onSeachQueryUpdate (query) {
+      // TODO update items
+      // make new backend request
+      this.filter = query
+      console.log('filter', this.filter)
+    },
     onPaginationEvent (data, event) {
       this.getDataFromApi()
         .then(data => {

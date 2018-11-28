@@ -25,9 +25,8 @@
               slot="activator"
               :value="normDate"
               clearable
-              label="Formatted with datefns"
               readonly></v-text-field>
-              <v-date-picker no-title v-model="normDate" @input="$refs.lower.save(normDate)" show-current="false"></v-date-picker>
+              <v-date-picker no-title v-model="normDate" @input="$refs.normMenuVisible.save(normDate)" show-current="false"></v-date-picker>
           </v-menu>
         </v-list-tile-action>
       </v-list-tile>
@@ -40,9 +39,19 @@
             </v-radio>
           </v-list-tile-content>
           <v-list-tile-action class="list_action">
-            <v-menu ref="lower" :close-on-content-click="false" v-model="lower" :return-value.sync="lower" lazy transition="scale-transition" offset-y full-width min-width="290px">
-              <v-text-field single-line slot="activator" v-model="lowerDate" label="Start" prepend-icon="event" readonly></v-text-field>
-              <v-date-picker no-title v-model="lowerDate" @input="$refs.lower.save(lowerDate)" show-current="false"></v-date-picker>
+            <v-menu ref="lowerMenuVisible"
+              :close-on-content-click="false"
+              v-model="lowerMenuVisible"
+              :return-value.sync="lowerMenuVisible"
+              lazy transition="scale-transition"
+              offset-y full-width
+              min-width="290px">
+              <v-text-field
+                slot="activator"
+                :value="lowerDate"
+                clearable
+                readonly></v-text-field>
+                <v-date-picker no-title v-model="lowerDate" @input="$refs.lowerMenuVisible.save(lowerDate)" show-current="false"></v-date-picker>
             </v-menu>
         </v-list-tile-action>
       </v-list-tile>
@@ -55,15 +64,25 @@
           </v-radio>
         </v-list-tile-content>
         <v-list-tile-action class="list_action">
-          <v-menu ref="greater" :close-on-content-click="false" v-model="greater" :return-value.sync="lower" lazy transition="scale-transition" offset-y full-width min-width="290px">
-            <v-text-field single-line slot="activator" v-model="greaterDate" label="Start" prepend-icon="event" readonly></v-text-field>
-            <v-date-picker no-title v-model="greaterDate" @input="$refs.greater.save(biggerDate)" show-current="false"></v-date-picker>
+          <v-menu ref="lowerMenuVisible"
+            :close-on-content-click="false"
+            v-model="greaterMenuVisible"
+            :return-value.sync="greaterMenuVisible"
+            lazy transition="scale-transition"
+            offset-y full-width
+            min-width="290px">
+            <v-text-field
+              slot="activator"
+              :value="greaterDate"
+              clearable
+              readonly></v-text-field>
+              <v-date-picker no-title v-model="greaterDate" @input="$refs.greaterMenuVisible.save(greaterDate)" show-current="false"></v-date-picker>
           </v-menu>
         </v-list-tile-action>
       </v-list-tile>
 
       <v-layout>
-        <v-flex>
+        <v-flex class="pa-3">
           <v-btn flat small primary @click="applyFilter()">Aktualisieren</v-btn>
           <!-- <v-btn flat small>Schließen</v-btn> -->
         </v-flex>
@@ -84,8 +103,8 @@ export default {
       date: null,
       selected: null,
       normMenuVisible: null,
-      lower: null,
-      greater: null,
+      lowerMenuVisible: null,
+      greaterMenuVisible: null,
       normDate: '',
       lowerDate: '',
       greaterDate: ''
@@ -109,8 +128,8 @@ export default {
      * @param selectedKey string
      */
     defineChipText (selectedKey) {
-      let key = Object.keys(this.localItem.advancedSearchItem)[0]
-      let value = this.localItem.advancedSearchItem[key]
+      let key = Object.keys(this.localItem.searchValue)[0]
+      let value = this.localItem.searchValue[key]
       if (selectedKey) {
         key = selectedKey
       } else {
@@ -119,6 +138,7 @@ export default {
       this.normDate = null
       this.lowerDate = null
       this.greaterDate = null
+      console.log(value);
       switch (key) {
         case '$eq':
           this.localItem.chipText = ''
