@@ -16,8 +16,7 @@
     <!-- Toolbar with chips -->
     <chips
       :items.sync="localStorageHeaders"
-      :items-default="itemsDefault"
-      @searchQuery="onSearchQueryEvent($event)"></chips>
+      :filter.sync="computedFilter"></chips>
 
     <v-data-table v-bind="localAttrs" :pagination.sync="compPagination">
       <template slot="items" slot-scope="props">
@@ -67,7 +66,7 @@ export default {
     /**
      * Default columns that are enabled for advanced search
      */
-    itemsDefault: {
+    filter: {
       type: Array,
       default: null
     }
@@ -93,6 +92,15 @@ export default {
     }
   },
   computed: {
+    computedFilter: {
+      get: function () {
+        return this.filter
+      },
+      set: function () {
+        console.log('update', this.computedFilter);
+        this.$emit('update:filter', this.computedFilter)
+      }
+    },
     compPagination: {
       get: function () {
         return this.localAttrs.pagination

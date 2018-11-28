@@ -9,10 +9,13 @@
       <v-chip
         close
         slot="activator"
-        @click="openChipDialog(item)"
         @input="onChipClose(item)">
           {{item.text}}
-          <span v-for="(value, key) in item.searchValue" :key="key" style="padding-left: 4px">
+          <span
+            v-if="key != 'readonly'"
+            v-for="(value, key) in item.searchValue"
+            :key="key"
+            style="padding-left: 4px">
           "<span class="chip-text">{{item.chipText}} </span>
            <span class="chip-value">{{value}}</span>"
         </span>
@@ -51,7 +54,7 @@ export default {
       type: Array,
       default: null
     },
-    itemsDefault: {
+    filter: {
       type: Array,
       default: null
     }
@@ -63,21 +66,21 @@ export default {
   },
   data: function () {
     return {
-      chipText: null,
+      // chipText: null,
       searchQuery: []
     }
   },
   computed: {
     itemsAsChips: {
       get () {
-        if (this.itemsDefault === null) {
+        if (this.filter === null) {
           return true
         }
         // run over defautls
         let temp = this.items
-        this.itemsDefault.map( dItem => {
+        this.filter.map( dItem => {
           const key = Object.keys(dItem)[0]
-          temp.filter(item => {
+          temp.filter(item => { // use find
             if(item.value === key) {
               item.selectedForSearch = true
               item.searchValue = dItem[key]
@@ -110,7 +113,8 @@ export default {
     },
     onItemUpdate (item) {
       this.searchQuery[item.value] = item.searchValue
-      this.$emit('searchQuery', this.searchQuery)
+      console.log(this.searchQuery);
+      this.$emit('update:filter', this.searchQuery)
     }
   }
 }

@@ -26,6 +26,7 @@ export default {
   },
   methods: {
     applyFilter () {
+      console.log('apply');
       this.$emit('itemUpdate', this.localItem)
     }
   }

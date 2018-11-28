@@ -24,7 +24,6 @@
             <v-text-field
               slot="activator"
               :value="normDate"
-              clearable
               readonly></v-text-field>
               <v-date-picker no-title v-model="normDate" @input="$refs.normMenuVisible.save(normDate)" show-current="false"></v-date-picker>
           </v-menu>
@@ -49,7 +48,6 @@
               <v-text-field
                 slot="activator"
                 :value="lowerDate"
-                clearable
                 readonly></v-text-field>
                 <v-date-picker no-title v-model="lowerDate" @input="$refs.lowerMenuVisible.save(lowerDate)" show-current="false"></v-date-picker>
             </v-menu>
@@ -74,19 +72,16 @@
             <v-text-field
               slot="activator"
               :value="greaterDate"
-              clearable
               readonly></v-text-field>
               <v-date-picker no-title v-model="greaterDate" @input="$refs.greaterMenuVisible.save(greaterDate)" show-current="false"></v-date-picker>
           </v-menu>
         </v-list-tile-action>
       </v-list-tile>
 
-      <v-layout>
-        <v-flex class="pa-3">
+        <div class="pt-3">
           <v-btn flat small primary @click="applyFilter()">Aktualisieren</v-btn>
           <!-- <v-btn flat small>Schließen</v-btn> -->
-        </v-flex>
-      </v-layout>
+        </div>
 
     </v-radio-group>
   </v-list>
@@ -111,12 +106,16 @@ export default {
     }
   },
   mounted () {
-    this.defineChipText()
+    this.$nextTick()
+      .then( () => {
+        this.defineChipText()
+        console.log('----');
+      })
   },
   watch: {
-    selected (newValue) {
-      this.defineChipText(newValue)
-    }
+    // selected (newValue) {
+    //   this.defineChipText(newValue)
+    // }
   },
   methods: {
     applyFilter () {
@@ -138,18 +137,17 @@ export default {
       this.normDate = null
       this.lowerDate = null
       this.greaterDate = null
-      console.log(value);
       switch (key) {
         case '$eq':
           this.localItem.chipText = ''
           this.normDate = value
           break
         case '$lt':
-          this.localItem.chipText = 'kleiner als'
+          this.localItem.chipText = 'lower as'
           this.lowerDate = value
           break
         case '$gt':
-          this.localItem.chipText = 'größer als'
+          this.localItem.chipText = 'greater as'
           this.greaterDate = value
           break
       }

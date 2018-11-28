@@ -32,7 +32,7 @@
         dialog-closelabel="Schließen"
         dialog-selectalllabel="Alle auswählen"
         dialog-searchlabel="Nach Spalten suchen"
-        :items-default="itemsDefault"
+        :filter.sync="filter"
         @updateSearchQuery="onSeachQueryUpdate">
       </pnbi-datatable-plus>
 
@@ -41,25 +41,7 @@
   </pnbi-page>
 </template>
 <script>
-import { Validator } from 'vee-validate'
 import moment from 'moment'
-const dictionary = {
-  en: {
-    messages: {
-      alpha: () => 'Some English Message'
-    }
-  },
-  ar: {
-    messages: {
-      alpha: 'حاجة عربي'
-    }
-  }
-}
-
-// Override and merge the dictionaries
-Validator.localize(dictionary)
-const validator = new Validator({ first_name: 'alpha' })
-validator.localize('ar') // now this validator will generate messages in Arabic.
 
 export default {
   mounted () {
@@ -83,20 +65,22 @@ export default {
         descending: false,
         sortBy: ''
       },
-      filter: null,
       search: null,
       newBudget: null,
       projectName: null,
       headers: [],
-      itemsDefault: [
-        { name: { '$in': 'alex' } },
-        { value2: { '$lt': moment().add(7, 'days').format('DD-MM-YYYY') } }
+      filter: [
+        { name: { '$in': 'alex', 'readonly': true } },
+        { value2: { '$lt': moment().add(7, 'days').format('YYYY-MM-DD') } }
       ]
     }
   },
   watch: {
     pagination: function () {
       this.onPaginationEvent()
+    },
+    filter: function () {
+      console.log('filter change')
     }
   },
   methods: {
@@ -104,7 +88,6 @@ export default {
       // TODO update items
       // make new backend request
       this.filter = query
-      console.log('filter', this.filter)
     },
     onPaginationEvent (data, event) {
       this.getDataFromApi()
