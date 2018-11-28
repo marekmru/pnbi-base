@@ -1,3 +1,14 @@
+/* CSS variables */
+$color-primary: red;
+$color-accent: rgb(63,81,93);
+
+$font-headline: 24px;
+$font-title: 20px;
+$font-subheading: 16px;
+$font-body-2: 14px; // research bold style
+$font-body-1: 14px;
+$font-caption: 12px;
+
 .application.theme--light {
   background: rgb(245, 245, 245);
 }
@@ -10,7 +21,7 @@
   padding: 16px;
 }
 .v-messages__message{
-padding-botom: 1px;   
+  padding-bottom: 1px;   
 }
 .pnbi-tablehead-fixed{
   padding-top: 8px;
@@ -118,13 +129,16 @@ table.v-table tfoot tr td {
   opacity: 0
 }
 
+.v-label {
+  font-size: $font-caption;
+}
 .v-select__selections .v-select__selection {
-  font-size: 15px;
+  font-size: $font-body-2;
 }
 
 .v-text-field input,
 .v-text-field textarea {
-  font-size: 15px;
+  font-size: $font-body-2;
 }
 
 #login form {
