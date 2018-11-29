@@ -94,7 +94,6 @@ export default {
   props: ['item'],
   data: function () {
     return {
-      localItem: this.item,
       date: null,
       selected: null,
       normMenuVisible: null,
@@ -105,20 +104,33 @@ export default {
       greaterDate: ''
     }
   },
+  computed: {
+    localItem: {
+      get: function () {
+        return this.item
+      },
+      set: function () {
+        console.log('set localItem');
+      }
+    }
+  },
   mounted () {
-    this.$nextTick()
-      .then( () => {
-        this.defineChipText()
-        console.log('----');
-      })
+    this.defineChipText()
   },
   watch: {
-    // selected (newValue) {
-    //   this.defineChipText(newValue)
-    // }
+    selected (newValue) {
+      this.defineChipText(newValue)
+    },
+    normDate (newValue) {
+      console.log('----', this.normDate);
+      this.localItem.searchValue.$gt = null
+      this.localItem.searchValue.$lt = null
+      this.localItem.searchValue.$eq = newValue
+    }
   },
   methods: {
     applyFilter () {
+      console.log('update', this.localItem);
       this.$emit('itemUpdate', this.localItem)
     },
     /**
@@ -129,28 +141,59 @@ export default {
     defineChipText (selectedKey) {
       let key = Object.keys(this.localItem.searchValue)[0]
       let value = this.localItem.searchValue[key]
+
+      // define key for initial load: Radio button
       if (selectedKey) {
         key = selectedKey
       } else {
         this.selected = key
       }
+
+      // reset all befor setting new
       this.normDate = null
       this.lowerDate = null
       this.greaterDate = null
-      switch (key) {
+
+      switch(key) {
         case '$eq':
+          console.log('$eq');
           this.localItem.chipText = ''
           this.normDate = value
           break
         case '$lt':
+          console.log('$lt');
           this.localItem.chipText = 'lower as'
           this.lowerDate = value
           break
         case '$gt':
+          console.log('$gt');
           this.localItem.chipText = 'greater as'
           this.greaterDate = value
           break
       }
+
+      console.log('key', key, value);
+
+      // this.normDate = null
+      // this.lowerDate = null
+      // this.greaterDate = null
+      // this.localItem.searchValue = {}
+      // switch (key) {
+      //   case '$eq':
+      //     this.localItem.chipText = ''
+      //     this.normDate = value
+      //     console.log('normDate', this.normDate);
+      //     break
+      //   case '$lt':
+      //     this.localItem.chipText = 'lower as'
+      //     this.lowerDate = value
+      //     break
+      //   case '$gt':
+      //     this.localItem.chipText = 'greater as'
+      //     this.greaterDate = value
+      //     break
+      // }
+      // console.log('key', key, value, this.localItem.searchValue);
     }
   }
 }

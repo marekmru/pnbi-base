@@ -28,7 +28,7 @@
       <!-- moment.js menu -->
       <card-moment v-if="item.style === 'moment.js'"
         :item="item"
-        @itemUpdate="onItemUpdate()"
+        @itemUpdate="onItemUpdate($event)"
         class="card-wrapper"></card-moment>
 
       <!-- default menu -->
