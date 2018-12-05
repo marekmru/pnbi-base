@@ -87,7 +87,6 @@ export default {
       return isNumber
     },
     onSearchQueryEvent (query) {
-      console.log('search', query);
       this.$emit('updateSearchQuery', query)
     }
   },
@@ -96,9 +95,8 @@ export default {
       get: function () {
         return this.filter
       },
-      set: function () {
-        console.log('update', this.computedFilter);
-        this.$emit('update:filter', this.computedFilter)
+      set: function (filter) {
+        this.$emit('update:filter', filter)
       }
     },
     compPagination: {

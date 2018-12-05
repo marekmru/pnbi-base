@@ -71,7 +71,7 @@ export default {
       headers: [],
       filter: [
         { name: { '$in': 'alex', 'readonly': true } },
-        { value2: { '$lt': moment().add(7, 'days').format('YYYY-MM-DD') } }
+        { value2: { '$lt': moment().add(7, 'days').format('YYYY-MM-DD'), 'readonly': true } }
       ]
     }
   },

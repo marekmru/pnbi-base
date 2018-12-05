@@ -95,7 +95,6 @@ export default {
   data: function () {
     return {
       date: null,
-      selected: null,
       normMenuVisible: null,
       lowerMenuVisible: null,
       greaterMenuVisible: null,
@@ -107,30 +106,44 @@ export default {
   computed: {
     localItem: {
       get: function () {
-        return this.item
+        let obj = this.item
+        obj.myKey = Object.keys(this.item.searchValue)[0]
+        obj.myValue = this.item.searchValue[obj.myKey]
+        return obj
       },
       set: function () {
         console.log('set localItem');
       }
+    },
+    selected: {
+      get: function () {
+        return this.localItem.myKey
+      },
+      set: function (newKey) {
+        this.localItem.myKey = newKey
+        this.setChipText(this.localItem.myKey, this.localItem.myValue)
+      }
     }
   },
   mounted () {
-    this.defineChipText()
+    this.defineInitChip()
+    this.applyFilter()
   },
   watch: {
-    selected (newValue) {
-      this.defineChipText(newValue)
-    },
-    normDate (newValue) {
-      console.log('----', this.normDate);
-      this.localItem.searchValue.$gt = null
-      this.localItem.searchValue.$lt = null
-      this.localItem.searchValue.$eq = newValue
-    }
+    // selected (newValue, oldValue) {
+    //   console.log('new selected', newValue);
+    //   this.defineChipText(newValue, oldValue)
+    // },
+    // normDate (newValue) {
+    //   this.localItem.searchValue.$gt = null
+    //   this.localItem.searchValue.$lt = null
+    //   this.localItem.searchValue.$eq = newValue
+    // }
   },
   methods: {
     applyFilter () {
-      console.log('update', this.localItem);
+      this.localItem.searchValue = null
+      console.log('local', this.localItem);
       this.$emit('itemUpdate', this.localItem)
     },
     /**
@@ -138,62 +151,30 @@ export default {
      * returned item to the parrent
      * @param selectedKey string
      */
-    defineChipText (selectedKey) {
+    defineInitChip () {
       let key = Object.keys(this.localItem.searchValue)[0]
       let value = this.localItem.searchValue[key]
-
-      // define key for initial load: Radio button
-      if (selectedKey) {
-        key = selectedKey
-      } else {
-        this.selected = key
-      }
-
-      // reset all befor setting new
+      this.setChipText(key, value)
+    },
+    setChipText (key, value) {
       this.normDate = null
       this.lowerDate = null
       this.greaterDate = null
 
       switch(key) {
         case '$eq':
-          console.log('$eq');
           this.localItem.chipText = ''
           this.normDate = value
           break
         case '$lt':
-          console.log('$lt');
           this.localItem.chipText = 'lower as'
           this.lowerDate = value
           break
         case '$gt':
-          console.log('$gt');
           this.localItem.chipText = 'greater as'
           this.greaterDate = value
           break
       }
-
-      console.log('key', key, value);
-
-      // this.normDate = null
-      // this.lowerDate = null
-      // this.greaterDate = null
-      // this.localItem.searchValue = {}
-      // switch (key) {
-      //   case '$eq':
-      //     this.localItem.chipText = ''
-      //     this.normDate = value
-      //     console.log('normDate', this.normDate);
-      //     break
-      //   case '$lt':
-      //     this.localItem.chipText = 'lower as'
-      //     this.lowerDate = value
-      //     break
-      //   case '$gt':
-      //     this.localItem.chipText = 'greater as'
-      //     this.greaterDate = value
-      //     break
-      // }
-      // console.log('key', key, value, this.localItem.searchValue);
     }
   }
 }
