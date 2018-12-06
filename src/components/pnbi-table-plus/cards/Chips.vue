@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import EventBus from 'pnbi-base/src/event-bus'
 // import ExtendsSearchMixin from './extendsSearchMixin.js'
 // import CardNumbro from './CardNumbro'
 import CardMoment from './CardMoment'
@@ -105,9 +106,14 @@ export default {
         }
       },
       set(items) {
-        console.log('set seletedChip', items)
         this.internalSelectedChips = items
-        // this.$emit('update:items', items)
+        // console.log(this.internalSelectedChips.map(chip => chip.searchValue));
+        const temp = this.internalSelectedChips.filter(chip => {
+          if(chip.searchValue) {
+            return chip
+          }
+        })
+        EventBus.$emit('filterUpdate', temp)
       }
     }
   },
@@ -128,17 +134,12 @@ export default {
       })
     },
     onItemUpdate (item) {
-      console.log('update', item);
-      // this.searchQuery[item.value] = item.searchValue
-
-      // TODO update here
       this.selectedChips = this.selectedChips.map(chip => {
         if(chip.value === item.value) {
           chip = item
         }
         return chip
       })
-      // this.$emit('update:filter', this.selectedChips)
     }
   }
 }

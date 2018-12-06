@@ -89,7 +89,6 @@
 </template>
 
 <script>
-import EventBus from 'pnbi-base/src/event-bus'
 export default {
   // current item is the advancedSearchItem
   props: ['item'],
