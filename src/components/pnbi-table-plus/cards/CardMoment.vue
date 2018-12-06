@@ -25,7 +25,7 @@
               slot="activator"
               :value="normDate"
               readonly></v-text-field>
-              <v-date-picker no-title v-model="normDate" @input="$refs.normMenuVisible.save(normDate)" show-current="false"></v-date-picker>
+              <v-date-picker no-title v-model="normDate" @input="$refs.normMenuVisible.save(normDate); setChipText('$eq', normDate)" show-current="false"></v-date-picker>
           </v-menu>
         </v-list-tile-action>
       </v-list-tile>
@@ -49,7 +49,7 @@
                 slot="activator"
                 :value="lowerDate"
                 readonly></v-text-field>
-                <v-date-picker no-title v-model="lowerDate" @input="$refs.lowerMenuVisible.save(lowerDate)" show-current="false"></v-date-picker>
+                <v-date-picker no-title v-model="lowerDate" @input="$refs.lowerMenuVisible.save(lowerDate);setChipText('$lt', lowerDate)" show-current="false"></v-date-picker>
             </v-menu>
         </v-list-tile-action>
       </v-list-tile>
@@ -62,7 +62,7 @@
           </v-radio>
         </v-list-tile-content>
         <v-list-tile-action class="list_action">
-          <v-menu ref="lowerMenuVisible"
+          <v-menu ref="greaterMenuVisible"
             :close-on-content-click="false"
             v-model="greaterMenuVisible"
             :return-value.sync="greaterMenuVisible"
@@ -73,7 +73,7 @@
               slot="activator"
               :value="greaterDate"
               readonly></v-text-field>
-              <v-date-picker no-title v-model="greaterDate" @input="$refs.greaterMenuVisible.save(greaterDate)" show-current="false"></v-date-picker>
+              <v-date-picker no-title v-model="greaterDate" @input="$refs.greaterMenuVisible.save(greaterDate);setChipText('$gt', greaterDate)" show-current="false"></v-date-picker>
           </v-menu>
         </v-list-tile-action>
       </v-list-tile>
@@ -89,6 +89,7 @@
 </template>
 
 <script>
+import EventBus from 'pnbi-base/src/event-bus'
 export default {
   // current item is the advancedSearchItem
   props: ['item'],
@@ -100,19 +101,24 @@ export default {
       greaterMenuVisible: null,
       normDate: '',
       lowerDate: '',
-      greaterDate: ''
+      greaterDate: '',
+      internalLocalItem: null
     }
   },
   computed: {
     localItem: {
       get: function () {
-        let obj = this.item
-        obj.myKey = Object.keys(this.item.searchValue)[0]
-        obj.myValue = this.item.searchValue[obj.myKey]
-        return obj
+        if(this.internalLocalItem === null){
+          let obj = this.item
+          obj.myKey = Object.keys(this.item.searchValue)[0]
+          obj.myValue = this.item.searchValue[obj.myKey]
+          return obj
+        } else {
+          return this.internalLocalItem
+        }
       },
-      set: function () {
-        console.log('set localItem');
+      set: function (item) {
+        this.internalLocalItem = item
       }
     },
     selected: {
@@ -120,8 +126,9 @@ export default {
         return this.localItem.myKey
       },
       set: function (newKey) {
-        this.localItem.myKey = newKey
-        this.setChipText(this.localItem.myKey, this.localItem.myValue)
+        const oldKey = Object.keys(this.item.searchValue)[0]
+        this.setChipText(newKey, this.item.searchValue[oldKey])
+        this.localItem = Object.assign(this.localItem, {myKey:newKey})
       }
     }
   },
@@ -129,22 +136,10 @@ export default {
     this.defineInitChip()
     this.applyFilter()
   },
-  watch: {
-    // selected (newValue, oldValue) {
-    //   console.log('new selected', newValue);
-    //   this.defineChipText(newValue, oldValue)
-    // },
-    // normDate (newValue) {
-    //   this.localItem.searchValue.$gt = null
-    //   this.localItem.searchValue.$lt = null
-    //   this.localItem.searchValue.$eq = newValue
-    // }
-  },
   methods: {
     applyFilter () {
-      this.localItem.searchValue = null
-      console.log('local', this.localItem);
-      this.$emit('itemUpdate', this.localItem)
+      this.$emit('itemUpdate', this.internalLocalItem)
+      // EventBus.$emit('filterUpdate', this.internalLocalItem.searchValue)
     },
     /**
      * updated item object with some Information from the chipmenu
@@ -153,25 +148,23 @@ export default {
      */
     defineInitChip () {
       let key = Object.keys(this.localItem.searchValue)[0]
-      let value = this.localItem.searchValue[key]
-      this.setChipText(key, value)
+      this.setChipText(key, this.localItem.searchValue[key])
     },
     setChipText (key, value) {
       this.normDate = null
       this.lowerDate = null
       this.greaterDate = null
-
       switch(key) {
         case '$eq':
-          this.localItem.chipText = ''
+          this.localItem = Object.assign(this.localItem, {chipText:'', searchValue:{[key]:value}})
           this.normDate = value
           break
         case '$lt':
-          this.localItem.chipText = 'lower as'
+          this.localItem = Object.assign(this.localItem, {chipText:'lower as', searchValue:{[key]:value} })
           this.lowerDate = value
           break
         case '$gt':
-          this.localItem.chipText = 'greater as'
+          this.localItem = Object.assign(this.localItem, {chipText:'greater as', searchValue:{[key]:value}})
           this.greaterDate = value
           break
       }

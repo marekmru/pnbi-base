@@ -42,9 +42,10 @@
 </template>
 <script>
 import moment from 'moment'
-
+import EventBus from 'pnbi-base/src/event-bus'
 export default {
   mounted () {
+    EventBus.$on('filterUpdate', this.onFilterUpdate)
     this.getDataFromApi()
       .then(data => {
         this.items = data.tableResponce.items
@@ -84,6 +85,10 @@ export default {
     }
   },
   methods: {
+    onFilterUpdate (payload) {
+      // TODO global event with update
+      console.log('onFilterUpdate', payload)
+    },
     onSeachQueryUpdate (query) {
       // TODO update items
       // make new backend request

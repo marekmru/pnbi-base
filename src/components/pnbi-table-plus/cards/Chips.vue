@@ -68,8 +68,7 @@ export default {
   },
   data: function () {
     return {
-      // chipText: null,
-      // searchQuery: []
+      internalSelectedChips: null
     }
   },
   computed: {
@@ -86,22 +85,29 @@ export default {
         if (this.filter === null) {
           return true
         }
-        // run over defautls
-        let temp = this.items
-        this.computedFilter.map( filteritem => {
-          const key = Object.keys(filteritem)[0]
-          temp.find(item => { // use find
-            if(item.value === key) {
-              item.selectedForSearch = true
-              item.searchValue = filteritem[key]
-              return item
-            }
+        if(this.internalSelectedChips === null) {
+          // run over defautls
+          let temp = this.items
+          this.computedFilter.map( filteritem => {
+            const key = Object.keys(filteritem)[0]
+            temp.find(item => { // use find
+              if(item.value === key) {
+                item.selectedForSearch = true
+                item.searchValue = filteritem[key]
+                return item
+              }
+            })
           })
-        })
-        return temp
+          return temp
+        } else {
+          // return internalChips
+          return this.internalSelectedChips
+        }
       },
       set(items) {
-        this.$emit('update:items', items)
+        console.log('set seletedChip', items)
+        this.internalSelectedChips = items
+        // this.$emit('update:items', items)
       }
     }
   },
@@ -122,7 +128,10 @@ export default {
       })
     },
     onItemUpdate (item) {
+      console.log('update', item);
       // this.searchQuery[item.value] = item.searchValue
+
+      // TODO update here
       this.selectedChips = this.selectedChips.map(chip => {
         if(chip.value === item.value) {
           chip = item
