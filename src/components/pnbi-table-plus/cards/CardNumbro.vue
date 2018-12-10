@@ -1,90 +1,153 @@
 <template lang="html">
+
   <v-list>
     <v-radio-group v-model="selected">
+
+      <!-- default -->
       <v-list-tile>
-        <v-list-tile-content>
-            <v-radio value="smaller">
-              <div slot="label">Kleiner als</div>
-            </v-radio>
-          </v-list-tile-content>
-          <v-list-tile-action class="list_action">
-            <v-text-field single-line hide-details label="dialogSearchlabel" v-model="searchStr"></v-text-field>
+      <v-list-tile-content>
+          <v-radio value="$eq">
+            <div slot="label">Equals</div>
+          </v-radio>
+        </v-list-tile-content>
+        <v-list-tile-action class="list_action">
+          <v-text-field single-line v-model="equalsNumber" @input="setChipText('$eq', equalsNumber)"></v-text-field>
         </v-list-tile-action>
       </v-list-tile>
 
+      <!-- lower -->
       <v-list-tile>
-        <v-list-tile-content>
-            <v-radio value="bigger">
-              <div slot="label">Größer als</div>
-            </v-radio>
-          </v-list-tile-content>
-          <v-list-tile-action class="list_action">
-            <v-text-field single-line label="dialogSearchlabel" v-model="searchStr1"></v-text-field>
+      <v-list-tile-content>
+          <v-radio value="$lt">
+            <div slot="label">Less than</div>
+          </v-radio>
+        </v-list-tile-content>
+        <v-list-tile-action class="list_action">
+          <v-text-field single-line v-model="lessNumber" @input="setChipText('$lt', lessNumber)"></v-text-field>
         </v-list-tile-action>
       </v-list-tile>
 
+      <!-- greater -->
       <v-list-tile>
-        <v-list-tile-content>
-            <v-radio value="between">
-              <div slot="label">Zwischen</div>
-            </v-radio>
-          </v-list-tile-content>
-          <v-list-tile-action class="list_action">
-            <v-layout>
-              <v-flex>
-                <v-text-field single-line label="dialogSearchlabel" v-model="searchStr3"></v-text-field>
-              </v-flex>
-              <v-flex>
-                <v-text-field single-line label="dialogSearchlabel" v-model="searchStr4"></v-text-field>
-              </v-flex>
-            </v-layout>
+      <v-list-tile-content>
+          <v-radio value="$gt">
+            <div slot="label">Greater than</div>
+          </v-radio>
+        </v-list-tile-content>
+        <v-list-tile-action class="list_action">
+          <v-text-field single-line v-model="greaterNumber" @input="setChipText('$gt', greaterNumber)"></v-text-field>
         </v-list-tile-action>
       </v-list-tile>
-      <v-list-tile>
-        <v-btn flat small primary>Aktualisieren</v-btn>
-        <v-btn flat small>Schließen</v-btn>
-      </v-list-tile>
+
+        <div class="pt-3">
+          <v-btn flat small primary @click="applyFilter()">Apply</v-btn>
+          <!-- <v-btn flat small>Schließen</v-btn> -->
+        </div>
+
     </v-radio-group>
   </v-list>
 
-  <!-- <v-card>
-    <v-card-text>
-      <v-text-field autofocus ref="focus" label="Kleiner als ..." v-model="item.avancedSearchTerm"></v-text-field>
-      <v-text-field autofocus ref="focus" label="Größer als" v-model="item.avancedSearchTerm"></v-text-field>
-      <v-layout>
-        <v-flex>
-          <v-text-field autofocus ref="focus" label="Start" v-model="item.avancedSearchTerm"></v-text-field>
-        </v-flex>
-        <v-flex>
-          <v-text-field autofocus ref="focus" label="Ende" v-model="item.avancedSearchTerm"></v-text-field>
-        </v-flex>
-      </v-layout>
-      <p class="caption"> {{item.style}} Verknüpfe die Suche in der Spalte "{{item.text}}" mit Suchen aus anderen Spalten.</p>
-    </v-card-text>
-  </v-card> -->
 </template>
 
 <script>
+import moment from 'moment'
 export default {
+  // current item is the advancedSearchItem
   props: ['item'],
   data: function () {
     return {
-      selected: null,
-      searchStr: null,
-      searchStr1: null,
-      searchStr2: null,
-      searchStr3: null,
-      searchStr4: null
+      date: null,
+      normMenuVisible: null,
+      lowerMenuVisible: null,
+      greaterMenuVisible: null,
+      equalsNumber: '',
+      lessNumber: '',
+      greaterNumber: '',
+      internalLocalItem: null
+    }
+  },
+  computed: {
+    localItem: {
+      get: function () {
+        if(this.internalLocalItem === null) {
+          let obj = this.item
+          // item with default search value
+          if(this.item.searchValue) {
+            obj.myKey = Object.keys(this.item.searchValue)[0]
+            obj.myValue = this.item.searchValue[obj.myKey]
+          } else {
+            obj.myKey = '$eq';
+            obj.myValue = ''
+            obj = Object.assign(obj, {chipText:'', searchValue:{[obj.myKey]:obj.myValue} })
+          }
+          return obj
+        } else {
+          return this.internalLocalItem
+        }
+      },
+      set: function (item) {
+        this.internalLocalItem = item
+      }
+    },
+    selected: {
+      get: function () {
+        return this.localItem.myKey
+      },
+      set: function (newKey) {
+        const oldKey = Object.keys(this.item.searchValue)[0]
+        this.setChipText(newKey, this.item.searchValue[oldKey])
+        this.localItem = Object.assign(this.localItem, {myKey:newKey})
+      }
+    }
+  },
+  mounted () {
+    this.defineInitChip()
+    this.applyFilter()
+  },
+  methods: {
+    applyFilter () {
+      this.$emit('itemUpdate', this.internalLocalItem)
+    },
+    /**
+     * updated item object with some Information from the chipmenu
+     * returned item to the parrent
+     * @param selectedKey string
+     */
+    defineInitChip () {
+      let key = Object.keys(this.localItem.searchValue)[0]
+      this.setChipText(key, this.localItem.searchValue[key])
+    },
+    setChipText (key, value) {
+      this.equalsNumber = null
+      this.lessNumber = null
+      this.greaterNumber = null
+      switch(key) {
+        case '$eq':
+          this.localItem = Object.assign(this.localItem, {chipText:'', searchValue:{[key]:value}})
+          this.equalsNumber = value
+          break
+        case '$lt':
+          this.localItem = Object.assign(this.localItem, {chipText:'lower than', searchValue:{[key]:value} })
+          this.lessNumber = value
+          break
+        case '$gt':
+          this.localItem = Object.assign(this.localItem, {chipText:'greater than', searchValue:{[key]:value}})
+          this.greaterNumber = value
+          break
+      }
     }
   }
 }
 </script>
 
-<style lang="scss">
-// .list_action {
-//   margin-left: 40px !important;
-// }
-// .v-list__tile__content {
-//   flex: 0 1 auto !important;
-// }
+<style>
+.custom-list {
+  padding: 16px;
+}
+.list_action {
+  margin-left: 40px !important;
+}
+.v-menu__content {
+  margin-top: 8px;
+}
 </style>

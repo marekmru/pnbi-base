@@ -24,8 +24,11 @@
       </v-chip>
 
       <!-- numbro.js menu -->
-      <!-- <card-numbro v-if="item.style === 'numbro.js'"
-        :originItem="item" class="card-wrapper"></card-numbro> -->
+      <card-numbro v-if="item.style === 'numbro.js'"
+        :item="item"
+        @itemUpdate="onItemUpdate($event)"
+        class="card-wrapper">
+      </card-numbro>
 
       <!-- moment.js menu -->
       <card-moment v-if="item.style === 'moment.js'"
@@ -45,7 +48,7 @@
 <script>
 import EventBus from 'pnbi-base/src/event-bus'
 // import ExtendsSearchMixin from './extendsSearchMixin.js'
-// import CardNumbro from './CardNumbro'
+import CardNumbro from './CardNumbro'
 import CardMoment from './CardMoment'
 import CardDefault from './CardDefault'
 
@@ -63,7 +66,7 @@ export default {
     }
   },
   components: {
-    // CardNumbro,
+    CardNumbro,
     CardMoment,
     CardDefault
   },

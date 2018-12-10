@@ -4,14 +4,14 @@
       <v-text-field
         autofocus
         ref="focus"
-        label="Enthält ..."
+        label="Includes ..."
         :value="localItem.searchValue.$in"
         @input="handleInput($event)">
       </v-text-field>
       <!-- <p class="caption">Verknüpfe die Suche in der Spalte "{{item.text}}" mit Suchen aus anderen Spalten.</p> -->
     </v-card-text>
     <v-card-actions>
-      <v-btn flat small primary @click="applyFilter">Aktualisieren</v-btn>
+      <v-btn flat small primary @click="applyFilter">Apply</v-btn>
       <!-- <v-btn flat small>Schließen</v-btn> -->
     </v-card-actions>
   </v-card>
@@ -36,17 +36,15 @@ export default {
         }
       },
       set: function (item) {
-        console.log('set localitem', item, this.internalLocalItem);
         this.internalLocalItem = this.localItem
       }
     }
   },
   methods: {
-    handleInput(val) {
-      this.localItem = Object.assign(this.localItem, {searchValue:{"$in":val}})
+    handleInput (val) {
+      this.localItem = Object.assign(this.localItem, { searchValue: { '$in': val } })
     },
     applyFilter () {
-      console.log('apply', this.internalLocalItem);
       this.$emit('itemUpdate', this.internalLocalItem)
     }
   }

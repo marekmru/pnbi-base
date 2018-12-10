@@ -7,7 +7,7 @@
       <v-list-tile>
       <v-list-tile-content>
           <v-radio value="$eq">
-            <div slot="label">Datum</div>
+            <div slot="label">Date</div>
           </v-radio>
         </v-list-tile-content>
         <v-list-tile-action class="list_action">
@@ -34,7 +34,7 @@
       <v-list-tile>
         <v-list-tile-content>
             <v-radio value="$lt">
-              <div slot="label">Kleiner als</div>
+              <div slot="label">Less than</div>
             </v-radio>
           </v-list-tile-content>
           <v-list-tile-action class="list_action">
@@ -58,7 +58,7 @@
       <v-list-tile>
         <v-list-tile-content>
           <v-radio value="$gt">
-            <div slot="label">Größer als </div>
+            <div slot="label">Greater than</div>
           </v-radio>
         </v-list-tile-content>
         <v-list-tile-action class="list_action">
@@ -79,7 +79,7 @@
       </v-list-tile>
 
         <div class="pt-3">
-          <v-btn flat small primary @click="applyFilter()">Aktualisieren</v-btn>
+          <v-btn flat small primary @click="applyFilter()">Apply</v-btn>
           <!-- <v-btn flat small>Schließen</v-btn> -->
         </div>
 
@@ -167,11 +167,11 @@ export default {
           this.normDate = value
           break
         case '$lt':
-          this.localItem = Object.assign(this.localItem, {chipText:'lower as', searchValue:{[key]:value} })
+          this.localItem = Object.assign(this.localItem, {chipText:'lower than', searchValue:{[key]:value} })
           this.lowerDate = value
           break
         case '$gt':
-          this.localItem = Object.assign(this.localItem, {chipText:'greater as', searchValue:{[key]:value}})
+          this.localItem = Object.assign(this.localItem, {chipText:'greater than', searchValue:{[key]:value}})
           this.greaterDate = value
           break
       }
