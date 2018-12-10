@@ -89,7 +89,8 @@ export default {
   data: function () {
     return {
       intenalFilter: this.filter,
-      internalSelectedChips: null
+      internalSelectedChips: null,
+      menuOpen: false
     }
   },
   computed: {

@@ -4,7 +4,25 @@
       <v-list>
         <v-list-tile v-for="header in localStorageHeaders" :key="header.text" :class="{'highlighted': header.highlight}">
           <v-list-tile-content>
-            <v-checkbox :label="header.text" @change="dialogVisible=false" v-model="header.selectedForSearch" :value="header.selectedForSearch"
+            <!-- readonly -->
+            <v-checkbox
+              v-if="header.required"
+              readonly
+              :label="header.text"
+              :class="{required:header.required}"
+              @change="dialogVisible=false"
+              v-model="header.selectedForSearch"
+              :value="header.selectedForSearch"
+              style="align-items:center">
+            </v-checkbox>
+
+            <!-- defaults -->
+            <v-checkbox
+              v-else
+              :label="header.text"
+              @change="dialogVisible=false"
+              v-model="header.selectedForSearch"
+              :value="header.selectedForSearch"
               style="align-items:center">
             </v-checkbox>
           </v-list-tile-content>
@@ -17,11 +35,6 @@
 <script>
 export default {
   name: 'extendSearchDialog',
-  data: function () {
-    return  {
-      dialogVisible: false
-    }
-  },
   props: {
     /**
      * Items for displaying in an list
@@ -29,6 +42,11 @@ export default {
     localStorageHeaders: {
       type: Array,
       default: null
+    }
+  },
+  data: function () {
+    return  {
+      dialogVisible: false
     }
   },
   mounted () {
@@ -45,5 +63,14 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="scss">
+.required {
+  opacity: 0.5;
+  label {
+    &::after {
+      content: "required";
+      margin-left: 30px;
+    }
+  }
+}
 </style>

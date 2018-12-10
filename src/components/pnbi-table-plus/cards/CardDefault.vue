@@ -6,7 +6,8 @@
         ref="focus"
         label="Includes ..."
         :value="localItem.searchValue.$in"
-        @input="handleInput($event)">
+        @input="handleInput($event)"
+        @keyup.enter="applyFilter">
       </v-text-field>
       <!-- <p class="caption">Verknüpfe die Suche in der Spalte "{{item.text}}" mit Suchen aus anderen Spalten.</p> -->
     </v-card-text>
