@@ -89,6 +89,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   // current item is the advancedSearchItem
   props: ['item'],
@@ -107,10 +108,17 @@ export default {
   computed: {
     localItem: {
       get: function () {
-        if(this.internalLocalItem === null){
+        if(this.internalLocalItem === null) {
           let obj = this.item
-          obj.myKey = Object.keys(this.item.searchValue)[0]
-          obj.myValue = this.item.searchValue[obj.myKey]
+          // item with default search value
+          if(this.item.searchValue) {
+            obj.myKey = Object.keys(this.item.searchValue)[0]
+            obj.myValue = this.item.searchValue[obj.myKey]
+          } else {
+            obj.myKey = '$eq';
+            obj.myValue = moment().format('YYYY-MM-DD')
+            obj = Object.assign(obj, {chipText:'', searchValue:{[obj.myKey]:obj.myValue} })
+          }
           return obj
         } else {
           return this.internalLocalItem

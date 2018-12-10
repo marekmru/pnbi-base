@@ -1,7 +1,13 @@
 <template lang="html">
   <v-card>
     <v-card-text>
-      <v-text-field autofocus ref="focus" label="Enthält ..." v-model="localItem.searchValue.$in"></v-text-field>
+      <v-text-field
+        autofocus
+        ref="focus"
+        label="Enthält ..."
+        :value="localItem.searchValue.$in"
+        @input="handleInput($event)">
+      </v-text-field>
       <!-- <p class="caption">Verknüpfe die Suche in der Spalte "{{item.text}}" mit Suchen aus anderen Spalten.</p> -->
     </v-card-text>
     <v-card-actions>
@@ -17,17 +23,31 @@ export default {
   props: ['item'],
   data: function () {
     return {
-      localItem: this.item
+      internalLocalItem: null
     }
   },
-  mounted () {
-    console.log(this.localItem);
-    //this.localItem.chipText = this.localItem.value
+  computed: {
+    localItem: {
+      get: function () {
+        if (this.internalLocalItem === null) {
+          return this.item
+        } else {
+          return this.internalLocalItem
+        }
+      },
+      set: function (item) {
+        console.log('set localitem', item, this.internalLocalItem);
+        this.internalLocalItem = this.localItem
+      }
+    }
   },
   methods: {
+    handleInput(val) {
+      this.localItem = Object.assign(this.localItem, {searchValue:{"$in":val}})
+    },
     applyFilter () {
-      console.log('apply');
-      this.$emit('itemUpdate', this.localItem)
+      console.log('apply', this.internalLocalItem);
+      this.$emit('itemUpdate', this.internalLocalItem)
     }
   }
 }

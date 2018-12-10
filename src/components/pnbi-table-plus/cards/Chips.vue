@@ -107,7 +107,6 @@ export default {
       },
       set(items) {
         this.internalSelectedChips = items
-        // console.log(this.internalSelectedChips.map(chip => chip.searchValue));
         const temp = this.internalSelectedChips.filter(chip => {
           if(chip.searchValue) {
             return chip

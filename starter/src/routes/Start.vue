@@ -38,6 +38,8 @@
 
     </pnbi-datatable>
 
+    <pre>{{filter}}</pre>
+
   </pnbi-page>
 </template>
 <script>
@@ -79,15 +81,16 @@ export default {
   watch: {
     pagination: function () {
       this.onPaginationEvent()
-    },
-    filter: function () {
-      console.log('filter change')
     }
   },
   methods: {
+    // Update filter with this event
     onFilterUpdate (payload) {
-      // TODO global event with update
-      console.log('onFilterUpdate', payload)
+      this.filter = []
+      payload = payload.map(payload => {
+        this.filter.push({ [payload.value]: payload.searchValue })
+      })
+      console.log('filter', this.filter)
     },
     onSeachQueryUpdate (query) {
       // TODO update items
@@ -162,7 +165,7 @@ export default {
           { text: 'Value 3', value: 'value3', format: '6 a', style: 'numbro.js' },
           { text: 'just number', value: 'value4' },
           { text: 'no format & moment', value: 'value5', style: 'moment.js' },
-          { text: 'format  & moment', value: 'value6', format: 'DD/MM/YYYY', style: 'moment.js' }
+          { text: 'moment', value: 'momentjs', format: 'DD/MM/YYYY', style: 'moment.js' }
         ]
 
         setTimeout(() => {
