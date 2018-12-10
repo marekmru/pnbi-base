@@ -9,6 +9,22 @@
 
       <!-- custom added chips -->
       <v-chip
+        v-if="item.required"
+        slot="activator"
+        @input="onChipClose(item)">
+          {{item.text}}
+          <span
+            v-if="key != 'readonly'"
+            v-for="(value, key) in item.searchValue"
+            :key="key"
+            style="padding-left: 4px">
+          "<span class="chip-text">{{item.chipText}} </span>
+           <span class="chip-value">{{value}}</span>"
+        </span>
+      </v-chip>
+
+      <v-chip
+        v-else
         close
         slot="activator"
         @input="onChipClose(item)">
@@ -72,6 +88,7 @@ export default {
   },
   data: function () {
     return {
+      intenalFilter: this.filter,
       internalSelectedChips: null
     }
   },
@@ -91,12 +108,14 @@ export default {
         }
         if(this.internalSelectedChips === null) {
           // run over defautls
+          // set required to true
           let temp = this.items
           this.computedFilter.map( filteritem => {
             const key = Object.keys(filteritem)[0]
             temp.find(item => { // use find
               if(item.value === key) {
                 item.selectedForSearch = true
+                item.required = true
                 item.searchValue = filteritem[key]
                 return item
               }
@@ -128,9 +147,10 @@ export default {
       item.editDialog = !item.editDialog
     },
     onChipClose (item) {
-      this.chips = this.selectedChips.filter(header => {
+      this.selectedChips = this.selectedChips.filter(header => {
         if (header.value === item.value) {
           header.selectedForSearch = false
+          return false
         }
         return header
       })

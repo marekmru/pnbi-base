@@ -73,8 +73,8 @@ export default {
       projectName: null,
       headers: [],
       filter: [
-        { name: { '$in': 'alex', 'readonly': true } },
-        { value2: { '$lt': moment().add(7, 'days').format('YYYY-MM-DD'), 'readonly': true } }
+        { name: { '$in': 'alex' } },
+        { value2: { '$lt': moment().add(7, 'days').format('YYYY-MM-DD') } }
       ]
     }
   },
