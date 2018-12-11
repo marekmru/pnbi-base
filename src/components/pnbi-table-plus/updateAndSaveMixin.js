@@ -13,7 +13,6 @@ export default {
     this.localStorageHeaders = this.loadFromLocalStorage().headers
   },
   mounted () {
-    // this.$on('updateHeaders', this.$updateHeaderDom)
     this.$updateHeaderDom(this.localStorageHeaders)
   },
   computed: {
@@ -31,7 +30,6 @@ export default {
   data () {
     return {
       localStorageName: null,
-      localStorageHeaders: [],
       customiseDialog: false
     }
   },

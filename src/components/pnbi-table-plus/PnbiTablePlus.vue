@@ -72,6 +72,16 @@ export default {
       default: null
     }
   },
+  created () {
+    // console.log(this.localStorageHeaders);
+    // // add searchValue
+    // this.localStorageHeaders = this.localStorageHeaders.map(header => {
+    //   if(header.required) {
+    //     header.searchValue = header.required
+    //     header.selectedForSearch = true
+    //   }
+    // })
+  },
   methods: {
     isNumber (val, key) {
       const isNumber = is.number(val)
@@ -118,10 +128,10 @@ export default {
   },
   data: function () {
     return {
-      localStorageHeaders: [],
       drag: null,
       searchPlusToolbarVisible: false,
-      searchPlusDialogVisible: false
+      searchPlusDialogVisible: false,
+      localStorageHeaders: []
     }
   }
 }

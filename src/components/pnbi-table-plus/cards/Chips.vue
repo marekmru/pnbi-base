@@ -1,8 +1,8 @@
 <template lang="html">
   <v-toolbar dense flat v-show="items.length > 0">
     <v-menu
-      v-if="item.selectedForSearch"
-      v-for="item in selectedChips"
+      v-if="item.selectedForSearch || item.required"
+      v-for="item in computedItems"
       :key="item.value"
       offset-y light
       :close-on-content-click="false">
@@ -53,10 +53,10 @@
         class="card-wrapper"></card-moment>
 
       <!-- default menu -->
-      <card-default v-if="item.style !== 'numbro.js' && item.style !== 'moment.js'"
+      <!-- <card-default v-if="item.style !== 'numbro.js' && item.style !== 'moment.js'"
         :item="item"
         @itemUpdate="onItemUpdate($event)"
-        class="card-wrapper"></card-default>
+        class="card-wrapper"></card-default> -->
     </v-menu>
   </v-toolbar>
 </template>
@@ -88,56 +88,36 @@ export default {
   },
   data: function () {
     return {
-      intenalFilter: this.filter,
-      internalSelectedChips: null,
+      internalChips: null,
       menuOpen: false
     }
   },
   computed: {
-    // computedFilter: {
-    //   get: function () {
-    //     return this.filter
-    //   },
-    //   set: function (filter) {
-    //     this.$emit('update:filter', filter)
-    //   }
-    // },
-    selectedChips: {
+    computedItems: {
       get () {
-        if (this.filter === null) {
-          return true
-        }
-        if(this.internalSelectedChips === null) {
-          // run over defautls
-          // set required to true
-          let temp = this.items
-          this.filter.map( filteritem => {
-            const key = Object.keys(filteritem)[0]
-            temp.find(item => {
-              if(item.value === key) {
-                item.selectedForSearch = true
-                item.required = true
-                item.searchValue = filteritem[key]
-                return item
-              }
-            })
-          })
-          return temp
-        } else {
-          // return internalChips
-          return this.internalSelectedChips
-        }
+        return this.items
+        // if(this.internalChips === null) {
+        //   return this.items
+        // } else {
+        //   // return internalChips
+        //   return this.internalChips
+        // }
       },
       set(items) {
-        console.log('items', items);
-        this.internalSelectedChips = items
-        const temp = this.internalSelectedChips.filter(chip => {
-          if(chip.selectedForSearch) {
-            return chip
+        this.internalChips = items.map(i => {
+          if(i.required) {
+            i.searchValue = i.default
+            i.selectedForSearch = true
           }
+          return i;
         })
-        console.log('set selectedChips', temp);
-        EventBus.$emit('filterUpdate', temp)
+        // const temp = this.internalSelectedChips.filter(chip => {
+        //   if(chip.selectedForSearch) {
+        //     return chip
+        //   }
+        // })
+        this.$emit('update:items', this.internalChips)
+        // EventBus.$emit('filterUpdate', temp)
       }
     }
   },
@@ -153,7 +133,7 @@ export default {
       // item.selectedForSearch = false
       // const obj = Object.assign(this.selectedChips, obj)
       // EventBus.$emit('filterUpdate', this.computedFilter)
-      this.selectedChips = this.selectedChips.map(header => {
+      this.computedItems = this.computedItems.map(header => {
         if (header.value === item.value) {
           header.selectedForSearch = false
         }
@@ -161,7 +141,7 @@ export default {
       })
     },
     onItemUpdate (item) {
-      this.selectedChips = this.selectedChips.map(chip => {
+      this.computedItems = this.computedItems.map(chip => {
         if(chip.value === item.value) {
           chip = item
         }

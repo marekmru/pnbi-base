@@ -10,9 +10,8 @@
               readonly
               :label="header.text"
               :class="{required:header.required}"
-              @change="updateItems(header)"
               v-model="header.selectedForSearch"
-              :value="header.selectedForSearch"
+              @change="updateItems(header)"
               style="align-items:center">
             </v-checkbox>
 
@@ -20,9 +19,8 @@
             <v-checkbox
               v-else
               :label="header.text"
-              @change="updateItems(header)"
               v-model="header.selectedForSearch"
-              :value="header.selectedForSearch"
+              @change="updateItems(header)"
               style="align-items:center">
             </v-checkbox>
           </v-list-tile-content>
@@ -48,15 +46,17 @@ export default {
   computed: {
     computedItems: {
       get: function () {
-        return this.items
+        return this.$helper.clone(this.items)
       },
       set: function (items) {
-        const temp = this.items.filter(chip => {
-          if(chip.selectedForSearch) {
-            return chip
-          }
-        })
-        EventBus.$emit('filterUpdate', temp)
+        // const temp = this.items.filter(chip => {
+        //   if(chip.selectedForSearch) {
+        //     return chip
+        //   }
+        // })
+        console.log('set computedItems', items);
+        this.$emit('update:items', items)
+        // EventBus.$emit('filterUpdate', temp)
       }
     }
   },
@@ -76,9 +76,10 @@ export default {
       this.dialogVisible = true
     },
     updateItems (item) {
+      console.log('item', item);
       this.computedItems = this.computedItems.map(chip => {
         if(chip.value === item.value) {
-          chip.searchValue = false
+          chip.selectedForSearch = item.selectedForSearch
         }
         return chip
       })

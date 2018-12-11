@@ -5,8 +5,8 @@
         autofocus
         ref="focus"
         label="Includes ..."
-        :value="localItem.searchValue.$in"
-        @input="handleInput($event)"
+        :value="internValue"
+        @input="handleInput"
         @keyup.enter="applyFilter">
       </v-text-field>
       <!-- <p class="caption">Verknüpfe die Suche in der Spalte "{{item.text}}" mit Suchen aus anderen Spalten.</p> -->
@@ -28,6 +28,9 @@ export default {
     }
   },
   computed: {
+    internValue: function () {
+      return this.localItem.searchValue.$in
+    },
     localItem: {
       get: function () {
         if (this.internalLocalItem === null) {
