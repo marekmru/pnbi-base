@@ -11,7 +11,7 @@
 
     <!-- Advanced search -->
     <extend-search-dialog
-      :localStorageHeaders="localStorageHeaders">
+      :items.sync="localStorageHeaders">
     </extend-search-dialog>
 
     <!-- Toolbar with chips -->

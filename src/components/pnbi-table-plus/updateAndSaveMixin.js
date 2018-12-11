@@ -35,8 +35,6 @@ export default {
       customiseDialog: false
     }
   },
-  watch: {
-  },
   methods: {
     /**
      * Filter localStorageHeaders

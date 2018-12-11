@@ -5,7 +5,7 @@
       v-for="item in selectedChips"
       :key="item.value"
       offset-y light
-      :close-on-content-click="false" >
+      :close-on-content-click="false">
 
       <!-- custom added chips -->
       <v-chip
@@ -14,7 +14,7 @@
         @input="onChipClose(item)">
           {{item.text}}
           <span
-            v-if="key != 'readonly'"
+            v-if="key != 'required'"
             v-for="(value, key) in item.searchValue"
             :key="key"
             style="padding-left: 4px">
@@ -94,14 +94,14 @@ export default {
     }
   },
   computed: {
-    computedFilter: {
-      get: function () {
-        return this.filter
-      },
-      set: function (filter) {
-        this.$emit('update:filter', filter)
-      }
-    },
+    // computedFilter: {
+    //   get: function () {
+    //     return this.filter
+    //   },
+    //   set: function (filter) {
+    //     this.$emit('update:filter', filter)
+    //   }
+    // },
     selectedChips: {
       get () {
         if (this.filter === null) {
@@ -111,9 +111,9 @@ export default {
           // run over defautls
           // set required to true
           let temp = this.items
-          this.computedFilter.map( filteritem => {
+          this.filter.map( filteritem => {
             const key = Object.keys(filteritem)[0]
-            temp.find(item => { // use find
+            temp.find(item => {
               if(item.value === key) {
                 item.selectedForSearch = true
                 item.required = true
@@ -129,12 +129,14 @@ export default {
         }
       },
       set(items) {
+        console.log('items', items);
         this.internalSelectedChips = items
         const temp = this.internalSelectedChips.filter(chip => {
-          if(chip.searchValue) {
+          if(chip.selectedForSearch) {
             return chip
           }
         })
+        console.log('set selectedChips', temp);
         EventBus.$emit('filterUpdate', temp)
       }
     }
@@ -148,10 +150,12 @@ export default {
       item.editDialog = !item.editDialog
     },
     onChipClose (item) {
-      this.selectedChips = this.selectedChips.filter(header => {
+      // item.selectedForSearch = false
+      // const obj = Object.assign(this.selectedChips, obj)
+      // EventBus.$emit('filterUpdate', this.computedFilter)
+      this.selectedChips = this.selectedChips.map(header => {
         if (header.value === item.value) {
           header.selectedForSearch = false
-          return false
         }
         return header
       })

@@ -2,7 +2,7 @@
   <pnbi-dialog title="Advanced search" :open="dialogVisible" @close="dialogVisible=false">
     <div slat="dialog-content">
       <v-list>
-        <v-list-tile v-for="header in localStorageHeaders" :key="header.text" :class="{'highlighted': header.highlight}">
+        <v-list-tile v-for="header in computedItems" :key="header.text" :class="{'highlighted': header.highlight}">
           <v-list-tile-content>
             <!-- readonly -->
             <v-checkbox
@@ -10,7 +10,7 @@
               readonly
               :label="header.text"
               :class="{required:header.required}"
-              @change="dialogVisible=false"
+              @change="updateItems(header)"
               v-model="header.selectedForSearch"
               :value="header.selectedForSearch"
               style="align-items:center">
@@ -20,7 +20,7 @@
             <v-checkbox
               v-else
               :label="header.text"
-              @change="dialogVisible=false"
+              @change="updateItems(header)"
               v-model="header.selectedForSearch"
               :value="header.selectedForSearch"
               style="align-items:center">
@@ -33,15 +33,31 @@
 </template>
 
 <script>
+import EventBus from 'pnbi-base/src/event-bus'
 export default {
   name: 'extendSearchDialog',
   props: {
     /**
      * Items for displaying in an list
      */
-    localStorageHeaders: {
+    items: {
       type: Array,
       default: null
+    }
+  },
+  computed: {
+    computedItems: {
+      get: function () {
+        return this.items
+      },
+      set: function (items) {
+        const temp = this.items.filter(chip => {
+          if(chip.selectedForSearch) {
+            return chip
+          }
+        })
+        EventBus.$emit('filterUpdate', temp)
+      }
     }
   },
   data: function () {
@@ -58,6 +74,15 @@ export default {
   methods: {
     showDialog () {
       this.dialogVisible = true
+    },
+    updateItems (item) {
+      this.computedItems = this.computedItems.map(chip => {
+        if(chip.value === item.value) {
+          chip.searchValue = false
+        }
+        return chip
+      })
+      this.dialogVisible = false
     }
   }
 }
