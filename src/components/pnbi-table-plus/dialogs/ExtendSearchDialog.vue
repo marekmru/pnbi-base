@@ -54,7 +54,6 @@ export default {
         //     return chip
         //   }
         // })
-        console.log('set computedItems', items);
         this.$emit('update:items', items)
         // EventBus.$emit('filterUpdate', temp)
       }

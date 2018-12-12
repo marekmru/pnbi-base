@@ -21,7 +21,7 @@
 
       <pnbi-datatable-plus
         v-if="items.length > 2"
-        :items="items" :headers="headers"
+        :items="items" :headers.sync="headers"
         tableIdentifier="123"
         :loading="loading"
         :total-items="totalItems"
@@ -32,13 +32,12 @@
         dialog-closelabel="Schließen"
         dialog-selectalllabel="Alle auswählen"
         dialog-searchlabel="Nach Spalten suchen"
-        :filter.sync="filter"
         @updateSearchQuery="onSeachQueryUpdate">
       </pnbi-datatable-plus>
 
     </pnbi-datatable>
 
-    <pre>{{filter}}</pre>
+    <pre>{{computedFilters}}</pre>
 
   </pnbi-page>
 </template>
@@ -55,8 +54,7 @@ export default {
         this.totalItems = data.tableResponce.totalItems
       })
   },
-  components: {
-  },
+  components: {},
   data: () => {
     return {
       items: [],
@@ -71,11 +69,17 @@ export default {
       search: null,
       newBudget: null,
       projectName: null,
-      headers: [],
-      filter: [
-        { name: { '$in': 'alex' } },
-        { value2: { '$lt': moment().add(7, 'days').format('YYYY-MM-DD') } }
-      ]
+      headers: []
+    }
+  },
+  computed: {
+    computedFilters: function () {
+      const obj = this.headers.filter(item => {
+        if (item.selectedForSearch) {
+          return item.searchValue
+        }
+      })
+      return obj
     }
   },
   watch: {
@@ -85,17 +89,13 @@ export default {
   },
   methods: {
     // Update filter with this event
-    onFilterUpdate (payload) {
-      this.filter = []
-      payload = payload.map(payload => {
-        this.filter.push({ [payload.value]: payload.searchValue })
-      })
-      console.log('filter', this.filter)
+    onFilterUpdate (items) {
+      console.log('new filters', items)
+      this.headers = items
+      // console.log('filter event', this.headers.filter(item => item.searchValue))
     },
     onSeachQueryUpdate (query) {
       // TODO update items
-      // make new backend request
-      this.filter = query
     },
     onPaginationEvent (data, event) {
       this.getDataFromApi()

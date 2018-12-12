@@ -16,8 +16,7 @@
 
     <!-- Toolbar with chips -->
     <chips
-      :items.sync="localStorageHeaders"
-      :filter.sync="computedFilter"></chips>
+      :items.sync="localStorageHeaders"></chips>
 
     <v-data-table v-bind="localAttrs" :pagination.sync="compPagination">
       <template slot="items" slot-scope="props">
@@ -72,16 +71,6 @@ export default {
       default: null
     }
   },
-  created () {
-    // console.log(this.localStorageHeaders);
-    // // add searchValue
-    // this.localStorageHeaders = this.localStorageHeaders.map(header => {
-    //   if(header.required) {
-    //     header.searchValue = header.required
-    //     header.selectedForSearch = true
-    //   }
-    // })
-  },
   methods: {
     isNumber (val, key) {
       const isNumber = is.number(val)
@@ -102,14 +91,6 @@ export default {
     }
   },
   computed: {
-    computedFilter: {
-      get: function () {
-        return this.filter
-      },
-      set: function (filter) {
-        this.$emit('update:filter', filter)
-      }
-    },
     compPagination: {
       get: function () {
         return this.localAttrs.pagination

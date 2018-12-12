@@ -88,7 +88,7 @@ export default {
   },
   data: function () {
     return {
-      internalChips: null,
+      internalItems: null,
       menuOpen: false
     }
   },
@@ -96,28 +96,23 @@ export default {
     computedItems: {
       get () {
         return this.items
-        // if(this.internalChips === null) {
-        //   return this.items
-        // } else {
-        //   // return internalChips
-        //   return this.internalChips
-        // }
       },
       set(items) {
-        this.internalChips = items.map(i => {
+        this.internalItems = items.map(i => {
           if(i.required) {
             i.searchValue = i.default
             i.selectedForSearch = true
           }
           return i;
         })
-        // const temp = this.internalSelectedChips.filter(chip => {
-        //   if(chip.selectedForSearch) {
-        //     return chip
-        //   }
-        // })
-        this.$emit('update:items', this.internalChips)
-        // EventBus.$emit('filterUpdate', temp)
+        console.log('set computedItems');
+        this.$emit('update:items', this.internalItems)
+        EventBus.$emit('filterUpdate', this.internalItems)
+        const self = this
+        // TODO refactore this bad practice
+        setTimeout(function () {
+          EventBus.$emit('filterUpdate', self.internalItems)
+        }, 2000)
       }
     }
   },
