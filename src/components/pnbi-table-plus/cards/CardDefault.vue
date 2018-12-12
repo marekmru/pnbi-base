@@ -5,7 +5,7 @@
         autofocus
         ref="focus"
         label="Includes ..."
-        :value="internValue"
+        :value="computedItem.searchValue.$in"
         @input="handleInput"
         @keyup.enter="applyFilter">
       </v-text-field>
@@ -13,7 +13,6 @@
     </v-card-text>
     <v-card-actions>
       <v-btn flat small primary @click="applyFilter">Apply</v-btn>
-      <!-- <v-btn flat small>Schließen</v-btn> -->
     </v-card-actions>
   </v-card>
 </template>
@@ -24,32 +23,29 @@ export default {
   props: ['item'],
   data: function () {
     return {
-      internalLocalItem: null
+      internalItem: null
     }
   },
   computed: {
-    internValue: function () {
-      return this.localItem.searchValue.$in
-    },
-    localItem: {
+    computedItem: {
       get: function () {
-        if (this.internalLocalItem === null) {
-          return this.item
+        if (this.internalItem === null) {
+          return this.$helper.clone(this.item)
         } else {
-          return this.internalLocalItem
+          return this.internalItem
         }
       },
       set: function (item) {
-        this.internalLocalItem = this.localItem
+        this.internalItem = item
       }
     }
   },
   methods: {
     handleInput (val) {
-      this.localItem = Object.assign(this.localItem, { searchValue: { '$in': val } })
+      this.computedItem = Object.assign(this.computedItem, { searchValue: { '$in': val } })
     },
     applyFilter () {
-      this.$emit('itemUpdate', this.internalLocalItem)
+      this.$emit('itemUpdate', this.$helper.clone(this.computedItem))
     }
   }
 }
