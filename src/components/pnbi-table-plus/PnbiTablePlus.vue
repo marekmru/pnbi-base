@@ -96,10 +96,6 @@ export default {
         return this.localAttrs.pagination
       },
       set: function (pagination) {
-        // https://vuejs.org/v2/guide/components-custom-events.html#Event-Names
-        // For these reasons, we recommend you always use kebab-case for event names.
-        // this.$emit('pagination-event', pagination)
-        // https://vuejs.org/v2/guide/components-custom-events.html#sync-Modifier
         this.$emit('update:pagination', pagination)
         this.$nextTick(function () {
           this.$updateHeaderDom(this.localStorageHeaders)

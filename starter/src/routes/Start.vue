@@ -92,6 +92,12 @@ export default {
     onFilterUpdate (items) {
       console.log('new filters', items)
       this.headers = items
+      this.getDataFromApi()
+        .then(data => {
+          this.items = data.tableResponce.items
+          this.headers = data.tableResponce.headers
+          this.totalItems = data.tableResponce.totalItems
+        })
       // console.log('filter event', this.headers.filter(item => item.searchValue))
     },
     onSeachQueryUpdate (query) {
@@ -127,8 +133,9 @@ export default {
         }
 
         const { sortBy, descending, page, rowsPerPage } = this.pagination
-
         const totalItems = items.length
+
+        console.log('API Request', this.pagination, this.computedFilters)
 
         // BE sorting
         if (this.pagination.sortBy && items.length > 1) {

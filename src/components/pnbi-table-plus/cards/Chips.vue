@@ -107,9 +107,9 @@ export default {
         })
         console.log('set computedItems');
         this.$emit('update:items', this.internalItems)
-        EventBus.$emit('filterUpdate', this.internalItems)
-        const self = this
+        // EventBus.$emit('filterUpdate', this.internalItems)
         // TODO refactore this bad practice
+        const self = this
         setTimeout(function () {
           EventBus.$emit('filterUpdate', self.internalItems)
         }, 2000)
