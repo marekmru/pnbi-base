@@ -83,13 +83,6 @@
                   </li>
                   <li>
                     <v-card flat>
-                      <v-card-text class="subheading pb-0">Auskunftsrecht</v-card-text>
-                      <v-card-text class="pt-1">Sie haben als betroffene Person das Recht, eine Bestätigung darüber zu verlangen, ob wir personenbezogene Daten verarbeiten, die Sie betreffen. Ist dies der Fall, so haben Sie das Recht auf Auskunft über diese personenbezogenen Daten sowie auf weitere Informationen, z.B. die Verarbeitungszwecke, die Empfänger und die geplante Dauer der Speicherung bzw. die Kriterien für die Festlegung der Dauer.
-                      </v-card-text>
-                    </v-card>
-                  </li>
-                  <li>
-                    <v-card flat>
                       <v-card-text class="subheading pb-0">Recht auf Einschränkung der Verarbeitung</v-card-text>
                       <v-card-text class="pt-1">Sie haben als betroffene Person ein Recht auf Einschränkung der Verarbeitung, z.B. wenn Sie der Meinung sind, die personenbezogenen Daten seien unrichtig.
                       </v-card-text>
