@@ -49,7 +49,6 @@ export default {
         return this.$helper.clone(this.items)
       },
       set: function (items) {
-        console.log('update im dialog', items);
         this.$emit('updateItems', this.$helper.clone(items))
       }
     }

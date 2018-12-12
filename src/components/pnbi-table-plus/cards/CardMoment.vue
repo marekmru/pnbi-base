@@ -109,11 +109,11 @@ export default {
     localItem: {
       get: function () {
         if(this.internalLocalItem === null) {
-          let obj = this.item
+          let obj = this.$helper.clone(this.item)
           // item with default search value
-          if(this.item.searchValue) {
-            obj.myKey = Object.keys(this.item.searchValue)[0]
-            obj.myValue = this.item.searchValue[obj.myKey]
+          if(obj.searchValue) {
+            obj.myKey = Object.keys(obj.searchValue)[0]
+            obj.myValue = obj.searchValue[obj.myKey]
           } else {
             obj.myKey = '$eq';
             obj.myValue = moment().format('YYYY-MM-DD')
@@ -145,7 +145,7 @@ export default {
   },
   methods: {
     applyFilter () {
-      this.$emit('itemUpdate', this.internalLocalItem)
+      this.$emit('itemUpdate', this.$helper.clone(this.internalLocalItem))
       // EventBus.$emit('filterUpdate', this.internalLocalItem.searchValue)
     },
     /**

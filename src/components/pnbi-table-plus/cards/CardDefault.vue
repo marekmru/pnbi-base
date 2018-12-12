@@ -45,7 +45,7 @@ export default {
       this.computedItem = Object.assign(this.computedItem, { searchValue: { '$in': val } })
     },
     applyFilter () {
-      this.$emit('itemUpdate', this.$helper.clone(this.computedItem))
+      this.$emit('itemUpdate', this.computedItem)
     }
   }
 }

@@ -40,17 +40,17 @@
       </v-chip>
 
       <!-- numbro.js menu -->
-      <!-- <card-numbro v-if="item.style === 'numbro.js'"
+      <card-numbro v-if="item.style === 'numbro.js'"
         :item="item"
         @itemUpdate="onItemUpdate($event)"
         class="card-wrapper">
-      </card-numbro> -->
+      </card-numbro>
 
       <!-- moment.js menu -->
-      <!-- <card-moment v-if="item.style === 'moment.js'"
+      <card-moment v-if="item.style === 'moment.js'"
         :item="item"
         @itemUpdate="onItemUpdate($event)"
-        class="card-wrapper"></card-moment> -->
+        class="card-wrapper"></card-moment>
 
       <!-- default menu -->
       <card-default v-if="item.style !== 'numbro.js' && item.style !== 'moment.js' && item.searchValue"
@@ -114,7 +114,7 @@ export default {
         return obj
       },
       set(items) {
-        this.$emit('updateItems', this.$helper.clone(items))
+        this.$emit('updateItems', items)
       }
     }
   },
@@ -135,7 +135,6 @@ export default {
       })
     },
     onItemUpdate (item) {
-      console.log('--', item);
       this.computedItems = this.computedItems.map(chip => {
         if(chip.value === item.value) {
           chip = item

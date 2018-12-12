@@ -77,7 +77,7 @@ export default {
     updateItems (items) {
       console.log('updateItems', items);
       this.localStorageHeaders = items
-      // EventBus.$emit('filterUpdate', this.$helper.clone(this.localStorageHeaders))
+      EventBus.$emit('filterUpdate', this.$helper.clone(this.localStorageHeaders))
     },
     isNumber (val, key) {
       const isNumber = is.number(val)
