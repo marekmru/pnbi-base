@@ -11,12 +11,13 @@
 
     <!-- Advanced search -->
     <extend-search-dialog
-      :items.sync="localStorageHeaders">
-    </extend-search-dialog>
+      :items="localStorageHeaders"
+      @updateItems="updateItems($event)"></extend-search-dialog>
 
     <!-- Toolbar with chips -->
     <chips
-      :items.sync="localStorageHeaders"></chips>
+      :items="localStorageHeaders"
+      @updateItems="updateItems($event)"></chips>
 
     <v-data-table v-bind="localAttrs" :pagination.sync="compPagination">
       <template slot="items" slot-scope="props">
@@ -39,6 +40,7 @@
 </template>
 
 <script>
+import EventBus from 'pnbi-base/src/event-bus'
 import UpdateAndSaveMixin from './updateAndSaveMixin.js'
 import is from 'is'
 import Chips from './cards/Chips'
@@ -72,6 +74,11 @@ export default {
     }
   },
   methods: {
+    updateItems (items) {
+      console.log('updateItems', items);
+      this.localStorageHeaders = items
+      // EventBus.$emit('filterUpdate', this.$helper.clone(this.localStorageHeaders))
+    },
     isNumber (val, key) {
       const isNumber = is.number(val)
       if (isNumber) {

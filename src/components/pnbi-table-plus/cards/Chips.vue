@@ -23,6 +23,7 @@
         </span>
       </v-chip>
 
+      <!-- closable chip -->
       <v-chip
         v-else
         close
@@ -30,7 +31,6 @@
         @input="onChipClose(item)">
           {{item.text}}
           <span
-            v-if="key != 'readonly'"
             v-for="(value, key) in item.searchValue"
             :key="key"
             style="padding-left: 4px">
@@ -40,23 +40,23 @@
       </v-chip>
 
       <!-- numbro.js menu -->
-      <card-numbro v-if="item.style === 'numbro.js'"
+      <!-- <card-numbro v-if="item.style === 'numbro.js'"
         :item="item"
         @itemUpdate="onItemUpdate($event)"
         class="card-wrapper">
-      </card-numbro>
+      </card-numbro> -->
 
       <!-- moment.js menu -->
-      <card-moment v-if="item.style === 'moment.js'"
+      <!-- <card-moment v-if="item.style === 'moment.js'"
         :item="item"
         @itemUpdate="onItemUpdate($event)"
-        class="card-wrapper"></card-moment>
+        class="card-wrapper"></card-moment> -->
 
       <!-- default menu -->
-      <!-- <card-default v-if="item.style !== 'numbro.js' && item.style !== 'moment.js'"
+      <card-default v-if="item.style !== 'numbro.js' && item.style !== 'moment.js' && item.searchValue"
         :item="item"
         @itemUpdate="onItemUpdate($event)"
-        class="card-wrapper"></card-default> -->
+        class="card-wrapper"></card-default>
     </v-menu>
   </v-toolbar>
 </template>
@@ -75,10 +75,6 @@ export default {
     items: {
       type: Array,
       default: null
-    },
-    filter: {
-      type: Array,
-      default: null
     }
   },
   components: {
@@ -88,31 +84,37 @@ export default {
   },
   data: function () {
     return {
-      internalItems: null,
-      menuOpen: false
+      menuOpen: false,
+      localItems: this.$helper.clone(this.items)
     }
+  },
+  created: function () {
+    // Initialize localItems
+    this.computedItems = this.computedItems.map(item => {
+      if(item.required) {
+        item.searchValue = item.default
+        item.selectedForSearch = true
+      }
+      return item;
+    })
   },
   computed: {
     computedItems: {
       get () {
-        return this.items
+        let obj = this.$helper.clone(this.items)
+        obj = obj.map(item =>{
+          if(item.required) {
+            if(!item.searchValue) {
+              item.searchValue = item.default
+            }
+            item.selectedForSearch = true
+          }
+          return item;
+        })
+        return obj
       },
       set(items) {
-        this.internalItems = items.map(i => {
-          if(i.required) {
-            i.searchValue = i.default
-            i.selectedForSearch = true
-          }
-          return i;
-        })
-        console.log('set computedItems');
-        this.$emit('update:items', this.internalItems)
-        // EventBus.$emit('filterUpdate', this.internalItems)
-        // TODO refactore this bad practice
-        const self = this
-        setTimeout(function () {
-          EventBus.$emit('filterUpdate', self.internalItems)
-        }, 2000)
+        this.$emit('updateItems', this.$helper.clone(items))
       }
     }
   },
@@ -125,9 +127,6 @@ export default {
       item.editDialog = !item.editDialog
     },
     onChipClose (item) {
-      // item.selectedForSearch = false
-      // const obj = Object.assign(this.selectedChips, obj)
-      // EventBus.$emit('filterUpdate', this.computedFilter)
       this.computedItems = this.computedItems.map(header => {
         if (header.value === item.value) {
           header.selectedForSearch = false
@@ -136,6 +135,7 @@ export default {
       })
     },
     onItemUpdate (item) {
+      console.log('--', item);
       this.computedItems = this.computedItems.map(chip => {
         if(chip.value === item.value) {
           chip = item

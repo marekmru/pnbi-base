@@ -49,13 +49,8 @@ export default {
         return this.$helper.clone(this.items)
       },
       set: function (items) {
-        // const temp = this.items.filter(chip => {
-        //   if(chip.selectedForSearch) {
-        //     return chip
-        //   }
-        // })
-        this.$emit('update:items', items)
-        // EventBus.$emit('filterUpdate', temp)
+        console.log('update im dialog', items);
+        this.$emit('updateItems', this.$helper.clone(items))
       }
     }
   },
@@ -75,10 +70,9 @@ export default {
       this.dialogVisible = true
     },
     updateItems (item) {
-      console.log('item', item);
       this.computedItems = this.computedItems.map(chip => {
         if(chip.value === item.value) {
-          chip.selectedForSearch = item.selectedForSearch
+          chip = item
         }
         return chip
       })

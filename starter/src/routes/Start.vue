@@ -21,7 +21,7 @@
 
       <pnbi-datatable-plus
         v-if="items.length > 2"
-        :items="items" :headers.sync="headers"
+        :items="items" :headers="headers"
         tableIdentifier="123"
         :loading="loading"
         :total-items="totalItems"
