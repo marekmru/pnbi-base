@@ -46,7 +46,8 @@ import is from 'is'
 import Chips from './cards/Chips'
 import CustomiseDialog from './dialogs/CustomiseDialog'
 import ExtendSearchDialog from './dialogs/ExtendSearchDialog'
-
+import _throttle from 'lodash.throttle'
+import _debounce from 'lodash.debounce'
 export default {
   name: 'PnbiDatatablePlus',
   components: {
@@ -74,10 +75,12 @@ export default {
     }
   },
   methods: {
-    updateItems (items) {
-      console.log('updateItems', items);
-      this.localStorageHeaders = items
+    sendFilterUpdateEvent: _debounce(function send() {
       EventBus.$emit('filterUpdate', this.$helper.clone(this.localStorageHeaders))
+    }, 1000),
+    updateItems (items) {
+      this.localStorageHeaders = items
+      this.sendFilterUpdateEvent()
     },
     isNumber (val, key) {
       const isNumber = is.number(val)
@@ -112,6 +115,7 @@ export default {
   },
   data: function () {
     return {
+      debounced: null,
       drag: null,
       searchPlusToolbarVisible: false,
       searchPlusDialogVisible: false,

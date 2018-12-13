@@ -90,7 +90,6 @@ export default {
   methods: {
     // Update filter with this event
     onFilterUpdate (items) {
-      console.log('new filters', items)
       this.headers = items
       this.getDataFromApi()
         .then(data => {
