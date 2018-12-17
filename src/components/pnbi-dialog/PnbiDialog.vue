@@ -13,7 +13,8 @@
         <!-- @slot default dialog content -->
         <slot v-else name="dialog-content"></slot>
       </v-card-text>
-      <v-card-actions class="pl-3 pr-3 py-3" style="background-color: rgba(100,100,100, .025)">
+      <v-card-actions class="pl-3 pr-3 py-3" style="background-color: rgba(100,100,100, .025)"
+                      v-if="!!$slots['dialog-actions']" >
         <v-spacer></v-spacer>
         <!-- @slot default dialog actions -->
         <slot name="dialog-actions"></slot>
