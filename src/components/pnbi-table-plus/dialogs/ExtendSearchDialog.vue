@@ -69,6 +69,9 @@ export default {
       this.dialogVisible = true
     },
     updateItems (item) {
+      if(item.selectedForSearch === false) {
+        delete item.searchValue
+      }
       this.computedItems = this.computedItems.map(chip => {
         if(chip.value === item.value) {
           chip = item
