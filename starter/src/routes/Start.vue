@@ -37,8 +37,6 @@
 
     </pnbi-datatable>
 
-    <pre>{{computedFilters}}</pre>
-
   </pnbi-page>
 </template>
 <script>

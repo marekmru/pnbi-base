@@ -1,5 +1,5 @@
 <template lang="html">
-  <v-toolbar dense flat v-show="items.length > 0">
+  <v-toolbar dense flat v-show="items.length > 0" class="chips-toolbar">
     <v-menu
       v-if="item.selectedForSearch || item.required"
       v-for="item in computedItems"
@@ -53,7 +53,7 @@
         class="card-wrapper"></card-moment>
 
       <!-- default menu -->
-      <card-default v-if="item.style !== 'numbro.js' && item.style !== 'moment.js' && item.searchValue"
+      <card-default v-if="item.style !== 'numbro.js' && item.style !== 'moment.js'"
         :item="item"
         @itemUpdate="onItemUpdate($event)"
         class="card-wrapper"></card-default>
@@ -148,4 +148,8 @@ export default {
 </script>
 
 <style lang="css">
+.chips-toolbar {
+  overflow: hidden;
+  overflow-x: scroll;
+}
 </style>

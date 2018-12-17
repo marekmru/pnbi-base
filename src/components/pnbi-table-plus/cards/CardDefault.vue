@@ -19,8 +19,12 @@
 
 <script>
 export default {
-  // current item is the advancedSearchItem
   props: ['item'],
+  mounted: function () {
+    if(this.item.searchValue === undefined) {
+      this.handleInput('')
+    }
+  },
   data: function () {
     return {
       internalItem: null

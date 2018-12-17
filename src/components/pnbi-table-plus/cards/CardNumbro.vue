@@ -117,7 +117,6 @@ export default {
       let key = Object.keys(this.localItem.searchValue)[0]
       this.setChipText(key, this.localItem.searchValue[key])
       if(this.localItem.default) {
-        console.log('required apply', this.localItem);
         this.applyFilter()
       }
     },
