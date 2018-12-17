@@ -20,6 +20,7 @@
 <script>
 export default {
   props: ['item'],
+  // define initial value
   mounted: function () {
     if(this.item.searchValue === undefined) {
       this.handleInput('')
