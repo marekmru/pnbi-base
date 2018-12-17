@@ -91,7 +91,7 @@ export default {
   created: function () {
     // Initialize localItems
     this.computedItems = this.computedItems.map(item => {
-      if(item.required) {
+      if(item.default) {
         item.searchValue = item.default
         item.selectedForSearch = true
       }
@@ -130,6 +130,7 @@ export default {
       this.computedItems = this.computedItems.map(header => {
         if (header.value === item.value) {
           header.selectedForSearch = false
+          delete header.searchValue
         }
         return header
       })

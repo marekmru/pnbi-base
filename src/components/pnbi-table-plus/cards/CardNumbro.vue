@@ -70,7 +70,7 @@ export default {
     localItem: {
       get: function () {
         if(this.internalLocalItem === null) {
-          let obj = this.item
+          let obj = this.$helper.clone(this.item)
           // item with default search value
           if(this.item.searchValue) {
             obj.myKey = Object.keys(this.item.searchValue)[0]
@@ -102,11 +102,11 @@ export default {
   },
   mounted () {
     this.defineInitChip()
-    this.applyFilter()
+    // this.applyFilter()
   },
   methods: {
     applyFilter () {
-      this.$emit('itemUpdate', this.internalLocalItem)
+      this.$emit('itemUpdate', this.$helper.clone(this.internalLocalItem))
     },
     /**
      * updated item object with some Information from the chipmenu
@@ -116,6 +116,10 @@ export default {
     defineInitChip () {
       let key = Object.keys(this.localItem.searchValue)[0]
       this.setChipText(key, this.localItem.searchValue[key])
+      if(this.localItem.default) {
+        console.log('required apply', this.localItem);
+        this.applyFilter()
+      }
     },
     setChipText (key, value) {
       this.equalsNumber = null

@@ -164,7 +164,7 @@ export default {
         tableResponce.totalItems = totalItems
         tableResponce.headers = [
           { text: 'Name', value: 'name', required: true, default: { '$in': 'alex' } },
-          { text: 'numbro 2', value: 'age', style: 'numbro.js', format: '0,0' },
+          { text: 'numbro 2', value: 'age', style: 'numbro.js', format: '0,0', default: { '$eq': 100 } },
           { text: 'currency €', value: 'price', format: '0,0.00', style: 'numbro.js' },
           { text: 'Percent', value: 'value1', format: '0.0%', style: 'numbro.js' },
           { text: 'String', value: 'value2', format: 'DD/MM/YYYY', style: 'moment.js', required: true, default: { '$lt': moment().add(7, 'days').format('YYYY-MM-DD') } },

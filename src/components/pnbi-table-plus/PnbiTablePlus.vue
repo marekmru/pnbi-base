@@ -75,12 +75,20 @@ export default {
     }
   },
   methods: {
-    sendFilterUpdateEvent: _debounce(function send() {
-      EventBus.$emit('filterUpdate', this.$helper.clone(this.localStorageHeaders))
+    /*
+    * Send the API request with a debounce of 1000ms
+    * 
+    */
+    sendFilterUpdateEvent: _debounce(function send(items) {
+      const visibleItems = items.filter(item => item.selectedForSearch)
+      const enabledForSearchItems = items.filter(item => item.searchValue)
+      this.localStorageHeaders = items
+      if(visibleItems.length === enabledForSearchItems.length) {
+        EventBus.$emit('filterUpdate', this.$helper.clone(this.localStorageHeaders))
+      }
     }, 1000),
     updateItems (items) {
-      this.localStorageHeaders = items
-      this.sendFilterUpdateEvent()
+      this.sendFilterUpdateEvent(items)
     },
     isNumber (val, key) {
       const isNumber = is.number(val)
