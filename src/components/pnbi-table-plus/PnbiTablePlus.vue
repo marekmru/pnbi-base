@@ -77,7 +77,7 @@ export default {
   methods: {
     /*
     * Send the API request with a debounce of 1000ms
-    * 
+    *
     */
     sendFilterUpdateEvent: _debounce(function send(items) {
       const visibleItems = items.filter(item => item.selectedForSearch)

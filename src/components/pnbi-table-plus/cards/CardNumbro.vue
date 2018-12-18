@@ -114,9 +114,9 @@ export default {
      * @param selectedKey string
      */
     defineInitChip () {
-      let key = Object.keys(this.localItem.searchValue)[0]
-      this.setChipText(key, this.localItem.searchValue[key])
       if(this.localItem.default) {
+        let key = Object.keys(this.localItem.searchValue)[0]
+        this.setChipText(key, this.localItem.searchValue[key])
         this.applyFilter()
       }
     },
@@ -143,7 +143,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="css" scoped>
 .custom-list {
   padding: 16px;
 }
@@ -152,5 +152,8 @@ export default {
 }
 .v-menu__content {
   margin-top: 8px;
+}
+/deep/ .v-text-field {
+  padding-top: 0 !important;
 }
 </style>
