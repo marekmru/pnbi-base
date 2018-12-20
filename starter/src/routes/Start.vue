@@ -10,7 +10,8 @@
 
     <pnbi-datatable headline="Datatable plus"
       @search="search = $event" :button-label="false"
-      customize-label="Customize">
+      customize-label="Columns"
+      extend-search="Advanced">
 
       <!-- primary controls-->
 
@@ -30,7 +31,8 @@
         dialog-subtitle="Wähle Spalten, die angezeigt werden sollen"
         dialog-closelabel="Schließen"
         dialog-selectalllabel="Alle auswählen"
-        dialog-searchlabel="Suche">
+        dialog-searchlabel="Nach Spalten suchen"
+        @updateSearchQuery="onSeachQueryUpdate">
       </pnbi-datatable-plus>
 
     </pnbi-datatable>
@@ -38,30 +40,11 @@
   </pnbi-page>
 </template>
 <script>
-import { Validator } from 'vee-validate'
-
-const dictionary = {
-  en: {
-    messages: {
-      alpha: () => 'Some English Message'
-    }
-  },
-  ar: {
-    messages: {
-      alpha: 'حاجة عربي'
-    }
-  }
-}
-
-// Override and merge the dictionaries
-Validator.localize(dictionary)
-
-const validator = new Validator({ first_name: 'alpha' })
-
-validator.localize('ar') // now this validator will generate messages in Arabic.
-
+import moment from 'moment'
+import EventBus from 'pnbi-base/src/event-bus'
 export default {
   mounted () {
+    EventBus.$on('filterUpdate', this.onFilterUpdate)
     this.getDataFromApi()
       .then(data => {
         this.items = data.tableResponce.items
@@ -69,8 +52,7 @@ export default {
         this.totalItems = data.tableResponce.totalItems
       })
   },
-  components: {
-  },
+  components: {},
   data: () => {
     return {
       items: [],
@@ -88,12 +70,36 @@ export default {
       headers: []
     }
   },
+  computed: {
+    computedFilters: function () {
+      const obj = this.headers.filter(item => {
+        if (item.selectedForSearch) {
+          return item.searchValue
+        }
+      })
+      return obj
+    }
+  },
   watch: {
     pagination: function () {
       this.onPaginationEvent()
     }
   },
   methods: {
+    // Update filter with this event
+    onFilterUpdate (items) {
+      this.headers = items
+      this.getDataFromApi()
+        .then(data => {
+          this.items = data.tableResponce.items
+          this.headers = data.tableResponce.headers
+          this.totalItems = data.tableResponce.totalItems
+        })
+      // console.log('filter event', this.headers.filter(item => item.searchValue))
+    },
+    onSeachQueryUpdate (query) {
+      // TODO update items
+    },
     onPaginationEvent (data, event) {
       this.getDataFromApi()
         .then(data => {
@@ -124,8 +130,9 @@ export default {
         }
 
         const { sortBy, descending, page, rowsPerPage } = this.pagination
-
         const totalItems = items.length
+
+        console.log('API Request', this.pagination, this.computedFilters)
 
         // BE sorting
         if (this.pagination.sortBy && items.length > 1) {
@@ -154,15 +161,15 @@ export default {
         tableResponce.items = items
         tableResponce.totalItems = totalItems
         tableResponce.headers = [
-          { text: 'Name', value: 'name' },
-          { text: 'numbro 2', value: 'age', style: 'numbro.js', format: '0,0' },
+          { text: 'Name', value: 'name', required: true, default: { '$in': 'alex' } },
+          { text: 'numbro 2', value: 'age', style: 'numbro.js', format: '0,0', default: { '$eq': 100 } },
           { text: 'currency €', value: 'price', format: '0,0.00', style: 'numbro.js' },
           { text: 'Percent', value: 'value1', format: '0.0%', style: 'numbro.js' },
-          { text: 'String', value: 'value2' },
+          { text: 'String', value: 'value2', format: 'DD/MM/YYYY', style: 'moment.js', required: true, default: { '$lt': moment().add(7, 'days').format('YYYY-MM-DD') } },
           { text: 'Value 3', value: 'value3', format: '6 a', style: 'numbro.js' },
           { text: 'just number', value: 'value4' },
           { text: 'no format & moment', value: 'value5', style: 'moment.js' },
-          { text: 'format  & moment', value: 'value6', format: 'DD/MM/YYYY', style: 'moment.js' }
+          { text: 'moment', value: 'momentjs', format: 'DD/MM/YYYY', style: 'moment.js' }
         ]
 
         setTimeout(() => {

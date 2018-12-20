@@ -214,6 +214,13 @@ export default {
       required: false
     }
   },
+  props: {
+    fullWidth: {
+      type: Boolean,
+      default: false,
+      required: false
+    },
+  },
   created () {
     this.setTitle(this.$config.TITLE)
     bus.$on(PROFILE_UPDATED, profile => {
