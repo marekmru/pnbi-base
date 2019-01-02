@@ -15,16 +15,17 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "numbro": "^2.1.0", 
-    "axios": "^0.17.1", 
-    "moment": "^2.20.1", 
-    "vee-validate": "^2.0.6", 
-    "vue-router": "^3.0.1", 
-    "vue": "^2.5.16", 
-    "vuetify": "^1.3.0", 
+    "numbro": "^2.1.0",
+    "axios": "^0.17.1",
+    "moment": "^2.20.1",
+    "vee-validate": "^2.0.6",
+    "vue-router": "^3.0.1",
+    "vue": "^2.5.16",
+    "vuetify": "^1.3.0",
     "vuex": "^3.0.1",
     "vuedraggable": "^2.16.0",
-    "is": "^3.2.1"
+    "is": "^3.2.1",
+    "lodash.throttle": "^4.1.1"
   },
   "devDependencies": {
     "@vue/eslint-config-standard": "^3.0.5",

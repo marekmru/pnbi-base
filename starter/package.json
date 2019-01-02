@@ -7,9 +7,6 @@
   ],
   "built": "2018-08-14T18:06:29.210534",
   "candidate": false,
-  "dependencies": {
-    "lodash.throttle": "^4.1.1"
-  },
   "description": "DemoApp",
   "devDependencies": {
     "@babel/core": "^7.1.0",
