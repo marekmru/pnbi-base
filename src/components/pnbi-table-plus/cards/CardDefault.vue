@@ -35,6 +35,7 @@ export default {
     computedItem: {
       get: function () {
         if (this.internalItem === null) {
+          Object.assign(this.item, { searchValue: { '$in': '' } })
           return this.$helper.clone(this.item)
         } else {
           return this.internalItem

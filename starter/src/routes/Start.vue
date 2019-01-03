@@ -65,25 +65,29 @@ export default {
         sortBy: ''
       },
       search: null,
+      requestObj: {
+        filter: {},
+        search: null
+      },
       newBudget: null,
       projectName: null,
       headers: []
     }
   },
-  computed: {
-    // this object is used for making a specific request to BE
-    computedFilters: function () {
-      const obj = []
-      this.headers.forEach(item => {
-        if (item.selectedForSearch) {
-          obj.push({
-            [item.value]: item.searchValue
-          })
-        }
-      })
-      return obj
-    }
-  },
+  // computed: {
+  //   // this object is used for making a specific request to BE
+  //   computedFilters: function () {
+  //     const obj = []
+  //     this.headers.forEach(item => {
+  //       if (item.selectedForSearch) {
+  //         obj.push({
+  //           [item.value]: item.searchValue
+  //         })
+  //       }
+  //     })
+  //     return obj
+  //   }
+  // },
   watch: {
     pagination: function () {
       this.onPaginationEvent()
@@ -92,7 +96,12 @@ export default {
   methods: {
     // Update filter with this event
     onFilterUpdate (items) {
-      this.headers = items
+      this.requestObj.filter = {}
+      items.forEach(item => {
+        if (item.selectedForSearch) {
+          Object.assign(this.requestObj.filter, { [item.value]: item.searchValue })
+        }
+      })
       this.getDataFromApi()
         .then(data => {
           this.items = data.tableResponce.items
@@ -136,7 +145,7 @@ export default {
         const { sortBy, descending, page, rowsPerPage } = this.pagination
         const totalItems = items.length
 
-        console.log('API Request', this.pagination, this.computedFilters)
+        console.log('API Request', this.pagination, this.requestObj.filter)
 
         // BE sorting
         if (this.pagination.sortBy && items.length > 1) {
