@@ -71,10 +71,14 @@ export default {
     }
   },
   computed: {
+    // this object is used for making a specific request to BE
     computedFilters: function () {
-      const obj = this.headers.filter(item => {
+      const obj = []
+      this.headers.forEach(item => {
         if (item.selectedForSearch) {
-          return item.searchValue
+          obj.push({
+            [item.value]: item.searchValue
+          })
         }
       })
       return obj
