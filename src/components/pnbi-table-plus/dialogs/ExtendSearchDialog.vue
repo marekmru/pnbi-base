@@ -94,4 +94,7 @@ export default {
     }
   }
 }
+.v-label {
+  font-size: 16px;
+}
 </style>
