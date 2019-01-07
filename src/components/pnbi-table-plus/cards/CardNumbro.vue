@@ -94,8 +94,10 @@ export default {
         return this.localItem.myKey
       },
       set: function (newKey) {
-        const oldKey = Object.keys(this.item.searchValue)[0]
-        this.setChipText(newKey, this.item.searchValue[oldKey])
+        if(this.item.searchValue) {
+          const oldKey = Object.keys(this.item.searchValue)[0]
+          this.setChipText(newKey, this.item.searchValue[oldKey])
+        }
         this.localItem = Object.assign(this.localItem, {myKey:newKey})
       }
     }
