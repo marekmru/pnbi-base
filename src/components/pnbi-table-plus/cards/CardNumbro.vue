@@ -72,9 +72,12 @@ export default {
         if(this.internalLocalItem === null) {
           let obj = this.$helper.clone(this.item)
           // item with default search value
-          if(this.item.searchValue) {
+          if(obj.searchValue) {
             obj.myKey = Object.keys(this.item.searchValue)[0]
             obj.myValue = this.item.searchValue[obj.myKey]
+            obj.chipText = "test"
+          } else if (obj.default) {
+            obj = Object.assign(obj, {searchValue:{[obj.myKey]:obj.myValue} })
           } else {
             obj.myKey = '$eq';
             obj.myValue = ''

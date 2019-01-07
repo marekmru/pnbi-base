@@ -19,6 +19,11 @@
           @click.stop="$bus.$emit('openExtendSearchDialog')">{{extendSearch}}</v-btn>
       </div>
 
+      <div>
+        <v-btn small color="accent"
+          @click.stop="$bus.$emit('triggerSaveSearch')">Save search</v-btn>
+      </div>
+
       <v-flex xs3>
         <v-text-field clearable class="pnbi-datatable__search" solo-inverted flat v-model="search" append-icon="search"></v-text-field>
       </v-flex>

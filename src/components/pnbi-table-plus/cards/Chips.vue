@@ -91,9 +91,11 @@ export default {
   created: function () {
     // Initialize localItems
     this.computedItems = this.computedItems.map(item => {
-      if(item.default) {
-        item.searchValue = item.default
+      if(item.default && item.selectedForSearch != false) {
         item.selectedForSearch = true
+      }
+      if(!item.searchValue && item.selectedForSearch != false) {
+        item.searchValue = item.default
       }
       return item;
     })
@@ -114,6 +116,7 @@ export default {
         return obj
       },
       set(items) {
+        console.log('changed', items);
         this.$emit('updateItems', items)
       }
     }

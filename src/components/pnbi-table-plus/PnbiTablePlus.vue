@@ -82,7 +82,9 @@ export default {
     sendFilterUpdateEvent: _debounce(function send(items) {
       const visibleItems = items.filter(item => item.selectedForSearch)
       const enabledForSearchItems = items.filter(item => item.searchValue)
+      console.log('--', visibleItems, enabledForSearchItems);
       this.localStorageHeaders = items
+      this.saveToLocalStorage(this.localStorageHeaders)
       if(visibleItems.length === enabledForSearchItems.length) {
         EventBus.$emit('filterUpdate', this.$helper.clone(this.localStorageHeaders))
       }
@@ -111,7 +113,11 @@ export default {
   computed: {
     compPagination: {
       get: function () {
-        return this.localAttrs.pagination
+        let temp = Object.assign({}, this.localAttrs.pagination)
+        // if(temp.sortBy = '') {
+        //   temp.sortBy = 'age'
+        // }
+        return temp
       },
       set: function (pagination) {
         this.$emit('update:pagination', pagination)

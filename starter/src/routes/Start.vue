@@ -61,8 +61,8 @@ export default {
       pagination: {
         page: 1,
         rowsPerPage: 10,
-        descending: false,
-        sortBy: ''
+        descending: true,
+        sortBy: 'age'
       },
       search: null,
       requestObj: {
