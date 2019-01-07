@@ -77,6 +77,9 @@ export default {
             obj.myValue = this.item.searchValue[obj.myKey]
             obj.chipText = "test"
           } else if (obj.default) {
+            console.log('default', obj);
+            obj.myKey = Object.keys(this.item.default)[0]
+            obj.myValue = this.item.default[obj.myKey]
             obj = Object.assign(obj, {searchValue:{[obj.myKey]:obj.myValue} })
           } else {
             obj.myKey = '$eq';
