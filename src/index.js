@@ -12,6 +12,8 @@ import PnbiDataTablePlus from './components/pnbi-table-plus/PnbiTablePlus'
 import PnbiEmpty from './components/pnbi-empty/PnbiEmpty'
 import bus, { LOADING } from './event-bus'
 import helper from './helper'
+import VeeValidate, { Validator } from 'vee-validate'
+import de from 'vee-validate/dist/locale/de'
 
 // app wide styles, fonts
 import Vuetify from 'vuetify'
@@ -30,6 +32,30 @@ const install = (Vue, options) => {
   Vue.prototype.$helper = helper
   Vue.prototype.$config = options.config
   Vue.prototype.$numbro = numbro
+  const dictionary = {
+    de: {
+      messages: {
+        auth: `Bitte überprüfen Sie ihren Namen und das Passwort.`,
+        emailreset: `Die E-Mail Adresse wurde nicht gefunden.`,
+        passwordscore: `Das gewählte Passwort ist nicht sicher genug.`,
+        confirmspecial: `Die Passwörter stimmen nicht überein.`
+      }
+    },
+    en: {
+      messages: {
+        auth: `Please translate me`,
+        emailreset: `Please translate me`,
+        passwordscore: `Please translate me`,
+        confirmspecial: `Please translate me`
+      }
+    }
+  }
+  Vue.use(VeeValidate, {
+    aria: false,
+    locale: 'de'
+  })
+  Validator.localize('de', de)
+  Validator.localize(dictionary)
   Vue.prototype.$loader = function (status) {
     bus.$emit(LOADING, true)
   }

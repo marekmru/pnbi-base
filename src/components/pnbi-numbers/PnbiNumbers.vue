@@ -1,15 +1,16 @@
 <template>
-  <div class="fn-input">
-    <v-text-field :disabled="disabled" :label="label" autocomplete="off" v-model="internalValue" @keydown.native.stop="onKeyDown" :error-messages="errorMessages" :error="error"
-      :suffix="internalSuffix"></v-text-field>
-  </div>
+    <v-text-field :disabled="disabled" :label="label" autocomplete="off" v-model="internalValue" @keydown.native.stop="onKeyDown" :error-messages="errorMessages" :error="errorMessages.length > 0"
+      :suffix="suffix"></v-text-field>
 </template>
 
 <script>
 import is from 'is'
 export default {
+  name: 'pnbi-numbers',
+
   $_veeValidate: {
     // fetch the current value from the innerValue defined in the component data.
+    // neeeded for vee-validate error passing and display inside pnbi-numbers
     value () {
       return this.value
     },
@@ -18,42 +19,71 @@ export default {
     }
   },
   props: {
+    /**
+     * v-model
+    */
     value: {
       type: Number,
       default: null
     },
+    /**
+     * See v-text-field docs
+    */
     label: {
-      type: String
-    },
-    error: {
-      type: Boolean,
-      default: false,
-      required: false
-    },
-    errorMessages: {
-      type: Array,
-      required: false
-    },
-    type: {
       type: String,
-      default: 'currency'
+      default: null,
+      required: false
     },
+    /**
+     * See v-text-field docs
+    */
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    /**
+     * Displayed after v-text-field.
+     * See v-text-field docs
+    */
     suffix: {
       type: String,
+      required: false,
       default: '€'
     },
+    /**
+     * Parent component errorMessages object containing errors for this instance
+    */
+    errorMessages: {
+      type: Array,
+      default: () => [],
+      required: false
+    },
+    /**
+     * Value by which the v-model is multiplied.<br>
+     * Example: unit=1000, v-model=1000000; displayed value: <strong>1.000</strong>
+     * Suffix should be set to <strong>>T€</strong> (ThousandsEuro) if unit=1000
+    */
     unit: {
       type: Number,
       required: false,
       default: 1
-    },
-    disabled: {
-      type: Boolean,
-      default: false
     }
   },
-
+  mounted () {
+    console.warn('TODO: check pnbi-numbers implementation. Remove error, remove type, use suffix for type')
+    /* this.$nextTick(function () {
+      if (this.disabled === false) {
+        this.$validator.validateAll()
+      }
+    }) */
+  },
   methods: {
+    /** Triggered onKeyDown in component.
+    * Supported keyboard keys (only digits): 1234567890, down,up,left,right arrow
+    * On up/down click v-model is incremented, decremented
+    * @event keydown
+    * @type {Event}
+    */
     onKeyDown (event) {
       if (event.keyCode === 38) { // up
         this.internalValue = (this.value / this.unit) + this.incrementor
@@ -100,18 +130,8 @@ export default {
         }
       }
     },
-    internalSuffix () {
-      if (this.type === 'currency') {
-        return (this.unit === 1) ? ('€') : ((this.unit === 1000) ? ('T€') : (''))
-      } else {
-        return this.type
-      }
-    },
     incrementor () {
-      if (this.unit === 1) {
-        return 1000
-      }
-      return 1
+      return (this.unit === 1) ? 1000 : 1
     }
   }
 }
