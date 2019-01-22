@@ -219,7 +219,6 @@ export default {
       'title'
     ]),
     isNavVisible () {
-      console.log(this.$route)
       const meta = this.$route.meta || {
         hideNav: false
       }
