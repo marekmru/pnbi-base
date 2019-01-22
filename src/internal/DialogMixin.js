@@ -10,10 +10,10 @@ export default {
       required: false
     },
     /**
-     * Sets dialog status open or closed
+     * Sets dialog status open or closed from outside
      */
     open: {
-      required: true,
+      required: false,
       type: Boolean,
       default: false
     }
