@@ -6,6 +6,7 @@ import Imprint from './imprint/Imprint'
 import Privacy from './privacy/Privacy'
 import Profile from './profile/Profile'
 import PageNotFound from './p404/PageNotFound'
+
 const authPages = ['/login', '/forgot', '/reset']
 
 const publicPages = ['/imprint', '/privacy']

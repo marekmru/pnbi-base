@@ -1,19 +1,19 @@
 <template>
-  <v-card class="pnbi-card">
+  <v-card class="pnbi-card pb-2">
     <v-toolbar flat color="white" class="pnbi-datatable__toolbar pb-0 pt-2">
       <h3 class="accent--text card-headline">{{label}}</h3>
       <v-spacer></v-spacer>
-      <!-- @slot Use this slot primary controls -->
+      <!-- @slot Use this slot for buttons that control important parts of the card  (optional)-->
       <slot name="primary-controls">
       </slot>
     </v-toolbar>
     <v-card-text class="px-4 py-2">
-      <!-- @slot Use this slot to place the button content -->
+      <!-- @slot Main Slot. Use this slot to place the card content -->
       <slot></slot>
     </v-card-text>
-    <v-card-actions class="px-3 py-2" v-if="!!$slots['card-actions']">
-      <!-- @slot Use this slot card actions -->
+    <v-card-actions class="px-3 pt-2" v-if="!!$slots['card-actions']">
       <v-spacer></v-spacer>
+      <!-- @slot Use this slot card actions (optional) -->
       <slot name="card-actions"></slot>
     </v-card-actions>
   </v-card>
@@ -23,6 +23,7 @@
 import ContentContainerMixin from '../../internal/ContentContainerMixin'
 
 export default {
+  name: 'pnbi-card',
   mixins: [ContentContainerMixin]
 }
 </script>

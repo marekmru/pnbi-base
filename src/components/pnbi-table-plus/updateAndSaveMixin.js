@@ -14,8 +14,6 @@ export default {
   },
   mounted () {
     this.$updateHeaderDom(this.localStorageHeaders)
-    // register event listener
-    this.$bus.$on('customizeEvent', this.showDialog)
   },
   computed: {
     localAttrs: {
@@ -32,18 +30,34 @@ export default {
   data () {
     return {
       localStorageName: null,
-      localStorageHeaders: [],
       customiseDialog: false
     }
   },
-  beforeDestroy(){
-    this.$bus.$off('customizeEvent', this.showDialog)
-  },
-  watch: {
-  },
   methods: {
-    showDialog () {
-      this.customiseDialog = true
+    /**
+     * Filter localStorageHeaders
+     * set header.found true|false for specific display
+     */
+    filterHeadersBySearch (searchStr) {
+      console.log('searchStr', searchStr);
+      this.localStorageHeaders = this.localStorageHeaders.map(header => {
+        if (searchStr === '' || searchStr === null || searchStr === undefined) {
+          header.highlight = false
+        } else {
+          header.highlight = !header.text.toLowerCase().includes(searchStr)
+        }
+        return header
+      })
+    },
+    /*
+    * Toogle all headers on/off
+    */
+    selectAllHeaders (allHeadersSelected) {
+      this.localStorageHeaders = this.localStorageHeaders.map(header => {
+        header.selected = allHeadersSelected
+        return header
+      })
+      this.updateHeaders()
     },
     saveToLocalStorage (headers) {
       if (headers == null) {
@@ -60,6 +74,7 @@ export default {
       return JSON.parse(window.localStorage.getItem(this.localStorageName))
     },
     updateHeaders () {
+      console.log('save');
       this.saveToLocalStorage(this.localStorageHeaders)
       this.$updateHeaderDom(this.localStorageHeaders)
     },

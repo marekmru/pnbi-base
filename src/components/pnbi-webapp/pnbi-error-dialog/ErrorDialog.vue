@@ -38,7 +38,7 @@ import {
   mapGetters,
   mapActions
 } from 'vuex'
-import DialogMixin from '../../internal/DialogMixin'
+import DialogMixin from '../../../internal/DialogMixin'
 export default {
   props: {},
   mixins: [DialogMixin],

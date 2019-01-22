@@ -4,7 +4,7 @@
 export default {
   props: {
     /**
-     * Sets headline
+     * Sets headline. Headline is bigger, bolder then title. Used as <strong>primary</strong> headline on a page.
      */
     headline: {
       default: '',
@@ -12,7 +12,7 @@ export default {
       required: false
     },
     /**
-     * Sets title
+     * Sets title. Title is smaller, Usually used when there is already a card with headline on a page.
      */
     title: {
       required: false,

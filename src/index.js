@@ -16,12 +16,11 @@ import helper from './helper'
 import './plugins/vee-validate'
 import VeeValidate, { Validator } from 'vee-validate'
 import de from 'vee-validate/dist/locale/de'
+import Router from 'vue-router'
 // Vee-Validator
 
 // import Auth from './Auth'
 // import de from 'vee-validate/dist/locale/de'
-
-
 
 // app wide styles, fonts
 
@@ -41,7 +40,7 @@ const install = (Vue, options) => {
   Vue.prototype.$helper = helper
   Vue.prototype.$store = options.store
   Vue.prototype.$numbro = numbro
-  ////////////////////
+  /// /////////////////
   const dictionary = {
     de: {
       messages: {
@@ -60,21 +59,18 @@ const install = (Vue, options) => {
       }
     }
   }
+  Vue.use(Router)
   Vue.use(VeeValidate, {
     aria: false,
     locale: 'de'
   })
   Validator.localize('de', de)
   Validator.localize(dictionary)
-  //Validator.localize('de', dictionary.de)
-  ////////////////////
   // 1. setup store (holds all informations)
   setStore(options.store) // TODO oder new store
   options.store.dispatch('initializeApp', options.config)
-  /// ///////////////////////////////
   // 2.
   setRoutes(options.router)
-  // setApiConfig(options.config)
   setAjaxConfig(options.config)
   setCookieConfig(options.config.API)
 

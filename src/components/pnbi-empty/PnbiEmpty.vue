@@ -8,22 +8,19 @@
 <script>
 
 export default {
+  name: 'pnbi-empty',
   props: {
+    /**
+     * Just a string
+     */
     text: {
       type: String | null
     },
+    /**
+     * Is rendered as html: <strong>No</strong> data
+     */
     html: {
       type: String | null
-    },
-    data: {
-      // deprecated...
-      type: Object | null,
-      default: () => {
-        const dto = {
-          label: 'Keine Datensätze vorhanden. Bitte erstellen sie ein neues Element.'
-        }
-        return dto
-      }
     }
   },
   computed: {

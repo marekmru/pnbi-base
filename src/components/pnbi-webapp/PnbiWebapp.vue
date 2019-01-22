@@ -4,6 +4,7 @@
 
       <v-navigation-drawer v-model="sidenavOpen" fixed clipped class="grey lighten-4" app>
         <div class="pt-3">
+          <!-- @slot Use this slot for SideNavigation v-list -->
           <slot name="navigation-slot"></slot>
         </div>
         <v-list dense class="default-routes">
@@ -59,7 +60,8 @@
       <transition name="slide">
         <v-toolbar dense dark color="accent darken-1" app fixed clipped-left>
           <v-toolbar-side-icon class="white--text" @click.native="toogleSideNav()"></v-toolbar-side-icon>
-          <slot v-if="hasTitleSlot" name="title-slot"></slot>
+          <!-- @slot Use this slot for a custom title instead of the default app-name -->
+          <slot v-if="!!this.$slots['title-slot']" name="title-slot"></slot>
           <h2 v-else class="app-title">{{title}}</h2>
           <v-spacer></v-spacer>
 
@@ -82,6 +84,7 @@
       </transition>
       <v-content class="pt-0">
         <v-container :fluid="isFluid" class="grey lighten-4">
+          <!-- @slot Use this slot for router instance -->
           <slot name="router"></slot>
           <pnbi-snackbar></pnbi-snackbar>
         </v-container>
@@ -109,14 +112,25 @@ import {
   CONFIG_UPDATED,
   ERROR
 } from '../../event-bus'
-// import Auth from '../../Auth'
-import PnbiSnackbar from '../pnbi-snackbar/PnbiSnackbar'
-import ErrorDialog from './ErrorDialog'
+import PnbiSnackbar from './pnbi-snackbar/Snackbar.vue'
+import ErrorDialog from './pnbi-error-dialog/ErrorDialog.vue'
 import {
   mapActions,
   mapGetters
 } from 'vuex'
 export default {
+  name: 'pnbi-webapp',
+  props: {
+    /**
+     * Controls responsive behavior of the app.
+     * If set to true the app content is full-width of the browser, even in large screen reslutions
+    */
+    fullWidth: {
+      type: Boolean,
+      default: false,
+      required: false
+    }
+  },
   components: {
     PnbiSnackbar,
     ErrorDialog
@@ -186,8 +200,6 @@ export default {
 
       this.$bus.$on(ERROR, function showError (alert) {
         console.log('TODO: ERROR')
-        /*         this.alertMessage = alert
-        this.alertOpen = true */
       })
     },
     _updateDimensions () {
@@ -198,15 +210,7 @@ export default {
       this.sidenavOpen = !this.sidenavOpen
     }
   },
-  props: {
-    fullWidth: {
-      type: Boolean,
-      default: false,
-      required: false
-    }
-  },
   created () {
-    // this.setTitle(this.$config.TITLE.toUpperCase())
   },
   computed: {
     ...mapGetters([
@@ -214,10 +218,8 @@ export default {
       'loading',
       'title'
     ]),
-    hasTitleSlot () {
-      return !!this.$slots['title-slot']
-    },
     isNavVisible () {
+      console.log(this.$route)
       const meta = this.$route.meta || {
         hideNav: false
       }

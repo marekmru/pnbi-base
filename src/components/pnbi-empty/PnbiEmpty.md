@@ -1,7 +1,7 @@
 ### Usage
 
-Show this component if no content is available
+Show this component if no content is available. For example in datatable etc.
 
 ```jsx
-<pnbi-empty :data="{label: 'No data available.'}"></pnbi-empty>
+<pnbi-empty text="No data available"></pnbi-empty>
 ```

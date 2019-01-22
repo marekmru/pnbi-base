@@ -4,7 +4,7 @@
 export default {
   props: {
     /**
-     * Sets value required default to false
+     * Sets value/v-model placeholder
      */
     value: {
       required: false
@@ -13,6 +13,7 @@ export default {
      * Sets dialog status open or closed
      */
     open: {
+      required: true,
       type: Boolean,
       default: false
     }

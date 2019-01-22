@@ -1,18 +1,17 @@
 ### Usage
 
-Root for all PNBI webapps See src/App.vue
+Root component for all plan.net business intelligence webapps
+<i>router not working with vue-styleguidist - so just code.<i/>
+#### Code
 
-#### Save user settings in localStorage
-
-If you has some settings, that should be saved for a user use `userSettings` object in localstorage.
-
-Current structure:
 ```js static
-{
-  userSettings: {
-    sidenavOpen: false //check for toggling the sidebar
-  }
-}
-```
+  <pnbi-webapp>
+    <side-navigation slot="navigation-slot"></side-navigation>
+    <router-view slot="router"></router-view>
+  </pnbi-webapp>
 
-##### Example: TBD
+  <pnbi-webapp full-width>
+    <side-navigation></side-navigation>
+    <router-view slot="router"></router-view>
+  </pnbi-webapp>
+```

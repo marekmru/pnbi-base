@@ -16,30 +16,31 @@
 <script>
 
 export default {
+  name: 'pnbi-page',
   props: {
     /**
-     * Sets small header image
+     * Sets small header image. Usually no content in the header
      */
     small: {
       type: Boolean | null,
       default: false
     },
     /**
-     * Sets medium header image
+     * Sets medium header image. Used when there is a bit of content in the header. (height 90px)
      */
     medium: {
       type: Boolean | null,
       default: false
     },
     /**
-     * Sets large header image
+     * Sets large header image. Used when there is a lot of content in the header. (height 135px)
      */
     large: {
       type: Boolean | null,
       default: false
     },
     /**
-     * Sets 1 of 3 header image type
+     * Currently three different background images are available with number 1,2,3
      */
     headerType: {
       type: String | null,
@@ -47,8 +48,8 @@ export default {
     }
   },
   mounted () {
-    const pageHC = document.querySelector('.page-header-content')
-    const header = document.querySelector('.pnbi-sub-header')
+    const pageHC = this.$el.querySelector('.page-header-content')
+    const header = this.$el.querySelector('.pnbi-sub-header')
 
     if (this.small === true || this.small === '') {
       pageHC.style.height = '36px'

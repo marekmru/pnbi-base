@@ -1,50 +1,23 @@
 <template>
 
-  <div class="pnbi-datatable">
+  <div class="pnbi-datatable" ref="toolbar">
 
-    <pnbi-dialog :title="dialogTitle" :open="customiseDialog" @close="customiseDialog=false" width="500">
-      <div slot="dialog-content">
-        <v-list>
-          <v-subheader>
-            {{dialogSubtitle}}
-          </v-subheader>
+    <!-- customise dialog here -->
+    <customise-dialog
+      :localStorageHeaders="localStorageHeaders"
+      @saveHeaders="updateHeaders()"
+      @filterHeadersBySearch="filterHeadersBySearch($event)"
+      @selectAllHeaders="selectAllHeaders($event)"></customise-dialog>
 
-          <!-- select all -->
-          <v-list-tile>
-            <v-list-tile-content>
-                <v-checkbox :label="dialogSelectalllabel" @change="selectAllHeaders()" v-model="selectAll"
-                  style="align-items:center">
-                </v-checkbox>
-              </v-list-tile-content>
-              <v-list-tile-action>
-                <v-text-field clearable class="pnbi-search" append-icon="search" flat solo-inverted full-width :label="dialogSearchlabel" v-model="searchStr"></v-text-field>
-            </v-list-tile-action>
-          </v-list-tile>
+    <!-- Advanced search -->
+    <extend-search-dialog
+      :items="localStorageHeaders"
+      @updateItems="updateItems($event)"></extend-search-dialog>
 
-          <v-divider></v-divider>
-
-          <draggable class="list-scrolWrapper" :list="localStorageHeaders" @start="drag=true" @end="updateHeaders($event)">
-            <v-list-tile v-for="header in localStorageHeaders" :key="header.text" :class="{'highlighted': header.highlight}">
-              <v-list-tile-content>
-                <v-checkbox :label="header.text" @change="updateHeaders()" v-model="header.selected" :value="header.selected"
-                  style="align-items:center">
-                </v-checkbox>
-              </v-list-tile-content>
-
-              <v-list-tile-action class="text-sm-right">
-                <v-icon color="grey lighten-1">drag_indicator</v-icon>
-              </v-list-tile-action>
-
-            </v-list-tile>
-          </draggable>
-        </v-list>
-      </div>
-      <div slot="dialog-actions">
-        <v-btn dark color="primary" @click="customiseDialog = false" flat>
-          {{dialogCloselabel}}
-        </v-btn>
-      </div>
-    </pnbi-dialog>
+    <!-- Toolbar with chips -->
+    <chips
+      :items="localStorageHeaders"
+      @updateItems="updateItems($event)"></chips>
 
     <v-data-table v-bind="localAttrs" :pagination.sync="compPagination">
       <template slot="items" slot-scope="props">
@@ -55,26 +28,34 @@
           </td>
         </tr>
       </template>
+
       <!-- TODO enable custom empty state
       <template slot="no-results">
         <pnbi-empty text="No data to display"></pnbi-empty>
       </template> -->
+
     </v-data-table>
   </div>
 
 </template>
 
 <script>
-import ColumnFilterMixin from './columnFilterMixin.js'
+import EventBus from 'pnbi-base/src/event-bus'
+import UpdateAndSaveMixin from './updateAndSaveMixin.js'
 import is from 'is'
-import draggable from 'vuedraggable'
-
+import Chips from './cards/Chips'
+import CustomiseDialog from './dialogs/CustomiseDialog'
+import ExtendSearchDialog from './dialogs/ExtendSearchDialog'
+import _throttle from 'lodash.throttle'
+import _debounce from 'lodash.debounce'
 export default {
-  name: 'PnbiDatatablePlus',
+  name: 'pnbi-datatable-plus',
   components: {
-    draggable
+    Chips,
+    CustomiseDialog,
+    ExtendSearchDialog
   },
-  mixins: [ColumnFilterMixin],
+  mixins: [UpdateAndSaveMixin],
   props: {
     /**
      * Uniq identifier for table.
@@ -86,51 +67,30 @@ export default {
       default: 'default'
     },
     /**
-     * Defined the dialog title for customised dialog.
+     * Default columns that are enabled for advanced search
      */
-    dialogTitle: {
-      type: String,
-      default: 'Customise table'
-    },
-    /**
-     * Defined the dialog subtitle for customised dialog.
-     */
-    dialogSubtitle: {
-      type: String,
-      default: 'Select visible columns'
-    },
-    /**
-     * Defined label for dialog close button
-     */
-    dialogCloselabel: {
-      type: String,
-      default: 'Close'
-    },
-    /**
-     * Defined the label for selecting all headers in dialog
-     */
-    dialogSelectalllabel: {
-      type: String,
-      default: 'Select all'
-    },
-    /**
-     * Label for search placeholder inside of dialog
-     */
-    dialogSearchlabel: {
-      type: String,
-      default: 'Search'
+    filter: {
+      type: Array,
+      default: null
     }
   },
   methods: {
     /*
-    * Toogle all headers on/off
+    * Send the API request with a debounce of 1000ms
+    *
     */
-    selectAllHeaders () {
-      this.localStorageHeaders = this.localStorageHeaders.map(header => {
-        header.selected = this.selectAll
-        return header
-      })
-      this.updateHeaders()
+    sendFilterUpdateEvent: _debounce(function send (items) {
+      const visibleItems = items.filter(item => item.selectedForSearch)
+      const enabledForSearchItems = items.filter(item => item.searchValue)
+      console.log('--', visibleItems, enabledForSearchItems)
+      this.localStorageHeaders = items
+      this.saveToLocalStorage(this.localStorageHeaders)
+      if (visibleItems.length === enabledForSearchItems.length) {
+        EventBus.$emit('filterUpdate', this.$helper.clone(this.localStorageHeaders))
+      }
+    }, 1000),
+    updateItems (items) {
+      this.sendFilterUpdateEvent(items)
     },
     isNumber (val, key) {
       const isNumber = is.number(val)
@@ -146,31 +106,20 @@ export default {
       }
       return isNumber
     },
-    /**
-     * Filter localStorageHeaders
-     * set header.found true|false for specific display
-     */
-    filterlocalStorageHeadersBySearchStr () {
-      this.localStorageHeaders = this.localStorageHeaders.map(header => {
-        if (this.searchStr === '' || this.searchStr === null) {
-          header.highlight = false
-        } else {
-          header.highlight = !header.text.toLowerCase().includes(this.searchStr)
-        }
-        return header
-      })
+    onSearchQueryEvent (query) {
+      this.$emit('updateSearchQuery', query)
     }
   },
   computed: {
     compPagination: {
       get: function () {
-        return this.localAttrs.pagination
+        let temp = Object.assign({}, this.localAttrs.pagination)
+        // if(temp.sortBy = '') {
+        //   temp.sortBy = 'age'
+        // }
+        return temp
       },
       set: function (pagination) {
-        // https://vuejs.org/v2/guide/components-custom-events.html#Event-Names
-        // For these reasons, we recommend you always use kebab-case for event names.
-        // this.$emit('pagination-event', pagination)
-        // https://vuejs.org/v2/guide/components-custom-events.html#sync-Modifier
         this.$emit('update:pagination', pagination)
         this.$nextTick(function () {
           this.$updateHeaderDom(this.localStorageHeaders)
@@ -178,16 +127,13 @@ export default {
       }
     }
   },
-  watch: {
-    searchStr: function () {
-      this.filterlocalStorageHeadersBySearchStr()
-    }
-  },
   data: function () {
     return {
+      debounced: null,
       drag: null,
-      selectAll: true,
-      searchStr: null
+      searchPlusToolbarVisible: false,
+      searchPlusDialogVisible: false,
+      localStorageHeaders: []
     }
   }
 }
@@ -211,11 +157,12 @@ export default {
   /deep/ .v-text-field__details {
     margin-bottom: 0 !important;
   }
-  .highlighted {
-    opacity: 0.3;
+  .card-wrapper {
+    padding: 8px;
   }
-  .list-scrolWrapper {
-    max-height: 350px;
-    overflow-x: scroll;
+  .caption {
+    max-width: 15em;
+    margin-bottom: 0;
+    color: #7a869a;
   }
 </style>

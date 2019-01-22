@@ -1,15 +1,16 @@
-<template>
-  <div class="pnbi-datatable dark elevation-1" :class="{'text-uppercase': this.uppercaseLabels}">
+<template> <!-- :class="{'uc': this.uppercaseLabels}" Not working correctly, everything is uppercase -->
+
+  <div class="pnbi-datatable dark elevation-1" >
     <!--  flat" :class="{'elevation-1': !flat}" -->
     <v-toolbar flat color="white" class="pnbi-datatable__toolbar pb-3 pt-3">
       <h3 class="accent--text card-headline">{{label}}</h3>
       <v-spacer></v-spacer>
 
-      <!-- primary controls -->
+      <!-- primary controls for additional filters and controls -->
       <slot name="primary-controls">
       </slot>
 
-      <!-- customise button for pnbi-datatable-plus -->
+      <!-- customize button for pnbi-datatable-plus -->
       <div v-if="customizeLabel">
         <v-btn small color="accent"
           @click.stop="$bus.$emit('customizeEvent')">{{customizeLabel}}</v-btn>
@@ -23,12 +24,10 @@
       </v-btn>
     </v-toolbar>
 
-    <!-- secondary slot -->
+    <!-- optional secondary slot for even more additional filters and controls (underneath primary controls) -->
     <slot v-if="$slots['secondary-controls']" name="secondary-controls"></slot>
-
     <!-- default slot -->
-    <slot>
-    </slot>
+    <slot></slot>
 
   </div>
 </template>
@@ -37,7 +36,7 @@
 import ContentContainerMixin from '../../internal/ContentContainerMixin'
 
 export default {
-  name: 'PnbiDatatable',
+  name: 'pnbi-datatable',
   mixins: [ContentContainerMixin],
   props: {
     /**
@@ -45,27 +44,34 @@ export default {
     * set is to false if button should be hidden
     */
     buttonLabel: {
-      type: String | Boolean,
+      type: [String, Boolean],
       default: 'Neu',
       required: true
     },
     /**
-    * If defined customise button is visible.
-    * value is used as button text
+    * The customize button is used to control elements in pnbi-datatable-plus.
+    * If a value is set, the it will be displayed as button label.
+    * Emits a custom event on click: customizeEvent
     */
     customizeLabel: {
-      typ: String | Boolean,
+      typ: [String, Boolean],
+      required: false,
       default: false
     },
     /**
-     * Should the labels be uppercase? Dafault: true
+     * Set to false to display lowercase labels
      */
     uppercaseLabels: {
       type: Boolean,
+      required: false,
       default: true
     },
+    /**
+     * Removes card elevation from datatable for better integration in other components
+     */
     flat: {
-      type: Boolean | null,
+      type: Boolean,
+      required: false,
       default: false
     }
   },
@@ -150,7 +156,7 @@ div >>> .v-input.pnbi-datatable__search .v-input__control {
 .pnbi-datatable >>> thead tr th:first-letter {
   text-transform: capitalize;
 }
-.pnbi-datatable.text-uppercase >>> thead tr th {
+.pnbi-datatable.uc >>> thead .column {
   text-transform: uppercase;
 }
 .pnbi-datatable .v-alert.warning {
@@ -166,22 +172,7 @@ div >>> .v-input.pnbi-datatable__search .v-input__control {
   background: rgba(204, 212, 218, 0.5) !important;
 }
 
-/* .pnbi-datatable.dark thead tr th.column.active,
-.pnbi-datatable.dark thead tr th.column:hover,
-.pnbi-datatable.dark thead tr th.column.active:hover,
-.pnbi-datatable.dark thead tr th.column.active.sortable:hover,
-.pnbi-datatable.dark thead tr th.column .icon,
-.pnbi-datatable.dark thead tr th.column.active .icon,
-.pnbi-datatable.dark thead tr th.column.active,
-.pnbi-datatable.dark thead tr th.column:hover,
-.pnbi-datatable.dark thead tr th.column.active:hover,
-.pnbi-datatable.dark thead tr th.column.active.sortable:hover,
-.pnbi-datatable.dark thead tr th.column .icon,
-.pnbi-datatable.dark thead tr th.column.active .icon {
-  color: rgba(255, 255, 255, 0.9) !important;
-} */
-
-/*light theme*/
+/*light theme ?*/
 
 .pnbi-datatable tr.active {
   background: rgba(204, 212, 218, 0.6) !important;
