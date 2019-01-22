@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import PnbiBase from 'pnbi-base/src'
+
 Vue.use(PnbiBase, {
   router,
   config: {
