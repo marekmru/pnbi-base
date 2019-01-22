@@ -2,7 +2,7 @@
 module.exports = {
   outputDir: 'dist',
   lintOnSave: true,
-  baseUrl: './',
+  publicPath: './',
   configureWebpack: {
     resolve: {
       alias: {
