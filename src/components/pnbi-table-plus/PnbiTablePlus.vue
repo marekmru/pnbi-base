@@ -46,7 +46,6 @@ import is from 'is'
 import Chips from './cards/Chips'
 import CustomiseDialog from './dialogs/CustomiseDialog'
 import ExtendSearchDialog from './dialogs/ExtendSearchDialog'
-// import _throttle from 'lodash.throttle'
 import _debounce from 'lodash.debounce'
 export default {
   name: 'pnbi-datatable-plus',
