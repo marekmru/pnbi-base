@@ -160,6 +160,7 @@ div >>> .v-input.pnbi-datatable__search .v-input__control {
   text-transform: uppercase;
 }
 .pnbi-datatable .v-alert.warning {
+  /* TODO This was broken inside of datatable+ */
   margin-top: 0px;
   margin-left: -24px;
   margin-right: -24px;
