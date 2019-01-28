@@ -61,23 +61,17 @@ export default {
       pagination: {
         page: 1,
         rowsPerPage: 10,
-        descending: false,
-        sortBy: ''
+        descending: true,
+        sortBy: 'age'
       },
       search: null,
+      requestObj: {
+        filter: {},
+        search: null
+      },
       newBudget: null,
       projectName: null,
       headers: []
-    }
-  },
-  computed: {
-    computedFilters: function () {
-      const obj = this.headers.filter(item => {
-        if (item.selectedForSearch) {
-          return item.searchValue
-        }
-      })
-      return obj
     }
   },
   watch: {
@@ -88,7 +82,12 @@ export default {
   methods: {
     // Update filter with this event
     onFilterUpdate (items) {
-      this.headers = items
+      this.requestObj.filter = {}
+      items.forEach(item => {
+        if (item.selectedForSearch) {
+          Object.assign(this.requestObj.filter, { [item.value]: item.searchValue })
+        }
+      })
       this.getDataFromApi()
         .then(data => {
           this.items = data.tableResponce.items
@@ -132,7 +131,7 @@ export default {
         const { sortBy, descending, page, rowsPerPage } = this.pagination
         const totalItems = items.length
 
-        console.log('API Request', this.pagination, this.computedFilters)
+        console.log('API Request', this.pagination, this.requestObj.filter)
 
         // BE sorting
         if (this.pagination.sortBy && items.length > 1) {
@@ -161,13 +160,13 @@ export default {
         tableResponce.items = items
         tableResponce.totalItems = totalItems
         tableResponce.headers = [
-          { text: 'Name', value: 'name', required: true, default: { '$in': 'alex' } },
+          { text: 'Name', value: 'name', required: true, default: { '$in': 'user' } },
           { text: 'numbro 2', value: 'age', style: 'numbro.js', format: '0,0', default: { '$eq': 100 } },
           { text: 'currency €', value: 'price', format: '0,0.00', style: 'numbro.js' },
           { text: 'Percent', value: 'value1', format: '0.0%', style: 'numbro.js' },
-          { text: 'String', value: 'value2', format: 'DD/MM/YYYY', style: 'moment.js', required: true, default: { '$lt': moment().add(7, 'days').format('YYYY-MM-DD') } },
+          { text: 'String', value: 'value2', format: 'DD/MM/YYYY', style: 'moment.js', default: { '$lt': moment().add(7, 'days').format('YYYY-MM-DD') } },
           { text: 'Value 3', value: 'value3', format: '6 a', style: 'numbro.js' },
-          { text: 'just number', value: 'value4' },
+          { text: 'String value', value: 'value4' },
           { text: 'no format & moment', value: 'value5', style: 'moment.js' },
           { text: 'moment', value: 'momentjs', format: 'DD/MM/YYYY', style: 'moment.js' }
         ]

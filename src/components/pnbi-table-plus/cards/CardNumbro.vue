@@ -72,9 +72,15 @@ export default {
         if(this.internalLocalItem === null) {
           let obj = this.$helper.clone(this.item)
           // item with default search value
-          if(this.item.searchValue) {
+          if(obj.searchValue) {
             obj.myKey = Object.keys(this.item.searchValue)[0]
             obj.myValue = this.item.searchValue[obj.myKey]
+            obj.chipText = "test"
+          } else if (obj.default) {
+            console.log('default', obj);
+            obj.myKey = Object.keys(this.item.default)[0]
+            obj.myValue = this.item.default[obj.myKey]
+            obj = Object.assign(obj, {searchValue:{[obj.myKey]:obj.myValue} })
           } else {
             obj.myKey = '$eq';
             obj.myValue = ''
@@ -94,8 +100,10 @@ export default {
         return this.localItem.myKey
       },
       set: function (newKey) {
-        const oldKey = Object.keys(this.item.searchValue)[0]
-        this.setChipText(newKey, this.item.searchValue[oldKey])
+        if(this.item.searchValue) {
+          const oldKey = Object.keys(this.item.searchValue)[0]
+          this.setChipText(newKey, this.item.searchValue[oldKey])
+        }
         this.localItem = Object.assign(this.localItem, {myKey:newKey})
       }
     }

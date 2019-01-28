@@ -17,7 +17,7 @@
                 clearable
                 class="pnbi-search"
                 append-icon="search"
-                flat solo-inverted full-width
+                flat full-width
                 :label="dialogSearchlabel"
                 v-model="searchStr">
               </v-text-field>
@@ -138,5 +138,8 @@ export default {
 .list-scrolWrapper {
   max-height: 350px;
   overflow-y: scroll;
+}
+/deep/ .v-label {
+  font-size: 16px;
 }
 </style>
