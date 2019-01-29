@@ -74,6 +74,20 @@ export default {
       default: null
     }
   },
+  created: function (){
+    /* Create default sorting for table
+    *  check if any header from BE has a desc attribute, then update the pagination
+    */
+    let sortBy = this.localAttrs.headers.filter(header => {
+      if(header.desc){
+        return true
+      }
+    })
+    if(sortBy.length > 0) {
+      this.localAttrs.pagination.sortBy = sortBy[0].value
+      this.localAttrs.pagination.descending = sortBy[0].desc
+    }
+  },
   methods: {
     /*
     * Send the API request with a debounce of 1000ms
@@ -82,7 +96,6 @@ export default {
     sendFilterUpdateEvent: _debounce(function send(items) {
       const visibleItems = items.filter(item => item.selectedForSearch)
       const enabledForSearchItems = items.filter(item => item.searchValue)
-      console.log('--', visibleItems, enabledForSearchItems);
       this.localStorageHeaders = items
       this.saveToLocalStorage(this.localStorageHeaders)
       if(visibleItems.length === enabledForSearchItems.length) {
@@ -113,13 +126,12 @@ export default {
   computed: {
     compPagination: {
       get: function () {
+        // return pagination
         let temp = Object.assign({}, this.localAttrs.pagination)
-        // if(temp.sortBy = '') {
-        //   temp.sortBy = 'age'
-        // }
         return temp
       },
       set: function (pagination) {
+        console.log('manual pagination', pagination);
         this.$emit('update:pagination', pagination)
         this.$nextTick(function () {
           this.$updateHeaderDom(this.localStorageHeaders)
