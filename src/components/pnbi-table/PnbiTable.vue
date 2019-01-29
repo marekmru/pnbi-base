@@ -56,7 +56,7 @@ export default {
     * set is to false if button should be hidden
     */
     buttonLabel: {
-      type: String | Boolean,
+      type: [String, Boolean],
       default: 'Neu',
       required: true
     },
@@ -65,7 +65,7 @@ export default {
     * set is to false if button should be hidden
     */
     icon: {
-      type: String | Boolean,
+      type: [String, Boolean],
       default: 'add'
     },
     /**
@@ -73,7 +73,7 @@ export default {
     * value is used as button text
     */
     customizeLabel: {
-      typ: String | Boolean,
+      typ: [String, Boolean],
       default: false
     },
     /**
@@ -87,11 +87,11 @@ export default {
      * If defined, enables extended search inside of table
      */
     extendSearch: {
-      type: String,
-      default: "Extends"
+      type: [String, Boolean],
+      default: false
     },
     flat: {
-      type: Boolean | null,
+      type: [String, Boolean],
       default: false
     }
   },
