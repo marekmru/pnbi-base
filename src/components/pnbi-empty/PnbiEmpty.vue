@@ -1,5 +1,5 @@
 <template>
-  <v-alert :value="true" color="warning" icon="warning">
+  <v-alert :value="true" color="warning" :icon="icon">
     <span v-if="content.html" class="grey--text" v-html="content.html"></span>
     <span v-else class="grey--text">{{content.label}}</span>
   </v-alert>
@@ -9,6 +9,10 @@
 
 export default {
   props: {
+    icon: {
+      type: [String, null],
+      default: 'warning'
+    },
     text: {
       type: String | null
     },
