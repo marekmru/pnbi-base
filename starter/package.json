@@ -9,7 +9,7 @@
     "test:e2e": "vue-cli-service test:e2e"
   },
   "dependencies": {
-    "pnbi-base": "https://github.com/marekmru/pnbi-base.git#mmr.CORE4-39_2610",
+    "pnbi-base": "https://github.com/marekmru/pnbi-base.git#mmr.CORE4-39_2610"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.3.0",
