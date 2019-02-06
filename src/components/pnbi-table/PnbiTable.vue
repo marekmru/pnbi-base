@@ -28,7 +28,7 @@
         <v-text-field clearable class="pnbi-datatable__search" solo-inverted flat v-model="search" append-icon="search"></v-text-field>
       </v-flex>
 
-      <v-btn v-if="buttonLabel !== false" small color="primary" dark @click="$emit('new')">
+      <v-btn v-if="buttonLabel !== false" small color="primary" dark @click="$emit('new')" :disabled="isDisabled">
         <v-icon class="mr-1" dark left>{{icon}}</v-icon>
         {{buttonLabel}}
       </v-btn>
@@ -92,6 +92,14 @@ export default {
     },
     flat: {
       type: [String, Boolean],
+      default: false
+    },
+    /**
+    * Use to disable Button.
+    * set to true if button should be disabled
+    */
+    isDisabled: {
+      type: Boolean,
       default: false
     }
   },
