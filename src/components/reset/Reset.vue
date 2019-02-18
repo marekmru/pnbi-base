@@ -25,7 +25,8 @@ export default {
           v => !!v || 'Passwort ist ein Pflichtfeld',
           v => v.length >= 6 || 'Passwort muss mindestens 6 Zeichen lang sein',
           v => this.isValid || 'Passwörter sind nicht identisch',
-          v => !this.error || 'Der Resetlink ist abgelaufen. Bitte fordern Sie einen neuen Resetlink an. Klicken Sie dazu auf der Login Seite auf PASSWORT ZURÜCKSETZEN.'
+          v => !this.error || 'Der Resetlink ist abgelaufen. Bitte fordern Sie einen neuen Resetlink an. Klicken Sie dazu auf der Login Seite auf PASSWORT ZURÜCKSETZEN.',
+          // v => !this.error412 || 'Das Passwort ist nicht sicher. Bitte wählen sie ein anderes Passwort.'
         ]
       }
     }
@@ -35,6 +36,7 @@ export default {
       this.error = false
     },
     focus () {
+      this.error = false
       this.$refs.form.validate()
     },
     goToLogin () {
@@ -91,11 +93,11 @@ export default {
     },
     color () {
       if (this.strength < 33) {
-        return ['error', 'warning', 'success'][0]
+        return 'error'
       } else if (this.strength >= 33 && this.strength < 66) {
-        return ['error', 'warning', 'success'][1]
+        return 'warning'
       } else if (this.strength >= 66) {
-        return ['error', 'warning', 'success'][2]
+        return 'success'
       }
     }
   },
@@ -129,7 +131,7 @@ export default {
                   <v-flex v-for="(m,i) in internalMessage" :key="i" class="error--text" style="font-size:12px;">{{m}}</v-flex>
                 </v-layout>
 
-                <v-btn block color="primary" type="submit" :disabled="!rules.valid" @click="onSubmit">Neues Passwort setzen</v-btn>
+                <v-btn block color="primary" type="submit" :disabled="!rules.valid || strength < 0.8" @click="onSubmit">Neues Passwort setzen</v-btn>
                 <v-btn @click="goToLogin" flat block>Zurück zum Login</v-btn>
               </v-card-text>
             </v-card>
