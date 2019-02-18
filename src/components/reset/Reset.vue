@@ -25,8 +25,7 @@ export default {
           v => !!v || 'Passwort ist ein Pflichtfeld',
           v => v.length >= 6 || 'Passwort muss mindestens 6 Zeichen lang sein',
           v => this.isValid || 'Passwörter sind nicht identisch',
-          v => !this.error || 'Der Resetlink ist abgelaufen. Bitte fordern Sie einen neuen Resetlink an. Klicken Sie dazu auf der Login Seite auf PASSWORT ZURÜCKSETZEN.',
-          // v => !this.error412 || 'Das Passwort ist nicht sicher. Bitte wählen sie ein anderes Passwort.'
+          v => !this.error || 'Der Resetlink ist abgelaufen. Bitte fordern Sie einen neuen Resetlink an. Klicken Sie dazu auf der Login Seite auf PASSWORT ZURÜCKSETZEN.'
         ]
       }
     }
@@ -57,6 +56,7 @@ export default {
     },
     onChange (data) {
       if (this.user.password.length > 0) {
+        this.$refs.form.validate()
         Auth.password({
           password: this.user.password
         })
@@ -119,7 +119,7 @@ export default {
 
               <v-card-text class="py-0">
                 <v-text-field type="password" @focus="focus" label="Neues Passwort" v-model="user.password" :rules="rules.passwordRules" @input="onChange" required></v-text-field>
-                <v-text-field type="password" @focus="focus" label="Passwort wiederholen" v-model="user.password2" :rules="rules.passwordRules2" required></v-text-field>
+                <v-text-field type="password" @focus="focus" label="Passwort wiederholen" v-model="user.password2" :rules="rules.passwordRules2" @input="$refs.form.validate"  required></v-text-field>
 
                 <v-layout pb-1>
                   <v-flex>
@@ -131,7 +131,7 @@ export default {
                   <v-flex v-for="(m,i) in internalMessage" :key="i" class="error--text" style="font-size:12px;">{{m}}</v-flex>
                 </v-layout>
 
-                <v-btn block color="primary" type="submit" :disabled="!rules.valid || strength < 0.8" @click="onSubmit">Neues Passwort setzen</v-btn>
+                <v-btn block color="primary" type="submit" :disabled="rules.valid === false || strength < 80" @click="onSubmit">Neues Passwort setzen</v-btn>
                 <v-btn @click="goToLogin" flat block>Zurück zum Login</v-btn>
               </v-card-text>
             </v-card>
@@ -150,6 +150,3 @@ export default {
     </v-container>
   </div>
 </template>
-
-<style lang="scss">
-</style>
