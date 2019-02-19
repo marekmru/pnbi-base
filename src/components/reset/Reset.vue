@@ -119,7 +119,7 @@ export default {
 
               <v-card-text class="py-0">
                 <v-text-field type="password" @focus="focus" label="Neues Passwort" v-model="user.password" :rules="rules.passwordRules" @input="onChange" required></v-text-field>
-                <v-text-field type="password" @focus="focus" label="Passwort wiederholen" v-model="user.password2" :rules="rules.passwordRules2" @input="$refs.form.validate"  required></v-text-field>
+                <v-text-field type="password" @focus="focus" label="Passwort wiederholen" v-model="user.password2" :rules="rules.passwordRules2" @input="$refs.form.validate()"  required></v-text-field>
 
                 <v-layout pb-1>
                   <v-flex>
