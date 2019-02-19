@@ -1,6 +1,22 @@
 ### Usage
 
-This is a wrapper for v-data-table and acceps all attributes and slots from
+In order to use DataTablePlus, the following additions must be made to the project. 
+index.js: 
+```js static
+import PnbiDataTablePlus from './pnbi-base/src/components/pnbi-table-plus/PnbiTablePlus'
+
+Vue.component('pnbi-datatable-plus', PnbiDataTablePlus)
+```
+
+package.json:
+```json static
+"dependencies": {
+  "vuedraggable": "^2.16.0",
+  "lodash.debounce": "^4.0.8"
+},
+```
+
+This is a wrapper for v-data-table and accepts all attributes and slots from
  original v-data-table.
 
 ```jsx

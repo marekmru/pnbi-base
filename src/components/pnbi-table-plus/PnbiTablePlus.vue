@@ -4,27 +4,27 @@
 
     <!-- customise dialog here -->
     <customise-dialog
-      :localStorageHeaders="localStorageHeaders"
-      @saveHeaders="updateHeaders()"
-      @filterHeadersBySearch="filterHeadersBySearch($event)"
-      @selectAllHeaders="selectAllHeaders($event)"></customise-dialog>
+      :local-storage-headers="localStorageHeaders"
+      @save-headers="updateHeaders()"
+      @filter-headers-by-search="filterHeadersBySearch($event)"
+      @select-all-headers="selectAllHeaders($event)"></customise-dialog>
 
     <!-- Advanced search -->
     <extend-search-dialog
       :items="localStorageHeaders"
-      @updateItems="updateItems($event)"></extend-search-dialog>
+      @update-items="updateItems($event)"></extend-search-dialog>
 
     <!-- Toolbar with chips -->
     <chips
       :items="localStorageHeaders"
-      @updateItems="updateItems($event)"></chips>
+      @update-items="updateItems($event)"></chips>
 
     <v-data-table v-bind="localAttrs" :pagination.sync="compPagination">
       <template slot="items" slot-scope="props">
         <tr @click="$emit('open-row', props.item)">
           <td v-for="(key, value, index) in localStorageHeaders" :key="index" nowrap class="tdcell" :title="props.item[key.value]"
             :class="{'text-xs-right': isNumber(props.item[key.value], key.value)}">
-            {{props.item[key.value] | customFormatter(key)}}
+            {{props.item[key.value] | datatablePlusFormatTableValues(key)}}
           </td>
         </tr>
       </template>
@@ -47,6 +47,9 @@ import Chips from './cards/Chips'
 import CustomiseDialog from './dialogs/CustomiseDialog'
 import ExtendSearchDialog from './dialogs/ExtendSearchDialog'
 import _debounce from 'lodash.debounce'
+import moment from 'moment'
+import numbro from 'numbro'
+
 export default {
   name: 'PnbiDatatablePlus',
   components: {
@@ -73,16 +76,16 @@ export default {
       default: null
     }
   },
-  created: function (){
+  created: function () {
     /* Create default sorting for table
     *  check if any header from BE has a desc attribute, then update the pagination
     */
     let sortBy = this.localAttrs.headers.filter(header => {
-      if(header.desc){
+      if (header.desc) {
         return true
       }
     })
-    if(sortBy.length > 0) {
+    if (sortBy.length > 0) {
       this.localAttrs.pagination.sortBy = sortBy[0].value
       this.localAttrs.pagination.descending = sortBy[0].desc
     }
@@ -92,12 +95,12 @@ export default {
     * Send the API request with a debounce of 1000ms
     *
     */
-    sendFilterUpdateEvent: _debounce(function send(items) {
+    sendFilterUpdateEvent: _debounce(function send (items) {
       const visibleItems = items.filter(item => item.selectedForSearch)
       const enabledForSearchItems = items.filter(item => item.searchValue)
       this.localStorageHeaders = items
       this.saveToLocalStorage(this.localStorageHeaders)
-      if(visibleItems.length === enabledForSearchItems.length) {
+      if (visibleItems.length === enabledForSearchItems.length) {
         EventBus.$emit('filterUpdate', this.$helper.clone(this.localStorageHeaders))
       }
     }, 1000),
@@ -130,12 +133,34 @@ export default {
         return temp
       },
       set: function (pagination) {
-        console.log('manual pagination', pagination);
+        console.log('manual pagination', pagination)
         this.$emit('update:pagination', pagination)
         this.$nextTick(function () {
           this.$updateHeaderDom(this.localStorageHeaders)
         })
       }
+    }
+  },
+  filter: {
+    'datatablePlusFormatTableValues': function (value, key) {
+      if (!value) return ''
+      switch (key.style) {
+        case 'numbro.js':
+          if (key.format) {
+            value = numbro(value).format(key.format)
+          } else {
+            value = numbro(value).format('0,0')
+          }
+          break
+        case 'moment.js':
+          if (key.format) {
+            value = moment(value).format(key.format)
+          } else {
+            value = moment(value).format('l')
+          }
+          break
+      }
+      return value
     }
   },
   data: function () {
