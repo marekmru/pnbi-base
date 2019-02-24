@@ -10,18 +10,16 @@ import CookieService from '../../internal/cookie.service.js'
 import Auth from '../../Auth'
 
 export default {
-  created () {
-    window.setTimeout(val => {
-      Auth.profile().then(
-        this.checkCookieLayer,
-        () => {
-          this.state = 'login'
-        }
-      )
-    }, 250)
-  },
-  beforeDestroy () {},
   mounted () {
+    window.setTimeout(val => {
+      // TODO: refactor this to store ...
+      Auth.profile().then(
+        this.checkCookieLayer
+      ).catch(error => {
+        this.state = 'login'
+        console.warn('ProfileError', error)
+      })
+    }, 250)
   },
   components: {
     LoginForm,
@@ -66,9 +64,10 @@ export default {
               window.location.assign(this.nextRoute)
             }
           }
-        },
-        () => {}
-      )
+        }
+      ).catch(error => {
+        console.warn('ProfileError', error)
+      })
     },
     onOptInClick (cookie = false) {
       CookieService.setPriPolCookie()
