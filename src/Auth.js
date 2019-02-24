@@ -26,9 +26,10 @@ export default {
   },
   logout () {
     EventBus.$emit(PROFILE_UPDATED, undefined)
-    this._profile = undefined
     if (this._profile != null) {
       // only logout if user logged in
+
+      this._profile = undefined
       return axios
         .get(`${config.API}/logout`)
         .then(result => {
@@ -36,6 +37,7 @@ export default {
         })
         .catch(error => Promise.reject(error.response))
     } else {
+      this._profile = undefined
       return Promise.resolve()
     }
   },
