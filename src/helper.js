@@ -1,5 +1,5 @@
 export function clone (element) {
-  if(element == null){
+  if (element == null) {
     return null
   }
   return JSON.parse(JSON.stringify(element))

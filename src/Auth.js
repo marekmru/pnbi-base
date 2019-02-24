@@ -27,12 +27,17 @@ export default {
   logout () {
     EventBus.$emit(PROFILE_UPDATED, undefined)
     this._profile = undefined
-    return axios
-      .get(`${config.API}/logout`)
-      .then(result => {
-        return result.data.result
-      })
-      .catch(error => Promise.reject(error.response))
+    if (this._profile != null) {
+      // only logout if user logged in
+      return axios
+        .get(`${config.API}/logout`)
+        .then(result => {
+          return result.data.result
+        })
+        .catch(error => Promise.reject(error.response))
+    } else {
+      return Promise.resolve()
+    }
   },
   profile () {
     if (this._profile != null) {

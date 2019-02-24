@@ -51,11 +51,10 @@ export default {
       Auth.profile().then(
         (val) => {
           this.profile = val
-        },
-        error => {
-          console.log(error)
         }
-      )
+      ).catch(error => {
+        console.warn('ProfileError', error)
+      })
     }, 500)
   },
   computed: {

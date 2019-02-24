@@ -12,12 +12,15 @@ import Auth from '../../Auth'
 export default {
   created () {
     window.setTimeout(val => {
+      // TODO: refactor this to store ...
       Auth.profile().then(
         this.checkCookieLayer,
         () => {
           this.state = 'login'
         }
-      )
+      ).catch(error => {
+        console.warn('ProfileError', error)
+      })
     }, 250)
   },
   beforeDestroy () {},
@@ -66,9 +69,10 @@ export default {
               window.location.assign(this.nextRoute)
             }
           }
-        },
-        () => {}
-      )
+        }
+      ).catch(error => {
+        console.warn('ProfileError', error)
+      })
     },
     onOptInClick (cookie = false) {
       CookieService.setPriPolCookie()

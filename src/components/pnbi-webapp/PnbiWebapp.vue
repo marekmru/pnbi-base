@@ -142,12 +142,10 @@ export default {
       Auth.profile().then(
         profile => {
           this.profile = Object.assign({}, profile)
-        },
-        () => {
-          // console.info(error);
         }
-
-      )
+      ).catch(error => {
+        console.warn('ProfileError', error)
+      })
     })
   },
   destroyed () {
@@ -196,15 +194,8 @@ export default {
       this.title = title.toUpperCase()
       document.title = this.title
     },
-    /*     checkUserSettings () {
-            const temp = JSON.parse(window.localStorage.getItem('userSettings'))
-            if (temp != null) {
-              this.userSettings = temp
-            }
-          }, */
     toogleSideNav () {
       this.userSettings.sidenavOpen = !this.userSettings.sidenavOpen
-      /*       window.localStorage.setItem('userSettings', JSON.stringify(this.userSettings)) */
     }
   },
   props: {
@@ -213,13 +204,6 @@ export default {
       default: false,
       required: false
     }
-  },
-  props: {
-    fullWidth: {
-      type: Boolean,
-      default: false,
-      required: false
-    },
   },
   created () {
     this.setTitle(this.$config.TITLE)

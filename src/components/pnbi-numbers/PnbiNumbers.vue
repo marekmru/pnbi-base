@@ -7,7 +7,6 @@
 import is from 'is'
 export default {
   name: 'pnbi-numbers',
-
   $_veeValidate: {
     // fetch the current value from the innerValue defined in the component data.
     // neeeded for vee-validate error passing and display inside pnbi-numbers
