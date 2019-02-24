@@ -142,12 +142,10 @@ export default {
       Auth.profile().then(
         profile => {
           this.profile = Object.assign({}, profile)
-        },
-        () => {
-          // console.info(error);
         }
-
-      )
+      ).catch(error => {
+        console.warn('ProfileError', error)
+      })
     })
   },
   destroyed () {
@@ -196,15 +194,8 @@ export default {
       this.title = title.toUpperCase()
       document.title = this.title
     },
-    /*     checkUserSettings () {
-            const temp = JSON.parse(window.localStorage.getItem('userSettings'))
-            if (temp != null) {
-              this.userSettings = temp
-            }
-          }, */
     toogleSideNav () {
       this.userSettings.sidenavOpen = !this.userSettings.sidenavOpen
-      /*       window.localStorage.setItem('userSettings', JSON.stringify(this.userSettings)) */
     }
   },
   props: {
@@ -260,7 +251,8 @@ export default {
       return !!this.$slots['title-slot']
     },
     isNavVisible () {
-      const isVis = ['login', 'reset'].indexOf(this.$route.name) === -1
+      console.log(this.$route.name, 'route.name')
+      const isVis = ['login', 'reset'].includes(this.$route.name) === false
       return isVis
     },
     isFluid () {
