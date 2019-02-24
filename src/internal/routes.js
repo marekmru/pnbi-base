@@ -82,6 +82,7 @@ export function setRoutes (router) {
       })
     }
     router.beforeEach((to, from, next) => {
+      console.info('CurrentRoute:', to.name)
       resolve().then(() => {
         const pageName = to.meta != null ? to.meta.title : 'No page name'
         bus.$emit(TRACK, {
