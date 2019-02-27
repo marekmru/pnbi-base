@@ -104,12 +104,12 @@
         </v-card-text>
         <v-card-actions class="pl-3 pr-3 pb-3 pt-0">
           <v-spacer></v-spacer>
-          <v-btn type="button" @click="logout()" flat color="secondary">
+          <v-btn v-if="(alertMessage.status_code || alertMessage.data.status_code) === 401 || (alertMessage.status_code || alertMessage.data.status_code) === 403" type="button" @click="logout()" flat color="secondary">
             Zum Login
           </v-btn>
-          <v-btn type="button" v-if="(alertMessage.status_code || alertMessage.data.status_code) != 401 && (alertMessage.status_code || alertMessage.data.status_code) != 403"
+          <v-btn type="button" v-else
             flat @click="alertOpen = false" color="primary">
-            OK
+            Schließen
           </v-btn>
         </v-card-actions>
       </v-card>
