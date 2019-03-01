@@ -1,3 +1,4 @@
+import './internal/check-incognito.js'
 import PnbiWebapp from './components/pnbi-webapp/PnbiWebapp'
 import PnbiPage from './components/pnbi-page/PnbiPage'
 import PnbiCard from './components/pnbi-card/PnbiCard'

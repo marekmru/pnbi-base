@@ -5,6 +5,7 @@ import Privacy from '../components/privacy/Privacy'
 import Profile from '../components/profile/Profile'
 import PageNotFound from './PageNotFound'
 import bus, { TRACK } from '../event-bus'
+import { reject } from 'bluebird'
 
 export function setRoutes (router) {
   router.addRoutes([
@@ -65,9 +66,9 @@ export function setRoutes (router) {
     window.gtag('config', 'UA-122079364-1')
     enabler('//www.googletagmanager.com/gtag/js?id=UA-122079364-1')
 
-    const resolve = () => {
+    const waitForTracking = () => {
       let int = null
-      return new Promise(resolve => {
+      return new Promise((resolve, reject) => {
         if (window.utag != null) {
           resolve()
         } else {
@@ -76,26 +77,37 @@ export function setRoutes (router) {
             if (window.utag != null) {
               window.clearInterval(int)
               resolve()
+            } else if (window.PRIVATE_MODE === true) {
+              reject(new Error('No tracking allowed'))
             }
           }, 10)
         }
       })
     }
-    router.beforeEach((to, from, next) => {
-      console.info('CurrentRoute:', to.name)
-      resolve().then(() => {
-        const pageName = to.meta != null ? to.meta.title : 'No page name'
-        bus.$emit(TRACK, {
-          tealium_event: 'page_view',
-          page_name: pageName
-        })
-        if (from.name === 'login' && to.name !== 'reset') {
-          bus.$emit(TRACK, {
-            tealium_event: 'user_login'
-          })
-        }
-        next()
+    const track = (to, from) => {
+      const pageName = to.meta != null ? to.meta.title : 'No page name'
+      bus.$emit(TRACK, {
+        tealium_event: 'page_view',
+        page_name: pageName
       })
+      if (from.name === 'login' && to.name !== 'reset') {
+        bus.$emit(TRACK, {
+          tealium_event: 'user_login'
+        })
+      }
+    }
+    router.beforeEach((to, from, next) => {
+      if (window.utag != null || window.PRIVATE_MODE === true) {
+        next()
+      } else {
+        waitForTracking().then(() => {
+          track(to, from)
+          next()
+        }, () => {
+          // no tracking allowed
+          next()
+        })
+      }
     })
   }
 }
