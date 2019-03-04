@@ -64,9 +64,9 @@
           </v-btn>
           <span>Logout</span>
         </v-tooltip>
-         <v-alert v-model="showHeaderInfo.showInfo" class="header-info" dismissible :value="visibility" :type="showHeaderInfo.infoType">
-                {{showHeaderInfo.infoText}}
-          </v-alert>
+        <v-alert v-if="!isChrome" class="header-info"  :value="visibility" type="error">
+              Diese Applikation wurde für Google Chrome optimiert. Bitte verwenden Sie Google Chrome. Funktionalität und Darstellung sind bei der Verwendung anderer Browser eingeschränkt oder fehlerhaft.
+        </v-alert>
       </v-toolbar>
     </transition>
     <v-content v-if="isNavVisible" class="pt-0">
@@ -206,17 +206,6 @@ export default {
       type: Boolean,
       default: false,
       required: false
-    },
-     showHeaderInfo: {
-      type: Object,
-     default: function() { 
-        return {
-          showInfo: false, 
-          infoText: '', 
-          infoType: 'warning'
-        }
-      },
-      required: false
     }
   },
   created () {
@@ -270,6 +259,9 @@ export default {
     },
     isFluid () {
       return (this.clientWidth < 1260) || (this.fullWidth)
+    },
+     isChrome () {
+      return ((!!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime)))
     }
   }
 }
