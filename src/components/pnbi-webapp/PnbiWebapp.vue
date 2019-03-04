@@ -156,6 +156,7 @@ export default {
   },
   data () {
     return {
+      visibility: true,
       title: null,
       alertMessage: null,
       loading: false,
