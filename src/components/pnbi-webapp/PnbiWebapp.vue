@@ -209,7 +209,13 @@ export default {
     },
      showHeaderInfo: {
       type: Object,
-      default: {showInfo: false, infoText: '', infoType: 'warning'},
+     default: function() { 
+        return {
+          showInfo: false, 
+          infoText: '', 
+          infoType: 'warning'
+        }
+      },
       required: false
     }
   },
