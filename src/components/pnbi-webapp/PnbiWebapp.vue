@@ -64,6 +64,9 @@
           </v-btn>
           <span>Logout</span>
         </v-tooltip>
+         <v-alert v-model="showHeaderInfo.showInfo" class="header-info" dismissible :value="visibility" :type="showHeaderInfo.infoType">
+                {{showHeaderInfo.infoText}}
+          </v-alert>
       </v-toolbar>
     </transition>
     <v-content v-if="isNavVisible" class="pt-0">
@@ -202,6 +205,11 @@ export default {
     fullWidth: {
       type: Boolean,
       default: false,
+      required: false
+    },
+     showHeaderInfo: {
+      type: Object,
+      default: {showInfo: false, infoText: '', infoType: 'warning'},
       required: false
     }
   },
@@ -354,5 +362,12 @@ export default {
 
   .v-divider {
     opacity: 0.15;
+  }
+  .header-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
   }
 </style>
