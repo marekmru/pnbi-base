@@ -1,5 +1,5 @@
 <template>
-  <div class="sp-background auth-page">
+  <div class="core-background auth-page">
     <!-- TODO -  component -->
     <v-dialog v-model="dialogPrivacy" fullscreen hide-overlay transition="dialog-bottom-transition" scrollable>
       <v-card tile>
@@ -37,7 +37,6 @@
             <v-text-field @focus="onFocus" autofocus clearable label="Nutzername"  v-model="user.username" :error-messages="errors.collect('Nutzername')" data-vv-as="Nutzername" data-vv-name="Nutzername" v-validate="'required|min:3|auth'"></v-text-field>
             <v-text-field @focus="onFocus" clearable label="Passwort" v-model="user.password"  :error-messages="errors.collect('Passwort')" data-vv-as="Passwort" data-vv-name="Passwort" v-validate="'required|min:3|auth'" :append-icon="passwordVisible ? 'visibility' : 'visibility_off'"
               @click:append="passwordVisible = !passwordVisible" :type="passwordVisible ? 'text' : 'password'"></v-text-field>
-              <!-- <pre>{{profile}}</pre> -->
           </v-card-text>
           <v-card-actions>
             <v-layout column>
@@ -46,7 +45,7 @@
                   @keyup.enter="onLoginClick">Login</v-btn>
               </v-flex>
               <v-flex>
-                <v-btn @click="$router.push('/reset')" flat block>Passwort zurücksetzen</v-btn>
+                <v-btn to="/reset" flat block>Passwort zurücksetzen</v-btn>
               </v-flex>
             </v-layout>
           </v-card-actions>
@@ -95,10 +94,6 @@
 </template>
 
 <script>
-// import LoginForm from './LoginForm'
-/* import ForgotForm from '../../internal/ForgotForm'
-import CookieForm from '../../internal/CookieForm'
-import CookieFooter from '../../internal/CookieFooter' */
 import Privacy from '../privacy/Privacy'
 import Imprint from '../imprint/Imprint'
 import { mapGetters, mapActions } from 'vuex'
@@ -116,8 +111,6 @@ export default {
       }
     })
   },
-
-  mounted () {},
   components: {
     Privacy,
     Imprint

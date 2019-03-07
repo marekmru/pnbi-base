@@ -5,6 +5,11 @@ import PnbiEmpty from '../core4/components/pnbi-empty/PnbiEmpty'
 import PnbiNumbers from '../core4/components/pnbi-numbers/PnbiNumbers'
 import PnbiPage from '../core4/components/pnbi-page/PnbiPage'
 import PnbiDataTable from '../core4/components/pnbi-table/PnbiTable'
+import 'vuetify/dist/vuetify.min.css'
+import './styles/typography.scss'
+import './styles/index.scss'
+import './styles/theme-dark.scss'
+import './styles/theme-light.scss'
 
 import helper from '../core4/helper'
 import bus, { LOADING } from '../core4/event-bus.js'
@@ -21,9 +26,7 @@ import de from 'vee-validate/dist/locale/de'
 
 // app wide styles, fonts
 import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
-import './styles/index.scss'
-import './styles/typography.scss'
+
 import numbro from 'numbro'
 import deDE from 'numbro/languages/de-DE.js'
 import Router from 'vue-router'

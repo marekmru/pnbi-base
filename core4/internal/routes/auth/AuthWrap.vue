@@ -1,5 +1,5 @@
 <template>
-  <div class="sp-background auth-page">
+  <div class="core-background auth-page">
     <router-view></router-view>
   </div>
 </template>

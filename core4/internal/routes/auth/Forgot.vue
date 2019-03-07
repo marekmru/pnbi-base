@@ -5,14 +5,15 @@
       <v-card-title class="py-0 pb-2 pt-2">
         <h2 class="title">Passwort zurücksetzen</h2>
       </v-card-title>
+
       <v-card-text class="pt-2" v-if="finished">
-        <p>Eine Email mit einem Link zum Zurücksetzen ihres Passwortes wurde an folgende Adresse geschickt:</p>
-        <strong>{{user.email}}</strong>
+        Bitte überprüfen sie ihren Email-Posteingang.
       </v-card-text>
+
       <v-card-text class="pt-2" v-else>
         <v-text-field @focus="onFocus" autofocus clearable label="Ihre E-Mail Adresse" v-model.lazy="user.email"
           required :error-messages="errors.collect('E-Mail Adresse')" data-vv-as="E-Mail Adresse" data-vv-name="E-Mail Adresse"
-          v-validate="'required|email|emailreset'"></v-text-field>
+          v-validate="'required|email'"></v-text-field>
       </v-card-text>
       <v-card-actions>
         <v-layout column>
@@ -21,7 +22,7 @@
               @keyup.enter="onClick">Anfordern</v-btn>
           </v-flex>
           <v-flex>
-            <v-btn @click="$router.push('/')" flat block>Zurück zum Login</v-btn>
+            <v-btn to="/login" flat block>Zurück zum Login</v-btn>
           </v-flex>
         </v-layout>
       </v-card-actions>
@@ -37,18 +38,14 @@ import {
 import Auth from '../../../Auth'
 export default {
   created () {
-    this.$validator.extend('emailreset', {
+    /* this.$validator.extend('emailreset', {
       validate: () => {
         return {
           valid: this.error == null
         }
       }
-    })
+    }) */
   },
-  mounted () {
-    // this.$validator.validateAll()
-  },
-  components: {},
   data () {
     return {
       error: null,
@@ -77,14 +74,10 @@ export default {
       this.$validator.reset()
     },
     onClick () {
-      this.error = null
       Auth.reset(this.user).then(val => {
         this.finished = true
-      }).catch((err) => {
-        this.error = err
-        this.$nextTick(function () {
-          this.$validator.validateAll()
-        })
+      }).catch(() => {
+        this.finished = true
       })
     }
   },

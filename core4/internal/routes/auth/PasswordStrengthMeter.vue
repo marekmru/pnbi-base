@@ -31,37 +31,17 @@
     </div>
   </div>
 </template>
-        <!-- <div style="position: relative;" class="v-timeline-item v-timeline-item--right">
-          <v-card class="password-strength-card elevation-8" v-show="score != null">
-            <v-card-text style="width:360px" class="px-1 py-0">
-              <password :password="user.password" :secure-length="7" @score="score = $event"></password>
-            </v-card-text>
-          </v-card>
-        </div> -->
 <script>
 export default {
 
   props: {
-    /**
-       * Input field id
-       * @type {String}
-       */
     id: {
       type: String,
       default: 'password'
     },
-    /**
-       * Binded value
-       * @type {Object}
-       */
     password: {
       type: String
     },
-    /**
-       * Password min length.
-       * Right now only visual for the badge
-       * @type {Number}
-       */
     secureLength: {
       type: Number,
       default: 7
@@ -77,26 +57,12 @@ export default {
   methods: {},
 
   computed: {
-    /**
-       * passwordStrength is the score calculated by window.zxcvbn
-       * @return {Number} Password Strength Score
-       */
     passwordStrength () {
       return this.password ? window.zxcvbn(this.password).score : null
     },
-    /**
-       * isSecure checks if the length of the password is longer then
-       * the defined `secureLength`
-       * @return {Boolean} Password length longer then minLength
-       */
     isSecure () {
       return this.password ? this.password.length >= this.secureLength : null
     },
-    /**
-       * passwordCount holds the character count of the
-       * current password. It shows the count up to the `secureLength`.
-       * @return {Number} Password Character Count
-       */
     passwordCount () {
       return this.password && (this.password.length > this.secureLength ? `${this.secureLength}+` : this.password.length)
     }
@@ -106,7 +72,6 @@ export default {
     passwordStrength (score) {
       this.$emit('score', score)
       this.feedback = window.zxcvbn(this.password).feedback
-      // this.$emit('feedback', window.zxcvbn(this.password).feedback)
     }
   }
 }
@@ -181,28 +146,4 @@ export default {
   .Password__score--4{
     color: #3f515d;
   }
-/*   .v-alert.error{
-    background-color: #999 !important;
-  } */
-/*
-  .v-alert[data-score='0'],
-    {
-    background-color: #d70f14 !important;
-  }
-
-  .v-alert[data-score='1'] {
-    background-color: orangered !important;
-  }
-
-  .v-alert[data-score='2'] {
-    background-color: orange !important;
-  }
-
-  .v-alert[data-score='3'] {
-    background-color: yellowgreen !important;
-  }
-
-  .v-alert[data-score='4'] {
-    background-color: #64a505 !important;
-  } */
 </style>

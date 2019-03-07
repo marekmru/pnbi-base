@@ -18,19 +18,19 @@ import VeeValidate, { Validator } from 'vee-validate'
 import de from 'vee-validate/dist/locale/de'
 import Router from 'vue-router'
 // Vee-Validator
-
-// import Auth from './Auth'
-// import de from 'vee-validate/dist/locale/de'
-
 // app wide styles, fonts
 
 import Vuetify from 'vuetify'
+
 import 'vuetify/dist/vuetify.min.css'
-import './styles/index.scss'
 import './styles/typography.scss'
+import './styles/index.scss'
+import './styles/theme-dark.scss'
+import './styles/theme-light.scss'
+
 import numbro from 'numbro'
 import deDE from 'numbro/languages/de-DE.js'
-import moment from 'moment'
+// import moment from 'moment'
 
 numbro.registerLanguage(deDE)
 numbro.setLanguage(deDE.languageTag)

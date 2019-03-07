@@ -16,7 +16,7 @@ const state = {
 }
 
 const actions = {
-  showNotification({ commit }, payload){
+  showNotification ({ commit }, payload) {
     bus.$emit('SHOW_NOTIFICATION', payload)
   },
   fetchProfile ({ commit }, payload) {

@@ -10,6 +10,7 @@ import PageNotFound from './p404/PageNotFound'
 const authPages = ['/login', '/forgot', '/reset']
 
 const publicPages = ['/imprint', '/privacy']
+
 let $router = {
   instance: null,
   publicPages: authPages.concat(publicPages)
@@ -69,7 +70,8 @@ export function setRoutes (router) {
       name: 'imprint',
       component: Imprint,
       meta: {
-        auth: false
+        auth: false,
+        hideNav: false
       }
     },
     {
@@ -77,7 +79,8 @@ export function setRoutes (router) {
       name: 'privacy',
       component: Privacy,
       meta: {
-        auth: false
+        auth: false,
+        hideNav: false
       }
     },
     {
@@ -85,7 +88,8 @@ export function setRoutes (router) {
       name: 'profile',
       component: Profile,
       meta: {
-        auth: false
+        auth: false,
+        hideNav: false
       }
     },
     {
@@ -93,7 +97,8 @@ export function setRoutes (router) {
       name: 'notfound',
       component: PageNotFound,
       meta: {
-        auth: false
+        auth: false,
+        hideNav: false
       }
     }
   ])

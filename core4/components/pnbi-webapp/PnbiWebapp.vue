@@ -1,7 +1,6 @@
 <template>
-  <v-app class="pnbi-webapp">
+  <v-app class="pnbi-webapp" light>
     <template v-if="isNavVisible">
-
       <v-navigation-drawer v-model="sidenavOpen" fixed clipped class="grey lighten-4" app>
         <div class="pt-3">
           <!-- @slot Use this slot for SideNavigation v-list -->
@@ -121,7 +120,7 @@ export default {
     ErrorDialog
   },
   mounted () {
-    this.checkLogin()
+    this.fetchProfile()
     this.setUpEvents()
     this.$nextTick(() => {
       if (!this.fullWidth) {
@@ -145,7 +144,7 @@ export default {
 
   methods: {
     ...mapActions([
-      'checkLogin',
+      'fetchProfile',
       'logout',
       'setTitle'
     ]),

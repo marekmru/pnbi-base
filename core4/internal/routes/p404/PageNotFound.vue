@@ -13,7 +13,7 @@
           <v-card-actions>
             <v-layout justify-end="" row>
               <v-spacer></v-spacer>
-              <v-btn @click="gotoStart" color="primary" flat>Zur Startseite</v-btn>
+              <v-btn to="/" color="primary" flat>Zur Startseite</v-btn>
             </v-layout>
           </v-card-actions>
         </v-card>
@@ -23,11 +23,6 @@
 </template>
 <script>
 export default {
-  methods: {
-    gotoStart () {
-      this.$router.push(this.$config.MAIN_ROUTE)
-    }
-  }
 }
 </script>
 <style lang="css" scoped>
