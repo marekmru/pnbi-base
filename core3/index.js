@@ -8,8 +8,6 @@ import PnbiDataTable from '../core4/components/pnbi-table/PnbiTable'
 import 'vuetify/dist/vuetify.min.css'
 import './styles/typography.scss'
 import './styles/index.scss'
-import './styles/theme-dark.scss'
-import './styles/theme-light.scss'
 
 import helper from '../core4/helper'
 import bus, { LOADING } from '../core4/event-bus.js'
