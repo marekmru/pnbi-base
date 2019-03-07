@@ -11,7 +11,8 @@ const state = {
     cookie: CookieService.isPriPolCookieSet(),
     authenticated: false,
     name: null,
-    short: 'PR'
+    email: 'No email',
+    short: 'NA'
   }
 }
 

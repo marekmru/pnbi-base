@@ -5,7 +5,7 @@
       color="white"
       class="pnbi-datatable__toolbar pb-0 pt-2"
     >
-      <h3 class="accent--text card-headline">{{label}}</h3>
+      <h3 class="card-headline">{{label}}</h3>
       <v-spacer></v-spacer>
       <!-- @slot Use this slot for buttons that control important parts of the card  (optional)-->
       <slot name="primary-controls">
@@ -34,7 +34,7 @@ export default {
 }
 </script>
 
-<style scoped lang="css">
+<style scoped lang="scss">
 /* .theme--dark{
   .card-headline{
     color: #fff;

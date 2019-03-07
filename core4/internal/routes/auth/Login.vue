@@ -127,6 +127,11 @@ export default {
       }
     }
   },
+  watch: {
+    profile (newValue, oldValue) {
+      console.log(newValue)
+    }
+  },
   computed: {
     nextRoute () {
       return this.$route.query.next
@@ -168,7 +173,7 @@ export default {
               CookieService.setPriPolCookie()
             }
             if (this.nextRoute == null) {
-              this.$router.push(this.$config.MAIN_ROUTE)
+              this.$router.push('/')
             } else {
               window.location.assign(this.nextRoute)
             }
@@ -203,8 +208,7 @@ export default {
         }
       })
     }
-  },
-  beforeDestroy () {}
+  }
 }
 </script>
 

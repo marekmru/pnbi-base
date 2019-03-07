@@ -58,7 +58,8 @@ table.v-table tfoot tr td {
   }
 }
 
-.pnbi-title-line {
+/* .pnbi-title-line {
+  // TODO
   width: 100%;
   display: flex;
   text-transform: uppercase;
@@ -66,11 +67,12 @@ table.v-table tfoot tr td {
 }
 
 .pnbi-title-line:after {
+  // TODO
   content: "";
   -ms-flex-item-align: center;
   -ms-grid-row-align: center;
   align-self: center;
-  background-color: #37474f;
+  background-color: var(--v-primary-base);
   border-radius: 1px 0 0 1px;
   display: inline-block;
   flex-grow: 1;
@@ -82,11 +84,11 @@ table.v-table tfoot tr td {
   width: 100%;
   position: relative;
   z-index: 1;
-}
+} */
 
 .bc-table-cell--head {
   font-weight: 600;
-  color: #3f515d;
+  color: var(--v-accent-base);
   font-size: 13px;
   text-transform: uppercase;
 }
@@ -208,18 +210,6 @@ table.v-table tfoot tr td {
       margin: 8px 0 5px;
     }
   }
-}
-
-input:-webkit-autofill,
-input:-webkit-autofill:focus input:-webkit-autofill,
-input:-webkit-autofill:hover,
-select:-webkit-autofill,
-select:-webkit-autofill:focus,
-select:-webkit-autofill:hover,
-textarea:-webkit-autofill,
-textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 1000px rgb(254, 254, 254) inset;
-  transition: background-color 5000s ease-in-out 0s;
 }
 
 .auth-form .v-card {

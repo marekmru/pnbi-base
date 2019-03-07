@@ -254,25 +254,26 @@ export default {
     width: 100%;
   }
 
-  .default-routes .v-list__tile .v-avatar {
+/*   .default-routes .v-list__tile .v-avatar {
     background-color: rgba(0, 0, 0, 0.5) !important;
     height: 24px !important;
     width: 24px !important;
-  }
+  } */
 
   .default-routes .v-list__tile__title,
   .default-routes .v-list__tile__action .material-icons {
     color: rgba(0, 0, 0, 0.5) !important;
   }
 
-  .default-routes .v-list__tile--active .v-list__tile__title,
+/*   .default-routes .v-list__tile--active .v-list__tile__title,
   .default-routes .v-list__tile--active .v-list__tile__action .material-icons {
-    color: #d70f14 !important;
-  }
+    color: var(--v-accent-base) !important;
+    border: 1px solid red;
+  } */
 
-  .default-routes .v-list__tile--active .v-avatar {
-    background-color: #d70f14 !important;
-  }
+/*   .default-routes .v-list__tile--active .v-avatar {
+    background-color: color: var(--v-primary-base) !important;
+  } */
 
   .profile-button .v-avatar {
     background-color: white;

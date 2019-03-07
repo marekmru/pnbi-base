@@ -11,6 +11,7 @@
   select:-webkit-autofill:focus {
     -webkit-text-fill-color: grey;
     -webkit-box-shadow: none;
+    transition: background-color 5000s ease-in-out 0s;
   }
   .core-background {
     background: linear-gradient(120deg, #2a373f 55%, #2f404a 55%);

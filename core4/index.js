@@ -20,6 +20,7 @@ import Router from 'vue-router'
 // app wide styles, fonts
 
 import Vuetify from 'vuetify'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 import 'vuetify/dist/vuetify.min.css'
 import './styles/typography.scss'
@@ -83,6 +84,7 @@ const install = (Vue, options) => {
 
   Vue.use(Vuetify, {
     theme: options.config.THEME,
+    iconfont: 'md',
     options: {
       customProperties: true, // color: var(--v-primary-base)
       themeVariations: ['primary', 'accent', 'secondary', 'warning']
