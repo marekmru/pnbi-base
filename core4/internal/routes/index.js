@@ -103,7 +103,6 @@ export function setRoutes (router) {
     }
   ])
   router.beforeEach((to, from, next) => {
-    // redirect to login page if not logged in and trying to access a restricted page
     const meta = to.meta || {
       auth: true
     }

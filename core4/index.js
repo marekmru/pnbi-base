@@ -5,7 +5,6 @@ import PnbiDialog from './components/pnbi-dialog/PnbiDialog'
 import PnbiNumbers from './components/pnbi-numbers/PnbiNumbers'
 import { setRoutes } from './internal/routes/index.js'
 import { setAjaxConfig } from './internal/axios.config.js'
-// import { setApiConfig } from './Auth.js'
 import { setCookieConfig } from './internal/cookie.service.js'
 import { setStore } from './store'
 import PnbiDataTable from './components/pnbi-table/PnbiTable'
@@ -30,7 +29,6 @@ import './styles/theme-light.scss'
 
 import numbro from 'numbro'
 import deDE from 'numbro/languages/de-DE.js'
-// import moment from 'moment'
 
 numbro.registerLanguage(deDE)
 numbro.setLanguage(deDE.languageTag)
@@ -80,22 +78,13 @@ const install = (Vue, options) => {
   Vue.component('pnbi-card', PnbiCard)
   Vue.component('pnbi-page', PnbiPage)
   Vue.component('pnbi-datatable', PnbiDataTable)
-  // Vue.component('pnbi-datatable-plus', PnbiDataTablePlus)
   Vue.component('pnbi-webapp', PnbiWebapp)
   Vue.component('pnbi-empty', PnbiEmpty)
 
-  /* TODO: possibility to pass a skin */
   Vue.use(Vuetify, {
-    theme: {
-      primary: '#d70F14',
-      accent: '#3f515d',
-      secondary: '#000000',
-      error: '#ff6400',
-      info: '#2196F3',
-      success: '#4CAF50',
-      warning: '#FFC107'
-    },
+    theme: options.config.THEME,
     options: {
+      customProperties: true, // color: var(--v-primary-base)
       themeVariations: ['primary', 'accent', 'secondary', 'warning']
     }
   })
