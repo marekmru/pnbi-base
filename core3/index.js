@@ -25,6 +25,7 @@ import VeeValidate, { Validator } from 'vee-validate'
 import de from 'vee-validate/dist/locale/de'
 
 // app wide styles, fonts
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import Vuetify from 'vuetify'
 
 import numbro from 'numbro'
@@ -91,7 +92,9 @@ const install = (Vue, options) => {
       success: '#4CAF50',
       warning: '#FFC107'
     },
+    iconfont: 'md',
     options: {
+      customProperties: true, // color: var(--v-primary-base)
       themeVariations: ['primary', 'accent', 'secondary', 'warning']
     }
   })
