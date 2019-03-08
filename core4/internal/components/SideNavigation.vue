@@ -1,11 +1,7 @@
-<script>
-export default {
-}
-</script>
 <template>
   <v-layout class="sidenav" row>
     <v-flex>
-      <v-list dense class="grey lighten-4 pb-0">
+      <v-list dense class="pb-0" :dark="dark">
         <v-list-tile :to="{name: 'dummy'}">
           <v-list-tile-action>
             <v-icon>loyalty</v-icon>
@@ -20,6 +16,18 @@ export default {
     </v-flex>
   </v-layout>
 </template>
+<script>
+import {
+  mapGetters
+} from 'vuex'
+export default {
+  computed: {
+    ...mapGetters([
+      'dark'
+    ])
+  }
+}
+</script>
 
 <style scoped lang="scss">
 

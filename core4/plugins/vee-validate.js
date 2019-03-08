@@ -2,10 +2,6 @@
 // import Auth from './Auth'
 // import de from 'vee-validate/dist/locale/de'
 
-
-
-
-
 /* Validator.extend('caps', {
   validate (value) {
     return /^[A-Z]$/.test(value);

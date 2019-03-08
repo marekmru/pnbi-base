@@ -98,7 +98,7 @@ import Privacy from '../privacy/Privacy'
 import Imprint from '../imprint/Imprint'
 import { mapGetters, mapActions } from 'vuex'
 import CookieService from '../../cookie.service.js'
-import Auth from '../../../Auth'
+// import Auth from '../../../Auth'
 
 export default {
   created () {
@@ -129,7 +129,8 @@ export default {
   },
   watch: {
     profile (newValue, oldValue) {
-      console.log(newValue)
+      // console.log(newValue)
+      // TODO checkCookieLayer
     }
   },
   computed: {
@@ -157,7 +158,7 @@ export default {
         this.$validator.validateAll()
       })
     },
-    checkCookieLayer () {
+    /*     checkCookieLayer () {
       Auth.profile().then(
         profile => {
           this.profile = profile
@@ -181,7 +182,7 @@ export default {
         },
         () => {}
       )
-    },
+    }, */
     onOptInClick (cookie = false) {
       CookieService.setPriPolCookie()
       CookieService.optIn({

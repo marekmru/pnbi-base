@@ -70,14 +70,14 @@ table.v-table tfoot tr td {
   }
 }
 
-.pnbi-title-line {
+/* .pnbi-title-line {
   width: 100%;
   display: flex;
   text-transform: uppercase;
   white-space: nowrap;
-}
+} */
 
-.pnbi-title-line:after {
+/* .pnbi-title-line:after {
   content: "";
   -ms-flex-item-align: center;
   -ms-grid-row-align: center;
@@ -94,7 +94,7 @@ table.v-table tfoot tr td {
   width: 100%;
   position: relative;
   z-index: 1;
-}
+} */
 
 .bc-table-cell--head {
   font-weight: 600;

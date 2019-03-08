@@ -22,9 +22,12 @@ export default {
         })
         return this.$profile
       })
-      .catch(error => Promise.reject(error))
+      .catch(error => {
+        return Promise.reject(error)
+      })
   },
   logout () {
+    this.$profile = null
     return axiosInternal
       .get(`/logout`)
       .then(result => {

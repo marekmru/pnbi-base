@@ -2,7 +2,7 @@
   <v-card class="pnbi-card pb-2">
     <v-toolbar
       flat
-      color="white"
+
       class="pnbi-datatable__toolbar pb-0 pt-2"
     >
       <h3 class="card-headline">{{label}}</h3>
@@ -35,14 +35,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
-/* .theme--dark{
+.theme--dark{
   .card-headline{
     color: #fff;
   }
 }
 .theme--light{
   .card-headline{
-    color: #283a45;
+    color: var(--v-accent-base);
   }
-} */
+}
 </style>

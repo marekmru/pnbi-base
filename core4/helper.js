@@ -1,5 +1,10 @@
 export function clone (element) {
-  return JSON.parse(JSON.stringify(element))
+  try {
+    element = JSON.parse(JSON.stringify(element))
+  } catch (err) {
+    console.error(err)
+  }
+  return element
 }
 export function flatten (arr) {
   return [].concat.apply([], arr)
