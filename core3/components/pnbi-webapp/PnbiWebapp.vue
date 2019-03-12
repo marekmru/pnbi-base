@@ -262,7 +262,7 @@ export default {
       return (this.clientWidth < 1260) || (this.fullWidth)
     },
     isChrome () {
-      return ((!!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime)))
+      return (!!window.chrome)
     }
   }
 }

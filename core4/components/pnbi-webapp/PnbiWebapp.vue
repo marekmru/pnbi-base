@@ -125,6 +125,9 @@
             </v-btn>
             <span>Logout</span>
           </v-tooltip>
+          <v-alert v-if="!isChrome" class="header-info"  :value="visibility" type="error">
+              Diese Applikation wurde für Google Chrome optimiert. Bitte verwenden Sie Google Chrome. Funktionalität und Darstellung sind bei der Verwendung anderer Browser eingeschränkt oder fehlerhaft.
+        </v-alert>
         </v-toolbar>
       </transition>
       <v-content class="pt-0">
@@ -205,6 +208,7 @@ export default {
   },
   data () {
     return {
+      visibility: true,
       alertMessage: null,
       alertOpen: false,
       showNavigation: false,
@@ -263,6 +267,9 @@ export default {
     },
     isFluid () {
       return (this.clientWidth < 1260) || (this.fullWidth)
+    },
+     isChrome () {
+      return (!!window.chrome)
     }
   }
 }
@@ -338,4 +345,12 @@ pre {
   top: 48px;
   margin: 0;
 }
+
+.header-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+  }
 </style>
