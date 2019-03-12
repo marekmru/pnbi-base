@@ -12,7 +12,9 @@ $font-caption: 12px;
 .pointer-events--none {
   pointer-events: none;
 }
-
+.pnbi-datatable__toolbar{
+  background-color: #fff !important;
+}
 .application.theme--light {
   background: rgb(245, 245, 245);
 }
