@@ -2,6 +2,7 @@ import iHelper from './internal/$internal'
 import { axiosInternal } from './internal/axios.config.js'
 export default {
   login (user) {
+    console.log('login user: ', user)
     return axiosInternal
       .post('/login', user)
       .then(result => {
@@ -10,7 +11,7 @@ export default {
       })
       .catch(error => Promise.reject(error))
   },
-  profile () {
+  profile () { // Todo: enrich profile with api(/settings)
     if (this.$profile != null) {
       return Promise.resolve(this.$profile)
     }
@@ -21,6 +22,17 @@ export default {
           short: iHelper.shortName(result.data.realname)
         })
         return this.$profile
+      })
+      .catch(error => {
+        return Promise.reject(error)
+      })
+  },
+  setting () {
+    return axiosInternal
+      .get(`/setting`)
+      .then(result => {
+        this.$setting = result.data._general
+        return this.$setting
       })
       .catch(error => {
         return Promise.reject(error)

@@ -93,41 +93,7 @@
             class="app-title"
           >{{title}}</h2>
           <v-spacer></v-spacer>
-
-          <v-tooltip bottom>
-            <v-btn
-              slot="activator"
-              class="pr-0 mr-0 profile-button"
-              flat
-              icon
-              to="/profile"
-            >
-              <v-avatar>
-                <span>{{profile.short}}</span>
-              </v-avatar>
-            </v-btn>
-            <span>Profile</span>
-          </v-tooltip>
-          <v-tooltip bottom>
-            <v-btn
-              slot="activator"
-              class="pr-0 mr-0"
-              flat
-              icon
-              @click="logout()"
-            >
-              <img
-                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMTkyIDI3Ny40aDE4OS43bC00My42IDQ0LjdMMzY4IDM1Mmw5Ni05Ni05Ni05Ni0zMSAyOS45IDQ0LjcgNDQuN0gxOTJ2NDIuOHoiLz48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMjU1LjcgNDIxLjNjLTQ0LjEgMC04NS41LTE3LjItMTE2LjctNDguNC0zMS4yLTMxLjItNDguMy03Mi43LTQ4LjMtMTE2LjkgMC00NC4xIDE3LjItODUuNyA0OC4zLTExNi45IDMxLjItMzEuMiA3Mi42LTQ4LjQgMTE2LjctNDguNCA0NCAwIDg1LjMgMTcuMSAxMTYuNSA0OC4ybDMwLjMtMzAuM2MtOC41LTguNC0xNy44LTE2LjItMjcuNy0yMy4yQzMzOS43IDYxIDI5OC42IDQ4IDI1NS43IDQ4IDE0MS4yIDQ4IDQ4IDE0MS4zIDQ4IDI1NnM5My4yIDIwOCAyMDcuNyAyMDhjNDIuOSAwIDg0LTEzIDExOS0zNy41IDEwLTcgMTkuMi0xNC43IDI3LjctMjMuMmwtMzAuMi0zMC4yYy0zMS4xIDMxLjEtNzIuNSA0OC4yLTExNi41IDQ4LjJ6TTQ0OC4wMDQgMjU2Ljg0N2wtLjg0OS0uODQ4Ljg0OS0uODQ5Ljg0OC44NDl6Ii8+PC9zdmc+"
-                width="22px"
-                height="22px"
-                title="logout"
-              />
-            </v-btn>
-            <span>Logout</span>
-          </v-tooltip>
-          <v-alert v-if="!isChrome" class="header-info"  :value="visibility" type="error">
-              Diese Applikation wurde für Google Chrome optimiert. Bitte verwenden Sie Google Chrome. Funktionalität und Darstellung sind bei der Verwendung anderer Browser eingeschränkt oder fehlerhaft.
-        </v-alert>
+          <pnbi-user></pnbi-user>
         </v-toolbar>
       </transition>
       <v-content class="pt-0">
@@ -172,6 +138,7 @@ import {
 } from '../../event-bus'
 import PnbiSnackbar from './pnbi-snackbar/Snackbar.vue'
 import ErrorDialog from './pnbi-error-dialog/ErrorDialog.vue'
+import PnbiUser from './../pnbi-user/PnbiUser.vue'
 import {
   mapActions,
   mapGetters
@@ -191,7 +158,8 @@ export default {
   },
   components: {
     PnbiSnackbar,
-    ErrorDialog
+    ErrorDialog,
+    PnbiUser
   },
   mounted () {
     this.fetchProfile()
@@ -208,7 +176,6 @@ export default {
   },
   data () {
     return {
-      visibility: true,
       alertMessage: null,
       alertOpen: false,
       showNavigation: false,
@@ -267,9 +234,6 @@ export default {
     },
     isFluid () {
       return (this.clientWidth < 1260) || (this.fullWidth)
-    },
-     isChrome () {
-      return (!!window.chrome)
     }
   }
 }
@@ -345,12 +309,4 @@ pre {
   top: 48px;
   margin: 0;
 }
-
-.header-info {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    margin: 0;
-  }
 </style>
