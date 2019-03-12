@@ -10,9 +10,8 @@ export function setAjaxConfig (config) {
   // helpers
   const ingnoredErrors = config.IGNORED_ERRORS || []
   const ignoredEndpoints = ['/logout', '/profile']
-  const current = router.instance.history.current
   function isErrorIgnoreRoute () {
-    return router.publicPages.indexOf(current.path) > -1
+    return router.publicPages.indexOf(router.instance.history.current.path) > -1
   }
   // AXIOS //
   // used in pnbi-base client
@@ -29,8 +28,8 @@ export function setAjaxConfig (config) {
           error.response.request.responseURL
         ) > -1
 
-        if (isErrorIgnoreRoute()) { // pass
-        } else {
+        if (isErrorIgnoreRoute() === false) { // pass
+          // TODO
           let data = {}
           // error without corret body > fallback to defaults
           // 500

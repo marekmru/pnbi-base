@@ -15,11 +15,6 @@ export default {
       this.show = true
     })
   },
-  watch: {
-  },
-  computed: {
-
-  },
   data () {
     return {
       show: false,

@@ -1,12 +1,14 @@
 <template>
   <v-layout row wrap class="pnbi-page">
-    <div class="pnbi-sub-header">
-    </div>
-    <v-flex xs12 class="pnbi-page-header">
-      <div class="page-header-content">
-        <slot v-if="!!$slots['page-header-content']" name="page-header-content"></slot>
+    <template v-if="headerType">
+      <div class="pnbi-sub-header">
       </div>
-    </v-flex>
+      <v-flex xs12 class="pnbi-page-header">
+        <div class="page-header-content">
+          <slot v-if="!!$slots['page-header-content']" name="page-header-content"></slot>
+        </div>
+      </v-flex>
+    </template>
     <v-flex xs12 class="pnbi-content-container">
       <slot></slot>
     </v-flex>
@@ -22,54 +24,56 @@ export default {
      * Sets small header image. Usually no content in the header
      */
     small: {
-      type: Boolean | null,
+      type: [Boolean, null],
       default: false
     },
     /**
      * Sets medium header image. Used when there is a bit of content in the header. (height 90px)
      */
     medium: {
-      type: Boolean | null,
+      type: [Boolean, null],
       default: false
     },
     /**
      * Sets large header image. Used when there is a lot of content in the header. (height 135px)
      */
     large: {
-      type: Boolean | null,
+      type: [Boolean],
       default: false
     },
     /**
      * Currently three different background images are available with number 1,2,3
      */
     headerType: {
-      type: String | null,
-      default: '1'
+      type: [String],
+      default: null
     }
   },
   mounted () {
-    const pageHC = this.$el.querySelector('.page-header-content')
-    const header = this.$el.querySelector('.pnbi-sub-header')
+    if (this.headerType != null) { // TODO render?
+      const pageHC = this.$el.querySelector('.page-header-content')
+      const header = this.$el.querySelector('.pnbi-sub-header')
 
-    if (this.small === true || this.small === '') {
-      pageHC.style.height = '36px'
-      header.style.height = '106px'
-    } else if (this.medium === true || this.medium === '') {
-      pageHC.style.height = '100px'
-      header.style.height = '170px'
-    } else {
-      pageHC.style.height = '170px'
-      header.style.height = '240px'
-    }
+      if (this.small === true || this.small === '') {
+        pageHC.style.height = '36px'
+        header.style.height = '106px'
+      } else if (this.medium === true || this.medium === '') {
+        pageHC.style.height = '100px'
+        header.style.height = '170px'
+      } else {
+        pageHC.style.height = '170px'
+        header.style.height = '240px'
+      }
 
-    if (this.headerType === '1') {
-      header.style.backgroundImage = "url('//bi.plan-net.com/cdn/assets/images/serviceplan-muenchen.jpg')"
-    } else if (this.headerType === '2') {
-      header.style.backgroundImage = "url('//bi.plan-net.com/cdn/assets/images/serviceplan-muenchen-blau.jpg')"
-    } else if (this.headerType === '3') {
-      header.classList.add('gradient-1')
-    } else {
-      header.classList.add('gradient-2')
+      if (this.headerType === '1') {
+        header.style.backgroundImage = "url('//bi.plan-net.com/cdn/assets/images/serviceplan-muenchen.jpg')"
+      } else if (this.headerType === '2') {
+        header.style.backgroundImage = "url('//bi.plan-net.com/cdn/assets/images/serviceplan-muenchen-blau.jpg')"
+      } else if (this.headerType === '3') {
+        header.classList.add('gradient-1')
+      } else {
+        header.classList.add('gradient-2')
+      }
     }
   }
 }

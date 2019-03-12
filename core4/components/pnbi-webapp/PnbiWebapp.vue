@@ -147,8 +147,8 @@
         fill-height
         class="core-container"
       >
-        <v-layout class="pa-0  ma-0">
-          <v-flex class="pa-0  ma-0">
+        <v-layout class="pa-0 ma-0">
+          <v-flex class="pa-0 ma-0">
             <router-view />
           </v-flex>
         </v-layout>
@@ -159,7 +159,6 @@
       indeterminate
       v-if="loading"
     ></v-progress-linear>
-
     <error-dialog></error-dialog>
   </v-app>
 </template>
@@ -241,7 +240,7 @@ export default {
       })
     },
     _updateDimensions () {
-      //TODO mixin
+      // TODO mixin
       this.clientWidth = Math.max(document.documentElement.clientWidth,
         window.innerWidth || 0)
     },

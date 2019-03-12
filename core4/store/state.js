@@ -79,11 +79,10 @@ const actions = {
   logout ({ commit, dispatch }, payload) {
     // const next = () => dispatch('gotoLogin')
     Auth.logout().then(function () {
-      // dispatch('gotoLogin')
-    }).catch((err) => {
-      return Promise.reject(err)
-    }).then(() => {
       dispatch('gotoLogin')
+    }).catch((err) => {
+      dispatch('gotoLogin')
+      return Promise.reject(err)
     })
   },
   clearAuthError ({ commit }) {
