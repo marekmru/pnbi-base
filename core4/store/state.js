@@ -2,8 +2,10 @@ import Auth from '../Auth'
 import bus from '../event-bus.js'
 import CookieService from '../internal/cookie.service.js'
 import router from '../internal/routes/index.js'
+import { axiosInternal } from '../internal/axios.config.js'
 
 const state = {
+  hasOwnTheme: false,
   loading: false,
   dark: false,
   title: 'CORE',
@@ -22,24 +24,31 @@ const actions = {
     bus.$emit('SHOW_NOTIFICATION', payload)
   },
   fetchProfile ({ commit, dispatch }, payload) {
-    Auth.profile().then(profile => {
-      const dto = {
-        name: profile.name,
-        realname: profile.realname,
-        email: profile.email,
-        short: profile.short,
-        perm: profile.perm,
-        role: profile.role
-      }
-      commit('set_profile', dto)
-      if (router.instance.history.current.name === 'login') {
-        dispatch('gotoStart')
-      }
-    }, () => {
-      commit('set_profile', { error: 'auth' })
-    }).catch((err) => {
-      console.error(err, '-----')
-    })
+    const promiseProfile = Auth.profile()
+    const promiseSetting = Auth.setting()
+
+    Promise.all([promiseProfile, promiseSetting])
+      .then(data => {
+        const profile = data[0]
+        const setting = data[1]
+        const dto = {
+          name: profile.name,
+          realname: profile.realname,
+          email: profile.email,
+          short: profile.short,
+          perm: profile.perm,
+          role: profile.role
+        }
+        commit('set_profile', dto)
+        if (router.instance.history.current.name === 'login') {
+          dispatch('gotoStart')
+        }
+        commit('set_dark', setting)
+      }, () => {
+        commit('set_profile', { error: 'auth' })
+      }).catch((err) => {
+        console.error(err)
+      })
   },
   gotoStart ({ commit, dispatch }) {
     commit('clear_auth_error')
@@ -95,7 +104,17 @@ const actions = {
   },
   initializeApp ({ commit, dispatch }, payload) {
     dispatch('setTitle', payload.TITLE)
-    commit('set_dark', payload.dark)
+    if (payload.dark != null) {
+      state.hasOwnTheme = true // do not show theme switch
+    }
+  },
+  setDark ({ commit }, payload) {
+    return axiosInternal
+      .post('/setting/_general', { data: { dark: payload } })
+      .then(result => {
+        commit('set_dark', result.data)
+      })
+      .catch(error => Promise.reject(error))
   }
 }
 
@@ -104,7 +123,9 @@ const mutations = {
     state.notification = payload
   },
   set_dark (state, payload) {
-    state.dark = payload
+    if (payload.dark != null) {
+      state.dark = payload.dark
+    }
   },
   clear_auth_error () {
     delete state.profile.error
@@ -145,6 +166,9 @@ const getters = {
   },
   dark (state) {
     return state.dark
+  },
+  hasOwnTheme (state) {
+    return state.hasOwnTheme
   }
 }
 
