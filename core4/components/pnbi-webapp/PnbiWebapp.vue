@@ -8,6 +8,7 @@
       <v-navigation-drawer
         v-model="sidenavOpen"
         fixed
+        stateless
         clipped
         class="core-navigation-container"
         app
@@ -73,8 +74,6 @@
       <transition name="slide">
         <v-toolbar
           dense
-          dark
-          color="accent darken-1"
           app
           fixed
           clipped-left
@@ -92,7 +91,7 @@
             v-else
             class="app-title"
           >{{title}}</h2>
-          <v-spacer></v-spacer>
+          <v-spacer style="margin-top: 2px; height: 8px;"></v-spacer>
 
           <v-tooltip bottom>
             <v-btn

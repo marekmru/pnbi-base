@@ -38,7 +38,7 @@ const actions = {
     }, () => {
       commit('set_profile', { error: 'auth' })
     }).catch((err) => {
-      console.error(err)
+      console.error(err, '-----')
     })
   },
   gotoStart ({ commit, dispatch }) {
@@ -64,7 +64,6 @@ const actions = {
     }
   },
   login ({ commit, dispatch }, payload) {
-    // TODO check token
     return new Promise((resolve, reject) => {
       Auth.login(payload).then(result => {
         resolve(true)
@@ -72,7 +71,6 @@ const actions = {
       }).catch((err) => {
         commit('set_profile', { error: 'auth' })
         return Promise.reject(err)
-        // resolve(false)
       })
     })
   },

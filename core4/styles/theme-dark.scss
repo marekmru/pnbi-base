@@ -7,17 +7,20 @@
   select:-webkit-autofill,
   select:-webkit-autofill:hover,
   select:-webkit-autofill:focus {
-    -webkit-text-fill-color: #424242;
+    -webkit-text-fill-color: var(--v-secondary-lighten5);
     -webkit-box-shadow: none;
     transition: background-color 5000s ease-in-out 0s;
   }
 
   &.v-toolbar {
-    background-color: #424242 !important;
-    //background-color: var(--v-secondary-lighten2) !important;
+
   }
 
   .core-background {
     background: linear-gradient(120deg, #2a373f 55%, #2f404a 55%);
+  }
+
+  &.application {
+    background-color: #232323 !important;
   }
 }

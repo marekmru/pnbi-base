@@ -1,9 +1,11 @@
 import axios from 'axios'
 import router from './routes/index.js'
 import Vue from 'vue'
+
 export const axiosInternal = axios.create({
   baseURL: window.APIBASE_CORE
 })
+
 axios.defaults.baseURL = window.APIBASE_APP
 
 export function setAjaxConfig (config) {
@@ -11,7 +13,16 @@ export function setAjaxConfig (config) {
   const ingnoredErrors = config.IGNORED_ERRORS || []
   const ignoredEndpoints = ['/logout', '/profile']
   function isErrorIgnoreRoute () {
-    return router.publicPages.indexOf(router.instance.history.current.path) > -1
+    return router.publicPages.includes(router.instance.history.current.path)// > -1
+  }
+  function isIgnoredEndopoint (responseURL = '') {
+    return ignoredEndpoints.includes(responseURL) // > -1
+  }
+  function isIgnoredErrorCode (error) {
+    return !ingnoredErrors.includes(error.response.status)
+  }
+  function isLandingPage () {
+    return router.instance.history.current.path === '/'
   }
   // AXIOS //
   // used in pnbi-base client
@@ -24,22 +35,20 @@ export function setAjaxConfig (config) {
         return response.data
       },
       error => {
-        const isIgnoredEndopoint = ignoredEndpoints.indexOf(
-          error.response.request.responseURL
-        ) > -1
-
-        if (isErrorIgnoreRoute() === false) { // pass
+        if (isLandingPage()) {
+          // router.push({ name: 'login' })
+          window.location.assign(window.location + 'login')
+        } else if (isErrorIgnoreRoute() === false) {
           // TODO
+          const is500Error = (error.response == null)
+          const isAuthError = (isIgnoredErrorCode(error) === false) && (isIgnoredEndopoint(error.response.request.responseURL) === false)
           let data = {}
           // error without corret body > fallback to defaults
-          // 500
-          if (error.response == null) {
+          // 500 has no meaingful response
+          if (is500Error) {
             data.status_code = 500
             data.html = 'Ein Server Fehler ist aufgetreten.<br>Bitte kontaktieren sie uns unter: <a href="mailto:bi-ops@plan-net.com">bi-ops@plan-net.com</a>'
-          } else if (
-            ingnoredErrors.indexOf(error.response.status) === -1 &&
-            isIgnoredEndopoint === false
-          ) {
+          } else if (isAuthError) {
             data.status_code = error.response.status
             if (data.status_code === 401) {
               data.html = 'Bitte loggen sie sich ein.'
@@ -49,9 +58,12 @@ export function setAjaxConfig (config) {
             } else {
               data.json = error.response.data || error.response
             }
-            // EventBus.$emit(ERROR, data)
             Vue.prototype.$store.dispatch('showError', data)
           }
+        }
+        const loading = Vue.prototype.$store.getters.loading
+        if (loading) {
+          Vue.prototype.$store.dispatch('setLoading', false)
         }
         return Promise.reject(error.response.data)
       }
