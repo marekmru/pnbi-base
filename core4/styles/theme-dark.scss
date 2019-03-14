@@ -15,7 +15,9 @@
   &.v-toolbar {
 
   }
-
+  &.core-navigation-container{
+    background-color: darken(#232323, 1)
+  }
   .core-background {
     background: linear-gradient(120deg, #232323 55%, darken(#232323, 1) 55%);
   }

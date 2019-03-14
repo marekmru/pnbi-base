@@ -203,26 +203,6 @@ export default {
   top: -48px;
 }
 
-.v-list__tile .v-avatar span,
-.profile-button .v-avatar span {
-  font-weight: 700 !important;
-  letter-spacing: -0.1em !important;
-  font-size: 11px !important;
-  line-height: 12px !important;
-  margin-left: -1px;
-}
-
-.profile-button .v-avatar {
-  /* background-color: white; */
-  height: 22px !important;
-  width: 22px !important;
-}
-
-.profile-button .v-avatar span {
-  margin-top: -1px;
-  /* //color: #3f515d; */
-}
-
 .auth-routes >>> .container {
   padding: 0;
 }
