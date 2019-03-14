@@ -125,14 +125,7 @@ table.v-table tfoot tr td {
       font-size: 24px;
     }
   }
-  .bi-headline {
-  font-size: 36px;
-    font-weight: 800;
-    letter-spacing: 4px;
-    margin: 0 0 0px;
-    text-align: center;
-    text-transform: uppercase;
-  }
+
   .bi-copyright,
   .bi-powered {
     user-select: none;
@@ -154,31 +147,6 @@ table.v-table tfoot tr td {
     @media (max-width: 600px) {
       line-height: 2;
       font-size: 24px;
-    }
-  }
-
-  .bi-headline {
-
-    &,
-    &.size-xl {
-      font-size: 36px;
-      font-weight: 800;
-      letter-spacing: 4px;
-      margin: 0 0 0px;
-      text-align: center;
-      text-transform: uppercase;
-    }
-
-    &.size-m {
-      font-size: 24px;
-      letter-spacing: 2px;
-      margin: 8px 0 5px;
-    }
-
-    &.size-l {
-      font-size: 28px;
-      letter-spacing: 2px;
-      margin: 8px 0 5px;
     }
   }
 }

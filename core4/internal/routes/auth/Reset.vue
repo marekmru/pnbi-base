@@ -10,7 +10,9 @@
       class="pa-3 auth-form-card"
     >
       <v-card-title class="py-0 pb-2 pt-2">
-        <h2 class="title accent--text">Passwort zurücksetzen</h2>
+        <h2 class="title"><!-- Passwort zurücksetzen -->
+        {{$t('resetPassword')}}
+        </h2>
       </v-card-title>
       <v-card-text class="pt-2 pb-4">
 
@@ -18,13 +20,11 @@
           class="mb-3"
           autofocus
           clearable
-          label="Neues Passwort"
-          v-model.lazy="user.password"
-          name="Neues Passwort"
-          :error-messages="errors.collect('Neues Passwort')"
-          data-vv-as="Neues Passwort"
-          data-vv-name="Neues Passwort"
-          ref="Neues Passwort"
+          :label="$t('newPassword')"
+          v-model.lazy="password"
+          :error-messages="errors.collect($t('newPassword'))"
+          :data-vv-as="$t('newPassword')"
+          :data-vv-name="$t('newPassword')"
           v-validate="'required|passwordscore'"
           :append-icon="passwordVisible ? 'visibility' : 'visibility_off'"
           @click:append="passwordVisible = !passwordVisible"
@@ -34,12 +34,12 @@
         <v-text-field
           class="mb-4"
           clearable
-          label="Passwort wiederholen"
-          v-model.lazy="user.password2"
-          :error-messages="errors.collect('Passwort wiederholen')"
-          data-vv-as="Passwort wiederholen"
+          :label="$t('repeatPassword')"
+          v-model.lazy="password2"
+          :error-messages="errors.collect($t('repeatPassword'))"
+          :data-vv-as="$t('repeatPassword')"
+          :data-vv-name="$t('repeatPassword')"
           required
-          data-vv-name="Passwort wiederholen"
           v-validate="'confirmspecial'"
           :append-icon="passwordVisible ? 'visibility' : 'visibility_off'"
           @click:append="passwordVisible = !passwordVisible"
@@ -48,7 +48,7 @@
         </v-text-field>
 
         <password
-          :password="user.password"
+          :password="password"
           @score="score = $event; $validator.validateAll()"
         ></password>
       </v-card-text>
@@ -63,14 +63,14 @@
               :disabled="disabled"
               type="button"
               @keyup.enter="onClick"
-            >Anfordern</v-btn>
+            >{{$t('requestNewPassword')}}</v-btn>
           </v-flex>
           <v-flex>
             <v-btn
               to="/login"
               flat
               block
-            >Zurück zum Login</v-btn>
+            >{{$t('backToLogin')}}</v-btn>
           </v-flex>
         </v-layout>
       </v-card-actions>
@@ -92,7 +92,7 @@ export default {
     this.$validator.extend('confirmspecial', {
       validate: () => {
         return {
-          valid: this.user.password === this.user.password2
+          valid: this.password === this.password2
         }
       }
     })
@@ -107,10 +107,8 @@ export default {
       passwordVisible: false,
       finished: false,
       error: null,
-      user: {
-        password: null,
-        password2: null
-      }
+      password: null,
+      password2: null
     }
   },
   computed: {
@@ -124,10 +122,16 @@ export default {
   methods: {
     onClick () {
       Auth.reset({
-        password: this.user.password,
+        password: this.password,
         token: this.$route.params.token
       }).then(val => {
         this.finished = true
+      }, err => {
+        this.error = err
+        console.war(err)
+        this.$nextTick(function () {
+          this.$validator.validateAll()
+        })
       }).catch((err) => {
         /// TODO: what can happen? error neccessary?
         this.error = err

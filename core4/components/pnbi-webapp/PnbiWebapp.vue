@@ -5,83 +5,24 @@
     :dark="dark"
   >
     <template v-if="isNavVisible">
-      <v-navigation-drawer
-        v-model="sidenavOpen"
-        fixed
-        stateless
-        clipped
-        class="core-navigation-container"
-        app
-      >
-        <div class="pt-3">
-          <!-- @slot Use this slot for SideNavigation v-list -->
-          <v-layout
-            class="sidenav"
-            row
-          >
-            <v-flex>
-              <v-list
-                dense
-                class="pb-0"
-                :dark="dark"
-              >
-                <slot name="navigation-slot"></slot>
-              </v-list>
-            </v-flex>
-          </v-layout>
-        </div>
-        <v-list
-          dense
-          class="default-routes"
-        >
-          <v-divider
-            dark
-            class="my-3"
-          ></v-divider>
 
-          <v-list-tile :to="{name: 'profile'}">
-            <v-list-tile-content>
-              <v-list-tile-title>
-                Profile
-              </v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-          <v-list-tile :to="{name: 'privacy'}">
-            <v-list-tile-content>
-              <v-list-tile-title>
-                Privacy Policy
-              </v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
+      <pnbi-navigation>
+        <slot name="navigation-slot"></slot>
+      </pnbi-navigation>
 
-          <v-list-tile :to="{name: 'imprint'}">
-            <v-list-tile-content>
-              <v-list-tile-title>
-                Imprint
-              </v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-
-          <v-list-tile @click="logout()">
-            <v-list-tile-content>
-              <v-list-tile-title>
-                Logout
-              </v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-        </v-list>
-      </v-navigation-drawer>
       <transition name="slide">
         <v-toolbar
+          flat
+          clipped-left
           dense
           app
           fixed
-          clipped-left
         >
-          <v-toolbar-side-icon
-            class="white--text"
-            @click.native="toogleSideNav()"
-          ></v-toolbar-side-icon>
+          <v-toolbar-side-icon @click="$bus.$emit('toggleSidenav')">
+            <!-- <v-icon>more_vert</v-icon> -->
+            <toolbar-side-icon>
+            </toolbar-side-icon>
+          </v-toolbar-side-icon>
           <!-- @slot Use this slot for a custom title instead of the default app-name -->
           <slot
             v-if="!!this.$slots['title-slot']"
@@ -95,7 +36,7 @@
           <pnbi-user></pnbi-user>
         </v-toolbar>
       </transition>
-      <v-content class="pt-0">
+      <v-content class="pt-0 core-background">
         <v-container
           :fluid="isFluid"
           class="core-container"
@@ -137,6 +78,8 @@ import {
 } from '../../event-bus'
 import PnbiSnackbar from './pnbi-snackbar/Snackbar.vue'
 import ErrorDialog from './pnbi-error-dialog/ErrorDialog.vue'
+import Navigation from './pnbi-navigation/Navigation.vue'
+import ToolbarSideIcon from './pnbi-navigation/pnbi-toolbar-side-icon.vue'
 import PnbiUser from './../pnbi-user/PnbiUser.vue'
 import {
   mapActions,
@@ -158,7 +101,9 @@ export default {
   components: {
     PnbiSnackbar,
     ErrorDialog,
-    PnbiUser
+    PnbiUser,
+    ToolbarSideIcon,
+    'pnbi-navigation': Navigation
   },
   mounted () {
     this.fetchProfile()
@@ -178,8 +123,7 @@ export default {
       alertMessage: null,
       alertOpen: false,
       showNavigation: false,
-      clientWidth: 0,
-      sidenavOpen: null
+      clientWidth: 0
     }
   },
   methods: {
@@ -213,9 +157,6 @@ export default {
       // TODO mixin
       this.clientWidth = Math.max(document.documentElement.clientWidth,
         window.innerWidth || 0)
-    },
-    toogleSideNav () {
-      this.sidenavOpen = !this.sidenavOpen
     }
   },
   computed: {
@@ -271,21 +212,15 @@ export default {
   margin-left: -1px;
 }
 
-.default-routes {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-
 .profile-button .v-avatar {
-  background-color: white;
+  /* background-color: white; */
   height: 22px !important;
   width: 22px !important;
 }
 
 .profile-button .v-avatar span {
   margin-top: -1px;
-  color: #3f515d;
+  /* //color: #3f515d; */
 }
 
 .auth-routes >>> .container {
@@ -305,7 +240,8 @@ pre {
 .v-progress-linear {
   position: absolute;
   z-index: 10;
-  top: 48px;
+  top: -3px;
   margin: 0;
 }
+
 </style>

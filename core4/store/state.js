@@ -10,7 +10,9 @@ const state = {
   dark: false,
   title: 'CORE',
   notification: null,
+
   profile: {
+    error: null,
     cookie: CookieService.isPriPolCookieSet(),
     authenticated: false,
     name: null,
@@ -26,7 +28,6 @@ const actions = {
   fetchProfile ({ commit, dispatch }, payload) {
     const promiseProfile = Auth.profile()
     const promiseSetting = Auth.setting()
-
     Promise.all([promiseProfile, promiseSetting])
       .then(data => {
         const profile = data[0]
@@ -40,14 +41,13 @@ const actions = {
           role: profile.role
         }
         commit('set_profile', dto)
+        commit('set_dark', setting)
+
         if (router.instance.history.current.name === 'login') {
           dispatch('gotoStart')
         }
-        commit('set_dark', setting)
       }, () => {
-        commit('set_profile', { error: 'auth' })
-      }).catch((err) => {
-        console.error(err)
+        // commit('set_profile', { error: 'auth' })
       })
   },
   gotoStart ({ commit, dispatch }) {
@@ -77,14 +77,13 @@ const actions = {
       Auth.login(payload).then(result => {
         resolve(true)
         dispatch('gotoStart')
-      }).catch((err) => {
+      }, () => {
+        reject(new Error('LoginError'))
         commit('set_profile', { error: 'auth' })
-        return Promise.reject(err)
       })
     })
   },
   logout ({ commit, dispatch }, payload) {
-    // const next = () => dispatch('gotoLogin')
     Auth.logout().then(function () {
       dispatch('gotoLogin')
     }).catch((err) => {
@@ -104,15 +103,16 @@ const actions = {
   },
   initializeApp ({ commit, dispatch }, payload) {
     dispatch('setTitle', payload.TITLE)
-    if (payload.dark != null) {
+    if (payload.DARK != null) {
       state.hasOwnTheme = true // do not show theme switch
+      commit('set_dark', { dark: payload.DARK })
     }
   },
   setDark ({ commit }, payload) {
     return axiosInternal
       .post('/setting/_general', { data: { dark: payload } })
       .then(result => {
-        commit('set_dark', result.data)
+        commit('set_dark', payload)
       })
       .catch(error => Promise.reject(error))
   }

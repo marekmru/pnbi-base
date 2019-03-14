@@ -17,7 +17,24 @@
   }
 
   .core-background {
-    background: linear-gradient(120deg, #2a373f 55%, #2f404a 55%);
+    background: linear-gradient(120deg, #232323 55%, darken(#232323, 1) 55%);
+  }
+
+  .circle-container .v-icon{
+    color: var(--v-secondary-lighten5) !important;
+  }
+  .pnbi-user .logout-button img{
+    opacity: 0.5;
+  }
+  .pnbi-user .profile-button .v-avatar{
+    background-color: var(--v-secondary-lighten5);
+  }
+  .pnbi-user .profile-button .v-avatar span{
+    background-color: var(--v-secondary-lighten5);
+    color: var(--v-secondary-lighten1);
+  }
+  h2.app-title{
+    color: var(--v-secondary-lighten5);
   }
 
   &.application {

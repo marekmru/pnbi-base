@@ -14,7 +14,7 @@ import bus from './event-bus'
 import helper from './helper'
 import './plugins/vee-validate'
 import VeeValidate, { Validator } from 'vee-validate'
-import de from 'vee-validate/dist/locale/de'
+import en from 'vee-validate/dist/locale/en'
 import Router from 'vue-router'
 // Vee-Validator
 // app wide styles, fonts
@@ -31,40 +31,26 @@ import './styles/theme-light.scss'
 import numbro from 'numbro'
 import deDE from 'numbro/languages/de-DE.js'
 
+import { i18n, veeValidateDictionary } from './translations'
+
 numbro.registerLanguage(deDE)
 numbro.setLanguage(deDE.languageTag)
 
 const install = (Vue, options) => {
+  Vue.prototype.i18n = i18n
   Vue.prototype.$bus = bus
   Vue.prototype.$helper = helper
   Vue.prototype.$store = options.store
   Vue.prototype.$numbro = numbro
   /// /////////////////
-  const dictionary = {
-    de: {
-      messages: {
-        auth: `Bitte überprüfen Sie ihren Namen und das Passwort.`,
-        emailreset: `Die E-Mail Adresse wurde nicht gefunden.`,
-        passwordscore: `Das gewählte Passwort ist nicht sicher genug.`,
-        confirmspecial: `Die Passwörter stimmen nicht überein.`
-      }
-    },
-    en: {
-      messages: {
-        auth: `Please translate me`,
-        emailreset: `Please translate me`,
-        passwordscore: `Please translate me`,
-        confirmspecial: `Please translate me`
-      }
-    }
-  }
+
   Vue.use(Router)
   Vue.use(VeeValidate, {
     aria: false,
-    locale: 'de'
+    locale: 'en'
   })
-  Validator.localize('de', de)
-  Validator.localize(dictionary)
+  Validator.localize('en', en)
+  Validator.localize(veeValidateDictionary)
   // 1. setup store (holds all informations)
   setStore(options.store)
   options.store.dispatch('initializeApp', options.config)

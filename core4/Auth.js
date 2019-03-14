@@ -2,7 +2,6 @@ import iHelper from './internal/$internal'
 import { axiosInternal } from './internal/axios.config.js'
 export default {
   login (user) {
-    console.log('login user: ', user)
     return axiosInternal
       .post('/login', user)
       .then(result => {

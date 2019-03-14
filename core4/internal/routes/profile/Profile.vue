@@ -12,7 +12,7 @@
             <v-layout row  align-center justify-start fill-height>
             <v-icon class="mr-2">account_box</v-icon>
             <span class="mr-3">
-              <div class="title accent--text">{{profile.name}}</div>
+              <div class="title">{{profile.name}}</div>
               <div class="subtitle grey--text">{{profile.realname}}</div>
             </span>
             <v-chip  v-if="profile.admin" color="accent" text-color="white">ADMIN</v-chip>
@@ -20,17 +20,17 @@
           </v-flex>
           <v-flex xs12 class="pt-3 mt-3" style="padding-left: 80px; border-top: 1px solid rgba(0,0,0,0.37)">
             <v-layout row wrap class="ml-3 profile-container">
-              <v-flex xs1>Email:</v-flex>
-              <v-flex xs11 class="pl-1">{{profile.email}}
+              <v-flex xs2>Email:</v-flex>
+              <v-flex xs10 class="pl-1">{{profile.email}}
                 <v-icon v-if="profile.email === 'No email'" color="orange" small>warning</v-icon>
               </v-flex>
 <!--               <v-flex xs1>Language:</v-flex>
               <v-flex xs11 class="pl-1">{{profile.language}}
               </v-flex> -->
-              <v-flex xs1>Permissions:</v-flex>
-              <v-flex xs11 class="mt-1">
+              <v-flex xs2>Permissions:</v-flex>
+              <v-flex xs10 class="mt-1">
                 <div  v-if="profile.perm">
-                  <v-chip class="mx-1" outline color="accent" v-for="item in profile.perm" :key="item.name">{{item}}</v-chip>
+                  <v-chip class="mx-1" outline v-for="item in profile.perm" :key="item.name">{{item}}</v-chip>
                 </div>
               </v-flex>
 

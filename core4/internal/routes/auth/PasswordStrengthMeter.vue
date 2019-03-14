@@ -19,14 +19,14 @@
     <div class="Password__strength-meter">
       <div class="Password__strength-meter--fill" :data-score="passwordStrength"></div>
     </div>
-    <div style="position: absolute; top: 4px;" class="grey--text caption">Passwortsicherheit</div>
+    <div style="position: absolute; top: 4px;" class="grey--text caption"><!-- Passwortsicherheit -->{{$t('passwordSecurity')}}</div>
     <div class="Password__score pr-2">
       <div class="text-xs-right">
-        <div class="caption Password__score--0" v-if="passwordStrength === 0">Sehr schwach</div>
-        <div class="caption Password__score--1" v-if="passwordStrength === 1">Schwach</div>
-        <div class="caption Password__score--2" v-if="passwordStrength === 2">Ok</div>
-        <div class="caption Password__score--3" v-if="passwordStrength === 3">Gut</div>
-        <div class="caption Password__score--4" v-if="passwordStrength === 4">Großartig</div>
+        <div class="caption Password__score--0" v-if="passwordStrength === 0">{{$t('pw.0')}}</div>
+        <div class="caption Password__score--1" v-else-if="passwordStrength === 1">{{$t('pw.1')}}</div>
+        <div class="caption Password__score--2" v-else-if="passwordStrength === 2">{{$t('pw.2')}}</div>
+        <div class="caption Password__score--3" v-else-if="passwordStrength === 3">{{$t('pw.3')}}</div>
+        <div class="caption Password__score--4" v-else-if="passwordStrength === 4">{{$t('pw.4')}}</div>
       </div>
     </div>
   </div>
@@ -113,7 +113,7 @@ export default {
   }
 
   .Password__strength-meter--fill[data-score='1'] {
-    background: #ee3e70;
+    background: #f4ce42;
     width: 40%;
   }
 
@@ -123,27 +123,27 @@ export default {
   }
 
   .Password__strength-meter--fill[data-score='3'] {
-    background: #545d8e;
+    background: #146624;
     width: 80%;
   }
 
   .Password__strength-meter--fill[data-score='4'] {
-    background: #3f515d;
+    background: #64a505;
      width: 100%;
   }
   .Password__score--0{
     color: #ff6400;
   }
   .Password__score--1{
-    color: #ee3e70;
+    color: #f4ce42;
   }
   .Password__score--2{
     color: #a4539c;
   }
   .Password__score--3{
-    color: #545d8e;
+    color: #146624;
   }
   .Password__score--4{
-    color: #3f515d;
+    color: #64a505;
   }
 </style>

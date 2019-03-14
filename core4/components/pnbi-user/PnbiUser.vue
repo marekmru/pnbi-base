@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pnbi-user">
           <v-spacer></v-spacer>
           <v-tooltip bottom v-if="hasOwnTheme !== true">
             <v-btn
@@ -30,7 +30,7 @@
           <v-tooltip bottom>
             <v-btn
               slot="activator"
-              class="pr-0 mr-0"
+              class="pr-0 mr-0 logout-button"
               flat
               icon
               @click="logout()"
@@ -58,15 +58,58 @@ import {
 } from 'vuex'
 export default {
   name: 'pnbi-user',
+  props: {
+  },
+  components: {
+
+  },
+  mounted () {
+    this.fetchProfile()
+    this.setUpEvents()
+  },
+  data () {
+    return {
+      alertMessage: null,
+      alertOpen: false,
+      showNavigation: false,
+      clientWidth: 0,
+      sidenavOpen: null
+    }
+  },
   methods: {
     ...mapActions([
+      'fetchProfile',
       'logout',
+      'setTitle',
       'setDark'
-    ])
+    ]),
+    setUpEvents () {
+      console.warn('deprectated: setUpEvents, use store')
+      this.$bus.$on(TRACK, payload => {
+        console.log('TODO: TRACK')
+        const dto = Object.assign({
+          customer_id: this.profile._id,
+          customer_email: this.profile.email,
+          realname: this.profile.realname,
+          webapp: this.title.toLowerCase()
+        }, payload)
+        if (payload.tealium_event === 'page_view') {
+          window.utag.view(dto)
+        } else {
+          window.utag.link(dto)
+        }
+      })
+
+      this.$bus.$on(ERROR, function showError (alert) {
+        console.log('TODO: ERROR')
+      })
+    }
   },
   computed: {
     ...mapGetters([
       'profile',
+      'loading',
+      'title',
       'dark',
       'hasOwnTheme'
     ])
@@ -75,6 +118,31 @@ export default {
 </script>
 
 <style scoped lang="css">
+.slide-enter-active,
+.slide-leave-active {
+  top: 0;
+}
+
+.slide-enter,
+.slide-leave-to {
+  top: -48px;
+}
+
+.v-list__tile .v-avatar span,
+.profile-button .v-avatar span {
+  font-weight: 700 !important;
+  letter-spacing: -0.1em !important;
+  font-size: 11px !important;
+  line-height: 12px !important;
+  margin-left: -1px;
+}
+
+.default-routes {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
 .profile-button .v-avatar {
   background-color: white;
   height: 22px !important;
@@ -84,6 +152,14 @@ export default {
 .profile-button .v-avatar span {
   margin-top: -1px;
   color: #3f515d;
+}
+
+.auth-routes >>> .container {
+  padding: 0;
+}
+
+.auth-routes >>> .v-content__wrap {
+  padding-top: 0;
 }
 
 .theme-btn{

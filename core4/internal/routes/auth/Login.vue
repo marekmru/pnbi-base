@@ -1,58 +1,129 @@
 <template>
   <div class="core-background auth-page">
     <!-- TODO -  component -->
-    <v-dialog v-model="dialogPrivacy" fullscreen hide-overlay transition="dialog-bottom-transition" scrollable>
-      <v-card tile>
-        <v-toolbar card dark color="primary" dense>
-          <v-btn icon dark @click.native="dialogPrivacy = false">
-            <v-icon>close</v-icon>
-          </v-btn>
-          <v-spacer></v-spacer>
-        </v-toolbar>
-        <v-card-text>
-          <privacy v-on:imprint-click="dialogPrivacy = false; dialogImprint = true;" type="dialog"></privacy>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
-    <v-dialog v-model="dialogImprint" fullscreen hide-overlay transition="dialog-bottom-transition" scrollable>
-      <v-card tile>
-        <v-toolbar card dark color="primary" dense>
-          <v-btn icon dark @click.native="dialogImprint = false">
-            <v-icon>close</v-icon>
-          </v-btn>
-          <v-spacer></v-spacer>
-        </v-toolbar>
-        <v-card-text>
-          <imprint type="dialog"></imprint>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
-    <!-- LOGIN dialog -->
-    <v-dialog v-model="dialogLogin" width="480px" persistent >
-        <v-card tile class="pa-3 auth-form-card">
-          <v-card-title class="justify-center py-0">
-            <h2 class="bi-headline">{{title}}</h2>
-          </v-card-title>
-          <v-card-text class="pt-2">
-            <v-text-field @focus="onFocus" autofocus clearable label="Nutzername"  v-model="user.username" :error-messages="errors.collect('Nutzername')" data-vv-as="Nutzername" data-vv-name="Nutzername" v-validate="'required|min:3|auth'"></v-text-field>
-            <v-text-field @focus="onFocus" clearable label="Passwort" v-model="user.password"  :error-messages="errors.collect('Passwort')" data-vv-as="Passwort" data-vv-name="Passwort" v-validate="'required|min:3|auth'" :append-icon="passwordVisible ? 'visibility' : 'visibility_off'"
-              @click:append="passwordVisible = !passwordVisible" :type="passwordVisible ? 'text' : 'password'"></v-text-field>
+    <template v-if="dialogPrivacy">
+      <v-dialog
+        v-model="dialogPrivacy"
+        fullscreen
+        hide-overlay
+        transition="dialog-bottom-transition"
+        scrollable
+      >
+        <v-card tile>
+          <v-toolbar
+            card
+            dark
+            color="primary"
+            dense
+          >
+            <v-btn
+              icon
+              dark
+              @click.native="dialogPrivacy = false"
+            >
+              <v-icon>close</v-icon>
+            </v-btn>
+            <v-spacer></v-spacer>
+          </v-toolbar>
+          <v-card-text>
+            <privacy
+              v-on:imprint-click="dialogPrivacy = false; dialogImprint = true;"
+              type="dialog"
+            ></privacy>
           </v-card-text>
-          <v-card-actions>
-            <v-layout column>
-              <v-flex>
-                <v-btn class="mb-3" color="primary" block @click="onLoginClick" :disabled="errors.any()" type="button"
-                  @keyup.enter="onLoginClick">Login</v-btn>
-              </v-flex>
-              <v-flex>
-                <v-btn to="/reset" flat block>Passwort zurücksetzen</v-btn>
-              </v-flex>
-            </v-layout>
-          </v-card-actions>
         </v-card>
+      </v-dialog>
+      <v-dialog
+        v-model="dialogImprint"
+        fullscreen
+        hide-overlay
+        transition="dialog-bottom-transition"
+        scrollable
+      >
+        <v-card tile>
+          <v-toolbar
+            card
+            dark
+            color="primary"
+            dense
+          >
+            <v-btn
+              icon
+              dark
+              @click.native="dialogImprint = false"
+            >
+              <v-icon>close</v-icon>
+            </v-btn>
+            <v-spacer></v-spacer>
+          </v-toolbar>
+          <v-card-text>
+            <imprint type="dialog"></imprint>
+          </v-card-text>
+        </v-card>
+      </v-dialog>
+    </template>
+    <!-- LOGIN dialog -->
+    <v-dialog
+      v-model="dialogLogin"
+      width="480px"
+      persistent
+    >
+      <v-card
+        tile
+        class="pa-3 auth-form-card"
+      >
+        <v-card-title class="justify-center py-0">
+          <h2 class="bi-headline">{{title}}</h2>
+        </v-card-title>
+        <v-card-text class="pt-2">
+          <v-text-field
+            @focus="onFocus"
+            clearable
+            :label="$t('username')"
+            v-model="username"
+            :error-messages="errors.collect($t('username'))"
+            :data-vv-as="$t('username')"
+            :data-vv-name="$t('username')"
+            v-validate="'required|min:3|auth'"
+            data-vv-delay="100"
+          ></v-text-field>
+          <v-text-field
+            @focus="onFocus"
+            clearable
+            :label="$t('password')"
+            v-model="password"
+            :error-messages="errors.collect($t('password'))"
+            :data-vv-as="$t('password')"
+            :data-vv-name="$t('password')"
+            v-validate="'required|min:3|auth'"
+            :append-icon="passwordVisible ? 'visibility' : 'visibility_off'"
+            @click:append="passwordVisible = !passwordVisible"
+            :type="passwordVisible ? 'text' : 'password'"
+            data-vv-delay="100"
+          ></v-text-field>
+        </v-card-text>
+        <v-card-actions>
+          <v-layout column>
+              <v-btn
+                class="mb-3"
+                color="primary"
+                block
+                @click="onLoginClick"
+                :disabled="errors.any()"
+                type="button"
+                @keyup.enter="onLoginClick"
+              >Login</v-btn>
+              <v-btn
+                to="/reset"
+                flat
+                block
+              >{{$t('resetPassword')}}</v-btn>
+          </v-layout>
+        </v-card-actions>
+      </v-card>
     </v-dialog>
 
-<!--     <v-dialog v-model="dialogLogin" width="480px" persistent >
+    <!--     <v-dialog v-model="dialogLogin" width="480px" persistent >
         <v-card tile class="pa-3 auth-form-card">
           <v-card-title class="justify-center py-0">
             <h2 class="bi-headline">{{title}}</h2>
@@ -98,7 +169,6 @@ import Privacy from '../privacy/Privacy'
 import Imprint from '../imprint/Imprint'
 import { mapGetters, mapActions } from 'vuex'
 import CookieService from '../../cookie.service.js'
-// import Auth from '../../../Auth'
 
 export default {
   created () {
@@ -111,6 +181,11 @@ export default {
       }
     })
   },
+  /*   mounted () {
+    this.$nextTick(function () {
+      this.dialogLogin = true
+    })
+  }, */
   components: {
     Privacy,
     Imprint
@@ -121,14 +196,15 @@ export default {
       dialogImprint: false,
       dialogLogin: true,
       passwordVisible: false,
-      user: {
-        username: 'admin',
-        password: 'hans'
-      }
+      username: null,
+      password: null
     }
   },
   watch: {
     profile (newValue, oldValue) {
+      console.log(oldValue.error)
+      console.log(newValue.error)
+      // this.$validator.validateAll()
       // console.log(newValue)
       // TODO checkCookieLayer
     }
@@ -148,13 +224,15 @@ export default {
       'clearAuthError'
     ]),
     onFocus () {
-      this.clearAuthError()
-      this.$nextTick(function () {
+      window.setTimeout(function () {
+        this.clearAuthError()
         this.$validator.validateAll()
-      })
+      }.bind(this), 10)
     },
     onLoginClick () {
-      this.login(this.user).then(val => {
+      this.login({ username: this.username, password: this.password }).then(val => {
+        this.$validator.validateAll()
+      }, val => {
         this.$validator.validateAll()
       })
     },
@@ -216,22 +294,22 @@ export default {
 <style lang="scss">
 </style>
 <style lang="css" scoped>
-  div>>>.fade-enter-active,
-  div>>>.fade-leave-active {
-    transition: all 0.33s ease-out;
-  }
+div >>> .fade-enter-active,
+div >>> .fade-leave-active {
+  transition: all 0.33s ease-out;
+}
 
-  div>>>.fade-enter,
-  .fade-leave-to {
-    transition: all 0.33s ease-out;
-    opacity: 0;
-    transform: scale(0.9);
-  }
+div >>> .fade-enter,
+.fade-leave-to {
+  transition: all 0.33s ease-out;
+  opacity: 0;
+  transform: scale(0.9);
+}
 
-  footer {
-    background-color: #fff;
-    position: fixed;
-    bottom: 0;
-    width: 100vw;
-  }
+footer {
+  background-color: #fff;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+}
 </style>

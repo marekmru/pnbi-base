@@ -47,14 +47,13 @@ export function setAjaxConfig (config) {
           // 500 has no meaingful response
           if (is500Error) {
             data.status_code = 500
-            data.html = 'Ein Server Fehler ist aufgetreten.<br>Bitte kontaktieren sie uns unter: <a href="mailto:bi-ops@plan-net.com">bi-ops@plan-net.com</a>'
+            data.html = `${this.$t('errors.is500Error')} <a href="mailto:mail@mailer.com">mail@mailer.com</a>`
           } else if (isAuthError) {
             data.status_code = error.response.status
             if (data.status_code === 401) {
-              data.html = 'Bitte loggen sie sich ein.'
+              data.html = `${this.$t('errors.isAuthError')} <a href="mailto:mail@mailer.com">mail@mailer.com</a>`
             } else if (data.status_code === 403) {
-              data.html =
-                'Sie sind nicht authorisiert, diese Ressource aufzurufen.<br>Bitte kontaktieren sie uns unter: <a href="mailto:bi-ops@plan-net.com">bi-ops@plan-net.com</a>'
+              data.html = `${this.$t('errors.isPermissionsError')} <a href="mailto:mail@mailer.com">mail@mailer.com</a>`
             } else {
               data.json = error.response.data || error.response
             }
