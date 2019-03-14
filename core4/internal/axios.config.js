@@ -36,8 +36,9 @@ export function setAjaxConfig (config) {
       },
       error => {
         if (isLandingPage()) {
-          // router.push({ name: 'login' })
-          window.location.assign(window.location + 'login')
+          if (window.location.hash.includes('login') === false) {
+            window.location.assign(window.location + 'login')
+          }
         } else if (isErrorIgnoreRoute() === false) {
           // TODO
           const is500Error = (error.response == null)
