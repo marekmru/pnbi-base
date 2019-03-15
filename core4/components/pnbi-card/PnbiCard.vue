@@ -44,5 +44,6 @@ export default {
   .card-headline{
     color: var(--v-accent-base);
   }
+
 }
 </style>

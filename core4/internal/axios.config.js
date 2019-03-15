@@ -35,14 +35,16 @@ export function setAjaxConfig (config) {
         return response.data
       },
       error => {
-        if (isLandingPage()) {
+        const isAuthError = (isIgnoredErrorCode(error) === false) && (isIgnoredEndopoint(error.response.request.responseURL) === false)
+        if (isLandingPage() && isAuthError) {
           if (window.location.hash.includes('login') === false) {
             window.location.assign(window.location + 'login')
+            return
           }
-        } else if (isErrorIgnoreRoute() === false) {
+        }
+        if (isErrorIgnoreRoute() === false) {
           // TODO
           const is500Error = (error.response == null)
-          const isAuthError = (isIgnoredErrorCode(error) === false) && (isIgnoredEndopoint(error.response.request.responseURL) === false)
           let data = {}
           // error without corret body > fallback to defaults
           // 500 has no meaingful response
