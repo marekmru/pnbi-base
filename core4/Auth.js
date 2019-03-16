@@ -30,8 +30,7 @@ export default {
     return axiosInternal
       .get(`/setting`)
       .then(result => {
-        this.$setting = result.data._general
-        return this.$setting
+        return result.data._general
       })
       .catch(error => {
         return Promise.reject(error)
@@ -52,6 +51,8 @@ export default {
     return axiosInternal
       .put(`/login`, data)
       .then(result => result)
-      .catch(error => Promise.reject(error))
+      .catch(error => {
+        return Promise.reject(error)
+      })
   }
 }

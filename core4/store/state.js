@@ -77,9 +77,14 @@ const actions = {
       Auth.login(payload).then(result => {
         resolve(true)
         dispatch('gotoStart')
-      }, () => {
+      }/* , () => {
         reject(new Error('LoginError'))
         commit('set_profile', { error: 'auth' })
+      } */).catch((err) => {
+        console.log(err.response, 'Login.Error')
+        commit('set_profile', { error: 'auth' })
+        reject(new Error('LoginError'))
+        return Promise.reject(err)
       })
     })
   },

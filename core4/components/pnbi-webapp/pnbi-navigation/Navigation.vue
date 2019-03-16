@@ -78,7 +78,7 @@ export default {
   },
   data () {
     return {
-      sidenavOpen: false
+      sidenavOpen: true
     }
   },
   methods: {

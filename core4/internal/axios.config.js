@@ -11,18 +11,57 @@ axios.defaults.baseURL = window.APIBASE_APP
 export function setAjaxConfig (config) {
   // helpers
   const ingnoredErrors = config.IGNORED_ERRORS || []
-  const ignoredEndpoints = ['/logout', '/profile']
-  function isErrorIgnoreRoute () {
-    return router.publicPages.includes(router.instance.history.current.path)// > -1
-  }
+  // const ignoredEndpoints = ['/logout', '/profile', '/settings']
+
   function isIgnoredEndopoint (responseURL = '') {
-    return ignoredEndpoints.includes(responseURL) // > -1
+    return ['api/login', 'api/logout', 'api/profile', 'api/settings'].find(val => {
+      return responseURL.includes(val)
+    }) != null
   }
-  function isIgnoredErrorCode (error) {
-    return !ingnoredErrors.includes(error.response.status)
-  }
-  function isLandingPage () {
+  /* function isLandingPage () {
     return router.instance.history.current.path === '/'
+  } */
+  function isErrorIgnoreRoute () {
+    return router.publicPages.includes(router.instance.history.current.path)
+  }
+  function isIgnoredError (error) {
+    // app can defined errors which willl be handled by app
+    let val = false
+    try {
+      val = ingnoredErrors.includes(error.response.status)
+    } catch (err) {
+
+    }
+    return val
+  }
+  function isErrorCode (error, type) {
+    /*     if (type === 500) { console.log(error.response, type) }
+    if (type === 500 && error.response == null) {
+      // 500 has no attr
+      return true
+    } */
+    return error.response.status === type
+  }
+
+  function showError (data) {
+    const mute = isIgnoredEndopoint(data.error.response.request.responseURL)
+    if (mute) {
+      // no error dialog, just do nothing
+      return false
+    }
+    const errors = {
+      '403': `${Vue.prototype.i18n.t('errors.isPermissionsError')} <a href="mailto:mail@mailer.com">mail@mailer.com</a>`,
+      '500': `${Vue.prototype.i18n.t('errors.is500Error')} <a href="mailto:mail@mailer.com">mail@mailer.com</a>`
+    }
+    const dto = {
+      status_code: data.error.response.status
+    }
+    if (data.json != null) {
+      dto.json = data.json
+    } else {
+      dto.html = errors[data.error.response.status]
+    }
+    Vue.prototype.$store.dispatch('showError', dto)
   }
   // AXIOS //
   // used in pnbi-base client
@@ -35,7 +74,24 @@ export function setAjaxConfig (config) {
         return response.data
       },
       error => {
-        const isAuthError = (isIgnoredErrorCode(error) === false) && (isIgnoredEndopoint(error.response.request.responseURL) === false)
+        if (isIgnoredError(error) === false) {
+          if (isErrorCode(error, 401)) {
+            const shouldRedirectToLogin = isErrorIgnoreRoute() === false
+            if (shouldRedirectToLogin) {
+              Vue.prototype.$store.dispatch('gotoLogin')
+            }
+          } else if (isErrorCode(error, 403)) {
+            showError({ error })
+          } else if (isErrorCode(error, 500)) {
+            showError({ error })
+          } else {
+            showError({
+              error,
+              json: (error.response.data || error.response)
+            })
+          }
+        }
+        /* const isAuthError = (isIgnoredErrorCode(error) === false) && (isIgnoredEndopoint(error.response.request.responseURL) === false)
         if (isLandingPage() && isAuthError) {
           if (window.location.hash.includes('login') === false) {
             window.location.assign(window.location + 'login')
@@ -62,7 +118,7 @@ export function setAjaxConfig (config) {
             }
             Vue.prototype.$store.dispatch('showError', data)
           }
-        }
+        } */
         const loading = Vue.prototype.$store.getters.loading
         if (loading) {
           Vue.prototype.$store.dispatch('setLoading', false)
@@ -81,6 +137,7 @@ export function setAjaxConfig (config) {
         return request
       },
       error => {
+        console.log(error)
         return Promise.reject(error)
       }
     )

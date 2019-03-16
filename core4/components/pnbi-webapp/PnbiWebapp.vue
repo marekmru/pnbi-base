@@ -19,9 +19,7 @@
           fixed
         >
           <v-toolbar-side-icon @click="$bus.$emit('toggleSidenav')">
-            <!-- <v-icon>more_vert</v-icon> -->
-            <toolbar-side-icon>
-            </toolbar-side-icon>
+            <toolbar-side-icon/>
           </v-toolbar-side-icon>
           <!-- @slot Use this slot for a custom title instead of the default app-name -->
           <slot
@@ -32,7 +30,7 @@
             v-else
             class="app-title"
           >{{title}}</h2>
-          <v-spacer></v-spacer>
+          <v-spacer class="core-dotted"></v-spacer>
           <pnbi-user></pnbi-user>
         </v-toolbar>
       </transition>
@@ -223,5 +221,14 @@ pre {
   top: -3px;
   margin: 0;
 }
-
+.spacer.core-dotted {
+  margin-left: 12px;
+  margin-right: 12px;
+  opacity: .2;
+  height: 10px;
+  background: radial-gradient(ellipse at center, var(--v-secondary-lighten5) 0%, var(--v-secondary-lighten5) 30%, transparent 30%);
+  background-size: 20px 20px;
+  background-repeat: repeat-x;
+  background-position: 5px center;
+}
 </style>
