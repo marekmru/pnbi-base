@@ -33,6 +33,7 @@ const actions = {
         const profile = data[0]
         const setting = data[1]
         const dto = {
+          authenticated: true,
           name: profile.name,
           realname: profile.realname,
           email: profile.email,
