@@ -141,7 +141,7 @@ export default {
       }
     }
   },
-  filter: {
+  filters: {
     'datatablePlusFormatTableValues': function (value, key) {
       if (!value) return ''
       switch (key.style) {
