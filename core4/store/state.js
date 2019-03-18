@@ -163,6 +163,9 @@ const getters = {
   profile (state) {
     return state.profile
   },
+  authenticated (state) {
+    return state.profile.authenticated
+  },
   loading (state) {
     return state.loading
   },
