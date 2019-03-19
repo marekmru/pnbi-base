@@ -5,7 +5,6 @@
     :dark="dark"
   >
     <template v-if="isNavVisible">
-
       <pnbi-navigation>
         <slot name="navigation-slot"></slot>
       </pnbi-navigation>
@@ -14,8 +13,8 @@
         <v-toolbar
           flat
           clipped-left
-          dense
-          app
+          dense :dark="true"
+          app class="pnbi-toolbar"
           fixed
         >
           <v-toolbar-side-icon @click="$bus.$emit('toggleSidenav')">
@@ -78,7 +77,7 @@ import PnbiSnackbar from './pnbi-snackbar/Snackbar.vue'
 import ErrorDialog from './pnbi-error-dialog/ErrorDialog.vue'
 import Navigation from './pnbi-navigation/Navigation.vue'
 import ToolbarSideIcon from './pnbi-navigation/pnbi-toolbar-side-icon.vue'
-import PnbiUser from './../pnbi-user/PnbiUser.vue'
+import PnbiUser from './pnbi-user/PnbiUser.vue'
 import {
   mapActions,
   mapGetters
@@ -221,14 +220,5 @@ pre {
   top: -3px;
   margin: 0;
 }
-.spacer.core-dotted {
-  margin-left: 12px;
-  margin-right: 12px;
-  opacity: .2;
-  height: 10px;
-  background: radial-gradient(ellipse at center, var(--v-secondary-lighten5) 0%, var(--v-secondary-lighten5) 30%, transparent 30%);
-  background-size: 20px 20px;
-  background-repeat: repeat-x;
-  background-position: 5px center;
-}
+
 </style>

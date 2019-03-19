@@ -42,7 +42,7 @@ const actions = {
           role: profile.role
         }
         commit('set_profile', dto)
-        commit('set_dark', setting)
+        commit('set_dark', setting.dark)
 
         if (router.instance.history.current.name === 'login') {
           dispatch('gotoStart')
@@ -106,6 +106,7 @@ const actions = {
   setTitle ({ commit }, payload) {
     commit('set_title', payload)
     document.title = payload
+    document.querySelector('body').classList.add(payload.toLowerCase().split(' ').join('-'))
   },
   initializeApp ({ commit, dispatch }, payload) {
     dispatch('setTitle', payload.TITLE)
@@ -114,11 +115,13 @@ const actions = {
       commit('set_dark', { dark: payload.DARK })
     }
   },
-  setDark ({ commit }, payload) {
+  toggleDark ({ commit, getters }) {
+    const dark = !getters.dark
+    console.log(dark)
+    commit('set_dark', dark)
     return axiosInternal
-      .post('/setting/_general', { data: { dark: payload } })
+      .post('/setting/_general', { data: { dark } })
       .then(result => {
-        commit('set_dark', payload)
       })
       .catch(error => Promise.reject(error))
   }
@@ -128,9 +131,9 @@ const mutations = {
   set_notification (state, payload) {
     state.notification = payload
   },
-  set_dark (state, payload) {
-    if (payload.dark != null) {
-      state.dark = payload.dark
+  set_dark (state, dark) {
+    if (dark != null) {
+      state.dark = dark
     }
   },
   clear_auth_error () {

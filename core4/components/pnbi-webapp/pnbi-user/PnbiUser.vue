@@ -4,14 +4,15 @@
           <v-tooltip bottom v-if="hasOwnTheme !== true">
             <v-btn
               slot="activator"
-              class="pr-0 mr-0 theme-button"
-              flat
-              @click="setDark(!dark)"
+              class="theme-btn"
+              flat icon
+              @click="toggleDark()"
             >
+            <v-icon>invert_colors</v-icon>
             <!-- set api call to toggle dark theme -->
-                <span >{{dark === true ? 'light' : 'dark'}}</span>
+                <!-- <span >{{dark === true ? 'light' : 'dark'}}</span> -->
             </v-btn>
-            <span>Theme</span>
+            <span>Toggle theme</span>
           </v-tooltip>
           <v-tooltip bottom>
             <v-btn
@@ -72,7 +73,7 @@ export default {
   methods: {
     ...mapActions([
       'logout',
-      'setDark'
+      'toggleDark'
     ])
   },
   computed: {
@@ -106,10 +107,10 @@ export default {
   margin-top: -1px;
 }
 
-.theme-button{
+/* .theme-button{
   border: 1px solid #fff;
   border-radius: 0%;
   padding:0;
-}
+} */
 
 </style>

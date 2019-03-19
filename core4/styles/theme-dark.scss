@@ -1,4 +1,4 @@
-.theme--dark {
+.application.theme--dark {
   /* Change Autocomplete styles in Chrome*/
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
@@ -21,7 +21,7 @@
   .core-background {
     background: linear-gradient(120deg, #232323 55%, darken(#232323, 1) 55%);
   }
-
+// theme top navbar
   .circle-container .v-icon{
     color: var(--v-secondary-lighten5) !important;
   }
@@ -35,11 +35,24 @@
     background-color: var(--v-secondary-lighten5);
     color: var(--v-secondary-lighten1);
   }
+  .pnbi-user .theme-btn{
+    color: var(--v-secondary-lighten5);
+  }
   h2.app-title{
     color: var(--v-secondary-lighten5);
   }
-
+// theme top navbar end
   &.application {
     background-color: #232323 !important;
+  }
+  .spacer.core-dotted {
+    margin-left: 12px;
+    margin-right: 12px;
+    opacity: .2;
+    height: 10px;
+    background: radial-gradient(ellipse at center, var(--v-secondary-lighten5) 0%, var(--v-secondary-lighten5) 30%, transparent 30%);
+    background-size: 20px 20px;
+    background-repeat: repeat-x;
+    background-position: 5px center;
   }
 }
