@@ -4,7 +4,7 @@
           <v-tooltip bottom v-if="hasOwnTheme !== true">
             <v-btn
               slot="activator"
-              class="theme-btn"
+              class="theme-btn pr-0 mr-0 "
               flat icon
               @click="toggleDark()"
             >
