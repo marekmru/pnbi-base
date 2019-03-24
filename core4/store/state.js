@@ -25,7 +25,7 @@ const actions = {
   showNotification ({ commit }, payload) {
     bus.$emit('SHOW_NOTIFICATION', payload)
   },
-  fetchProfile ({ commit, dispatch }, payload) {
+  fetchProfile ({ commit, dispatch, getters }, payload) {
     const promiseProfile = Auth.profile()
     const promiseSetting = Auth.setting()
     Promise.all([promiseProfile, promiseSetting])
@@ -42,7 +42,9 @@ const actions = {
           role: profile.role
         }
         commit('set_profile', dto)
-        commit('set_dark', setting.dark)
+        if (getters.hasOwnTheme === false) {
+          commit('set_dark', setting.dark)
+        }
 
         if (router.instance.history.current.name === 'login') {
           dispatch('gotoStart')
@@ -111,13 +113,12 @@ const actions = {
   initializeApp ({ commit, dispatch }, payload) {
     dispatch('setTitle', payload.TITLE)
     if (payload.DARK != null) {
+      commit('set_dark', payload.DARK)
       state.hasOwnTheme = true // do not show theme switch
-      commit('set_dark', { dark: payload.DARK })
     }
   },
   toggleDark ({ commit, getters }) {
     const dark = !getters.dark
-    console.log(dark)
     commit('set_dark', dark)
     return axiosInternal
       .post('/setting/_general', { data: { dark } })

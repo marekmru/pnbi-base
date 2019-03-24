@@ -28,9 +28,9 @@ export default {
   },
   setting () {
     return axiosInternal
-      .get(`/setting`)
+      .get(`/setting/_general`)
       .then(result => {
-        return result.data._general
+        return result.data
       })
       .catch(error => {
         return Promise.reject(error)

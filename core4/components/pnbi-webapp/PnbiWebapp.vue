@@ -119,7 +119,6 @@ export default {
     return {
       alertMessage: null,
       alertOpen: false,
-      showNavigation: false,
       clientWidth: 0
     }
   },
