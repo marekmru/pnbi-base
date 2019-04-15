@@ -1,6 +1,6 @@
 <template>
   <v-app class="pnbi-webapp">
-    <v-navigation-drawer v-if="isNavVisible" v-model="userSettings.sidenavOpen" fixed clipped class="grey lighten-4"
+    <v-navigation-drawer v-if="isNavVisible" v-model="sidenavOpen" fixed clipped class="grey lighten-4"
       app>
       <div class="pt-3">
         <slot name="navigation-slot"></slot>
@@ -86,9 +86,10 @@
     </v-content>
 
     <v-progress-linear indeterminate v-if="loading"></v-progress-linear>
-    <v-dialog scrollable persistent v-model="alertOpen" max-width="720">
+    <pnbi-error :open="alertOpen" :alert-message="alertMessage" @close="alertOpen = false" @logout="logout"></pnbi-error>
+<!--     <v-dialog scrollable persistent v-model="alertOpen" max-width="720">
       <v-card tile v-if="alertOpen && alertMessage">
-        <v-toolbar dense card dark color="error">
+        <v-toolbar dense card dark :color="error">
           <v-toolbar-title>
             ERROR {{alertMessage.status_code || alertMessage.data.status_code }}
           </v-toolbar-title>
@@ -116,7 +117,7 @@
           </v-btn>
         </v-card-actions>
       </v-card>
-    </v-dialog>
+    </v-dialog> -->
   </v-app>
 </template>
 <script>
@@ -129,10 +130,12 @@ import bus, {
 } from '../../event-bus'
 import Auth from '../../Auth'
 import PnbiSnackbar from '../pnbi-snackbar/PnbiSnackbar'
+import PnbiError from './PnbiError.vue'
 
 export default {
   components: {
-    PnbiSnackbar
+    PnbiSnackbar,
+    PnbiError
   },
   mounted () {
     this.$nextTick(() => {
@@ -167,9 +170,8 @@ export default {
         realname: null,
         short: null
       },
-      userSettings: {
-        sidenavOpen: null
-      }
+      sidenavOpen: null
+
     }
   },
 
@@ -199,7 +201,7 @@ export default {
       document.title = this.title
     },
     toogleSideNav () {
-      this.userSettings.sidenavOpen = !this.userSettings.sidenavOpen
+      this.sidenavOpen = !this.sidenavOpen
     }
   },
   props: {
@@ -261,7 +263,7 @@ export default {
     isFluid () {
       return (this.clientWidth < 1260) || (this.fullWidth)
     },
-     isChrome () {
+    isChrome () {
       return (!!window.chrome)
     }
   }
