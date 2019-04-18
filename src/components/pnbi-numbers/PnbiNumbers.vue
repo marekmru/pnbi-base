@@ -69,7 +69,7 @@ export default {
     }
   },
   mounted () {
-    console.warn('TODO: check pnbi-numbers implementation. Remove error, remove type, use suffix for type')
+    // console.warn('TODO: check pnbi-numbers implementation. Remove error, remove type, use suffix for type')
     /* this.$nextTick(function () {
       if (this.disabled === false) {
         this.$validator.validateAll()
