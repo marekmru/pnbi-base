@@ -471,3 +471,16 @@ Optional Content, for example Buttons
 ```javascript
   <pnbi-empty :data="{label: 'Keine Zielgruppen vorhanden.'}"></pnbi-empty>
 ```
+
+Please make sure your host app hase dependencies installed
+
+1. "vuetify": "^1.0.0"
+2. "vue-router": "^3.0.1",
+3. "vee-validate": "2.0.4", 
+4. "pnbi-base": "https://github.com/marekmru/pnbi-base.git#candidate", 
+5. "vue": "^2.5.2",
+6. "axios": "^0.17.1"
+7. "is": "^3.2.1"
+
+Dev
+8. "node-sass": "^4.7.2"
