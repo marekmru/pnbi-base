@@ -22,9 +22,9 @@ export default {
   },
 
   mounted() {
-    if (this.headline.length) {
+    if ((this.headline || '').length) {
       this.$el.querySelector('.card-headline').classList.add('headline')
-    } else if (this.title.length) {
+    } else {
       this.$el.querySelector('.card-headline').classList.add('title')
     }
   },
