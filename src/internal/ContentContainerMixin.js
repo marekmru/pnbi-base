@@ -21,7 +21,7 @@ export default {
     }
   },
 
-  mounted () {
+  mounted() {
     if (this.headline.length) {
       this.$el.querySelector('.card-headline').classList.add('headline')
     } else if (this.title.length) {
@@ -29,14 +29,19 @@ export default {
     }
   },
   computed: {
-    label () {
-      const headline = this.headline.length
-      const title = this.title.length
-      if (headline) {
-        return this.headline.toUpperCase()
-      } else if (title) {
-        return this.title.toUpperCase()
+    label() {
+      try {
+        const headline = this.headline.length
+        const title = this.title.length
+        if (headline) {
+          return this.headline.toUpperCase()
+        } else if (title) {
+          return this.title.toUpperCase()
+        }
+      } catch (err) {
+        console.warn(err)
       }
+      return ''
     }
   }
 }
