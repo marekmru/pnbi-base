@@ -114,7 +114,7 @@ export default {
     internalValue: {
       get: function () {
         if (is.number(this.value)) {
-          const number = (this.value / this.unit) // .toLocaleString('de-DE')
+          const number = Math.round(((this.value / this.unit) + Number.EPSILON) * 100) / 100 // .toLocaleString('de-DE')
           const splitted = number.toString().split('.')
           splitted[0] = parseInt(splitted[0]).toLocaleString('de-DE')
           return splitted.join(',')
