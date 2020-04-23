@@ -66,6 +66,11 @@ export default {
       type: Number,
       required: false,
       default: 1
+    },
+    mantissa: {
+      type: Number,
+      required: false,
+      default: 2
     }
   },
   mounted () {
@@ -111,10 +116,19 @@ export default {
     }
   },
   computed: {
+    nachkommastellen () {
+      /*       0 > 1
+      1 > 10
+      2 > 100
+      3 > 1000
+      4 > 10000 */
+      return Math.pow(10, Math.abs(this.mantissa || 0))
+    },
     internalValue: {
       get: function () {
         if (is.number(this.value)) {
-          const number = Math.round(((this.value / this.unit) + Number.EPSILON) * 100) / 100 // .toLocaleString('de-DE')
+          const nst = this.nachkommastellen
+          const number = Math.round(((this.value / this.unit) + Number.EPSILON) * nst) / nst // .toLocaleString('de-DE')
           const splitted = number.toString().split('.')
           splitted[0] = parseInt(splitted[0]).toLocaleString('de-DE')
           return splitted.join(',')
