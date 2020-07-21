@@ -38,7 +38,16 @@
       <v-card-actions class="pl-3 pr-3 pb-3 pt-0">
         <v-spacer></v-spacer>
         <v-btn
-          v-if="showLoginButton"
+          v-if="is500"
+          type="button"
+          @click="onReload"
+          flat
+          color="secondary"
+        >
+          Seite neu laden
+        </v-btn>
+        <v-btn
+          v-else-if="showLoginButton"
           type="button"
           @click="$emit('logout')"
           flat
@@ -62,40 +71,48 @@
 
 <script>
 import DialogMixin from '../../DialogMixin'
-  export default {
-    computed: {
-      showLoginButton() {
-        return (this.alertMessage.status_code || this.alertMessage.data.status_code) === 401 || (this.alertMessage.status_code || this.alertMessage.data.status_code) === 403
-      },
-      titleType(){
-        if((this.alertMessage || {}).status_code != null ){
-          if(this.alertMessage.status_code === 406){
-            return 'accent'
-          }
-        }
-        return 'error'
-      },
-      headline(){
-        if((this.alertMessage || {}).headline != null ){
-          return this.alertMessage.headline
-        }
-        return `Fehler ${this.alertMessage.status_code || this.alertMessage.data.status_code}`
-      }
+export default {
+  methods: {
+    onReload () {
+      window.location.reload()
+    }
+  },
+  computed: {
+    showLoginButton () {
+      return (this.alertMessage.status_code || this.alertMessage.data.status_code) === 401 || (this.alertMessage.status_code || this.alertMessage.data.status_code) === 403
     },
-    props: {
-      alertMessage: {
-        type: Object,
-        required: false,
-        default: () => {
-          return {
-            status_code: 406,
-            html: '<div></div>'
-          }
+    titleType () {
+      if ((this.alertMessage || {}).status_code != null) {
+        if (this.alertMessage.status_code === 406) {
+          return 'accent'
         }
       }
+      return 'error'
     },
-    mixins: [ DialogMixin ]
-  }
+    headline () {
+      if ((this.alertMessage || {}).headline != null) {
+        return this.alertMessage.headline
+      }
+      return `Fehler ${this.alertMessage.status_code || this.alertMessage.data.status_code}`
+    },
+    is500 () {
+      return (this.alertMessage || {}).status_code === 500
+    }
+  },
+  props: {
+    alertMessage: {
+      type: Object,
+      required: false,
+      default: () => {
+        return {
+          status_code: 406,
+          html: '<div></div>'
+        }
+      }
+    }
+  },
+  mixins: [ DialogMixin ]
+}
 </script>
 
 <style lang="scss" scoped>
