@@ -1,6 +1,15 @@
 <template>
-    <v-text-field :disabled="disabled" :label="label" autocomplete="off" v-model="internalValue" @keydown.native.stop="onKeyDown" :error-messages="errorMessages" :error="errorMessages.length > 0"
-      :suffix="suffix"></v-text-field>
+  <v-text-field
+    :disabled="disabled"
+    :label="label"
+    autocomplete="off"
+    v-model="internalValue"
+    @keydown.native.stop="onKeyDown"
+    :error-messages="errorMessages"
+    :error="errorMessages.length > 0"
+    :suffix="suffix"
+    type="text"
+  ></v-text-field>
 </template>
 
 <script>
