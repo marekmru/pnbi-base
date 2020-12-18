@@ -57,7 +57,6 @@
         </v-btn>
         <v-btn
           type="button"
-          v-else
           flat
           @click="isOpen = false"
           color="primary"
